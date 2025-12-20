@@ -1496,6 +1496,34 @@ E \arrow[rr, "\varphi"] \arrow[rd, "\pi_E"'] &    & F \arrow[ld, "\pi_F"] \\
       \psi_i:TU_i = \bigcup_{p\in U_i}\{p\}\times T_p\M  = \pi^{-1}(U_i)\to U_i\times \R^m, (p,X_p)\mapsto (p,T_p\varphi_iX_p).
     \end{equation*}
     Note that we have a canonical isomorphism $T_{\varphi_i(p)}\R^m\cong\R^m$.
+    \par Given two charts $(U_i,\varphi_i),(V_j,\psi_j)$ around a point $p\in \M$, and $v\in T_p\M$ then we have,
+    \begin{equation*}
+      v = \sum_{k=1}^m \xi_k^i \pd{}{x_k}\bigg{|}_p = \sum_{k=1}^m \xi_k^j \pd{}{y_k}\bigg{|}_p.
+    \end{equation*}
+    Then we have 
+    \begin{equation*}
+      T_p\varphi_i(v) = \begin{pmatrix}
+        \xi_1^i\\
+        \vdots\\
+        \xi_m^i
+      \end{pmatrix} = 
+      \begin{pmatrix}
+        \pd{x_1}{y_1} & \cdots & \pd{x_1}{y_m}\\
+        \vdots & \ddots & \vdots \\
+        \pd{x_m}{y_1}  & \cdots & \pd{x_m}{y_m}
+      \end{pmatrix}
+      \begin{pmatrix}
+        \xi_1^j\\
+        \vdots\\
+        \xi_m^j
+      \end{pmatrix}
+    \end{equation*}
+    That is 
+    \begin{align*}
+      \sum\xi_k^i\pd{}{x_k}\bigg{|}_p & = \sum\xi_k^j\pd{}{y_k}\bigg{|}_p,\\
+      & = \sum_k\left(\sum_l \sum\xi_k^j\pd{x_k}{y_l}\right)\pd{}{x_k}\bigg{|}_p.
+    \end{align*}
+    Thus the cocycle is $(g_{kl}(p))_{kl} = \left(\pd{x_k}{y_k}(p)\right)$.
   \end{example}
 
 \begin{theorem}
@@ -1562,7 +1590,6 @@ E \arrow[rr, "\varphi"] \arrow[rd, "\pi_E"'] &    & F \arrow[ld, "\pi_F"] \\
 \begin{remark}
   A vector bundle $E\stackrel{\pi}{\to}\M$ is trivial of rank $N$ if and only if there exists sections $s_1,\cdots,s_N\in\Gamma(E)$ such that for all $p\in \M$, $\langle s_1(p),\cdots,s_N(p)\rangle$ is a basis of $E_p$.
 \end{remark}
-
 
   %11.19
 
