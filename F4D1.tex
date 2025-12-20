@@ -28,7 +28,7 @@ mysymbol/.style={start anchor=center,end anchor=center,draw=none}
 \newtheorem{terminology}{Terminology}[section] 
 \newtheorem{fact}{Fact}[section] 
 \newtheorem{example}{Example}[section] 
-\newtheorem{claim}{Claim}[theorem] 
+\newtheorem{claim}{Claim}
 
 \DeclareMathOperator{\triv}{triv}
 \DeclareMathOperator{\ind}{ind}
@@ -848,7 +848,7 @@ The Lebesgue measure on $\R^m$ is denoted by $\lambda^m$.
   The second condition can be restated as follow. Recall Definition \ref{induced_linear_transform_tangent_space}. A chart $\varphi:U\to \R^m$ can be considered a smooth map between $U$ and $\R^n$. 
   We also have seen that $T\R^m \cong \R^m\times\R^n$. With this identification, we have,
   \begin{equation*}
-    T\varphi:TU\to T\R^m \cong \R^m\times\R^m,  TU\ni [U\ni p\mapsto X_p]\mapsto [\R^n \ni x \varphi^*\mapsto X_{\varphi^{-1}(x)}],
+    T\varphi:TU\to T\R^m \cong \R^m\times\R^m,  TU\ni [U\ni p\mapsto X_p]\mapsto [\R^n \ni x \mapsto [\cinf(\maniN)\ni f\mapsto X_{\varphi^{-1}(x)}f\circ\varphi]],
   \end{equation*}
   is smooth for all chart $\varphi$.
 \end{remark}
@@ -926,6 +926,7 @@ The Lebesgue measure on $\R^m$ is denoted by $\lambda^m$.
     \item $\partial_tF(t,x) = X(F(t,x))$.
   \end{enumerate}
 \end{theorem}
+\setcounter{claim}{0}
 \begin{proof}
 Recall that a continuously differentiable function over a compact set is Lipschitz. \\
 \par Consider a smooth function $f:\overline{B(y_0,r)}$ such that 
@@ -938,12 +939,13 @@ where $y_0\in\R^n$, $r>0$ and $a,b$ are continuous function.  For $p\in B(y_0,r)
     \partial_t F(t,y) = f(F(t,y)),\\
     F(0,y) = y_0.
   \end{cases}
+  \tag{P1}
 \end{equation*}
 By the construction, we get,
 \begin{equation*}
   F(t,y) = y+\int_0^t f(F(s,y))ds.
 \end{equation*}
-THus for $\vert t\vert\leq 1$, we get,
+Thus for $\vert t\vert\leq 1$, we get,
 \begin{align*}
   \vert F(t,y)-y_0\vert & \leq \left\vert y -y_0+\int_0^t f(F(s,y))ds\right\vert,\\
   & \leq \vert y - y_0\vert +\vert t\vert\vert f(y_0)\vert +\int_0^t\vert f(F(s,y))-f(y_0)\vert ds,\\
@@ -953,11 +955,122 @@ for some $L>0$. By applying Lemma \ref{gronwall_lemma}, we get,
 \begin{equation*}
   \vert F(t,y)-y_0\vert \leq (\vert y-y_0\vert+\vert f(y_0)\vert)e^{L\vert t\vert}.
 \end{equation*}
-%Later see the google photos
+Set $\vert y -y_0\vert \leq {\frac r 2}$ and take,
+\begin{equation*}
+  c\defeq \min\left\{1,{\frac 1 L},{\frac {r} {{\frac r 2}+\vert f(y_0)\vert}}\right\},
+\end{equation*}
+then for $\vert t\vert<c$, we have,
+\begin{equation*}
+  \vert F(t,y_0)\leq \cdot <r.
+\end{equation*}
+Thus such $F$ exists on a cylinder $(-\varepsilon,\varepsilon)\times\overline{B\left(y_0,{\frac r 2}\right)}$.
+\par We now move on to examine the differentiability of such solutions. Let $0<\rho<r$ and $\varepsilon$ be such that $F$ is a unique solution to the IVP on a cylinder $[-\varepsilon,\varepsilon]\times \overline{B(y_0,\rho)}$.
+Then we have,
+\begin{align*}
+  \vert F(t,y)-F(t,\overline{y})\vert&\leq \vert y -\overline{y}\vert + \left\vert \int_0^tf(F(s,y))-f(F(s,\overline{y}))ds\right\vert,\\
+  &\leq \vert y-\overline{y}\vert+L\int_0^{\vert t \vert}\vert F(s,y)-F(s,\overline{y})vert ds.
+\end{align*}
+Using Lemma \ref{gronwall_lemma}, we obtain,
+\begin{equation*}
+  \vert F(t,y)-F(t,\overline{y})\vert\leq \vert y -\overline{y}\vert e^{L\vert t\vert}.
+\end{equation*}
+By definition, $F$ is continuously differentiable in $t$ as $f$ is continuous. For the differentiability in $y$, consider 
+\begin{equation*}
+  \begin{cases}
+    \partial_t D_2F(t,y) = \underbrace{Df(F(t,y))}_{\in\Mat_{m\times m}(\R)}\overbrace{(D_2F)(t,y)}^{\in\Mat_{m\times m}(\R)},\\
+    (D_2F)(0,y) = I_m\in \Mat_{m\times m}(\R).
+  \end{cases}
+  \tag{P2}
+  \label{ivp_2}
+\end{equation*}
+Equation \eqref{ivp_2} is an IVP for a matrix valued functions. Let $\Phi:(-\varepsilon,\varepsilon)\times B(y_0,\rho)\to\Mat_{m\times m}(\R)$ be a unique solution of 
+\begin{equation*}
+  \begin{cases}
+    \partial_t\phi(t,y) = Df(F(t,y))\phi(t,y),\\
+    \phi(0,y) = I_m\in \Mat_{m\times m}(\R).
+  \end{cases}
+  \tag{P3}
+  \label{ivp_3}
+\end{equation*}
+Similar to the case of $F$ we have $\Phi$ is (Lipschitz)-continuous.
+\begin{claim}
+  $F(t,y)$ is partially differentiable in $y$ and $D_2F(t,y) = \Phi(t,y)$.
+\end{claim}
+\begin{proof}[Proof of Claim]
+Fix $(t,\overline{y})\in(-\varepsilon,\varepsilon)\times B(y_0,\rho)$. Since $f$ is continuously differentiable, we have,
+\begin{equation*}
+  f(x)-f(y) = (Df)(y)(x-y)+R(x,y)(x-y),
+\end{equation*}
+where $R$ is an uniformly continuous function on $\overline{B(y,\rho)}$ such that $R(x,x)=0$. Thus for $\tilde{\varepsilon}>0$ there is $\delta>0$ such that 
+\begin{equation*}
+  \vert x-y\vert<\delta\Rightarrow \vert R(x,y)\vert<\tilde{\varepsilon}.
+\end{equation*}
+By the construction of $F$, we see $F$ is locally uniform in $s$ thus there is $\tilde{\delta}>0$ such that 
+\begin{equation*}
+  \vert x-y\vert<\tilde{\delta}\Rightarrow \vert F(s,x)-F(s,y)\vert<\delta.
+\end{equation*}
+Take $y$ such that $\vert y -\overline{y}\vert<\tilde{\delta}$ and consider the equation.
+\begin{align*}
+  f(F(s,y))-f(F(s,\overline{y}))&-(Df)(F(s,\overline{y}))\phi(s,\overline{y})(y-\overline{y})\\
+   =& (Df)(F(s,\overline{y}))(F(s,y)-F(s,\overline{y})-\phi(s,\overline{y})(y-\overline{y}))\\
+  &+R(F(s,y),F(s,\overline{y}))(F(s,y)-F(s,\overline{y})).
+\end{align*}
+We see,
+\begin{equation*}
+  \vert R(F(s,y),F(s,\overline{y}))\vert\cdot\vert F(s,y)-F(s,y)\vert \leq \tilde{\varepsilon}\vert y-\overline{y}\vert e^{\vert s\vert L}.
+\end{equation*}Finally,
+\begin{align*}
+  \vert F(t,y)-F(t,\overline{y})-\phi(s,\overline{y})(y-\overline{y})\vert & = \left\vert\int_0^t f(F(t,y))-f(F(s,\overline{y}))-(Df)(F(s,\overline{y}))\phi(s,\overline{y})(y-\overline{y})ds\right\vert,\\
+  & \leq \int_0^{\vert t\vert}\vert Df(F(s,\overline{y}))\vert F(s,y)-F(s,\overline{y})-\phi(s,\overline{y})(y-\overline{y})\vert ds\\
+  &+\tilde{\varepsilon}\vert y -\overline{y}\vert \int_0^{\vert t\vert}e^{\vert s\vert L}ds,\\
+  &\leq c_1\tilde{\varepsilon}\vert y-\overline{y}\vert +c_2\int_0^{\vert t\vert}G(s,y,\overline{y})ds.
+\end{align*}
+Using Lemma \ref{gronwall_lemma}, we obtain,
+\begin{equation*}
+  G(t,y,\overline{y})\leq c_1\tilde{\varepsilon}\vert y -\overline{y}\vert e^{c_2\vert t\vert}.
+\end{equation*}
+Thus the solution $\Phi$ of Equation \eqref{ivp_3} is equal to $D_2F(t,y)$.
+\end{proof}
+Using the claim, we proved the regularity of $F$. 
 \end{proof}
 \begin{definition}
   Above $F(t,\cdot)$ is called the local flow of the vector field $X$.
 \end{definition}
+
+\begin{theorem}
+  Let $\M$ be a smooth manifold and $X\in\Gamma(T\M), p\in\M$. THen there exists continuous functions $a,b:\M\to\R$ such that 
+  \begin{equation*}
+    -\infty \leq a(p)<0<b(p)\leq \infty,
+  \end{equation*}
+  and an integral curve, $c_p:(a(p),b(p))\to\M$ of $X$ with $c_0(0)=p$ such that for any integral curve $\tilde{c}_p:I\to\M$ of $X$ such that $\tilde{c}_p(0)=p$, we have 
+  \begin{enumerate}[i).]
+    \item $I\subseteq(a(p),b(p))$,
+    \item $c_p|_I = \tilde{c}_p$.
+  \end{enumerate}
+  That is to say $c_p$ is the maximal integral curve through $p$. By continuity the set,
+  \begin{equation*}
+    A\defeq = \{t\in I_1\cap I_2\sep c_1(t) = c_2(t)\},
+  \end{equation*}
+  is closed. If $t_0\in I_1\cap I_2$ then $c_1,c_2$ are local solution of the IVP,
+  \begin{equation*}
+    \begin{cases}
+      \gamma'(t) = X(\gamma(t)),\\
+      \gamma(t_0) = c_1(t_0) = c_2(t_0).
+    \end{cases}
+  \end{equation*}
+  Using Picard-Lindelöf, there is a neighborhood $U$ of $t_0$ such that $U\subseteq A$. Since $A\not=\emptyset$, we conclude $A=I_1\cap I_2$. That is 
+  \begin{equation*}
+    (c_1\cup c_2):I_1\cup I_2\to\M, I_1\cup I_2\ni t\mapsto \begin{cases}
+      c_1(t),\quad(t\in I_1),\\
+      c_2(t), \quad (t\in I_2).
+    \end{cases}
+  \end{equation*}
+  $c_1\cup c_2$ is also an integral curve of $X$ through $p$. Thus there is a maximal integral curve $c_{\max}:I_{\max}\to\M$. Set $c_{\max} = c_p$.
+\end{theorem}
+
+\begin{proof}
+  Let $c_1:I_1\to\M,c_2:I_2\to\M$ be two integral curves of $X$ through $p$ that is $c_1(0)=c_2(0) = p$. 
+\end{proof}
 
 \subsection{Applications of Mrose-Sards THeorem}
 \subsubsection{Embedding}
