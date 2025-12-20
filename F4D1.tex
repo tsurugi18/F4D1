@@ -1,0 +1,2931 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{ mathrsfs }
+\usepackage{ mathtools}
+\usepackage{enumerate}
+\usepackage{bbm}
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{tikz-cd} 
+\usetikzlibrary{arrows}
+\newcommand{\midarrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
+\tikzset{commutative diagrams/.cd,
+mysymbol/.style={start anchor=center,end anchor=center,draw=none}
+}
+\newcommand\comsymb[2][\circlearrowleft]{%
+  \arrow[mysymbol]{#2}[description]{#1}}
+
+\newtheorem{theorem}{Theorem} [section] 
+\newtheorem{proposition}{Proposition}[section] 
+\newtheorem{definition}{Definition}[section] 
+\newtheorem{lemma}{Lemma}[section] 
+\newtheorem{notation}{Notation}[section] 
+\newtheorem{remark}{Remark}[section] 
+\newtheorem{corollary}{Corollary} [section] 
+\newtheorem{terminology}{Terminology}[section] 
+\newtheorem{fact}{Fact}[section] 
+\newtheorem{example}{Example}[section] 
+\newtheorem{claim}{Claim}[theorem] 
+
+\DeclareMathOperator{\triv}{triv}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\st}{s.t.}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\esssup}{esssup}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Homk}{Hom_{k-alg}}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\divergence}{div}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\MaxSpec}{MaxSpec}
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\inte}{int}
+%\newcommand*{\name}[\num_arguments][default values]{{\color{#1}\Large #2}}
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+\newcommand{\opNorm}[2]{\norm{#1}_{#2\to#2}}
+\newcommand{\normL}[3]{\norm{#1}_{L^{#2}(#3)}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\m}[0]{\mathfrak{m}}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\C}[0]{\mathbb{C}}
+\newcommand{\Q}[0]{\mathbb{Q}}
+\newcommand{\F}[0]{\mathbb{F}}
+\newcommand{\G}[0]{\mathbb{G}}
+\newcommand{\A}[0]{\mathbb{A}}
+\newcommand{\Para}[0]{\mathbb{P}}
+\newcommand{\M}[0]{\mathcal{M}}
+\newcommand{\maniN}[0]{\mathcal{N}}
+\newcommand{\cinf}[0]{\mathcal{C}^\infty}
+\newcommand{\torus}[0]{\mathbb{T}}
+\newcommand{\sep}[0]{\:|\:}
+\newcommand{\pd}[2]{{\frac {\partial #1} {\partial #2}}}
+\newcommand{\compinc}[0]{\subset \subset}
+
+\newcommand{\fib}[1]{%
+  \mathbin{\mathop{\times}\limits_{#1}}%
+}
+\newcommand{\tens}[1]{%
+  \mathbin{\mathop{\otimes}\displaylimits_{#1}}%
+}
+
+\title{Analysis and Geometry on Manifolds}
+\author{So Murata}
+\date{WiSe 25/26, University of Bonn}
+
+
+\begin{document}
+\maketitle
+\section{Review of Structure Theorems for Differentiable Maps}
+
+\begin{theorem}[Implicit Function Theorem]
+Let $U\subseteq\R^p$, $V\subseteq\R^q$ be open sets and $F(x,y):U\times V\to \R^{q}$ be of $\mathcal{C}^\infty$ class. If $(a,b)\in U\times V$ satisfies $F(a,b)=0$ and 
+\begin{equation*}
+D_yF(a,b) = \left({\frac {\partial F_i} {\partial y_j}}(a,b)\right)\in\GL_q(\R)
+\end{equation*}
+ then there exists 
+\begin{enumerate}[i).]
+\item neighborhoods $a\in U_1$ and $b\in V_1$,
+\item $\varphi\in\mathcal{C}^\infty(U_1,V_1)$
+\end{enumerate}
+such that 
+\begin{equation*}
+\forall (x,y)\in U_1\times V_1, F(x,y) = 0\Leftrightarrow \varphi(x)=y.
+\end{equation*}
+Furthermore, we have that
+\begin{equation*}
+D\varphi(x) = -D_yF(x,\varphi(x))^{-1}\cdot D_xF(x,\varphi(x)).
+\end{equation*}
+\end{theorem}
+
+\begin{theorem}[Inverse Function Theorem]
+Let $U\subseteq\R^p$ be an open subset and $f:U\to\R^q$ be smooth. Let $a\in U$ be such that $Df(a)$ is invertible. Then there are neighborhoods $a\in U_1\subseteq U$ and $f(a)\subseteq V_1$ such that $f|_{U_1}:U_1\to V_1$ is a diffeomorphism.
+\end{theorem}
+
+\begin{theorem}[Rank Theorem]
+Let $U\subseteq\R^p$ be open and $f:U\to\R^q$ be smooth. Let $a\in U$ and $b=f(a)$. If $\rk Df(a)=r$ then there exists local diffeomorphisms
+\begin{enumerate}[i).]
+\item $\psi:U_\psi\subseteq U\to V_\psi\subseteq\R^p$ with $\psi(a)=0$ 
+\item $\varphi:U_\varphi\subseteq \R^q\to V_\varphi\subseteq\R^q$ with $\varphi(b)=0$.
+\end{enumerate}
+such that 
+\begin{equation*}
+\varphi\circ f\circ \psi^{-1}(x_1,\cdots,x_p)= (x_1,\cdots,x_r,\tilde{f}(x)).
+\end{equation*}
+Furthermore, if $\rk Df(x)=r$ in some neighborhood of $a$, then $\tilde{f}$ can be chosen to be $0$.
+\end{theorem}
+
+\section{Differentiable Manifolds}
+\subsection{Basics from Set Theoretic Topology}
+\begin{definition}
+Let $X$ be a topological space. $X$ is said to be separated/Hausdorff if any two distinct points have open neighborhoods which are disjoint to one another. 
+\end{definition}
+
+\begin{definition}
+Let $X$ be a topological space and $(U_i)_{i\in I}$ be its open covering. A refinement of $(U_i)_{i\in I}$ is an open covering $(V_j)_{j\in J}$ such that 
+\begin{equation*}
+\forall j\in J,\exists i\in I\st V_j\subseteq U_i.
+\end{equation*}
+It is locally finite if each point $x\in X$, there exists a neighborhood $U_i$ such that 
+\begin{equation*}
+\vert\{ j\in J\:|\: U\cap V_j\not=\emptyset\}\vert <\infty.
+\end{equation*} 
+\end{definition}
+
+\begin{definition}
+A topological space $X$ is called paracompact if every open covering $(U_i)_{i\in I}$ has a locally finite refinement $(V_j)_{j\in J}$. 
+\end{definition}
+
+\begin{example}The following spaces are paracompact.
+\begin{enumerate}[1).]
+\item Compact spaces.
+\item Locally compact Hausdorff spaces which are first countable.
+\end{enumerate}
+\end{example}
+
+\begin{definition}
+A subset $M\subseteq\R^p$ is said to be a submanifold of dimension $m$ if $M$ can be covered by open sets $(U_i)_{i\in I}$ such that there exists a smooth function $F_i:U_i\to\R^{p-m}$ with full rank and 
+\begin{equation*}
+M\cap U_i=\{x\in U_i\:|\: F_i(x)=0\}.
+\end{equation*}
+In other words, $M$ is locally a graph of a smooth map.
+\end{definition}
+
+\begin{definition}
+Let $X$ be a separated and paracompact topological space. A chart is a pair $(U,\varphi)$ where $U$ is an open subset of $X$ and $\varphi:U\to V\subseteq\R^n$ is a homeomorphism onto some open subset $V$ of $\R^n$. An atlas $\mathcal{A}=\{(U_i,\varphi_i)\}_{i\in I}$ is a collection of charts such that $(U_i)_{i\in I}$ covers $X$.
+\end{definition}
+
+\begin{definition}
+Let $\mathcal{A} = \{(U_i,\varphi_i)\}_{i\in I}$ be an atlas. A transition map is a composition $\varphi_i\circ\varphi_j^{-1}|_{\varphi_j(U_i\cap U_j)}\to\varphi_i(U_i\cap U_j)$ for some $i,j\in I$. 
+\end{definition}
+
+\begin{definition}
+An atlas $\mathcal{A}$ is called smooth if all the transition maps are smooth.
+\end{definition}
+
+\begin{definition}
+A chart $(U,\varphi)$ is smooth compatible with smooth atlas $\mathcal{A}$ if for any $i\in I$, $\varphi_i\circ\varphi^{-1}$ and $\varphi\circ\varphi_i^{-1}$ are smooth.
+\end{definition}
+
+\begin{definition}
+An atlas $\mathcal{A}$ is smooth maximal if $(U,\varphi)$ is smooth compatible with $\mathcal{A}$ then $(U,\varphi)\in\mathcal{A}$.
+\end{definition}
+
+\begin{definition}
+A paracompact, smooth manifold is a pair $(M,\mathcal{A})$ such that 
+\begin{enumerate}[i).]
+\item $M$ is a paracompact separated topological space.
+\item $\mathcal{A}$ is smooth maximal.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+Above notions can be defined for $\mathcal{C}^k$, analytic, continuous, algebraic, linear by simply replacing the word "smooth" with one of the formers.
+\end{remark}
+
+\begin{remark}
+It suffices to give one (smallest possible) atlas to define a smooth structure.
+\end{remark}
+
+\subsection{Examples of Smooth Manifolds}
+
+\begin{definition}
+  A topological space is second countable if it has a basis consists of at most countably many open subsets.
+\end{definition}
+
+\begin{remark}
+  Instead of paracompactness, we assume smooth manifolds to be separated and second countable space. From this definition, we can also induce paracompactness.
+\end{remark}
+
+\begin{example}
+For $x,y\in\R$, $x\sim y \Leftrightarrow \vert x\vert = \vert y \vert > 1$. With this relation, we construct a quotient space $X = \R/\sim$. 
+\par We introduce its atlas by $U_1 = (-\infty,1)/\sim=X-\{[1]\}$ with chart $\varphi_1(x) = [x]$, and $U_2 = (-1,\infty)/\sim=X-\{[-1]\}$ with chart $\varphi_2(x) = [x]$. However, this is non-separated as $1$ and $-1$ cannot be separated.
+\end{example}
+
+\begin{definition}
+  A smooth submanifold of $\R^n$ is a separated, second countable smooth manifold. 
+\end{definition}
+
+Take $\varphi^{-1}$, where $\varphi$ runs through parametrization as charts.
+
+\begin{remark}
+$(\R^n,\{\id\})$ is separated and second countable smooth manifold.
+\end{remark}
+
+\begin{definition}
+  Let $S^n = \{x\in\R^{n+1}\sep\norm{x}^2 = 1\}$. Let $N\in S^n$ and call it the north pole. We define the stereographic projection with north pole $N$ to be such that
+  \begin{equation*}
+    \varphi_+:S^n\backslash\{N\}\to\R^n,(x_1,\cdots,x_{n})\mapsto {\frac 1 {1-x_n}}(x_1,\cdots,x_{n-1}).
+  \end{equation*}
+  Similarly, we define 
+  \begin{equation*}
+    \varphi_-:S^n\backslash\{-N\}\to\R^n,(x_1,\cdots,x_{n})\mapsto {\frac 1 {1+x_n}}(x_1,\cdots,x_{n-1}).
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  A $n$-dimensional torus $T^n$ is a direct product of $n$-many $S^1$. 
+\end{definition}
+
+\begin{definition}
+  A lattice $\Gamma$ in $\R^n$ is a subgroup generated by a basis of $\R^n$ over $\Z$. 
+\end{definition}
+
+\begin{lemma}
+\begin{equation*}
+  T^n = \R^n/\Gamma. 
+\end{equation*}
+\end{lemma}
+
+\begin{definition}
+  Let $k=\R$ or $\C$. The projective space over the field $K$ is 
+  \begin{equation*}
+    K\Para^n=(K^{n+1}\backslash\{o\})/K^\times.
+  \end{equation*}
+\end{definition}
+\begin{remark}
+  \begin{equation*}
+    \R\Para^n = S^n/x\sim-x.
+  \end{equation*}
+  And also we have,
+  \begin{equation*}
+    \C\Para^n = S^{2n+1}/S^1.
+  \end{equation*}
+  We can introduce atlases to them by 
+  \begin{equation*}
+    U_j = \{[x_0:\cdots:x_n]\in K\Para^n\sep x_j\not=0\},
+  \end{equation*}
+  with chart,
+  \begin{equation*}
+    \varphi_j:U_j\to K^n, \varphi([x_0:\cdots:x_n]) = \left({\frac {x_0} {x_j}},\cdots,{\frac {x_n} {x_j}}\right).
+  \end{equation*}
+\end{remark}
+\begin{definition}
+  Let $\mathcal{M},\mathcal{N}$ be smooth manifold. A function $f:\mathcal{M}\to\mathcal{N}$ is called smooth if for each $p\in\mathcal{M}$, there exist chart $(U,\varphi)$ around $p$ and $(V,\psi)$ around $f(p)$ such that 
+  \begin{equation*}
+    \psi\circ f\circ \varphi^{-1}:\R^m \to \R^n
+  \end{equation*}
+  is smooth for some $m,n\in\N$. 
+\end{definition}
+\begin{remark}
+  Since transition maps are smooth, above map is well-defined and if $f$ is smooth so is $\varphi'\circ f\circ \psi'$ for any charts $\varphi',\psi'$. 
+\end{remark}
+\begin{proposition}
+  Compositions of smooth maps are smooth.
+\end{proposition}
+
+\begin{definition}
+  Let $f:\mathcal{M}\to\mathcal{N}$ be a smooth map. It is called a diffeomorphism if it is bijective and $f^{-1}$ is also smooth.
+\end{definition}
+\subsection{Partitions of Unity}
+
+\begin{proposition}
+  Let $(\mathcal{M},\mathcal{A})$ be a pair of a smooth manifold with its atlas which we assumed to be separated and second countable. Then it is paracompact. More precisely, given an open covering $(U_i)_{i\in I}$, there exists a countable locally finite refinement $(V_j)_{j\in J}$ together with a chart $\{\psi_j\}_{j\in J}$ which can be chosen such that 
+  \begin{equation*}
+    \psi_j:V_j\to B(o,3)
+  \end{equation*}
+  such that 
+  \begin{equation*}
+    \mathcal{M} = \bigcup_{j\in J}\psi_j^{-1}(B(o,1)).
+  \end{equation*}
+  \label{smooth_manifold_paracompact}
+\end{proposition}
+
+\begin{proof}
+$\mathcal{M}$ is locally compact (look at the charts), hence there existsa acompact subsets
+\begin{equation*}
+  K_1\subset\compinc K_2\compinc K_3
+\end{equation*}
+such that 
+\begin{equation*}
+  \mathcal{M} = \bigcup K_j
+\end{equation*}
+(ie. an exhaustion by compact sets). Note $K_{j+1}-\interior K_j$ is again compact. For $p\in K_{j+1}-\interior K_j$ choose a chart $(V_p,\psi_p)$ such that 
+\begin{equation*}
+  \psi_p(V_p) = B(o,3), \psi_l(p) = 0.
+\end{equation*}
+Note that we can take $V_p$ small enough so that there is $i\in I$ such that $V_p\subset U_i$. 
+\par By compactness, we can take $p_{j,1},\cdots,p_{j,r_j}$ such that 
+\begin{equation*}
+  K_{j+1}-\interior K_j = \bigcup_{l=1}^{r_j} \varphi_{jl}^{-1}(B(0,1)).
+\end{equation*}
+By making $V_{p_{j,l}}$ small enough we can assume 
+\begin{equation*}
+  V_{p_{j,l}}\subset\interior K_{j+2}-K_{j-1}.
+\end{equation*}
+The union over all $j$ gives the countable locally finite refinement.
+\end{proof}
+
+From now on, a manifold refers to a smooth, separated, and second countable manifold.
+\begin{example}
+  We define,
+  \begin{equation*}
+    f_1(t) \defeq \begin{cases}
+      e^{-{\frac 1 t}}, t>0\\
+      0, t\leq 0.
+    \end{cases}
+  \end{equation*}
+  Then $f_1$ smooth. We then define,
+  \begin{equation*}
+    f_2(t)\defeq {\frac {f_1(t)} {f_1(t)+f_1(1-t)}}.
+  \end{equation*}
+  $f_2$ is a function which is monotonically increasing and for $t\geq 1$, we have $f_2(t) = 1$. 
+  \begin{equation*}
+    f_3(t) = f_2(2+t)+f_2(2-t).
+  \end{equation*}
+  Again we define
+  \begin{equation*}
+  f_4:\R^n\to\R, f(x) = f_3(\norm{x}).
+  \end{equation*}
+  \label{partition_of_unity_example}
+\end{example}
+
+\begin{definition}
+  A support of the function $f:X\to\R$ is 
+  \begin{equation*}
+    \supp(f) \defeq \overline{f^{-1}(\R\backslash\{0\})}.
+  \end{equation*} 
+\end{definition}
+
+\begin{theorem}
+  Let $\mathcal{M}$ be a manifold and $(U_i)_{i\in I}$ be an open covering. Then there exist smooth functions $(\varphi_n:\mathcal{M}\to\R)_{n\in\N}$ such that 
+  \begin{enumerate}[i).]
+    \item $\forall n\in\N, 0\leq\varphi_n\leq 1$.
+    \item $(\supp\varphi_n)_{n\in\N}$ is locally finite.
+    \item $\forall n\in\N\exists i\in I,\st \supp\varphi_n\subset U_i$.
+    \item $\forall p\in\mathcal{M}, \sum_{n=1}^\infty \varphi_n(p) = 1$. 
+  \end{enumerate}
+  Such sequence of functions is called a partition of unity subordinated by the given covering $(U_i)_{i\in I}$.
+  \par Additionally, if $I\subset\N$, then $(\varphi_n)_{n\in\N}$ can be indexed by $I$ as well in such a way that,
+  \begin{equation*}
+    \forall i\in I, \supp\varphi_i \subset U_i.
+  \end{equation*}
+  \label{partition_of_unity_existence}
+\end{theorem}
+\begin{proof}
+By Proposition \ref{smooth_manifold_paracompact}, take a countable, locally finite refinement charts $((\tilde{\psi}_n,V_n))_{n\in\N}$. Borrowing the notation from Exampple \ref{partition_of_unity_example}, we set 
+\begin{equation*}
+  \tilde{\varphi_n}(x) \defeq
+  \begin{cases}
+    f_4(\tilde{\psi}_n(x))\quad \forall x\in V_n,\\
+    0,\quad x\not\in V_n.
+  \end{cases}
+\end{equation*}
+Then take $\tilde{\varphi}$ to be 
+\begin{equation*}
+  \varphi\defeq \sum_{n=1}^\infty \tilde{\varphi_n}\in\mathcal{C}^\infty(\mathcal{M}).
+\end{equation*}
+We observe that $\varphi$ is nowhere $0$. Thus we define 
+\begin{equation*}
+  \varphi_n \defeq \tilde{\varphi_n}/\tilde{\varphi},
+\end{equation*}
+we derived a desired family of functions. 
+\par For the second part, set 
+\begin{equation*}
+  J_0 = \emptyset,\quad \varphi_0 = 0,
+\end{equation*}
+define inductively that 
+\begin{equation*}
+  J_k = \left\{i\in\N\backslash\bigcup_{i=0}^{k-1}J_i\:\Bigg{|}\: \supp\varphi_i\subseteq U_k\right\}. 
+\end{equation*}
+We then take 
+\begin{equation*}
+  \psi_k \defeq \sum_{i\in J_k} \tilde{\varphi_i}/\tilde{\varphi}.
+\end{equation*}
+\end{proof}
+
+\begin{proposition}
+  Let $A\subset\mathcal{M}$ be a closed subset of a manifold such that there is an open set $A\subset G\subset \mathcal{M}$. Then there exists a smooth function $f\in\mathcal{C}^\infty(\mathcal{M})$ such that the image of $f$ is contained in $[0,1]$ and
+  \begin{equation*}
+    \forall p\in A, f(p) = 1,\text{ and }\forall p\in G, f(p) = 0.
+  \end{equation*}
+\end{proposition}
+
+\begin{proof}
+Observe that $\{\mathcal{M}-A,G\}$ is an open covering. By Theorem \ref{partition_of_unity_existence}, we can take smooth functions $\varphi,\psi$ such that 
+\begin{equation*}
+  \supp\varphi\subset\mathcal{M}-A,\supp\psi\subset G, \varphi+\psi \equiv 1.
+\end{equation*}
+Take $f = \psi$.
+\end{proof}
+\subsection{Tangent Spaces}
+\begin{example}
+  Let $\mathcal{M}\subseteq\R^n$ be a submanifold. Then we have a notion of tangent vector, such that for some $v\in\R^n$, we define a smooth curve $\gamma$ such that 
+  \begin{equation*}
+    \gamma:(-\varepsilon,\varepsilon)\to\mathcal{M},\quad \varphi'(0) = v.
+  \end{equation*}
+  Given $v\in\R^n$, $p\in\mathcal{M}$ and $f:\mathcal{M}\to\R^n$, we define 
+  \begin{equation*}
+    vf = (f\circ \gamma)'(0).
+  \end{equation*}
+  where $\gamma:(-\varepsilon,\varepsilon)\to\mathcal{M}$ is a smooth curve such that $\gamma(0)=p,\gamma'(0)= v$. 
+  Exercise : show that this definition does not depend on the choice of $\gamma$ satisfying the two conditions above. Furthermore, this defines a linear map 
+  \begin{equation*}
+    v:\mathcal{C}^\infty(\mathcal{M})\to\R,
+  \end{equation*}
+  such that 
+  \begin{equation*}
+    v(f\cdot g) = (f\circ\gamma\cdot g\circ\gamma)'(0) = f(p)\cdot (vg)+(vf)\cdot g(p).
+  \end{equation*}
+\end{example}
+
+\begin{definition}
+Let $\mathcal{M}$ be a smooth manifold and $p\in\mathcal{M}$. The linear map $X_p:\mathcal{C}^\infty(\mathcal{M})\to\R$ is called a derivation at $p$ if 
+$X_p(fg) = f(p)X_pg+g(p)X_pf$.
+\par We define the tangent space of $\mathcal{M}$ at $p$ to be 
+\begin{equation*}
+T_p\mathcal{M} = \{X_p:\mathcal{C}^\infty\mathcal{M}\to \R\sep \text{$X_p$ is a derivation}\}.
+\end{equation*}
+\end{definition}
+
+\begin{remark}
+  Obviously $T_p\mathcal{M}$ is a $\R$-vectorspace.
+\end{remark}
+
+
+
+\begin{lemma}
+  if $\varphi\in\mathcal{C}^\infty(\mathcal{M})$ is constant around $p\in\mathcal{M}$. Then $X\varphi = 0$ for any $X\in T_p\M$. 
+\end{lemma}
+\begin{proof}
+Let $\varphi\equiv 1$ around $p$. Choose $\chi\in\cinf(\M)$ to be such that 
+\begin{enumerate}
+  \item $\chi\equiv1$ in a neighborhoodof $p$.
+  \item $\supp\chi\subseteq\{q\in\M\sep\varphi(q))=1\}$.
+\end{enumerate}
+Then $\chi\varphi = \chi$. Thus we have 
+\begin{equation}
+  X(\chi) = X(\chi)\varphi(p) + \chi(p)X(\varphi).
+\end{equation}
+Since $\varphi(p) = 1$ and $\chi(p)=1$, thus we conclude $X(\varphi) = 0$. 
+\end{proof}
+
+\begin{lemma}
+  If $X\in T_p\M\cap T_q\M$ then either $X=0$ or $p=q$. 
+\end{lemma}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{lemma}
+Let $(U,\varphi)$ be a chart of $\M$ centered at $p\in\M$ (ie. $\varphi(p) = 0$) withecoordiante function $x_1,\cdots,x_n$. 
+Then for $f\in\cinf(U)$, there are functions $f_1,\cdots, f_n\in\cinf(U)$, such that 
+\begin{equation*}
+f = \sum_{j=1}^n f_jx_j+f(p).
+\end{equation*} 
+Note that taking $\varphi(p)=0$, justfies the $f_jx_j$ for each coordinate.
+\par Analogously, given $f\in\cinf(\M)$, we may choose $f_j\in\cinf(\M)$ such that 
+\begin{equation*}
+  f|_U = \sum_{j=1}^n f_j|_Ux_j +f(p).
+\end{equation*}
+\end{lemma}
+
+\begin{proof}
+  The proof for the second part is assgined as an exercise. 
+  \par Consider $\M=\R^n$, $p=0$, and $U = (-\varepsilon,\varepsilon)^n$. We have 
+  \begin{equation*}
+    f(x) = \sum_{j=1}^n (f(x_1,\cdots,x_j,0,\cdots,0)-f(x_1,\cdots,x_{j-1},0,\cdots,0))+f(0).
+  \end{equation*}
+  By the fundamental theorem of calculus, we obtain, 
+  \begin{equation*}
+    f(x) = \sum_{j=1}^n \int_0^1 \partial_jf(x_1,\cdots,tx_j,0,\cdots,0)dtx_j+f(0).
+  \end{equation*}
+  By setting $f_j = \int_0^1 \partial_jf(x_1,\cdots,tx_j,0,\cdots,0)dt$, we derive the statement.
+\end{proof}
+
+\begin{definition}
+  Given a chart $(U,\varphi)$ of $\M$. For $f\in\cinf(U)$, we define 
+  \begin{equation*}
+    {\frac \partial {\partial x_j}}\bigg{|}_pf \defeq {\frac {\partial } {\partial \gamma_j}}\bigg{|}_{\varphi(p)}(f\circ\varphi^{-1})(\gamma) = D(f\circ\varphi^{-1})(\varphi(p))[e_j].
+  \end{equation*}
+\end{definition}
+
+\begin{proposition}
+  Let $\M$ be a smooth manifold and $(U,\varphi)$ be a $n$-dimensional chart at $p$. Then we have 
+  \begin{equation*}
+    \left\{{\frac {\partial} {\partial x_1}}\bigg{|}_p,\cdots,{\frac {\partial} {\partial x_n}}\bigg{|}_p\right\}
+  \end{equation*}
+  forms a basis in $T_p\M$.
+\end{proposition}
+\begin{proof}
+  Write 
+  \begin{equation*}
+    f = \sum_{i=1}^n f_jx_j+f(p).
+  \end{equation*}
+  Choose $\chi\in\cinf(\M)$ such that 
+  \begin{enumerate}[i).]
+    \item $\chi$ is compactly supported in $U$.
+    \item $\chi\equiv1$ in a neighborhood of $p$.
+  \end{enumerate}
+  Then 
+  \begin{equation*}
+    \chi^2 f = \sum_{j=1}^n (\chi f_j)(\chi x_j)+\chi^2f(p),
+  \end{equation*}
+  in the neighborhood of $p$. Since $\chi$ is compactly supported. This is defined everywhere on $U$. 
+  \par Let $X\in T_p\M$ be a derivation. Then observe that 
+  \begin{equation*}
+    X\chi^2 = 0,\quad Xf = X(\chi^2f).
+  \end{equation*}
+  Therefore, 
+  \begin{align*}
+    Xf &= \sum_{j=1}^n X((\chi f_j))(Xx_j)(p)+f_j(p)X(\chi x_j)\\
+    &= \sum_{j=1}^n f_j(p)X(\chi x_j)\\
+    & = \sum_{j=1}^nX(\chi x_j)\cdot{\frac {\partial} {\partial x_j}}\bigg{|}_pf.\\
+  \end{align*}
+  This implies that 
+  \begin{equation*}
+    X = \sum_{j=1}^n X(\chi x_j){\frac {\partial } {\partial x_j}}\bigg{|}_p.
+  \end{equation*}
+  The set 
+  \begin{equation*}
+    \left\{{\frac {\partial} {\partial x_1}}\bigg{|}_p,\cdots,{\frac {\partial} {\partial x_n}}\bigg{|}_p\right\}
+  \end{equation*}
+  spans $T_p\M$. Remains to show the linearly independentness. To do so consider 
+  \begin{equation*}
+    {\frac {\partial} {\partial x_j}}x_i = \delta_{ij}.
+  \end{equation*}
+  We conclude the proof.
+\end{proof}
+\begin{example}
+  For $\M = \R^n$ and $p\in\R^n$, the partial derivatives with respect to the standard coordinate at $p$ is a basis of $T_p\R^n$. Explicitly each is of the form,
+  \begin{equation*}
+    {\frac {\partial } {\partial x_j}}\bigg{|}_pf = {\frac {\partial f} {\partial x_j}}(p).
+  \end{equation*}
+\end{example}
+\begin{example}
+  Let $(U,\varphi)$ be a chart of an open subset of $\R^n$ with coordinate function $y_1,\cdots, y_n$, (ie. $\varphi=(y_1,\cdots,y_n)$).
+  \par We have 
+  \begin{align*}
+    \pd{}{x_j}\bigg{|}_pf &= \pd{}{x_j}(f\circ\varphi^{-1}\circ\varphi)(0),\\
+    & = \sum_{j=1}^n\partial_j(f\circ\varphi^{-1})(\varphi(p))\pd{\varphi_j}{x_i}(p).
+  \end{align*}
+  Let $\pd{}{y_j}\bigg{|}_pf = \partial_j(f\circ\varphi^{-1})(\varphi(p))$, we get,
+  \begin{equation*}
+    =\sum_{j=1}^n \pd{y_j}{x_i}(p)\pd{}{y_j}\bigg{|}_pf.
+  \end{equation*}
+  In particular,
+  \begin{equation*}
+  \pd{}{x_i}\bigg{|}_pf  =\sum_{j=1}^n \pd{y_j}{x_i}\pd{}{y_j}\bigg{|}_p.
+  \end{equation*}
+\end{example}
+\begin{definition}
+  Let $\M,\mathcal{N}$ be smooth manifold and $f:\M\to\mathcal{N}$ be a smooth map. For $p\in\M$, we have a linear transform
+  \begin{equation*}
+    T_pf:T_p\M\to T_p\mathcal{N}
+  \end{equation*}
+  such that given $X\in T_p\M$ and $h\in\cinf(\mathcal{N})$, we define 
+  \begin{equation*}
+    T_pf(X)h = X(h\circ f).
+  \end{equation*}
+  \label{induced_linear_transform_tangent_space}
+\end{definition}
+
+\begin{lemma}
+  Let $\M\subseteq\R^m$ and $\mathcal{N}\subseteq\R^n$ be open. Then in the standard basis $T_pf$ is the Jacobi-matrix.
+\end{lemma}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+\begin{lemma}[Chain Rule]
+  Let $f:\M\to\mathcal{N}$, $g:\mathcal{N}\to\mathcal{W} $be smooth maps. Then we have 
+  \begin{equation*}
+    T_p(g\circ f) = T_{f(p)}g\circ T_pf.
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Exercise.
+\end{proof}
+\begin{lemma}
+  Let $(U,\varphi)$ be a chart. Viewing this as a locally smooth map from $\M$ to $\R^n$, we obtain an isomorphism,
+  \begin{equation*}
+    T_p\varphi:T_p\M\to T_{\varphi(p)}\R^n = \R^n.
+  \end{equation*}
+  If $(V,\psi)$ is another chart then for $p\in U\cap V$, we have,
+  \begin{equation*}
+    T_p\psi = T_p(\psi\circ\varphi^{-1}\circ \varphi) = D_{\varphi(p)}(\psi\circ\varphi^{-1})T_p\varphi.
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{definition}[Physicists definition of tangent space]
+  A tangent vector is a family $(\xi^\varphi)_\varphi$ where $\xi^\varphi\in\R$ 
+  where $\varphi$ runs through charts containing $p$, together with a transformation rule 
+  \begin{equation*}
+    \xi^\psi = D_{\varphi(p)}\left(\psi\circ\varphi^{-1}\right)[\xi^\varphi].
+  \end{equation*}
+
+\end{definition}
+
+\begin{definition}
+  Let $\M$ be a manifold. A curve $\gamma:I\to \M$ in $\M$ is a smooth map such that from some interval $I\in\R$, such that $I$ is a manifold with the canonical charts. $d:I\to I$ where ${\frac d {dt}}$ a canonical tangent vector associated to this chart, we get a velocity vector of the curve 
+  \begin{equation*}
+    \stackrel{\circ}{\gamma}(t_0) = T_{t_0}\gamma({\frac d {dt}}\big{|}_{t_0})\in T_{\gamma(t_0)}\M.
+  \end{equation*}
+\end{definition}
+
+\begin{example}
+  Given any $v\in T_p\M$, and a chart $(U,\varphi)$ centered at $p$ (ie. $\varphi(p) = 0$), we have 
+  \begin{equation*}
+    v = \sum_{i=1}^n v_i \pd{}{x_j}\bigg{|}_p
+  \end{equation*}
+  Define a curve 
+  \begin{equation*}
+    \gamma(t) = \varphi^{-1}(tv_1,\cdots,tv_n).
+  \end{equation*}
+  Note that $\gamma(0) = \varphi^{-1}(0) = p$. We define 
+  \begin{equation*}
+    \stackrel{\circ}{\gamma}(0)f = T_0\gamma({\frac {d} {dt}}\bigg{|}_0)f = {\frac d {dt}}\bigg{|}_{t=0}f(\gamma(t))=\sum_{i=1}^nv_i\pd{f\circ\varphi^{-1}}{x_j}(0) = vf.
+  \end{equation*}
+\end{example}
+\subsection{Local properties of differentiable maps and submanifolds.}
+In this section, all manifolds are assumed to have pure dimension (ie. it has a constant dimension everywhere). 
+\begin{notation}
+$\M^m$ denotes that $\dim\M = \dim T_p\M=m$ for any point $p\in\M$.
+\end{notation}
+\begin{definition}
+  Let $\M^m,\maniN^n$ be manifolds and $f:\M\to\maniN$ be a smooth map.
+  \begin{enumerate}[1).]
+    \item $p\in\M$ is called a critical point for $f$ if $\rank T_pf<n=\dim\maniN$ and $f(p)$ is called the critical value.
+    \item $q\in\maniN$ is called a regular value if $\forall p\in f^{-1}(q)$ we have $T_qf = \dim\maniN = n$. 
+    \item $f$ is called a submersion if for any $p\in\M$, $T_pf = n$.
+    \item $f$ is called an immersion if for any $p\in\M$, $T_pf = m$.
+    \item $f$ is called a subimersion if $\M\ni p\mapsto\rank T_pf$ is a constant.
+  \end{enumerate}
+\end{definition}
+\begin{notation}
+  For $f:\M\to\maniN$, we denote the set of critical points to be $C_f$.
+\end{notation}
+\begin{definition}[Submanifold]
+  Let $\maniN\subset\M^m$ is called a submanifold if for any chart $(U,\varphi)$ of $\M$, 
+  \begin{equation*}
+    \varphi(\N\cap U)\subseteq\R^m
+  \end{equation*}
+  is a submanifold of $\R^m$.
+\end{definition}
+\begin{remark}
+  The above definition is equivalent to say that for each $p\in\M$, there exists a chart $(U,\varphi)$ centered at $p$ such that 
+  \begin{equation*}
+    \varphi(\maniN\cap U) = \R^k\times\{0\}\cap\varphi(U)\subset\varphi(U)\subset\R^m.
+  \end{equation*}
+  In other words, the intersection is diffeomorphic to some hyperspace with dimension $k$ in $\R^m$. 
+\end{remark}
+\begin{definition}
+  A smooth map $f:\M\to\maniN$ is an embedding if 
+  \begin{enumerate}[i).]
+    \item $f$ is an injective immersion.
+    \item $f:\M\to f(\M)\subset\maniN$ is a homeomorphism.
+  \end{enumerate}
+\end{definition}
+\begin{definition}
+  Let $f:\M\to\maniN$ be smooth. The rank of $f$ is the map $\M\ni p\mapsto \rank T_pf$.
+\end{definition}
+\begin{proposition}
+  Let $f:\M^m\to\maniN^n$ be a subimmersion of rank $k$. 
+  \begin{enumerate}[1).]
+    \item For $q\in\maniN$, the set $f^{-1}(\{q\})\subset\M$ is empty or a submanifold of dimension $n-k$.
+    \item For $p\in\M, q\defeq f(p)$ there exists a  neighborhood$U$ of $p$ and $V$ of $q$ such that $S=f(U)\cap V$ is a submanifold of $\maniN$ of dimension $k$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  Apply the rank theorem for $f(p) = q$. There exists a chart $(U,\varphi)$ and $(V,\psi)$ which are centered at $p$ and $q$, respectively such that 
+  \begin{center}
+    \begin{tikzcd}
+U \arrow[r, "f"] \arrow[d, "\varphi"']                                            & V \arrow[d, "\psi"] \\
+\R^m\supset U' \arrow[r, "{(x_1,\cdots,x_m)\mapsto(x_1,\cdots,x_k,0,\cdots,0)}"'] & V'\subset\R^n     
+\end{tikzcd}
+  \end{center}
+\end{proof}
+\begin{corollary}
+  $f:\M^m\to\maniN^n$ is smooth and $q\in \maniN$ is a regular value, then $f^{-1}(\{q\})$ is a submanifold of dimension $m-n$ or empty.
+\end{corollary}
+\subsection{The Theorem of Morse-Sard}
+\begin{notation}
+The Lebesgue measure on $\R^m$ is denoted by $\lambda^m$. 
+\end{notation}
+\begin{definition}[Null set]
+  $A\subset \M^m$ is a nullset if for each chart $(U,\varphi)$, the set $\varphi(U\cap A)$ is a $\lambda^m$-nullset in $\R^m$. 
+\end{definition}
+\begin{remark}
+  A diffeomorphism maps nullsets to nullsets. Hence the above notion is well-defined.
+\end{remark}
+\begin{remark}
+  A singleton of a manifold is a nullset. Countable unions of nullsets are again nullsets.
+\end{remark}
+\begin{remark}
+  Let $A\subset\M^m$ where $m>0$, $\M\backslash A$ is dense.
+\end{remark}
+\begin{remark}
+  Suppose we have a smooth function $f:\R^m\supset U\to\R$. For the sake of simplicity, we assume $f(0) = 0$ and $\pd{f}{x_1}(0)\not=0$. Consider 
+  \begin{equation*}
+    h(x) = (f(x),x_2,\cdots,x_m).
+  \end{equation*}
+  Then we have 
+  \begin{equation*}
+    Jf(0) = \begin{pmatrix}
+      \pd{f}{x_1}(0) & \pd{f}{x_2}(0)&\cdots &\pd{f}{x_m}(0)\\
+      0 & 1 & \cdots & 0\\
+      \vdots & \vdots & \ddots & \vdots\\
+      0) & 0 & \cdots & 1.
+    \end{pmatrix}
+  \end{equation*}
+  This is invertible, therefore we have $h$ is a local diffeomorphism. COnsider 
+  \begin{equation*}
+    g \defeq f\circ h^{-1}.
+  \end{equation*}
+  We denote $(t,\xi) = h(x)$, then 
+  \begin{equation*}
+    g(t,\xi) = f\circ h^{-1}\circ h (x) = f(x) = t.
+  \end{equation*}
+  \label{local_diffeo_section}
+\end{remark}
+\begin{theorem}
+  Let $f:\M^m\to\maniN^n$ be smooth where $n\geq 1$. Then the set $C_f$ of critical values of $f$ is a nullset. 
+\end{theorem}
+\begin{proof}
+  Suffices to prove that each $p\in\M$ has an open neighborhood$U$ such that $f(C_f\cap U)$ is a nullset.
+  \par$\Rightarrow)$ Without the loss of generality, we assume $\M=U\in\R^m$ and $\maniN=\R^n$ for $n\geq 1$. We will prove the theorem by induction on $m$. 
+  \par If $m=0$, then the image $f(\M)$ is at most countable thus a nullset.
+  \par Assume the claim holds for all dimension less than $m$. Let us define 
+  \begin{equation}
+    C\defeq C_f,\quad C_1\defeq \left\{x\in U\sep\forall \vert\alpha\vert\leq l, {\frac {\partial^{\vert\alpha\vert}f} {\partial_x\alpha}}=0\right\} l\geq 1.
+  \end{equation}
+  Then we have $f(C\backslash C_l)$ is a nullset. Pick $\xi\in C\backslash C_l$ then there exists $\pd{f_i}{x_j}(\xi) \not=0$ for some $i,j$. Without the loss of genearlity, we assume $i=j=1$.
+  We put 
+  \begin{equation*}
+    h(x) = (f_1(x),x_2,\cdots,x_m).
+  \end{equation*}
+   By Remark \ref{local_diffeo_section}, we have $h$ is a local diffeomorphism and in particular,
+   \begin{equation*}
+    \xi\mapsto(f_1(\xi),\xi_2,\xi_m).
+   \end{equation*}
+   Similarly to the remark, we define 
+   \begin{equation*}
+    g\defeq f\circ h^{-1},\quad g(t,x) = (t,\tilde{g}(t,x)).
+   \end{equation*}
+   $(t,x)$ is critical for $g$ if and only if $x$ is critical for $\tilde{g}(t,\cdot)$. Now consider 
+   \begin{align*}
+    \lambda^n(f(C_f\cap V)) & = \lambda^n(\{g(t,x)\sep\text{$(t,x)$ is critical for $g$}\}),\\
+    & = \lambda^n(\{(t,\tilde{g}(t,x))\sep\text{$x$ is critical for $\tilde{g}(t,\cdot)$}\}),\\
+    & \stackrel{=}{\text{Fubini}} \int_I \lambda^{n-1}\{\tilde{g}(t,x)\sep\text{$x$ is a critical point of $\tilde{g}(t,\cdot)$}\}dt.
+   \end{align*} 
+   The inside of the integral is $0$ by the induction hypothesis.
+   \par Fix $1\leq l<\infty$, then $f(C_l\backslash C_{l+1})$ is a nullset. Indeed, for $\xi\in C_l\backslash C_{l+1}$, without the loss of genearlity, we assume there is a multiindex $\beta$ such that $\vert\beta\vert = l$ and 
+   \begin{equation*}
+    {\frac{\partial^\beta f_1}{\partial x^\beta}}(\xi) = 0.
+   \end{equation*}
+   Similarly for the previous case, we set 
+   \begin{equation*}
+    h(x) = \left({\frac{\partial^\beta f_1}{\partial x^\beta}}(x),x_2,\cdots,x_m\right).
+   \end{equation*}
+   By the similar argument as above, we get the claim.
+   \par Finally, let $d>0$ and $W$ be a cube of side length $b$. Consider $x\in C_k\cap W, y\in W$. Fomr Taylor expansion at $x$ implies that 
+   \begin{equation*}
+    \vert f(x)-f(y)\vert \leq L\vert x-y\vert^{k+1},
+   \end{equation*}
+   where $L$ depends on the cube $W$, $k$ and $f$. Also by fixing $k$, we can make it a locally uniform constant.
+   \par Subdivide each edge of $W$ into $r$ edges to make $W$ into $r^m$ many cubs $(W_j)$ of edge length ${\frac d r}$. For $x\in C_k\cap W_j$, and $y\in W_j$, we have 
+   \begin{equation*}
+    \vert x-y\vert \leq \sqrt{m}{\frac d r}.
+   \end{equation*}
+   In particular, the constant $\sqrt{m}$ only depends on the dimension. Back to the previous arugment, we get 
+   \begin{equation*}
+    \vert f(x)-f(y)\vert \leq L\left({\frac {\sqrt{m}d} r}\right)^{k+1}.
+   \end{equation*}
+   This means that $f(C_k\cap W_j)$ sits in a cube of edge length less than or equal to $2L\left({\frac {\sqrt{m}d} r}\right)^{k+1}$.
+   \begin{equation*}
+    \lambda^n(f(C_k\cap W))\leq r^m\lambda(\max_{1\leq j\leq r^m}f(C_k\cap W_j)) \leq r^m \left\{2L\left({\frac {\sqrt{m}d} r}\right)\right\}^n = K\cdot r^{m-n(k+1)}.
+   \end{equation*}
+   Observe that $r\to\infty$ and $k\geq {\frac m n}$, we get $C_k\cap W$ has measure $0$.
+\end{proof}
+\section{Vector fields and dynamical system}
+\subsection{Definition}
+\begin{definition}
+  Let $\M$ be a smooth manifold. A smooth vector field of $\M$ is a map 
+  \begin{equation*}
+    X:\M\to T\M,
+  \end{equation*}
+  such that 
+  \begin{enumerate}
+    \item $\forall p\in\M, X(p)\in T_p\M$. 
+    \item For any chart $(U,\varphi)$ centered at $p$, we have $X|_U=\sum_{i=1}^mX_j^\varphi\pd{}{x_i}$ where $X_i^\varphi\in\cinf(U)$ for each $i$.
+  \end{enumerate}
+\end{definition}
+\begin{notation}
+  \begin{equation*}
+    \Gamma(T\M) = \{\text{smooth vector fields on $\M$}\}.
+  \end{equation*}
+\end{notation}
+\begin{remark}
+  The second condition can be restated as follow. Recall Definition \ref{induced_linear_transform_tangent_space}. A chart $\varphi:U\to \R^m$ can be considered a smooth map between $U$ and $\R^n$. 
+  We also have seen that $T\R^m \cong \R^m\times\R^n$. With this identification, we have,
+  \begin{equation*}
+    T\varphi:TU\to T\R^m \cong \R^m\times\R^m,  TU\ni [U\ni p\mapsto X_p]\mapsto [\R^n \ni x \varphi^*\mapsto X_{\varphi^{-1}(x)}],
+  \end{equation*}
+  is smooth for all chart $\varphi$.
+\end{remark}
+\begin{example}
+  Consider,
+  \begin{equation*}
+    X:S^1\to TS^1, (x,y)\mapsto (-y,x),
+  \end{equation*}
+  is a smooth vector field.
+\end{example}
+\begin{definition}
+  Let $I\subset\R$ be an interval and $X\in\Gamma(T\M)$. A curve $\gamma:I:\to\M$ is called an integral curve of $X$ if 
+  \begin{equation*}
+    \forall t\in I, \gamma'(t) = X(\gamma(t)).
+  \end{equation*}
+\end{definition}
+\begin{remark}
+  To find such curve is equivalent to solve the following autonomous initial value problem. Given a chart $(U,\varphi)$ around a point $p\in\M$, 
+  \begin{align*}
+    \begin{cases}
+      (\varphi\circ\gamma)'(t) &= \begin{pmatrix}
+      X_1^\varphi\circ\varphi^{-1}\\
+      \vdots\\
+      X_1^\varphi\circ\varphi^{-1}
+    \end{pmatrix}
+    (\varphi\circ \gamma(t)),\\
+    (\varphi\circ\gamma)(t_0) &= 0.
+    \end{cases}
+  \end{align*}
+\end{remark}
+\subsection{Flow-Box Theorem}
+\begin{lemma}[Grönwall]
+  \label{gronwall_lemma}
+  Let $f,g:[a,b]\to(0,\infty)$ be continuous functions such that 
+  \begin{equation*}
+    f(t)\leq c+\int_0^t f(s)g(s)ds,
+  \end{equation*}
+  for some constant $c>0$. Then we have,
+  \begin{equation*}
+    f(t)\leq c\exp\left(\int_0^tg(s)ds\right).
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Consider,
+  \begin{equation*}
+    \tilde{f}(t) = c+\int_0^t f(s)g(s)dt.
+  \end{equation*}
+  Then by assumption $f(t)\leq \tilde{f}(t)$. Also set,
+  \begin{equation*}
+    h(t) = \tilde{f}(t)\exp\left(-\int_0^t g(s)ds\right).
+  \end{equation*}
+  Then $f,h$ are both differentiable thus we take,
+  \begin{align*}
+    h'(t) &= f(t)g(t)\exp\left(-\int_0^t g(s)ds\right)-g(t)\tilde{f}(t)\exp\left(-\int_0^t g(s)ds\right),\\
+    &= \underbrace{(f(t)-\tilde{f}(t))}_{\leq 0}g(t)\exp\left(-\int_0^t g(s)ds\right),\\
+    &\leq 0.
+  \end{align*}
+  We also have,
+  \begin{equation*}
+    h(0) = c.
+  \end{equation*}
+  Thus we conclude,
+  \begin{equation*}
+    h(t)\leq c\Rightarrow f(t)\leq \tilde{f}(t)=h(t)\exp\left(\int_0^t g(s)ds\right)\leq c\exp\left(\int_0^t g(s)ds\right).
+  \end{equation*}
+\end{proof}
+\begin{theorem}
+  Let $\M$ be a smooth manifold and $X\in\Gamma(T\M)$. Then for each $p\in\M$ there exists a neighborhood $U$, $\varepsilon>0$, and a smooth map 
+  \begin{equation*}
+    F:(-\varepsilon,\varepsilon)\times U\to\M,
+  \end{equation*}
+  such that 
+  \begin{enumerate}[1).]
+    \item $\forall x\in U, F(0,x)=x$,
+    \item $\partial_tF(t,x) = X(F(t,x))$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+Recall that a continuously differentiable function over a compact set is Lipschitz. \\
+\par Consider a smooth function $f:\overline{B(y_0,r)}$ such that 
+\begin{equation*}
+  a(y)<f(y)<b(y).
+\end{equation*}
+where $y_0\in\R^n$, $r>0$ and $a,b$ are continuous function.  For $p\in B(y_0,r)$, we let $F(t,y)$ to be the maximal solution of the initial value problem,
+\begin{equation*}
+  \begin{cases}
+    \partial_t F(t,y) = f(F(t,y)),\\
+    F(0,y) = y_0.
+  \end{cases}
+\end{equation*}
+By the construction, we get,
+\begin{equation*}
+  F(t,y) = y+\int_0^t f(F(s,y))ds.
+\end{equation*}
+THus for $\vert t\vert\leq 1$, we get,
+\begin{align*}
+  \vert F(t,y)-y_0\vert & \leq \left\vert y -y_0+\int_0^t f(F(s,y))ds\right\vert,\\
+  & \leq \vert y - y_0\vert +\vert t\vert\vert f(y_0)\vert +\int_0^t\vert f(F(s,y))-f(y_0)\vert ds,\\
+  & \leq \vert y-y_0\vert +\vert f(y_0)\vert +\int_0^t L\vert F(s,y)-y_0\vert ds,
+\end{align*}
+for some $L>0$. By applying Lemma \ref{gronwall_lemma}, we get,
+\begin{equation*}
+  \vert F(t,y)-y_0\vert \leq (\vert y-y_0\vert+\vert f(y_0)\vert)e^{L\vert t\vert}.
+\end{equation*}
+%Later see the google photos
+\end{proof}
+\begin{definition}
+  Above $F(t,\cdot)$ is called the local flow of the vector field $X$.
+\end{definition}
+
+\subsection{Applications of Mrose-Sards THeorem}
+\subsubsection{Embedding}
+\begin{theorem}[Whiteney]
+  Each $\M^m$ has an embedding into $\R^{2m+1}$. 
+\end{theorem}
+\begin{proof}
+  We prove the case for $\M$ compact. Note that if $\M$ is compact and $f:\M\to\maniN$ is an injective immersion. Then $f$ is an embedding. Since this gives the continuity of the inverse map. 
+  \par Using Morse-Sard's theorem, $\M^m$ compact, there exists an embedding into some $\R^N$, for $N>>0$. Indeed, choosing charts $(U_j,\varphi_j)_{j=1,\cdots,r}$, (by the compactness, finitely many would cover the whole). Such that 
+  \begin{equation*}
+    \varphi_j(U_j)\supset B(0,3),
+  \end{equation*}
+  and
+  \begin{equation*}
+    \M = \bigcup_{j=1}^r\varphi^{-1}(B(0,1)).
+  \end{equation*}
+  Fix $g\in\mathcal{C}^\infty (\R^m)$ be such that 
+  \begin{equation*}
+    g(x) = \begin{cases}
+      1,\quad (\vert x\vert\leq{\frac 4 3})\\
+      0,\quad (\vert x\vert\geq{\frac 5 3})
+    \end{cases}.
+  \end{equation*}
+  Further defining the functions,
+  \begin{equation*}
+    f_j(p) = \begin{cases}
+      g(\varphi_j(p))\varphi_j(p),\quad (p\in U_j)\\
+      0,\quad(\text{otherwise})
+    \end{cases}.
+  \end{equation*}
+  Then we have $f_j\in\mathcal{C}^\infty(\R^m)$. In particular 
+  \begin{equation*}
+    f_j|_{\varphi_j^{-1}(B(0,1))}
+  \end{equation*}
+  is a diffeomorphism.
+  \par Consider the tuple 
+  \begin{equation*}
+    (f_1,\cdots,f_r,\cdots,g\circ\varphi_1,\cdots,g\circ\varphi_r) : \M\to\R^{(m+1)r},
+  \end{equation*}
+  is an injective immersion, hence it is an embedding.
+  \par Let $\M\subset\R^N$, compact. For $w\in S^{N-1}$, let $\pi_w$ be the orthogonal projection onto $\langle w\rangle^\perp$ which is a hyperplane of dimension $N-1$ which is given by 
+  \begin{equation*}
+    \pi_w(x) = x-\langle w,x\rangle w.
+  \end{equation*}
+  We have 
+  \begin{equation*}
+    \pi_wp = \pi_wq \Leftrightarrow\pi_w(p-q) = 0 \Leftrightarrow p-q\parallel w.
+  \end{equation*}
+  We construct a map,
+  \begin{equation*}
+    \phi:\M\times\M\backslash\{(p,p)\sep p\in\M\}\to S^{N-1}, \phi(p,q) = {\frac {p-q} {\vert p-q\vert}}.
+  \end{equation*}
+  If $2m<N-1$, using Morse-Sarde, the image of $\phi$ is of measure $0$. Therefore,
+  \begin{equation*}
+    \{w\in\S^{N-1}\sep\exists p,q\in\M, p\not=q,p-q\parallel w\} = \Image\phi\cup -\Image\phi.
+  \end{equation*}
+  The right hand side is a nullset. More explicitly, the set of those $w$ such that $\pi_w|_\M$ is not injective is a nullset.
+  \par Suppose $\pi_w$ is an immersion if for $p\in\M$, $v\in T_p\M\backslash\{0\}$, we have $\pi_w(v)\not=0$.
+  \par $\pi_w$ is an immersion, if
+  \begin{equation*}
+    \forall p\in\M, w\not\in T_p\M \Leftrightarrow\not\in\Image\sigma
+  \end{equation*}
+  where 
+  \begin{equation*}
+    \sigma:T\M\backslash\{0\}\to S^{N-1}, v\mapsto {\frac v {\vert v\vert}}.
+    \end{equation*} 
+    %Proofs will be completed on Monday
+    
+\end{proof}
+
+\begin{definition}
+  Let $X\in\Gamma(T\M)$. We define a flow of $X$ to be 
+  \begin{equation*}
+    \phi^X:A\to \M,
+  \end{equation*}
+  where 
+  \begin{equation*}
+    A = \mathcal{D}(\phi^X) \defeq \bigcup_{p\in\M} (a_p,b_p)\times \{p\}\subseteq \R\times \M
+  \end{equation*}
+  such that $\phi^X(p)$ is maximal curve through $p$. $\mathcal{D}(\phi^X)$ is called the flow domain of $X$.
+\end{definition}
+
+\begin{proposition}
+  Let $X\in\Gamma(T\M)$, and $\phi^X\mathcal{D}(\phi^X)=A\to \M$ be the flow of $X$. Then the following statements hold.
+  \begin{enumerate}[1).]
+    \item $A$ is open subset in $\R\times \M$ and contains $\{0\}\times\M$. 
+    \item $\phi^X\in\mathcal{C}^\infty(A)$.
+    \item For $t\in\R$, $\mathcal{D}(\phi^X_t) = \{p\in\M\sep (t,p)\in A\}\subset\M$  where $\phi_t^X(\cdot) = \phi^X(t,\cdot)$, is open. 
+    \item $\M = \bigcup_{t>0}\mathcal{D}(\phi^X_t)$.
+    \item $\phi_t^X:\mathcal{D}(\phi_t)\to\mathcal{D}(\phi^X_{-t})$ is a diffeomorphism.
+    \item $\phi^X_s\circ\phi^X_t \subseteq \phi_{s+t}^X$ in other words if $p\in\mathcal{D}(\phi_t^X)\cap\phi_s^X(p)\in\mathcal{D}(\phi_{s}^X)$ then $p\in\mathcal{D}(\phi^X_{s+t})$.
+    \item $\phi^X_s(\phi_t^X(p)) = \phi_{s+t}(p)$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}$\:$\\
+  \par For 4), let $s,t>0$, and $p\in\mathcal{D}(\phi_t^X)$, then by assumption, $\phi_t^X(p)\in\mathcal{D}(\phi_{s+t}^X)$. Consider 
+  \begin{equation*}
+    c(u) = \begin{cases}
+      \phi_u(p),\quad 0\leq u\leq t,\\
+      \phi_{u-t}(\phi_t(p)), \quad t\leq u \leq t+s,
+    \end{cases}
+  \end{equation*}
+  is an integral curve through $p$ as the two expressions coincide at $u=t$, conclude using the uniqueness. Therefore, 
+  \begin{equation*}
+    \phi_{s+t}^X(p) = c(t+s) = \phi_s(\phi_t^X(p)).
+  \end{equation*}
+  The cases for $s\leq 0$ o $t\leq 0$ are exercises.\\
+  \par For 2), let $p\in\mathcal{D}(\phi_t^X)$, $t>0$, we define,
+  \begin{equation*}
+    B\defeq. = \{\phi_s^X(p) \sep 0\leq s \leq t\}.
+  \end{equation*}
+  This is compact. By using Flow-box theorem, there is a neighborhood $W_0\supseteq B$ and $\varepsilon>0$ such that 
+  \begin{equation*}
+    (-\varepsilon,\varepsilon)\times W_0\ni(u,q)\mapsto \phi_u^X(q) \M
+  \end{equation*}
+  is smooth. Then choose $N$ such that ${\frac t N}<\varepsilon$. Define inductively $W_j$ by 
+  \begin{equation*}
+    W_j = \left(\phi_{{\frac t N}}^X\bigg{|}_{W_{j-1}}\right)^{-1}(W_{j-1}).
+  \end{equation*}
+  \begin{claim}
+  \begin{enumerate}[1).]
+    \item $W_0\supseteq W_1\supseteq\cdots \supseteq W_N$ and they are all open.
+    \item For $q\in W_N$, $\phi_{t{\frac {N-j} {N}}}^X(q)\in W_j$.
+    \item For $0\leq u\leq t{\frac {N-j} N}$, $\phi_u^X(p)\in W_j$. In particular $p\in W_N$. 
+  \end{enumerate}
+  \end{claim}
+  \begin{proof}[Proof of the Claim]
+    For Claim 2). $q\in W_N$, $\phi_{{\frac t N}}(q)\in W_{N-1}$ and inductively $\phi_{t{\frac {j} N}}(q)\in W_{N-j}$. \\
+    \par For Claim 3). $\varphi_u^X(p)\in B\subset W_0$, $0\leq u \leq t$. 
+    \par On the induction step $j\to j+1$, $0\leq u\leq t{\frac {N-j-1} N}$, then 
+    \begin{equation*}
+      {\frac t N}+u\leq t{\frac {N-j} N},
+    \end{equation*}
+    so 
+    \begin{equation*}
+      \phi^X_{{\frac t N}}(\phi_u^X(p))\in W_j,\quad \phi_u^X(p)\in W_j\Rightarrow \phi_u^X(p)\in W_{j+1}.
+    \end{equation*}
+    Let $q\in W_N$, then $\phi_t^X(q) = (\phi_{{\frac t N}})^N(q)$, hence $q\in\mathcal{D}(\phi_t^X)$.
+  \end{proof}
+  For 3). Let $p\in\mathcal{D}(\phi_t^X)$, set $c(u)\defeq \phi_{t+u}^X(p)$ where $-t\leq u\leq 0$. This is an integral curve through $\phi_t^X(p)$. Thus $\phi_t^X(p)\in\mathcal{D}(\phi_{-t}^X)$ and $\phi_{-t}^X\circ\phi_{t}^X(p) = p$.\\
+  \par For 1). Let $(t_0,p)\in A$. Using 2). we can find an open neighborhood $\mathcal{D}(\phi_{t_0}^X)\subset W\ni p$. Using Flow-box theorem, there is $(-\varepsilon,\varepsilon)\times \tilde{W}$ open such that 
+  \begin{equation*}
+    (-\varepsilon,\varepsilon)\times \tilde{W}\ni(u,q)\mapsto \phi_u^X(q),
+  \end{equation*}
+  is smooth with image contained in $W$. In particular $p\in \tilde{W}$. Then for $q\in\tilde{W}$ with $\vert t-t_0\vert<\varepsilon$, 
+  \begin{equation*}
+    \phi_t^X(q) = \phi_{t_0}(\phi_{t-t_0}^X(q))
+  \end{equation*}
+  is smooth. Furthermore, $(t_0-\varepsilon,t_0+\varepsilon)\times\tilde{W}\subseteq A$.
+\end{proof}
+
+\begin{definition}
+A vector field $X\in\Gamma(T\M)$ is called complete  (or integrable) if $\mathcal{D}(\phi^X)=\R\times\M$.
+\end{definition}
+
+\begin{remark}
+  Not all vector fields are complete. 
+\end{remark}
+
+\begin{example}
+  The following vector fields are not complete.
+  \begin{enumerate}[1).]
+    \item $\M = \R^2\backslash\{0\}$ and $X(x,y) = \pd{}{x}$. 
+    \item $\M = \R^2$ and $X(x,y) = x^2\pd{}{x}$. Then we have $\phi^{(1,0)}(t)=\left({\frac 1 {1-t}},0\right)$. 
+  \end{enumerate}
+\end{example}
+
+\begin{proposition}
+  Let $X\in\Gamma(T\M)$ be a compactly supported vector field. Then $X$ is complete. In particular, if $\M$ is compact, then every vector field is complete.
+\end{proposition}
+
+\begin{proof}
+Set $K \defeq \supp(X)$.By the Flow-box theorem, there is an open set $K\subset W\subset \M$ and $\varepsilon>0$, such that 
+$(-\varepsilon,\varepsilon) \times W\subseteq\mathcal{D}(\phi^X)$. On the other hand, if $p\in\M\backslash K$, then for every $t\in\R$, $\phi_t^X(p) = p$. Henc, there is $\varepsilon>0$ such that 
+$(-\varepsilon,\varepsilon)\times \M\subseteq\mathcal{D}(\phi^X)$. Letting $N\in\N$ be large enough such that ${\frac t N}<\varepsilon$, and using $\phi_t = (\phi_{{\frac t N}})^N$ shows $X$ is integrable.
+\end{proof}
+
+\begin{proposition}
+  Let $X\in\Gamma(T\M)$, and $p\in\M$, and assume $X_p\not =0$. Then there is a chart $(U,\varphi)$ centered around $p$, with $X = \pd{}{x_1}$ on $U$.
+\end{proposition}
+
+\begin{proof}
+  Let $\psi$ be a chart with $T_p\psi(X_p) = e_1$. This is possible because if for any chart $\tilde{\psi}$, we find $L\in\GL_m(\R)$ such that 
+  \begin{equation*}
+    LT_p\tilde{\psi}(X_p) = e_1.
+  \end{equation*}
+  Set $\psi = L\circ\tilde{\psi}$. Let $\varepsilon>0,\delta>0$ such that $(-\varepsilon,\varepsilon)\times \psi^{-1}(\overline{B(0,\delta)})\subseteq\mathcal{D}(\phi^X)$.
+  \par Set for $\vert t\vert <\varepsilon$, $y\in\R^{m-1}$, $\vert y\vert <\varepsilon$. 
+  \begin{equation*}
+    \sigma(t,y) = \phi_t^X(\psi^{-1}(0,y)).
+  \end{equation*} 
+  Then 
+  \begin{equation*}
+    D(\psi\circ\sigma)( 0,0) = \begin{pmatrix}
+      1 & \ast & \ast & \cdots & \ast\\
+      0 & 1 & 0 & \cdots& 0\\
+      0 & 0 & \ddots & \ddots & \vdots \\
+      \vdots & \ddots & \ddots & \ddots & \vdots\\
+      0 & 0 & 0& \cdots & 1.
+    \end{pmatrix}
+  \end{equation*}
+  where the lower coner is the identity matrix.
+  \begin{align*}
+    \partial_t\big{|}_{(0,0)}\psi\circ\sigma(t,y) & = \partial_t\big{|}_{(0,0)}\psi(\phi_t^X(p)) = T_p\psi(X_p) = e_1,\\
+    \partial_y\big{|}_{0,0)}\psi(\psi^{-1}(0,y))&=I.
+  \end{align*}
+  So $\sigma$ is locally invertible and $\varphi=\sigma^{-1}$ is a chart centered at $p$. 
+  \begin{equation*}
+    \pd{}{t}\sigma(t,y) = \pd{}{t}\phi^X_t(\psi^{-1}(0,y)) = X\big{|}_{\sigma(t,y)}.
+  \end{equation*}
+  So for $q\in\mathcal{D}(\sigma^{-1}) = \sigma((-\varepsilon,\varepsilon)\times B(0,\delta)\subset\M)$. Thus,
+  \begin{equation*}
+    X(q) = X(\sigma(\sigma^{-1}(q))) = T_{\sigma^{-1}(q)}\sigma(e_1) = D\sigma(\sigma^{-1}(q))e_1.
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Given two vector field $X,Y\in\Gamma(T\M)$, this is not in general false that 
+  \begin{equation*}
+    XY f \not = YX f.
+  \end{equation*}
+  Furthermore, it can even happen that $XY\not\in\Gamma(T\M)$.
+\end{remark}
+
+\begin{definition}
+  For $X,Y\in\Gamma(T\M)$, and $f\in\mathcal{C}^\infty(\M)$, set 
+  \begin{equation*}
+    [X,Y]f\defeq X(Yf) - Y(Xf).
+  \end{equation*}
+  $[X,Y]$ is called the Lie bracket. 
+\end{definition}
+
+\begin{definition}
+  An algebra $\mathfrak{g}$ is called a Lie algebra over $\R$ together with Lie bracket $[\cdot,\cdot]:\Gamma(T\M)\times \Gamma(T\M)\to \Gamma(T\M)$ if for any $X,Y,Z\in\mathfrak{g}$,
+  \begin{enumerate}
+    \item $[\cdot,\cdot]$ is $\R$-linear.
+    \item $[X,Y] = -[Y,X]$.
+    \item $[[X,Y],Z]+[[Y,Z],X]+[[Z,X],Y] = 0$
+  \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+  Let $X,Y\in\Gamma(T\M)$.
+  \begin{enumerate}
+    \item $[X,Y]\in\Gamma(T\M)$.
+    \item $(\Gamma(T\M),[\cdots,\cdots])$ is a Lie algebra.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  $[\cdot,\cdot]$ is $\R$-linear. consider,
+\begin{align*}
+  [X,Y]|_p(fg) &= X|_p(Y(fg))-Y|_p(X(fg)),\\
+  & = X|_p(Yf)g+X|_p(Yg)f - Y|_p(Xf)g-Y|_p(Xg)f,\\
+  & = X|_p(Yf)g+Yfg(p)+X|_pf Yg+fX|_p(Yg) - Y|_p(Xf)g-XfY|_pg-Y|_pfXg-fY|_p(Xg),\\
+  & = ([X,Y]|_p f)g = f[X,Y]|_pg.
+\end{align*}
+The rest is an exercise.
+\end{proof}
+
+\begin{proposition}
+  Let $X\in\Gamma(T\M)$, such that $X_p\not=0$, then there exists a chart $(U,\varphi)$ centered at $p$ such that 
+  \begin{equation*}
+    \pd{}{x_1} = X.
+  \end{equation*}
+\end{proposition}
+
+\begin{definition}
+Let $\varphi:\M\to\maniN$ be a diffeomorphism and $X\in\Gamma(T\M)$. For $q\in\maniN$,
+\begin{equation*}
+  (\varphi_*X)(q) \defeq T_{\varphi^{-1}(q)}\varphi[X(\varphi^{-1}(q))],
+\end{equation*}
+and 
+\begin{equation*}
+  \varphi^*X\defeq (\varphi^{-1})_*.
+\end{equation*}
+\end{definition}
+
+\begin{definition}
+  Let $\varphi:\M\to\maniN$, be a smooth map and $X\in\Gamma(TM)$ and $Y\in\Gamma(T\maniN)$, we write
+  \begin{equation*}
+    X\sim_\varphi Y, \text{and say they are $\varphi$-related if } Y (\varphi(p)) = T_p\varphi(X(p)).
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  If $\varphi$ is a diffeomorphism and $X\in\Gamma(T\M)$, then clearly,
+  \begin{equation*}
+    X\sim_\varphi\varphi_*X.
+  \end{equation*}
+\end{remark}
+
+\begin{proposition}
+  Suppose $X_1,X_2\in \Gamma(T\M)$, $Y_1,Y_2\in\Gamma(T\maniN)$, and $\varphi:\M\to\maniN$ be smooth. 
+  \par If $X_j\sim_\varphi Y_j$ for each $j=1,2$, then $[X_1,X_2]\sim_\varphi[Y_1,Y_2]$.
+\end{proposition}
+
+\begin{proof}
+  Let $p\in\M$ and $f\in\mathcal{C}^infty(\maniN)$. 
+  \begin{align*}
+    T_p\varphi([X_1,X_2])(f) &= [X_1,X_2]_p(f\circ \varphi),\\
+     & = X_{1,p}(X_2f\circ\varphi)-X_{2,p}(X_1f\circ\varphi),\\
+     & = X_{1,p}((Y_2f)\circ\varphi)-X_{2,p}((Y_1f)\circ f),\\
+     & = Y_{1,\varphi(p)}(Y_2f)-Y_{2,\varphi(p)}(Y_1f),\\
+     & = [Y_1,Y_2]|_{\varphi(p)}f.
+  \end{align*}
+\end{proof}
+
+\begin{lemma}
+  Let $X\in\Gamma(T\M)$ and $\phi = \phi^X$ be a flow of $X$. We have the following statements.
+  \begin{enumerate}[1).]
+    \item For $f\in\cinf(\M)$, ${\frac d {dt}}(\phi_t^*f) = \phi_t^*(Xf)$. In particular, ${\frac d {dt}}|_{t=0}\phi^*_tf = Xf$.
+    \item For $Y\in\Gamma(T\M),{\frac d {dt}}\varphi_t^*Y=\phi_t^*([X,Y]),{\frac d {dt}}|_{t=0}\phi^*_tY = [X,Y]$.
+    \item 
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  Refer to Lee's book.
+\end{proof}
+
+\begin{proposition}
+  Let $X,Y\in\Gamma(T\M)$. Then the following statements are equivalent.
+  \begin{enumerate}[1).]
+    \item $[X,Y]=0$, 
+    \item $\forall t, \phi^*_tY = Y$,
+    \item $\forall s, \psi^*_sX = X$,
+    \item $\psi_s\circ\phi_t = \phi_t\circ\psi_s$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+  Let $X_1,\cdots,X_k\in\Gamma(T\M)$ be commuting vector fields (ie, $[X_i,X_j] = 0$ for all $i,j=1,\cdots,k$).
+  Suppose $X_1(p),\cdots,X_k(p)$ are linearly independent. Then there exists a chart $(U,\varphi)$ such that 
+  \begin{equation*}
+    X_j|_U = \pd{}{x_j}
+  \end{equation*}
+  for all $j=1,\cdots k$.
+\end{proposition}
+
+\begin{proof}
+Since the statement is about open sets, it suffices to show for the case where $\M=\R^n$ and $p=0$. Consider,
+\begin{equation*}
+  \sigma(t,\xi)\defeq \phi_{t_1}^1\circ\cdots\circ\phi_{t_k}^k(0\xi),
+\end{equation*}
+where $t\in\R^k$ and $\xi\in\R^{m-k}$.
+\end{proof}
+\subsection{Vector Bundles}
+\begin{definition}
+  A (smooth, real) vector bundle over a manifold $\M$ is a triple $(E,\pi,\M)$ such that 
+  \begin{enumerate}[1).]
+    \item $E,\M$ are smooth manifolds. 
+    \item $\pi:E\to \M$ is a surjective submersion.
+    \item For all $p\in\M$, the fiber $\pi^{-1}(\{p\}) = E_p$ is an $\R$-vectorspace with $\dim E_p<\infty$.
+  \end{enumerate}
+  Furthermore, this satisfies the axiom of local triviality, namely,\\
+  \par For each $p\in\M$, there exists an open neighborhood $p\in U$ and a diffeomorphism 
+  \begin{equation*}
+    \varphi_U:\pi^{-1}(U)\to U\times \R^N,
+  \end{equation*}
+  such that 
+  \begin{equation*}
+    \forall q\in U, \varphi_{U|_{E_q}}:E_q\to\{q\}\times \R^N,
+  \end{equation*}
+  is a linear isomorphism.\\
+  \par $E$ is called the total space of the bundle, $\M$ is the base of the bundle, and $\varphi_U$ is called the bundle chart.
+\end{definition}
+\begin{definition}
+  A system $(\varphi_i)_{i\in I}$ of bundle charts 
+  \begin{equation*}
+    \varphi_i:\pi^{-1}(U_i)\to U_i\times \R^N,
+  \end{equation*}
+  is a bundle atlas if 
+  \begin{equation*}
+    \bigcup_{i\in I}U_i = \M, \left(\text{or equivalently } \bigcup_{i\in I}\pi^{-1}(U_i)=E\right).
+  \end{equation*}
+\end{definition}
+
+\begin{example}
+  Consider $(E=\M\times\R^N,\pi(p,v) = p,\M)$. This is called a trivial vector bundle.
+\end{example}
+
+\begin{definition}
+  Consider $(E,\pi_E,\M)$ and $(F,\pi_F,\M)$ be vector bundles. A homomorphism of vector bundles between $E$ and $F$ is a smooth map 
+  $\varphi:E\to F$ such that for each point $p\in\M$, $\varphi|_{E_p}:E_p\to F_p$ is a linear map.\\
+  \par It is called an isomorphism if each $\varphi|_{E_p}$ is a linear isomorphism.
+\end{definition}
+
+\begin{definition}
+  A vector bundle is said to be trivial if it is isomorphic to some trivial bundle $\M\times \R^N$.
+\end{definition}
+
+\begin{definition}
+  Vector bundles with fibers being $\C$-vectorspaces are then called complex vector bundles.
+\end{definition}
+\begin{example}Consider the total space,
+  \begin{equation*}
+    E = \{(z,w)\in\C^2\cong\R^4\sep \vert z\vert = 1, {\frac {w^2} {z}}\geq 0\},
+  \end{equation*}
+  and the projection map,
+  \begin{equation*}
+    \pi:E\to S^1,(z,w)\mapsto z.
+  \end{equation*}
+  We observe that,\\
+  \par $E$ is a submanifold of $\C^2\cong\R^4$. Pick $z_0\in S^1$ and a smooth square root function,
+  \begin{equation*}
+    \xi:S^1\backslash\{z_0\}\to S^1,\xi(x_1,x_2) = (\xi_1,\xi_2).
+  \end{equation*}
+  Let $w=(x_3,x_4)$ be a point such that $w^2 = \lambda z = \lambda\xi(z)^2$ for $\lambda\geq0$.
+  \par It is equivalent to say that 
+  \begin{equation*}
+    \exists \mu\in\R,w = \mu\xi(z).
+  \end{equation*}
+  Reformulate this again, we get,
+  \begin{equation*}
+    w = (x_3,x_4)\parallel(\xi_1(z),\xi_2(z))\Leftrightarrow x_3\xi_2(z)-x_4\xi_1(z) = 0.
+  \end{equation*}
+  Thus we obtain,
+  \begin{equation*}
+    E\cap\{(z,w)\sep z\in S^1\backslash\{z_0\}\} = \{(z,w)\in(\C\backslash\R_+z_0)\times \C\sep\substack{x_1^2+x_2^2-1=0\\ x_3\xi(x_1,x_2)-x_4\xi(x_1,x_2)=0}\}.
+  \end{equation*}
+  Examine the Jacobian of the conditions, we observe
+  \begin{equation*}
+    \begin{pmatrix}
+      2x_1 & 2x_2 & 0 & 0\\
+      \ast & \ast & \xi_2(x_1,x_2)&-\xi_1(x_1,x_2)
+    \end{pmatrix}.
+  \end{equation*}
+  We know that at least one of these row is not $0$, in other word the matrix is of full rank, thus $E$ is a manifold.\\
+  \par Now we show that $\pi^{-1}(\{z\})$ is a one-dimensional $\R$-vectorspace.
+  \par Similar to the previous case, we get $w^2 = \lambda\xi(z)^2$ for all $z\in S^1\backslash\{z_0\}$. We get $w =\pm\sqrt{\lambda}\xi(z)$. With this observation, we get,
+  \begin{equation*}
+    \pi^{-1}(\{z\}) = \{(z,\mu\xi(z))\sep\mu\in\R\}.
+  \end{equation*}
+  Bundle charts over $S^1\backslash\{z_0\}$.
+  \par Consider 
+  \begin{equation*}
+    \varphi:\pi^{-1}(S^1\backslash\{z_0\})\to(S^1\backslash\{z_0\})\times \R, (z,w)\mapsto (z,{\frac w {\xi(z)}}).
+  \end{equation*}
+  Finally we show that the bundle $E\stackrel{\pi}{\to}S^1$ is not trivial.
+  \par To derive a contradiction, suppose there exists a bundle isormophism $\varphi:E\to S^1\times \R$. Consider 
+  \begin{equation*}
+    E\backslash\{(z,0)\sep z\in S^1\}\stackrel{\varphi}{\cong}S^1\times\R^\times
+  \end{equation*}
+  which is disconnected.Indeed the map,
+  \begin{equation*}
+    c:[0,2\pi]\to E\backslash\{(z,0)\sep z\in S^1\}, t\mapsto (e^{it},e^{i{\frac t 2}}).
+  \end{equation*}
+  Observe that 
+  \begin{equation*}
+    c(0) = (1,1), c(2\pi) = (1,-1).
+  \end{equation*}
+  We derived a contradiction that two components get connected by a path.\\
+  \par This turns out to be one of the realization of a Möbius strip.
+\end{example}
+
+\textbf{Construction of vector bundle from local charts}
+  Consider $E\stackrel{\pi}{\to}\M$ be a vector bundle and $(U_i,\varphi_i)_{i\in I}$ be a bundle chart. Consider 
+  \begin{center}
+    \begin{tikzcd}
+(U_i\cap U_j)\times\R^N \arrow[r, "\varphi^{-1}_j"] \arrow[rd, "\pr_1"'] & \pi^{-1}(U_i\cap U_j) \arrow[r, "\varphi_i"] \arrow[d, "\pi"] & (U_i\cap U_j)\times \R^N \arrow[ld, "\pr_1"] \\
+                                                                         & U_i\cap U_j                                                   &                                             
+\end{tikzcd}
+  \end{center}
+  where $\pr_1(p,v) = p$. Then we have,
+  \begin{equation*}
+    \varphi_{ij} = \varphi_i\circ\varphi_j^{-1}:(U_i\cap U_j)\times\R^N\to(U_i\cap U_j)\times\R^N, \varphi_{ij}(q,v) = (q,g_{ij}(q)v),
+  \end{equation*}
+  where 
+  \begin{equation*}
+    g_{ij}\in\cinf(U_i\cap U_j,\GL_N(\R)).
+  \end{equation*}
+  We have the following properties of $(g_{ij})_{ij}$.
+  \begin{enumerate}[i).]
+    \item $g_{ij}g_{jk} = g_{ik}$ over $U_i\cap U_j\cap U_k$.
+    \item $g_{ii}(q) = I_N$.
+    \item $g_{ji}(q) = g_{ij}(q)^{-1}$.
+  \end{enumerate}
+
+  Such collection $(g_{ij})_{ij}$ is called a co-cycle with values in $\GL_N(\R)$.
+  \begin{remark}
+    The last two properties follow from the first one but the proof is left to the readers.
+  \end{remark}
+  \begin{definition}
+    Let $\M$ be a smooth manifold and $(U_i)_{i\in I}$ be an open covering of $\M$ and $G$ be a Lie group(ie. a manifold with group structure such that both multiplication and inversion are smooth as functions). A family $(g_{ij})_{i,j\in I}$ of smooth map such that 
+    \begin{equation*}
+      g_{ij}:U_i\cap U_j\to G
+    \end{equation*}
+    is a cocycle with values in $G$ if 
+    \begin{enumerate}
+      \item $g_{ij}g_{jk} = g_{ik}$ over $U_i\cap U_j\cap U_k$.
+      \item $g_ii = e_G$.
+      \item $g_{ij} = g_{ji}^{-1}$
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}
+  Suppose we are given a cocycle $(g_{ij})_{ij}$ in $G\subset\GL_N(\R)$. We define a pre-bundle as follows,
+  \begin{equation*}
+    E \defeq \bigcup_{i\in I}{i}\times U_i\times \R^N/\sim,
+  \end{equation*}
+  where $(i,p,v)\sim(j,q,w)$ if 
+  \begin{equation*}
+    p=q\text{ and } v = g_{ij}(p)\cdot w.
+  \end{equation*}
+  We define the projection to be,
+  \begin{equation*}
+    \pi(([i,p,v]))\defeq p,
+  \end{equation*}
+  and the bundle chart,
+  \begin{equation*}  
+    \varphi_i:\pi^{-1}(U_i)\to U_i\times\R^N,[i,p,v]\mapsto (p,v).
+  \end{equation*}
+  \end{definition}
+  \begin{remark}
+    Observe that this has not topology defined yet.
+  \end{remark}
+  \begin{definition}
+    Let $E,F$ be vector bundles over $\M$. A smooth map $\varphi:E\to F$ is a bundle isomorphism such that
+    \begin{center}
+      \begin{tikzcd}
+E \arrow[rr, "\varphi"] \arrow[rd, "\pi_E"'] &    & F \arrow[ld, "\pi_F"] \\
+                                             & \M &                      
+\end{tikzcd}
+    \end{center}
+    is a commutative diagram and for all $p\in\M,\varphi_p$ is an isomorphism between $E_p$ and $F_p$.
+  \end{definition}
+
+  \begin{example}
+    Let $\M$ be a smooth manifold. Then we have 
+    \begin{equation*}
+      T\M = \bigcup_{p\in\M}\{p\}\times T_p\M.
+    \end{equation*}
+    Let $(U_i,\varphi_i)_{i\in I}$ be an atlas for $\M$. Now define a bundle atlas as follows.
+    \begin{equation*}
+      \psi_i:TU_i = \bigcup_{p\in U_i}\{p\}\times T_p\M  = \pi^{-1}(U_i)\to U_i\times \R^m, (p,X_p)\mapsto (p,T_p\varphi_iX_p).
+    \end{equation*}
+    Note that we have a canonical isomorphism $T_{\varphi_i(p)}\R^m\cong\R^m$.
+  \end{example}
+
+\begin{theorem}
+  Given a pre-bundle $(E,\pi,\M,I)$. There exists a unique topology and $\cinf$-structure on $E$ such that $(E,\pi,\M)$ is a vector bundle.
+  \par Moreover, given a cocycle $(g_{ij}:U_{ij}\to G\subseteq\GL_N(\R))_{i,j\in I}$, where $(U_{ij})_{i,j\in I}$ is an open covering, there is a unique vector bundle $(E,\pi,\M)$ up to isomorphismsms with atlas $(U_i,\varphi_i)_{i\in I}$ such that $(g_{ij})_{i,j\in I}$ is the corresponding cocycle.
+\end{theorem}
+
+\begin{proof}
+  Let $E\stackrel{\pi}{\to}\M$ be a vector bundle with bundle atlas $(\varphi_i:\pi^{-1}(U_i)\to U_i\times \R^N)$. Then for each open set $U\subseteq\M$ we have,
+  \begin{equation*}
+    \pi^{-1}(U)\cap\pi^{-1}(U_i)
+  \end{equation*}
+  is open. Conversely, given a pre-vector bundle $(E,\pi,\M,I)$. Define a topology on $E$ generated by base open sets of the form $\{\pi^{-1}(U)\cap\pi^{-1}(U_i)\}_{i\in I,U\subseteq\M}$, this gives a topology such that $\pi$ is continuous. Similarly for the smooth structure. Define 
+  \begin{equation*}
+    \varphi_i:\pi^{-1}(U_i)\to U_i\times \R^N,
+  \end{equation*}
+  to be such that 
+  \begin{equation*}
+    \varphi_i([(i,p,v)]) = (p,v).
+  \end{equation*}
+  This gives a smooth structure to $E\stackrel{\pi}{\to}\M$.
+  \par For the uniqueness, assume we have two vector bundles $E\stackrel{\pi_E}{\to}\M,F\stackrel{\pi_F}{\to}\M$ with corresponding atlases $(U_i,\varphi_i),(V_i,\psi_i)$, respectively, such that 
+  \begin{equation*}
+    \varphi_i\circ\varphi_j^{-1}(p,v) = \psi_i\circ\psi_{j}^{-1}(p,v) = (p,g_{ij}(p)v).
+  \end{equation*}
+  Define, $\Phi:E\to F$ as follows. For $p\in U_i$ and $\xi\in\R^N$, we put
+  \begin{equation*}
+    \Phi(p,\xi) = \psi_i\circ\phi_i(p,\xi).
+  \end{equation*}
+  This gives us a bundle isomorphism.
+\end{proof}
+
+\begin{definition}
+  Let $E\stackrel{\pi}{\to}\M$ be a vector bundle with bundle atlas $(U_i,\varphi_i)_{i\in I}$ and cocycle $(g_{ij})_{i,j\in I}$. The dual vector bundle of $E$ is $E^*$ which is constructed from pre-vector bundle $(E^*,\pi^*,\M,I)$ with cocycle $(g_{ji}^{-1})_{i,j\in I}$ and  
+  \begin{equation*}
+    E^* = \bigcup_{p\in \M}E_p^*.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Let $E\stackrel{\pi_E}{\to}\M,F\stackrel{\pi_F}{\to}\M$ be vector bundles with cocycle $(g_{ij})_{i,j\in I},(h_{ij})_{i,j\in I}$ we define their direct sum to be 
+  \begin{equation*}
+    (E\oplus F)_p = E_p\oplus F_p
+  \end{equation*}
+  with cocycle $(g_{ij}\oplus h_{ij})_{i,j\in I}$. 
+\end{definition}
+
+\begin{definition}
+  Let $E\stackrel{\pi_E}{\to}\M,F\stackrel{\pi_F}{\to}\M$ be vector bundles with cocycle $(g_{ij})_{i,j\in I},(h_{ij})_{i,j\in I}$ we define their tensor product to be 
+  \begin{equation*}
+    (E\otimes F)_p = E_p\otimes F_p
+  \end{equation*}
+  with cocycle $(g_{ij}\otimes h_{ij})_{i,j\in I}$. 
+\end{definition}
+
+\begin{definition}
+  Let $E\stackrel{\pi}{\to}\M$ be a vector bundle. A section of $E$ is a smooth map $f:\M\to E$ such that $\pi\circ f = \id_\M$.
+\end{definition}
+
+\begin{remark}
+  Vector fields are exactly the sections of $T\M$.
+\end{remark}
+
+\begin{remark}
+  A vector bundle $E\stackrel{\pi}{\to}\M$ is trivial of rank $N$ if and only if there exists sections $s_1,\cdots,s_N\in\Gamma(E)$ such that for all $p\in \M$, $\langle s_1(p),\cdots,s_N(p)\rangle$ is a basis of $E_p$.
+\end{remark}
+
+
+  %11.19
+
+Given a bundle atlas $(U_\alpha,\varphi_\alpha)$ with cocycle $(g_{\alpha\beta})$, defne,
+\begin{equation*}
+  f_\alpha:U_\alpha \to \R^n, f_\alpha(x) =\pr_2(\varphi_\alpha(f(x))).
+\end{equation*}
+Of course, we have,
+\begin{equation*}
+  f_\alpha = g_{\alpha\beta}(x)f_\beta(x), x\in U_\alpha\cap U_\beta.
+\end{equation*}
+Conversely, given such $f_\alpha$, we define,
+\begin{equation*}
+f(x) = [(\alpha,x,f_\alpha(x))].
+\end{equation*}
+
+\begin{proposition}
+  \label{proposition_9_8}
+  There is a one-to-one correspondence between,
+  \begin{equation*}
+    \{\text{sections $f$ of $E$}\}\leftrightarrow\{(f_\alpha)_{\alpha\in I}\sep \forall \alpha\in I, f_\alpha\in\mathcal{C}^\infty (U_\alpha,\R^N), f_\alpha(x)=g_{\alpha\beta}(x)f_\beta(x)\}.
+  \end{equation*}
+\end{proposition}
+\begin{proposition}
+  \label{proposition_9_9}
+  Let $E,F\to\M$ be vector bundles. Let $\phi\in\Hom(E,F)$ be surjective. Then there exists $j\in\Hom(F,E)$ such that $\phi\circ j = \id_F$. Furthermore, $\Ker\phi$ is a vector bundle over $\M$ and 
+  \begin{equation*}
+    E\simeq \Ker\phi\otimes F.
+  \end{equation*}
+  That is to say, in the category of vector bundles of $\M$, a short exact sequence 
+  \begin{center}
+    \begin{tikzcd}
+0 \arrow[r] & \Ker\phi \arrow[r, hook] & E \arrow[r, "\phi", two heads] & F \arrow[r] \arrow[l, "\exists j", dotted, bend left] & 0
+\end{tikzcd}
+  \end{center}
+  splits.
+\end{proposition}
+
+\begin{proof}
+  We will first show that locally such section exists. Let $p\in\M$. Choose sections of $E$ (by using a chart) $s_1,\cdots,s_n\in\Gamma(E)$ such that 
+  \begin{equation*}
+    \phi(s_1(p)),\cdots,\phi(s_N(p)),
+  \end{equation*}
+  is linearly independent. Then there exists $p\in U$ an open neighborhood of $p$ such that for all $q\in U$,
+  \begin{equation*}
+    \phi(s_1(q)),\cdots,\phi(s_N(q)),
+  \end{equation*}
+  is linearly independent. For $w\in F_q|_U$, we can now write,
+  \begin{equation*}
+    w = \sum\xi_j\phi(s_j(q)).
+  \end{equation*}
+  Put 
+  \begin{equation*}
+    j(w) = \sum\xi_js_j(q).
+  \end{equation*}
+  Clearlyk, we have that $j$ is a section of $\phi$ over $U$.\\
+  \par For the global case, let $(U_\alpha)_{\alpha\in I}$ be an open covering with sections $j_\alpha:F|_{U_\alpha}\to E|_{U_\alpha}$. Let $(\rho_\alpha)_{\alpha\in I}$ be a subordinated partition of unity. Then,
+  \begin{equation*}
+    j(p,w) \defeq \left(p,\sum_{\alpha} \rho_{\alpha}j_{\alpha}(w)\right)
+  \end{equation*}
+  Now for $P\in\Hom(E,E)$, we set,
+  \begin{equation*}
+    P(v) \defeq v-j(\varphi(v)),
+  \end{equation*}
+  then $P$ is a projection $P^2=P$ and the image is $\Image(P) = \Ker \phi$.\\
+  \par Fix $p$, and choose sections $\tilde{s}_1,\cdots,\tilde{s}_r$ of $E$ be such that 
+  \begin{equation*}
+    \tilde{s}_1(p),\cdots\tilde{s}_1(p),\cdots,\tilde{s}_r(p)
+  \end{equation*}
+  is a basis of $\Ker\phi|_P$. Set 
+  \begin{equation*}
+    s_j\defeq P\circ\tilde{s}_j.
+  \end{equation*}
+  Then $s_j$ are sections of $\Ker\phi$ and in a neighborhoodof $p$, they are pairwise linearly independent hence a frame.
+\end{proof}
+
+\begin{proposition}[Swan's theorem]
+  \label{proposition_9_10}
+  Let $E\stackrel{\pi}{\to}\M$ be a vector bundle of a compact manifold $\M$. Then there exists a large enough natural number $r$ such that there exists a surjective bundle homomorphism $\phi:\M\times\R^r\twoheadrightarrow E$.
+  \par In parcitular, $E\oplus\Ker\phi\simeq \M\times \R^r$ is trivial and hence there exit sections $s_1,\cdots,s_r\in\Gamma(E)$, such that 
+  \begin{equation*}
+    \forall p\in\M, E_p = \Span(s_1(p),\cdots,s_r(p)).
+  \end{equation*}
+\end{proposition}
+
+\begin{proof}
+  Choose a finite bundle atlas $(U_1,\varphi_1),\cdots,(U_l,\varphi_l)$ of $E$ (this is justified as $\M$ is compact) and a subordinated partition of unity $\rho_1,\cdots,\rho_l$. 
+  We set, 
+  \begin{equation*}
+    s_j^i(p)\defeq \rho_j(p)\varphi_j^{-1}(p,e_j),
+  \end{equation*}
+  where $N=\rank E$ and $e_1,\cdots,e_N$ are the canonical basis of $\R^N$. Note that $s_j^i\in\Gamma(E)$. 
+  \par Given $p\in\M$ there exists $j$ such that $\rho_j(p)\not=0$. Hence $s_j^i(p),\cdots,s_j^N(p)$ is a basis of $E_p$, respectively 
+  \begin{equation*}
+    \forall p\in \M, E_p = \Span(s_j^i(p))_{\substack{1\leq j\leq l\\ 1\leq i\leq N}}.
+  \end{equation*}
+  Re-enumerate them to $s_1,\cdots,s_r\in\Gamma(E)$. Put
+  \begin{equation*}
+    \phi:\M\times \R^r\to E (p,\xi)\mapsto(p,\sum\xi_js_j(p)).
+  \end{equation*}
+  The rest follows from the previous propostion.
+\end{proof}
+
+\begin{definition}
+  A $R$-module $P$ is said to be projective if there exists another $R$-module $Q$ such that $P\oplus Q$ is free.
+\end{definition}
+\begin{remark}
+  Observe first that the sections $\Gamma(E)$ is a module over $\cinf(\M)$ with the action defined by 
+  \begin{equation*}
+    \cinf(\M)\times \Gamma(E)\ni(f,s)\mapsto [\M\ni p\mapsto f(p)\cdot s(p)].
+  \end{equation*}
+  Proposition \ref{proposition_9_10} tells us that $\Gamma(E)$ is finitely generated as a $\cinf(\M)$ module. Furthermore, $\Gamma(E)$ is projective (ie. a direct summand of a free module).
+\end{remark}
+
+\section{Tensor Algebras and Exteriror Algebras}
+
+In this section, we assume that  $K$ be a field of characteristic $0$ and all vector spaces are finite dimensional.
+\subsection{Tensors}
+Let $E$ be a vectorspace. We will denote the dual pairing as $\langle\cdot,\cdot\rangle_{E,E^*}$. 
+\begin{definition}
+  Let $E_1,\cdots,E_r$ be vectorspaces. Recall that a multiliera map $F:E_1\times\cdots E_r\to F$ is such that, for each $i=1,\cdots,r, F(a_1,\cdots,a_{i-1},\cdot,a_{i+1},\cdots,a_r)$ is linear. We denote,
+  \begin{equation*}
+    L(E_1,\cdots,E_r;F) = \{E_1\times\cdots\times E_r\to F\sep \text{$r$-multilinear maps}\}.
+  \end{equation*}
+\end{definition}
+\begin{remark}
+  \begin{equation*}
+    \dim L(E_1,\cdots,E_r;F) = \left(\prod_{i=1}^r\dim E_i\right)\times \dim F.
+  \end{equation*}
+\end{remark}
+
+\begin{definition}
+  Let $\varphi\in E^*$ and $\psi\in F^*$. For $e\in E,f\in F$, we define,
+  \begin{equation*}
+    (\varphi\otimes\psi)(e,f)\defeq \varphi(e)\psi(f)
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Obvisouly we have $\varphi\otimes\psi\in L(E,F;K)$.
+\end{remark}
+\begin{remark}
+  A map $\cdot\otimes\cdot$ is a bilinear map $E^*\times F^*\to L(E,F;K)$.
+\end{remark}
+
+\begin{proposition}
+  Let $(e_i)_{i\in I},(f_j)_{j\in J}$ be bases of $E,F$. Then we have,
+  \begin{equation*}
+    \varphi\otimes\psi = \sum\varphi(e_i)\psi(f_j)e_i^*\otimes f_j^*.
+  \end{equation*}
+  By definition, we have,
+  \begin{equation*}
+    e_i^*\otimes f_j^*(e_k,f_l) = \delta_{ik}\delta_{jl.}
+  \end{equation*}
+  In particular, $(e_i^*\otimes f_j^*)_{(i,j)\in I\times J}$ is a basis of $L(E,F;K)$.
+\end{proposition}
+
+\begin{definition}
+  We define,
+  \begin{equation*}
+    L(e_1,\cdots,E_r,K)\times L(f_1,\cdots,f_s;K)\to L(E_1,\cdots,E_r,F_1,\cdots,F_s;K)
+  \end{equation*}
+  by,
+  \begin{equation*}
+    \varphi\otimes\psi(e_1,\cdots,e_r,f_1,\cdots,f_s)\defeq \varphi(e_1,\cdots,e_r)\psi(f_1,\cdots,f_s).
+  \end{equation*}
+  It is left to the readers as an exercise to show this is bilinear and associative (ie $(\varphi\otimes\psi)\otimes\chi = \varphi\otimes(\psi\otimes\chi))$.
+\end{definition}
+
+\begin{notation}
+  We denote 
+  \begin{equation*}
+    E^*\otimes F^*\defeq L(E,F;K),
+  \end{equation*}
+  and 
+  \begin{equation*}
+    E\otimes F \cong E^{**}\otimes F^{**} = L(E^*,F^*,K).
+  \end{equation*}
+\end{notation}
+
+\begin{proposition}[Universality]
+  \label{proposition_10_3}
+  The assingment $\otimes :E\times F\to E\otimes F$ solves the following universal property. \\
+  \par Let $G$ be a vectorspace and $h:E\times F\to G$ be a bilinear map. Then there exists a unique linear map $\overline{h}:E\otimes F\to G$ making the diagram commutative.
+  \begin{center}
+    \begin{tikzcd}
+E\times F \arrow[r, "h"] \arrow[d, "\otimes"'] & G \\
+E\otimes F \arrow[ru, "\exists!\overline{h}"'] &  
+\end{tikzcd}
+  \end{center}
+  Furthermore, the map 
+  \begin{equation*}
+    L(E,F;G)\ni h\mapsto \overline{h}\in L(E\otimes F;G),
+  \end{equation*}
+  is an isomorphism.
+\end{proposition}
+\begin{proof}
+  Check at the level of basis elements.
+\end{proof}
+\begin{definition}
+  Let $E$ be a vectorspace, we will define,
+  \begin{equation*}
+    T^rE = \underbrace{E\otimes\cdots\otimes E}_{\text{$r$ times}},
+  \end{equation*}
+  and 
+  \begin{equation*}
+    T(E) = \bigoplus_{r=0}^\infty T^r(E),
+  \end{equation*}
+  which is called the tensor algebra over $E$. Furthermore, Setting $\otimes$ as a multiplication of elements, $T(E)$ is a positively graded $K$-algebra. 
+\end{definition}
+\begin{remark}
+  Obviously, a basis of $T^rE$ is given by $(e_{i_1}\otimes \cdots\otimes e_{i_r})_{1\leq i_1\leq\cdots\leq i_r\leq n}$. Thus we have $\dim T^rE = (\dim E)^r$.
+\end{remark}
+
+\begin{lemma}
+  The operation $\otimes$ is associative.
+  \begin{center}
+    \begin{tikzcd}
+T^rE\times T^sE \arrow[d] \arrow[rr, "{(v_1\otimes\cdots\otimes v_r,w_1\otimes\cdots\otimes w_s)\mapsto v_1\otimes\cdots\otimes v_r\otimes w_1\otimes\cdots\otimes w_s}"] &  & T^{r+s}E \\
+T^rE\otimes T^sE \arrow[rru]                                                                                                                                              &  &         
+\end{tikzcd}
+  \end{center}
+\end{lemma}
+
+\subsection{Totally antisymmetric(alternating) tensors}
+\begin{remark}
+  \begin{equation*}
+    T^rE\otimes T^rE^*\to K,
+  \end{equation*}
+  where 
+  \begin{equation*}
+    (v_1\otimes\cdots\otimes v_r,v_1^*\otimes\cdots\otimes v_r^*)\mapsto \prod_{i=1}^r\langle v_i,v_i^*\rangle
+  \end{equation*}
+  is an dual pariing. 
+\end{remark}
+Let $\sigma\in S_r$ be the permutations of $\{1,\cdots,r\}$. We have,
+\begin{center}
+  % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAFEA9AJxAF9S6TLnyEUARnJVajFmy68BQ7HgJFJ46fWatEIACo92-QSAwrRRMpura5ew92N9pMKAHN4RUADNuEAFskMhAcCCRJGR02AB0Y7HcAuhNffyDEAGZqMKQAJmoGOgAjGAYABWFVMRBuLHcACxwQW1ldAx44hKSUkD9A4OzwzILi0oqLNT1ahqalXrSIwbyW6L04iDwArxc+IA
+\begin{tikzcd}
+E^r \arrow[r, "\sigma"] \arrow[d] & E^r \arrow[d, "\otimes"] \\
+T^rE \arrow[r, "T^r\sigma"']      & T^rE                    
+\end{tikzcd}
+\end{center}
+where $T^r\sigma$ is a linear isomorphism. and we have,
+\begin{equation*}
+  (T^r\sigma)^{-1}= T^r{\sigma}^{-1}.
+\end{equation*}
+
+\begin{notation}
+  $\sgn(\sigma) = (-1)^\sigma$.
+\end{notation}
+
+\begin{definition}
+  $T\in T^rE$ is called alternating or totally antisymmetric if for all $\sigma\in S_r$, we have,
+  \begin{equation*}
+    T^r\sigma T = (-1)^{\sigma}T,
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  To check $T$ is alternating, it suffices to check that $T^r\sigma T = -T$ for every transposition $\tau\in S_r$.
+\end{remark}
+
+\begin{notation}
+  We denote the space of alternating tensors to be,
+  \begin{equation*}
+    \bigwedge^r E \subseteq T^rE.
+  \end{equation*}
+\end{notation}
+
+\begin{definition}
+  An anti-symmetrization map is ,
+  \begin{equation*}
+    A_r:T^r\to T^r, A\mapsto {\frac 1 {r!}}\sum_{\sigma\in S_r}(-1)^\sigma (T^r\sigma)(T).
+  \end{equation*}
+  This is a linear map.
+\end{definition}
+
+\begin{lemma}
+  $A_r\circ A_r = A_r$ In other words, it is idempotent.
+\end{lemma}
+
+\begin{proof}
+  Let $T\in T^rE$ and fix $\sigma\in S_r$. We have,
+  \begin{equation*}
+    (T^r\tau)A_r(T) = {\frac 1 {r!}}\sum_{\sigma\in S_r}(-1)^\sigma T^r(\tau\sigma)(T)(-1)^{\tau}(-1)^{\tau} = (-1)^\tau A_r(T).
+  \end{equation*}
+  In particular, the range of $A_r$ is contained in $\bigwedge^r E$. If $T\in\bigwedge^rE$, we have,
+  \begin{equation*}
+    A_r(T) = {\frac 1 {r!}}\sum_{\sigma\in S_r} T^r\sigma T = T.
+  \end{equation*}
+  Thus we have the range of $A_r$ is exactly $\bigwedge^rE$.
+\end{proof}
+
+\subsection{Exterior Algebra}
+
+\begin{notation}
+  \begin{equation*}
+    \bigwedge E = \bigoplus_{r\in\Z_{\geq0}}\bigwedge^rE.
+  \end{equation*}
+\end{notation}
+
+\begin{definition}
+  Let $\psi:\N\to \Z_+$ be a sequence such that $\psi(0)=\psi(1) = 1$. We define,
+  \begin{equation*}
+    \wedge_\psi:\bigwedge^pE\times \bigwedge^q E \to\bigwedge^{p+q}E, \xi\wedge_\psi \eta \defeq {\frac {\psi(p+q)} {\psi(p)\psi(q)}}A_{p+q}(\xi\otimes\eta).
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Let $A$ be a graded ring. A mapping $(\cdot,\cdot):A\to A$ is graded commutative if for any $a\in A^p,b\in A^q$, we have,
+  \begin{equation*}
+    (a,b) = (-1)^{pq}(b,a).
+  \end{equation*} 
+\end{definition}
+
+\begin{proposition}
+  The map $\wedge = \wedge_\psi$ is bilinear, associated and graded commutative. Furthermore, for $v_1,\cdots,v_r\in E = \bigwedge^1E$, 
+  \begin{equation*}
+    v_1\wedge\cdots\wedge v_r = {\frac {\psi(r)} {r!}}\sum_{\sigma\in S_r}\sgn\sigma v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(r)}.
+  \end{equation*}
+  From above, we conclude,
+  \begin{equation*}
+    (e_{i_1}\otimes\cdots\otimes e_{i_r})_{1\leq i_1<\cdots<i_r\leq \dim E}
+  \end{equation*}
+  is a basis of $\bigwedge^rE$. Thus $\dim \bigwedge^r E = {\dim E\choose r}$.
+\end{proposition}
+
+\begin{proof}
+  Let $\xi\in\bigwedge^pE,\eta\in \bigwedge^qE,\chi\in\bigwedge^rE$ and $\tau\in S_{p+q}$ such that 
+  \begin{equation*}
+    \tau = \begin{pmatrix}
+      1 & 2 &\cdots & p & p+1&\cdots&p+q\\
+      q+1 & q+2& \cdots &p+q& 1 & \cdots & q.
+    \end{pmatrix}
+  \end{equation*}
+  Observe that 
+  \begin{equation*}
+    \sgn(\tau) = (-1)^{pq},\tau(\xi\otimes \eta) = \eta\otimes \xi.
+  \end{equation*}
+  Thus we have,
+  \begin{equation*}
+    A_{p+q}(\xi\otimes \eta) = (-1)^\tau A_{p+q}(\eta\otimes \xi).
+  \end{equation*}
+  We then obtain,
+  \begin{equation*}
+    \xi\wedge\eta = (-1)^\tau\eta\wedge\xi = (-1)^{pq}\eta\wedge\xi.
+  \end{equation*}
+  We derived the graded-commutativity.\\
+  \par For the associativity, we have,
+  \begin{align*}
+    (\xi\wedge \eta)\wedge\chi & = {\frac {\psi(p+q+r)} {\psi(p+q)\psi(r)}} A_{p+q+r}((\xi\wedge\eta)\otimes \chi),\\
+    & = {\frac {\psi(p+q+r)} {\psi(p+q)\psi(r)}}{\frac {\psi(p+q)} {\psi(p)\psi(q)}} {\frac 1 {(p+q+r)!}}{\frac 1 {(p+q)!}}\sum_{\tau\in S_{p+q}}\sgn\tau\\
+    &\sum_{\sigma\in S_{p+q+r}}\sgn(\sigma\circ(\tau\times\id))(\sigma\circ(\tau\times \id))((\xi\wedge\eta)\otimes \chi),\\
+    & = {\frac {\psi(p+q+r)} {\psi(p)\psi(q)\psi(r)}}{\frac 1 {(p+q)!}}\sum_{\sigma\in S_{p+q+r}}\sgn\sigma\sigma(\xi\otimes\eta\otimes\chi),\\
+    & = \xi\wedge(\eta\wedge\chi).
+  \end{align*}
+  By induction, for
+  \begin{equation*}
+    \xi_1\in\bigwedge^{p_1},\cdots,\xi_r\in\bigwedge^{p_r}E,
+  \end{equation*}
+  we see,
+  \begin{equation*}
+    \xi_1\wedge\cdots\wedge \xi_r = {\frac {\psi(p_1+\cdots+p_r)} {\psi(p_1)\cdots\psi(p_r)}}A_{p_1+\cdots+p_r}(\xi_1\otimes\cdots\otimes\xi_r).
+  \end{equation*}
+  Take $p_1=\cdots=p_r=1$, we obtain the formula.
+
+\end{proof}
+
+\begin{corollary}
+  Keeping the notation from the proposition above, we have,
+  \begin{equation*}
+    \langle v_1\wedge\cdots\wedge v_r,v_1^*\otimes \cdots\otimes v_r^*\rangle_{T^rE,T^rE^*} = {\frac {\psi(r)} {r!}}\det((\langle v_i,v_j^*\rangle)_{1\leq i,j\leq r}),
+  \end{equation*}
+  and 
+  \begin{equation*}
+    \langle v_1\wedge\cdots\wedge v_r,v_1^*\wedge \cdots\wedge v_r^*\rangle_{T^rE,T^rE^*} = {\frac {\psi(r)^2} {r!}}\det((\langle v_i,v_j^*\rangle)_{1\leq i,j\leq r}),
+  \end{equation*}
+\end{corollary}
+
+\begin{proof}
+  \begin{align*}
+    \langle v_1\wedge\cdots\wedge v_r,v_1^*\otimes \cdots\otimes v_r^*\rangle_{T^rE,T^rE^*} & = \sum_{\sigma\in S_r}\sgn\sigma \langle v_{\sigma(1)}v^*_1\rangle\cdots\langle v_{\sigma(r)}v^*_r\rangle,\\
+    & = {\frac {\psi(r)} {r!}}\det((\langle v_i,v_j^*\rangle)_{1\leq i,j\leq r}).
+  \end{align*}
+  \begin{align*}
+    \langle v_1\wedge\cdots\wedge v_r,v_1^*\wedge \cdots\wedge v_r^*\rangle_{T^rE,T^rE^*} & = {\frac {\psi(r)} {r!}}\sum_{\tau\in S_r}\sgn\tau\langle v_1\wedge\cdots\wedge v_r,v_{\tau(1)}^*\otimes \cdots\otimes v_{\tau(r)}^*\rangle_{T^rE,T^rE^*},\\
+    &  = {\frac {\psi(r)} {r!}}\sum_{\tau\in S_r}\sgn\tau \langle v_{\tau(1)}\wedge\cdots\wedge v_{\tau(r)},v_1^*\otimes \cdots\otimes v_r^*\rangle_{T^rE,T^rE^*},\\
+    & = {\frac {\psi(r)} {(r!)^2}}\det((\langle v_i,v_j^*\rangle)_{1\leq i,j\leq r}).
+  \end{align*}
+\end{proof}
+
+We will follow the convention from \cite{Kobayashi-Nomizu} which is $\psi\equiv 1$.
+
+\begin{definition}
+  For $\xi\in\bigwedge^pE$, we define,
+  \begin{equation*}
+    \ext_\xi:\bigwedge E \to\bigwedge E, \eta\mapsto \xi\wedge\eta.
+  \end{equation*}
+  Respectively for $u\in E$, we define,
+  \begin{equation*}
+  \inte_U:\bigwedge E^*\mapsto \bigwedge E^*, \omega\mapsto \langle \omega,u\otimes \cdot\rangle = \langle \omega,u\wedge \cdot\rangle
+  \end{equation*}
+  %check why the last equality holds. The choice of normalizing factor?
+\end{definition}
+
+\begin{remark}
+  For $\eta\in\bigwedge E$ and $\omega\in\bigwedge E^*$, we have,
+  \begin{equation}
+    \langle \ext_u\eta,\omega\rangle = \langle u\wedge\eta,\omega\rangle = \langle \eta,\inte_U\omega\rangle.
+  \end{equation}
+\end{remark}
+
+\begin{lemma}
+  \label{lemma_10_12}
+  Suppose $\omega,\eta\in\bigwedge E^*$ are homogeneous elements. Then we have,
+  \begin{equation*}
+    \inte_u(\omega\wedge\eta) = (\inte_u\omega)\wedge\eta + (-1)^{\deg(\omega)}\omega\wedge\inte_u\eta.
+  \end{equation*}
+  In other words, $\inte_u$ is an anti-derivation.
+\end{lemma}
+
+\section{Orientations, volumes and the Hodge $\ast$-operator}
+
+\subsection{Lines}
+In this section, we denote $K=\R$. 
+\begin{definition}
+  A line is a one-dimensional $\R$-vector space.
+\end{definition}
+
+\begin{definition}
+  \label{definition_11_1}
+  Fix $\alpha>0$. An $\alpha$-density on a $n$-dimensional vector space $E$ is a map $\rho:\bigwedge^nE^*\to\R$ such that 
+  \begin{equation*}
+    \forall \omega\in\bigwedge^nE^*,\lambda\in\R, \rho(\lambda,\omega) = \vert\lambda\vert^\alpha\rho(\omega).
+  \end{equation*}
+  We will denote $\vert\bigwedge\vert^\alpha E^*$ to be the vector space of all $\alpha$-densities.
+\end{definition}
+
+\begin{definition}
+  A signed density on a $n$-dimensional vector space $E$ is a map $\rho:\bigwedge^n E^*\to\R$ such that 
+  \begin{equation*}
+    \forall \omega\in\bigwedge^nE^*, \rho(\lambda,\omega)= \sgn\lambda\rho(\omega).
+  \end{equation*}
+  We also define, the set of sgined densities as,
+    $\mathcal{O}(E)$ which we also call the orientation line.
+\end{definition}
+
+\begin{remark}
+  We have a map,
+\begin{equation*}
+  (E^*)^n\to\bigwedge^n E.
+\end{equation*}
+With this we can define an $\alpha$-density by,
+\begin{equation*}
+  \rho:(E^*)^n\to\R, \rho(\varphi(v_1^*),\cdots,\varphi(v_n^*)) = \vert\det\varphi\vert^\alpha\rho(v_1^*,\cdots,v_n^*),
+\end{equation*}
+for every $\varphi\in\GL(E)$. In particular, we have,
+\begin{equation*}
+  \varphi(v_1)\wedge\cdots\wedge\varphi(v_n) = (\det\varphi) v_1\wedge\cdots\wedge v_n.
+\end{equation*}
+Similarly for the signed density case we put $\sgn(\det\varphi)$.
+\end{remark}
+
+\begin{remark}
+  \begin{equation*}
+    \dim\left\vert\bigwedge\right\vert E = \dim \mathcal{O}(E) = 1.
+  \end{equation*}
+  Given $\xi\in\bigwedge^nE\backslash\{0\}$, we have,
+  \begin{equation*}
+    \rho_\xi^\alpha(\omega) \defeq \vert\xi(\omega)\vert^\alpha
+  \end{equation*}
+  which is an $\alpha$-density. Also,
+  \begin{equation*}
+    \rho_\xi^\alpha(\omega)\defeq \sgn(\langle\xi,\omega\rangle)
+  \end{equation*}
+  which is a signed density. If $\rho$ is an $\alpha$-density,
+  \begin{equation*}
+    \rho(\lambda\omega) = \vert\lambda\vert^\alpha\rho(\omega) = \vert\lambda\vert^\alpha{\frac {\rho(\omega)} {\rho^\alpha_\xi(\omega)}}\rho^\alpha_\xi(\omega) = {\frac {\rho(\omega)} {\rho_\xi^\alpha(\omega)}}\rho_\xi^\alpha(\lambda\omega).
+  \end{equation*}
+\end{remark}
+
+\begin{lemma}
+  \label{lemma_11_3}
+  THere are canonical isomorphisms between,
+  \begin{equation*}
+  \left\vert\bigwedge\right\vert^\alpha E\otimes\left\vert\bigwedge\right\vert^\beta E \rho_1\otimes\rho_2\mapsto\rho_1\rho_2 \left\vert\bigwedge\right\vert^{\alpha+\beta}E.
+  \end{equation*}
+  \begin{equation*}
+    \left\vert\bigwedge\right\vert^1 E\otimes\mathcal{O}\to \bigwedge^nE
+  \end{equation*}
+  \begin{equation*}
+   \bigwedge^nE\to\left\vert\bigwedge\right\vert^1 E\otimes\mathcal{O},
+  \end{equation*}
+  and 
+  \begin{equation*}
+    \mathcal{O}\otimes\mathcal{O}\to\R.
+  \end{equation*}
+  Furthermore, $\mathcal{O}$ has a canonical Euclidean metric, namely, for $\rho\in\mathcal{O}$, we have,
+  \begin{equation*}
+    \vert\rho\vert\defeq \sqrt{\rho(\omega)^2},\forall \omega\not=0.
+  \end{equation*}
+  Note that this is independent of choice of $\omega\not=0$ since $\rho$ is a signed-density and the square root will take the sign out.
+\end{lemma}
+
+\subsection{Orientations}
+
+\begin{definition}
+  An orientation of $E$ is given by a choice of a vector $\mathfrak{o}\in\mathcal{O}$ of unit length.
+\end{definition}
+
+\begin{remark}
+  We have an isometry by,
+  \begin{equation*}
+    \mathcal{O}\ni\mathfrak{o}\mapsto 1\in\R.
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  We have an isomorphism such that,
+  \begin{equation*}
+    \bigwedge^n E\ni\rho\mapsto \rho\cdot\mathfrak{o}\in\left\vert\bigwedge\right\vert^1E.
+  \end{equation*}
+\end{remark}
+
+\begin{definition}
+  Given a connected component ${\bigwedge^n}_+ E$ of $\bigwedge^n E\backslash\{0\}$. 
+  A basis $e_1,\cdots,e_n$ of $E$ is called oriented if 
+  \begin{equation*}
+    e_1\wedge\cdots\wedge e_n\in{\bigwedge^n}_+E.
+  \end{equation*}
+  Or equivalently, we have,
+  \begin{equation*}
+    e_1\wedge\cdots\wedge e_n = \mathfrak{o}\cdot\vert e_1\wedge\cdots\wedge e_n\vert.
+  \end{equation*}
+\end{definition}
+
+\subsection{Volume elements}
+Let $g$ be a symmetric bilinear form on $E$. Then $g$ induces bilinear forms on $TE$ and $\bigwedge E$ as follows. 
+
+\begin{equation*}
+  (T^rg)(v_1\otimes\cdots\otimes v_r,w_1\otimes\cdots\otimes w_r) \defeq \prod_{j=1}^rg(v_j,w_j).
+\end{equation*}
+
+Note that $\bigwedge E\subseteq TE$. Thus we have,
+\begin{align*}
+  (T^rg)(v_1\wedge\cdots\wedge v_r, w_1\wedge\cdots\wedge w_r) &\defeq {\frac 1 {(r!)^2}}\sum_{\sigma,\tau\in S_r}\sgn\sigma\tau\prod_{j=1}^rg(v_{\sigma(j)},v_{\tau(j)}),\\
+  & = {\frac 1 {(r!)^2}}\sum_{\sigma\in S_r}\det((g(v_i,w_j))_{1\leq i,j\leq r}),\\
+  & = {\frac 1 {r!}}\det((g(v_i,w_j))_{1\leq i,j\leq r}).
+\end{align*}
+
+\begin{lemma}
+  \label{lemma_11_5}
+  If $g$ is non-degenerate, so are $T^rg,\bigwedge^rg$. The latter is the restriction of $T^r g$ to $\bigwedge^r E\times\bigwedge^r E$. Also we have an isomorphism 
+  \begin{equation*}
+    (\cdot)^b:E\to E^*,v\mapsto g(v_j) = v^b,
+  \end{equation*}
+  which inverse $\#$. 
+  \par $g$ induces a non-degenerate bilienar form $g^\ast$ on $E^*$, such that 
+  \begin{equation*}
+    g^*(v^*,w^*)\defeq g(\# v^*,\# w^*).
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Let $e_1,\cdots,e_n$ be a $g$-oriented basis of $E$ that is $g(e_i,e_j) = \pm\delta_{ij}$. 
+  \begin{equation*}
+    (T^rg)(e_{i_1}\otimes\cdots\otimes e_{i_r},e_{j_1}\otimes\cdots\otimes e_{j_r}) = \prod_{k=1}^r \pm\delta_{i_1j_1}.
+  \end{equation*}
+  And we also have,
+  \begin{equation*}
+    \left(\bigwedge^r g\right) = (e_{i_1}\wedge\cdots\wedge e_{i_r},e_{j_1}\wedge\cdots\wedge e_{j_r}) = {\frac {\pm1} {r!}}\prod_{k=1}^r \delta_{i_1j_1}.
+  \end{equation*}
+  \begin{remark}
+    Induced bases are orthogonal with respect to the induced forms. Therefore, they are non-degenerate.
+  \end{remark}
+\end{proof}
+
+\begin{proposition}
+  \label{proposition_11_6}
+  Let $g$ be a non-degenerate bilinear form on $E$. Then $g$ determines uniquely a positive $1$-density $\vol_g\in\left\vert\bigwedge\right\vert^1 E$. 
+  \par If $e_1,\cdots,e_n$ is a basis of $E$, then 
+  \begin{equation*}
+    \vol_g = \vert\det((g(e_i,e_j))_{1\leq i,j\leq n})^{{\frac 1 2}}\vert e_1\wedge\cdots\wedge e_n\vert.
+  \end{equation*}
+  Furthermore, $g$ induces for every $\alpha>0$, a canonical isomorphism,
+  \begin{equation*}
+    \left\vert\bigwedge\right\vert^\alpha E\to \R, \lambda\cdot\vert\vol_g\vert^\alpha\mapsto\lambda.
+  \end{equation*}
+\end{proposition}
+
+\begin{proof}
+  Let us first prove that this is independent of the choice of bases. Let $f_1,\cdots,f_n$ be another basis. We can write,
+  \begin{equation*}
+    f_i = \sum a_{ij}e_j.
+  \end{equation*}
+  Thus we have,
+  \begin{equation*}
+    g(f_i,f_j) = \sum_{k,l}a_{ki}a_{lj}g(e_k,e_l).
+  \end{equation*}
+  Therefore, we have,
+  \begin{equation*}
+    \det(g(f_i,f_j)) = 
+  \end{equation*}
+\end{proof}
+%12/1
+
+\subsection{The Hodge $\ast$-operator}
+
+Let $q$ be a non-degenerate biliear form on $E$ where $E$ is a real vector space of dimension $n$. Let $\vol_g\in\left|\bigwedge\right|^1E$. 
+\par Let $\mathcal{O}(E)$ be the orientation line and recall 
+
+\begin{definition}
+  Let $g$ be a non-degenerate bilinear form on a vector space $V$. A basis $\{e_1,\cdots,e_n\}$ of $V$ is said to be $g$-orthonormal if we have,
+  \begin{equation*}
+    g(e_i,e_j) = \pm\delta_{ij}.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Let $g$ be a non-degenerate biliear form on $V$ and $\{e_1,\cdots,e_n\}$ be a $g$-orthonormal basis of $V$, we define the index of $g$ to be such that 
+  \begin{equation*}
+    \ind g = \vert\{i\sep g(e_i,e_i) = -1\}\vert.
+  \end{equation*}
+\end{definition}
+
+\begin{notation}
+  Let $L$ be a one-dimensional $\R$-vector space and $f,g\in L\backslash\{0\}$. We have $f = \lambda g$ for some $\lambda\in\R$. We denote,
+  \begin{equation*}
+    f/g = \lambda.
+  \end{equation*}
+\end{notation}
+
+\begin{definition}
+  Let $E$ be a $n$-dimensional $\R$-vectorspace. The Hodge $\ast$-operator is a map 
+  \begin{align*}
+    \ast_p:\bigwedge^p E\to\bigwedge^{n-p}E\otimes \mathcal{O},
+  \end{align*}
+  satisfying the following properties.
+  \begin{enumerate}[i).]
+    \item It is a linear isomorphism.
+    \item For $g$-orthonormal basis $\{e_1,\cdots,e_n\}$ of $E$ and $\sigma\in S_n$, we have 
+    \begin{equation*}
+      \ast e_{\sigma(1)}\wedge\cdots\wedge e_{\sigma(p)} = (-1)^{\sgn\sigma}\prod_{i=1}^pg(e_{\sigma(i)},e_{\sigma(i)})e_{\sigma(p+1)}\wedge\cdots\wedge e_{\sigma(n)}\otimes e_1\wedge\cdots\wedge e_n/\vol_g.
+    \end{equation*}
+    \item $\ast_{n-p}\ast_p = (-1)^{p(n-p)+\ind g}$,
+    \item For $\omega,\eta\in\bigwedge^p E$, we have,
+    \begin{equation*}
+      \left(\bigwedge^{n-p}g\right)(\ast\omega,\ast\eta) = (-1)^{\ind g}\left(\bigwedge^p g\right)(\omega,\eta).
+    \end{equation*}
+    \item Let $\omega\in\bigwedge^pE,\eta\in\bigwedge^{n-p}E\otimes\mathcal{O}$, then 
+    \begin{equation*}
+      \omega\wedge\eta = (-1)^{p(n-p)+\ind g}\left(g\right)(\omega,\ast\eta)\cdot\vol_g.
+    \end{equation*}
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+  Let $E$ be a $\R$-vector space of dimension $n$ and $g$ be a non-degenerate bilinear form on $E$. Pick $\vol_g\in \left\vert\bigwedge^1\right\vert^1E$.
+  We have, there exists a unique bilinear pairing such that 
+  \begin{equation*}
+    \bigwedge^p E\times\left(\bigwedge^{n-p}E\otimes \mathcal{O}\right)\ni(\omega,\eta)\mapsto \omega\wedge\eta/\vol_g \in\R.
+  \end{equation*}
+  In particular\, for any $\eta\in\wedge^p E$ there is a unique $\star\eta\in\bigwedge^{n-p}E\otimes \mathcal{O}$ such that for any $\omega\in\bigwedge^pE$,
+  \begin{equation*}
+    \omega\wedge\star\eta = \bigwedge^pg(\omega,\eta)\vol_g.
+  \end{equation*}
+  And such $\star$ is the Hodge $\star$-operator $\star_p$.
+\end{theorem}
+
+\begin{proof}
+  The composition,
+  \begin{equation*}
+    (\omega,\eta)\mapsto\omega\wedge\eta\mapsto \omega\wedge\eta/\vol_g\in\R
+  \end{equation*}
+  is bilinear. Note that 
+  \begin{equation*}
+    \det(g(e_i,e_j))_{ij} = (-1)^{\ind g}.
+  \end{equation*}
+  Let $I = \{i_1,\cdots,i_p\}\subseteq\{1,\cdots,n\}$. Then we denote,
+  \begin{equation*}
+    e_I\defeq e_{i_1}\wedge\cdots\wedge e_{i_p}.
+  \end{equation*}
+  Note that an element $\omega\in\bigwedge^pE$ is of the form,
+  \begin{equation*}
+    \omega = \sum_{\substack{I\subseteq\{1,\cdots,n\}\\\vert I \vert = p}}\omega_Ie_I, (\omega_I\in\R).
+  \end{equation*}
+Fix $I_0\subseteq\{1,\cdots,n\}$ and denote $I_0^c = \{1,\cdots,n\}\backslash I_0$. Using the expression of $\omega$ above, we have,
+\begin{equation*}
+\omega\wedge e_{I_0^c}\otimes \underbrace{e_1\wedge\cdots\wedge e_n}_{\vol_g} = \pm\omega_{I_0}\vert \underbrace{e_1\wedge\cdots\wedge e_n}_{\vol_g}\vert.
+\end{equation*}
+This shows the non-degeneracy. The existence of $\ast\eta$ thus follows from non-degeneracy. 
+\par We now show that $\star$ satisfies all the properties of  the Hodge operator.
+\par\textbf{ii).}
+Set $\omega = e_{I}$ for some $\{i_1,\cdots,i_p\}\subseteq\{1,\cdots,n\}$. Then 
+\begin{align*}
+  \mathfrak{o} = \left(\bigwedge^pg\right)(\omega,e_{I^c}).
+\end{align*}
+We have,
+\begin{align*}
+  \omega\wedge e_{I^c} &= (-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i){\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}},\\
+& = (-1)^{\sgn\sigma}e_1\wedge\cdots\wedge e_n(-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i){\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}},\\
+& = \prod_{i\in I}g(e_i,e_i)\vert e_1\wedge\cdots\wedge e_n\vert,\\
+& = \left(\bigwedge^pg\right)(e_I,e_I)\vert e_1\wedge\cdots\wedge e_n\vert.
+\end{align*}
+That is 
+\begin{equation*}
+  \star e_{\sigma(1)}\wedge\cdots\wedge e_{\sigma(p)}={\sgn\sigma}e_1\wedge\cdots\wedge e_n(-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i)e_{I^c}{\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}}.
+\end{equation*}
+\par\textbf{iii).}
+Applying the second propert twice, and consider $\tau\in S_n$ such that 
+\begin{equation*}
+  \tau = \begin{pmatrix}
+    1 & \cdots & n-p & n-p+1 & \cdots n \\ 
+    p+1 & \cdots & n & 1 & \cdots & p
+  \end{pmatrix}
+\end{equation*}
+Then we have $\sgn\tau = (-1)^{p(n-p)}$. Rewrite $e_{I^c}$ with $\tau$, we obtain,
+\begin{equation*}
+  \star_{n-p}\star_{p}e_I = (-1)^{\ind g} \sgn\sigma\sgn(\tau)e_{\tau(I^c)} = (-1)^{p(n-p)+\ind g}e_I.
+\end{equation*}
+To show it satisfies the remaining properties is left to the readers as an exercise.
+\end{proof}
+
+%12/8
+
+\subsection{Tensor fields and differential forms}
+
+\begin{remark}
+  Given a manifold $\M$, we have a vectorbundle $T\M\stackrel{\pi}{\to}\M, T_p\M\mapsto p$. Let us denote $\{g_{ij}\}_{ij}$ be the corresponding cocycle, 
+  then we can define, $\bigwedge^p g_{ij}$ which corresponds to a vectorbundle $\bigwedge^pE$. 
+\end{remark}
+
+\begin{definition}
+  Let $\M$ be a smooth manifold. We define,
+  \begin{equation*}
+    T^{r,s}\M\defeq\bigotimes^rT\M\otimes\bigotimes^sT^*\M.
+  \end{equation*}
+  Sections of $T^{r,s}\M$ are called the tensorfield of type $(r,s)$. We denote,
+  \begin{equation*}
+    \Gamma(T^{r,s}\M) = \{\text{smooth sections of $T^{r,s}\M$}\}.
+  \end{equation*}
+\end{definition}
+
+\begin{proposition}
+  For a map $f:\M\to T^*\M$ with 
+  \begin{equation*}
+   \forall p\in\M, f(p)\in T_p^{r,s}\M,
+  \end{equation*}
+  the following are equivalent.
+  \begin{enumerate}[1).]
+    \item for vector fields, $X_1,\cdots,X_n\in\Gamma(T\M)$, and covector field $\omega_1,\cdots,\omega_r\in\Gamma(T\M)$, the function, 
+    \begin{equation*}
+      p\mapsto f(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s) = f(p)(\omega_1(p),\cdots,\omega_r(p),X_1(p),\cdots,X_s(p)),
+    \end{equation*}
+    is smooth.
+    \item for any charts $(U,\varphi)$ with coordiate functions $x_1,\cdots,x_m$, we have,
+      \begin{equation*}
+        f = \sum f_{j_1\cdots j_s}^{i_1\cdots i_r}\pd{}{x_{i_1}}\otimes\cdots\otimes \pd{}{x_{i_s}}\otimes dx_{j_1}\otimes \cdots\otimes dx_{j_s},
+      \end{equation*}
+      where $dx_1,\cdots,dx_m$ are the dual (missing) to $\pd{}{x_1},\cdots,\pd{}{x_m}$ with smooth functions $f_{j_1,\cdots,j_s}^{i_1,\cdots,i_r}\in\cinf(U)$.
+      \item $f\in\Gamma(T^{r,s}\M)$.
+  \end{enumerate}
+  \label{proposition_12_2}
+\end{proposition}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{definition}
+  THe sections of the bundle $\bigwedge^pT^*\M\subseteq T^{0,p}\M$, are called differential forms. The set of differential forms are denoted by 
+  \begin{equation*}
+    \Omega^p(\M) = \Gamma\left(\bigwedge^pT^*\M\right).
+  \end{equation*}
+\end{definition}
+
+\begin{proposition}
+  \label{proposition_12_4}
+  Let $f:\Gamma(T^*\M)^r\times \Gamma(T\M)^s \to\cinf(\M)$, is indueced by a section of $T^{r,s}\M$ if and onlly if it is $\cinf(\M)$-$(r-s)$ multilinear.
+\end{proposition}
+\begin{proof} If $f\in\Gamma(T^{r,s},\M)$ then 
+\begin{equation*}
+  (\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)\mapsto (p\mapsto f(p(\omega_1(p),\cdots,\omega_r(p),X_1(p),\cdots, X_s(p)))),
+\end{equation*}
+is clearly $\cinf(\M)$-$(r+s)$-multilinear.
+\par Conversely, given $\cinf(\M)$-multilinear map $f$, need to find $f(p)$. To do so we will show that for $p\in\M$, if there is $i$ such that $\omega_i(p) = 0$ or there is $j$ such that $X_j(p)=0$, we have,
+\begin{equation*}
+  f(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)(p) = 0.
+\end{equation*}
+Indeed, we assume without loss of generality that $\omega_1(p)=0$. Choose a chart $(U,\varphi)$ centered around $p$. Choose $h\in\cinf(\M)$ such that $h\equiv 1$ in small enough neighborhood of $p$. By assumption, we have,
+\begin{equation*}
+  \omega_1|_U = \sum_{j=1}^ma_jdx_j, a_j(p) = 0.
+\end{equation*}
+Combining these, we obtain,
+\begin{align*}
+  \omega_1 & = (1-h^2)\omega_1+h^2\omega_1,\\
+  &= (1-h^2)\omega_1+\sum_{j=1}^m\underbrace{(a_jh)}_{\in\cinf(\M)}\underbrace{(hdx_j)}_{\in\Gamma(T^*\M)}.
+\end{align*}
+Using multilinearlity of $f$, we get,
+\begin{equation*}
+  f(\omega_1,\cdots)(p) = (1-h^2)(p)f(\omega_1,\cdots)(p)+\sum_{j=1}^m\underbrace{(ha_j)(p)}_{=0}f(hdx_j,\cdots)(p) = 0.
+\end{equation*}
+Define $f(p)$ as follows. For $\theta_1,\cdots,\theta_r\in T^*_p\M,v_1,\cdots,v_s\in T_p\M$, choose $\omega_1,\cdots,\omega_r\in\Gamma(T^*\M),X_1,\cdots,X_s\in\Gamma(T\M)$ with 
+\begin{equation*}
+  \omega_j(p) = \theta_j,X_j(p) = v_j.
+\end{equation*}
+By what we have proved, we have,
+\begin{equation*}
+  f(p)(\theta_1,\cdots,\theta_r,v_1,\cdots,v_s) \defeq f(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)(p),
+\end{equation*}
+which is independent of choices of $\omega_j,X_j$. The rest follows from Proposition \ref{proposition_12_2}.
+\end{proof}
+Observe that given $f\in\cinf(\M)$ and $X\in\Gamma(T\M)$, the map,
+\begin{equation*}
+  \M\ni p\mapsto X_pf,
+\end{equation*}
+is a smooth function. In particular,
+\begin{equation*}
+  df:\Gamma(T\M)\to\cinf(\M), df(X)=Xf,
+\end{equation*}
+is a $\cinf(\M)$ linear map. 
+\par From Proposition \ref{proposition_12_4}, it follows that $df\in\Gamma(T^*\M)$. In particular, we have a linear map,
+\begin{equation*}
+  d:\cinf(\M)=\Omega^9\M\to\Gamma(T^*\M)=\Omega^1\M.
+\end{equation*}
+\begin{definition}[Pullback]
+  \label{defnition_12_5}
+  Let $f:\M\to\maniN$ be smooth and $\xi\in T(T^{0,s\maniN})$, Put,
+  \begin{equation*}
+    f^*\xi|_p(v_1,\cdots,v_s) \defeq \xi|_{f(p)}(T_pfv_1,\cdots,T_pfv_s).
+  \end{equation*}
+\end{definition}
+\begin{proposition}[Properties of Pullbacks]
+  \label{proposition_12_6}
+  Given $\M\stackrel{f}{\to}\maniN\stackrel{g}{\to}\mathcal{L}$ be smooth maps. We have,
+  \begin{enumerate}
+    \item $\varphi\in\cinf(\maniN)=\Gamma(T^{0,0}\maniN), f^*\varphi=\varphi\circ f$.
+    \item $f^*$ is a linear map $\Gamma(T^{0,s}\maniN)\to\Gamma(T^{0,s}\M)$ and $\Omega^p\maniN\to\Omega^p\M$. 
+    \item $(g\circ f)^* = f^*\circ g^*$.
+    \item If $f$ is a diffeomorphism then $(f^*)^{-1} = (f^{-1})^*$.
+    \item $\omega\in\Omega^p\maniN,\eta\in\Omega^q\maniN$ then $f^*(\omega\wedge\eta) = f^*\omega\wedge f^*\eta$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{notation}Let $U\subseteq\M$ be an open set, we define,
+  \begin{equation*}
+    \Omega^*(U) \defeq \bigoplus_{p\in\Z_{\geq0}}\Omega^p(U).
+  \end{equation*}
+\end{notation}
+
+\begin{theorem}[Cartan (exterior) derivative]
+  \label{theorem_12_7}
+  Let $\M$ be a smooth manifold and $U$ be an open subset of $\M$, then there exists aunique family of linear maps 
+  \begin{equation*}
+    d:\Omega^*(U)\to\Omega^*(U),
+  \end{equation*}
+  which satisfies the following properties.
+  \begin{enumerate}[1).]
+    \item $d$ is of degree $1$ that is $d:\Omega^p(U)\to\Omega^{p+1}(U)$.
+    \item For $\omega\in\Omega^p(U),\eta\in\Omega^{q}(U)$, we have, 
+      \begin{equation*}
+        d(\omega\wedge\eta) = (d\omega)\wedge\eta+(-1)^p\omega\wedge d(\eta).
+      \end{equation*}
+    \item For $f\in\cinf(\M)=\Omega^0(U)$ and $X\in\Gamma(T\M)$, we have,
+    \begin{equation*}
+      \langle df,X\rangle = df(X) = Xf
+    \end{equation*}
+    \item $d\circ d = 0$.
+    \item For $U\subseteq V\subset\M$ open then we have a commutative diagram, where $\iota:U\hookrightarrow V$ is an inclusion and $\iota^*$ is the pullback of inclusion namely the restriction.s
+    \begin{center}
+      \begin{tikzcd}
+\Omega^*(V)\comsymb{dr} \arrow[d, "\iota^*"'] \arrow[r, "d"] & \Omega^*(V) \arrow[d, "\iota^*"] \\
+\Omega^*(U) \arrow[r, "d"']                      & \Omega^*(U)                     
+\end{tikzcd}
+    \end{center}
+    These five properties determine $d$ uniquely, and satisfies furthermore,
+    \item For $\omega\in\Omega^p(\M),X_0,\cdots,X_p\in\Gamma(T\M)$, we have
+    \begin{align*}
+      d\omega(X_0,\cdots,X_p) =& \sum_{i=0}^p(-1)^iX_i(\omega(X_0,\cdots,X_{i-1},X_{i+1},\cdots,X_p))\\
+       & + \sum_{0\leq i<j\leq m}(-1)^{i+j}\omega([X_i,X_j],X_0,\cdots,X_{i-1},X_{i+1},\cdots,X_{j-1},X_{j+1},\cdots,X_p).
+    \end{align*}
+  \item $f:\M\to\maniN$ is smooth then $f^*(d\omega) = d(f^*\omega)$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  For the uniqueness, assume we had $d,\tilde{d}$ satisfying the first five properties. Let $(U,\varphi)$ be a chart. Denote for $I=\{i_1<\cdots<i_p\}$, $dx_{I} = dx_{i_1}\wedge\cdots\wedge dx_{i_p}$. 
+  Using this notation, we have,
+  \begin{equation*}
+    d(fdx_I) = df\wedge dx_I,
+  \end{equation*}
+  which follows from the second and the forth properties. Explicitly, this follows from that 
+  \begin{equation*}
+    ddx_I = \underbrace{ddx_{i_1}}_{=0}\wedge\cdots\wedge dx_{i_p}\pm dx_{i_1}\wedge d(dx_{i_2}\wedge\cdots\wedge dx_{i_p}).
+  \end{equation*}
+  And using induction, we get $ddx_I=0$. Using the third property, we have,
+  \begin{equation*}
+    d(fdx_I) = \sum_{j\not\in I}\pd{f}{xj}dx_j\wedge dx_I.
+  \end{equation*}
+  Cover $\M$ by charts $\bigcup_{i}U_i$, by the fifth property, we have,
+  \begin{equation*}
+    d\omega|_{U_i} = \tilde{\omega}|_{U_i}.
+  \end{equation*}
+  Therefore, we conclude $d = \tilde{d}$.\\
+  \par For the existence of $d$, taking 6). as definition. We need to show as per Proposition \ref{proposition_12_4}, for $\omega\in\Omega^p(U)$, 
+  \begin{enumerate}[i).]
+    \item $d\omega$ is $\cinf(U)$-multilinear,
+    \item $d\omega$ is alternating.
+  \end{enumerate}
+  These two will imply that $d\omega\in\Omega^{p+1}(U)$. For the second assertion, we see,
+  \begin{align*}
+    d\omega(X_1,X_0,X_2,\cdots,X_p) &= X_1\omega(X_0,X_2,\cdots,X_p)+\sum_{i=2}^p(-1)^iX_i\omega(X1,X_0,\cdots)+\cdots,\\
+    & = -d\omega(X_0,X_1,\cdots,X_p).
+  \end{align*}
+  For the first assertion, we have,
+  \begin{align*}
+    d\omega(fX_0,X_1,\cdots,X_p) & = \sum_{i=1}^p (-1)^i\overbrace{X_i(f\cdot\omega(X_0,\cdots,X_{i-1},X_{i+1},\cdots,X_p))}^{X_if\omega(X_0,\cdots,X_{i-1},X_{i+1},\cdots,X_p)+fX_i\omega(X_0,\cdots,X_{i-1},X_{i+1},\cdots,X_p)}\\
+    &+f\cdot X_0\omega(X_1,\cdots,X_p)\\
+    & + \sum_{j=1}^p(-1)^j\omega(\underbrace{[fX_0,X_j]}_{fX_0-X_j(fX_0) = f[X_0,X_j]-(Xjf)X_0},X_1,\cdots,X_{j-1},X_{j+1},\cdots,X_p)\\
+    & + \sum_{1\leq i< j\leq p}(-1)^{i+j}f\cdot\omega([X_i,X_j],X_0,\cdots,X_{i-1},X_{i+1},\cdots,X_{j-1},X_{j+1},\cdots,X_p),\\
+    & = f\cdot d\omega(X_0,\cdots,X_p).
+  \end{align*}
+  We claim that the so-defined $d$ satisfies 1). - 5). We have already seen that 1) and 5). Now it suffies to look at a coordinate system, $x_1,\cdots,x_n$ where 
+  \begin{equation*}
+    \forall 1\leq i,j\leq n, [\pd{}{x_i},\pd{}{x_j}] = 0.
+  \end{equation*}
+  Then we have,
+  \begin{align*}
+    d&(fdx_{i_1}\wedge\cdots\wedge dx_{i_p})\left(\pd{}{x_{j_0}},\cdots,\pd{}{x_{j_p}}\right) &\\
+    &= {\frac {\partial^2} {\partial x_j\partial x_i}}\left(fdx_{i_1}\wedge\cdots\wedge \underbrace{dx_{i_p}\left(\pd{}{x_{j_0}},\cdots,\pd{}{x_{j_{i-1}}},\pd{}{x_{j_{i+1}}},\cdots,\pd{}{x_{j_p}}\right)}_{0\text{ or }\pm 1}\right),\\
+    & = \begin{cases}
+      0, \{i_1,\cdots,i_p\}\not\subseteq\{j_0,\cdots,j_p\}\\
+      (-1)^\alpha {\frac{\partial}{\partial x_{\alpha}}} f \quad \{i_1<\cdots<i_p\}=\{j_0<\cdots<j_{\alpha-1}<j_{\alpha+1}<\cdots<j_p\},
+    \end{cases}
+    \\
+    & = \sum \pd{f}{x_k}dx_k\wedge dx_{i_1}\wedge\cdots\wedge dx_{i_p}\left(\pd{}{x_{j_0}},\cdots,\pd{}{x_{j_p}}\right).
+  \end{align*}
+  Let 
+\begin{align*}
+  \omega &= f dx_1\wedge\cdots\wedge dx_{p},\\
+  \eta & = g dx_{p+1}\wedge\cdots\wedge dx_{p+q}.
+\end{align*}
+Using the concrete formula, we have,
+\begin{align*}
+  d(\omega\wedge\eta) & = d(f\cdot g dx_1\wedge\cdots\wedge dx_{p+q}),\\
+  & = \sum_{j=p+q+1}^m \pd{fg}{x_j}(-1)^{p+q}dx_1\wedge\cdots\wedge dx_{p+q}\wedge dx_j,\\
+  & = \underbrace{\sum_{j=p+q+1}^m \pd{f}{x_j}(-1)^p dx_1\wedge\cdots \wedge dx_p\wedge dx_j}_{=d\omega}\wedge \underbrace{gdx_{p+1}\wedge\cdots\wedge dx_{p+q}\wedge dx_j}_{=\eta}\\
+  & + \underbrace{\sum_{j=p+q+1}^m \underbrace{fdx_1\wedge\cdots \wedge dx_p}_{=\omega}\wedge (-1)^{p+q}\pd{g}{x_j}dx_{p+1}\wedge\cdots\wedge dx_{p+q}\wedge dx_j}_{(-1)^p\omega\wedge d\eta}. 
+\end{align*}
+This proves 2). For the third, both slots are $\cinf(U)$-linear in $X$. Hence without loss of genearlity, we assume $X = \pd{}{x_1}$.
+\begin{align*}
+  \langle df,\pd{}{x_1}\rangle = \left\langle\sum_{j=1}^m\pd{f}{x_j}dx_j,\pd{}{x_1}\right\rangle = \pd{f}{x_1}.
+\end{align*}
+For the fourth, we see,
+\begin{align*}
+  d\circ d (fdx_1\wedge\cdots\wedge dx_p) & = d\left(\sum_{j=p+1}^m\pd{f}{x_j}dx_j\wedge dx_1\wedge\cdots\wedge dx_p\right),\\
+  & = \sum_{\substack{i,j=1\\ i\not=j}}^m {\frac {\partial^2 f}{\partial x_i\partial x_j}}dx_i\wedge dx_j\wedge dx_1\wedge\cdots\wedge dx_{p},\\
+  & = \sum_{i<j}{\frac {\partial^2 f} {\partial x_i\partial x_j}}\underbrace{(dx_i\wedge dx_j+dx_j\wedge dx_i)}_{=0}\wedge dx_1\wedge\cdots\wedge dx_p.
+\end{align*}
+The seventh is obvious at charts.
+\end{proof}
+
+\subsection{Application : Classical vector analysis}
+Consider $\M^m$ where $m\in\{2,3,4\}$. Let $g\in\Gamma(T^{0,2}\M)$, be symmetric non-degenerate. May choose at orthonormal frame such that 
+\begin{equation*}
+  g = \begin{pmatrix}
+    -I_p & O\\
+    O & I_q
+  \end{pmatrix}
+\end{equation*}
+
+where $m=p+q$. That is 
+
+\begin{equation*}
+  g\left(\pd{}{x_i},\pd{}{x_j}\right) =
+  \begin{cases}
+    0,\quad i\not=j,
+    -1,\quad i=j\leq p,\\
+    1, \quad i=j>p.
+  \end{cases}
+\end{equation*}
+
+Interesting cases are 
+\begin{enumerate}
+  \item Riemannain metric when $p=0$,
+  \item General relativity, when $p=1,q=3$. 
+\end{enumerate}
+
+Set the volume form as 
+
+\begin{align*}
+  \vol_g & = \left\vert \det g\left(\pd{}{x_i},\pd{}{x_j}\right)\right\vert^{{\frac 1 2}}\vert dx_1\wedge\cdots\wedge dx_m\vert,\\
+  \sigma & = \sigma(dx_1,\cdots,dx_m) = {\frac {dx_1\wedge\cdots\wedge dx_m} {\vert dx_1\wedge\cdots\wedge dx_m\vert}}.
+\end{align*}
+
+Compute $\ast dx_j$ for a general coordinate system.
+\begin{align*}
+  \ast dx_j = \sum_{k=1}^m (-1)^{k-1}g^{kj}\sqrt{g}dx_1\wedge\cdots\wedge dx_{k-1}\wedge dx_{k+1}\wedge\cdots\wedge dx_m\otimes \sigma,
+\end{align*}
+
+$g_{ij} = g\left(\pd{}{x_i},\pd{}{x_j}\right),g^{ij} = g(dx_i,dx_j) = (\{(g_{kl})_{k,l}\}^{-1})_{i,j}$.
+\par Recall that $\ast dx_j$ is the unique twisted $(n-1)$-form $\omega$ satisfying 
+\begin{equation*}
+  \tau\wedge \omega = \bigwedge^1 g(\tau_1dx_j)\vol g,
+\end{equation*}
+where $\tau$ is an arbitrary $1$-form. 
+\begin{equation*}
+  \omega = \sum_{j=1}^m(-1)^{j-1}\omega_j dx_1\wedge\cdots\wedge dx_{j-1}\wedge dx_{j+1}\wedge dx_m\otimes\sigma.
+\end{equation*}
+And we have,
+\begin{align*}
+  dx_i\wedge\omega & = \left(\bigwedge^1 g\right)(dx_i,dx_j)\vol g = g^{ij}\vol g,\\
+  & = \sum_{j=1}^m(-1)^{j-1}\omega_jdx_i\wedge dx_1\wedge\cdots\wedge dx_{j-1}\wedge dx_{j+1}\wedge\cdots dx_m\otimes\sigma,\\
+  & = \omega_i. dx_1\wedge\cdots\wedge dx_m\otimes\sigma,\\
+  & = \omega_i\sqrt{g}^{-1}\vol g.\\
+  \omega_i &= g^{ij}\sqrt{g}.
+\end{align*}
+\begin{proposition}
+  \begin{equation*}
+    dx_i^\#=\sum_{j}g^{ij}\pd{}{x_j},\left(\pd{}{x_i}\right)^b = \sum g_{ij}dx_j.
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  \begin{align*}
+    \left\langle\left(\pd{}{x_i}\right)^b,\pd{}{x_k}\right\rangle & = g\left(\pd{}{x_i},\pd{}{x_k}\right) = g_{ik}\text{ gives the second formula}.\\
+    \langle (dx_i)^\#,dx_k\rangle &= g(dx_i,dx_k) = g^{ik}\text{ gives the first formula}
+  \end{align*}
+\end{proof}
+
+%12/15
+
+\begin{definition}
+  We define the gradient to be such that 
+  \begin{equation*}
+    \grad_gf = (def)^\# \defeq = \left(\sum (\partial_i f)dx_i\right)^\# = \sum_{ij}g^{ij}(\partial_i f)\pd{}{x_j}.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  $\star dx_j$ is the unique $(n-1)$ form $\omega$ such that 
+  \begin{equation*}
+    (\tau\wedge \omega) = \left(\bigwedge^1 g\right)(tdx_j)\vol_g
+  \end{equation*}
+  for all $1$-form $\tau$. 
+\end{definition}
+
+\begin{remark}
+  \begin{equation*}
+    \omega = \sum_{j=1}^m(-1)^{j-1}\omega_jdx_1\wedge\cdots dx_{i-1}\wedge dx_{i+1}\wedge\cdots dx_m\otimes\sigma.
+  \end{equation*}
+  In particular,
+  \begin{align*}
+    dx_j\wedge \omega & = w_idx_1\wedge \cdots \wedge dx_m\otimes \sigma,\\
+    & = \omega_i\sqrt{g}^{-1}\vol_g,\quad \sqrt{g} = \vert \det (g_{ij})\vert,\\
+    & = \left(\bigwedge^1 g\right)(dx_i,dx_j)\vol_g,\\
+    & = g_{ij}\vol_g.
+  \end{align*}
+  Therefore, we obtain $\omega_i = g^{ij}\sqrt{g}$ and 
+  \begin{equation*}
+    \omega = \star(dx_j) = \sum_{k=1}^m (-1)^{k-1}g^{kj}\sqrt{g}dx_1\wedge\cdots\wedge dx_{j-1}\wedge dx_{j+1}\wedge\cdots \wedge dx_m\otimes\sigma.
+  \end{equation*}
+\end{remark}
+
+We now identify vectorfields with $(m-1)$-form by pairing,
+\begin{equation*}
+  X\mapsto\star(X^\flat).
+\end{equation*}
+
+\begin{lemma}
+  \begin{equation*}
+    \star X^\flat = \interior_X\vol_g.
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Since the formula we want to show is a pointwise identity, it suffices to check it on $X|_p=e_1|_p$, where $e_1,\cdots,e_m$ are $g$-orthonormal basis, since every small enough neighborhood admits a $g$-orthonormal basis.
+Observe that 
+\begin{equation*}
+  \star e_1^\flat = \star(e_1)^* = c_1e_2^\flat\wedge\cdots\wedge e_m^\flat\otimes\sigma(e_1^*,\cdots,e_m^*).
+\end{equation*}
+Thus we have,
+\begin{equation*}
+  \interior_{e_1}\vol_g = \interior_{e_1}e_1^\flat \wedge \cdots\wedge e_m^\flat \otimes \sigma = c_1e_2^\flat \wedge\cdots\wedge e_m^\flat\otimes\sigma,
+\end{equation*}
+where $c_j = g_{jj}=g^{jj}$ for a $g$-orthonormal basis.
+
+\begin{center}
+  \begin{tikzcd}
+\Omega^{m-1}(\M) \arrow[r, "d"]                                            & \Omega^{m}(\M) \arrow[d, "(-1)^p\star"', shift right] \\
+\Gamma(\M) \arrow[u, "X\mapsto \star X^\flat"] \arrow[r, "\divergence^g"'] & \cinf(\M) \arrow[u, "\star"', shift right]           
+\end{tikzcd}
+\end{center}
+\begin{equation*}
+  \divergence^g(X) = (-1)^p\star d\star X^\flat,
+\end{equation*}
+thus 
+\begin{align*}
+  \divergence^g(X) & = \divergence^g\left(\sum_{j=1}^m X_j\pd{}{x_j}\right),\\
+  & = (-1)^p\star d \star\left(\sum_{jk} g_{jk}X_jdx_k\right),\\
+  &= (-1)^p\ast d\left(\sum_{jkl}X_jd_{jk}(-1) dx_1\wedge\cdots\wedge dx_{l-1}\wedge dx_{l+1}\wedge\cdots\wedge dx_m\right)\\
+  & = (-1)^p\ast d\left(\sum(-1)^{j-1}x_j\sqrt{g}dx_1\wedge\cdots\wedge dx_{j-1}\wedge dx_{j+1}\wedge\cdots\wedge dx_m\otimes\sigma\right),\\
+\end{align*}
+Thus, we obtain,
+\begin{equation*}
+  \interior_X\vol_g = \sum_{j}X_j\interior_{\partial_j}\sqrt{g}dx_1\wedge\cdots\wedge dx_m\otimes\sigma = 
+\end{equation*}
+\end{proof}
+\begin{remark}
+  On $\M^2$, we have,
+  \begin{center}
+    \begin{tikzcd}
+\Omega^0 \arrow[r, "d"] \arrow[d, "="'] & \Omega^1 \arrow[d, "\#"] \arrow[r, "d"]                           & \Omega^2 \arrow[d, "\star", shift left]        \\
+\cinf(\M) \arrow[r, "\grad^g"']         & \Gamma(T\M) \arrow[r, "X\mapsto -\divergence(\star X^\flat)^\#"'] & \cinf(\M) \arrow[u, "(-1)^p\star", shift left]
+\end{tikzcd}
+  \end{center}
+\end{remark}
+\subsection{Integration of densities}
+In this section, 
+\begin{equation*}
+\mathcal{O} = \mathcal{O}(T^*\M).  
+\end{equation*}
+In terms of the 
+\begin{lemma}
+  If $(U_i,\varphi_i)$ is an atlas of $\M$ then the cocyle for $\left\vert\bigwedge\right\vert^\alpha$ is 
+\end{lemma}
+\begin{proof}
+  \begin{align*}
+    g_{ij}(p) & = \vert \det((\varphi_i^{-1})^*\circ\varphi_j^*)\vert^\alpha,\\
+    &= \vert\det ((\varphi_j\circ\varphi_i)^*)\vert^\alpha,\\
+    & = \vert\det(D(\varphi_j\circ\varphi_i^{-1})^t)\vert^\alpha,\\
+    & = \vert \det(D(\varphi_i\circ\varphi_j^{-1}))\vert^{-\alpha}|_{\varphi_j(p)}.
+  \end{align*}
+  Respectively for $\mathcal{O}$, we get,
+  \begin{equation*}
+    g_{ij} = \sgn D(\varphi_i\circ\varphi_j^{-1})|_{\varphi_j(p)}.
+  \end{equation*}
+\end{proof}
+A diffeomorphism $f:\M\to\maniN$ gives rise for pullback map 
+  \begin{equation*}
+    \left\vert\bigwedge\right\vert^\alpha(\maniN)\stackrel{f^*}{to}\left\vert\bigwedge\right\vert(\M), \mathcal{O}(\maniN)\stackrel{f^*}{\to}\mathcal{O}(\M).
+  \end{equation*}
+
+\begin{proposition}
+  Let $\M^m$ be a manifold. There is a unique linear form, 
+  \begin{equation*}
+    \int_{U}:\Gamma_C(\vert\wedge\M\vert) \to \R,
+  \end{equation*}
+  which is invariant under diffeomorhpisms and in local coordinate cocycles with the Lebesgue integral,
+  \begin{equation*}
+    \int_\M f(x)\vert dx\vert = \int_{\R^m} f(x)\vert dx_1\wedge\cdots\wedge dx_m\vert. 
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  Let $\omega\in\Gamma_C(\vert\wedge\M\vert)$ with support contained in some chart $(U,\varphi)$. We have to put 
+  \begin{equation*}
+    \int_\M\omega = \int_{\R^m}(\varphi^{-1})^*\omega.
+  \end{equation*}
+  If we have another chart $(V,\psi)$ such that $\supp \omega\subseteq U\cap V$, then 
+  \begin{align*}
+    (\varphi^{-1})^*\omega &= f\vert dx_1\wedge\cdots\wedge dx_m\vert,\\
+    (\psi^{-1})^*\omega & = (\varphi^{-1}\circ\varphi\circ\psi^{-1})^*\omega & = (\varphi)
+  \end{align*}
+  \begin{equation*}
+    \Rightarrow \int_{\R^m}(\varphi^{-1})^*\omega = \int_{\R^m}(\psi^{-1})^*\omega.
+  \end{equation*}
+  For the general case, choose $\rho_1,\cdots,\rho_k\in\cinf_C(\M)$ with,
+  \begin{equation*}
+    \sum \rho_j|_{\supp\omega} \equiv 1|_{\supp\omega},
+  \end{equation*}
+  such that $\supp\rho_j$ lies in a chart. Put 
+  \begin{equation*}
+    \int_\M\omega \defeq \sum_{j=1}^k\int_\M\rho_j\omega.
+  \end{equation*}
+  If $\tilde{\rho}_1,\cdots,\tilde{\rho}_l$ is a different partition of unity then,
+  \begin{equation*}
+    \sum_{j=1}^k\int_\M\rho_j\omega = \sum_{j=1}^k\int_\M\sum_{i=1}^l\rho_j\tilde{\rho}_i\omega = \sum_{j,i=1}^{k,l}\int_\M\rho_j\tilde{\rho}_i\omega = \sum_{i=1}^l\int_\M\tilde{\rho}_i\omega_i.
+  \end{equation*}
+\end{proof}
+
+%12/17
+
+\begin{remark}
+  Let $\omega = f\vert dx_1\wedge\cdots\wedge dx_m\vert$. Suppose we have a diffeomorphism,
+  \begin{equation*}
+    (\R^m,y)\stackrel{\varphi}{\to}(\R^m,x).
+  \end{equation*}
+  Then we have,
+  \begin{equation*}
+    \varphi^*\omega = f\circ\varphi\vert\det D\varphi\vert\vert dy_1\wedge\cdots\wedge dy_m\vert.
+  \end{equation*}
+  Then we have,
+  \begin{align*}
+    \int_{(R^m,x)}f\vert dx_1\wedge\cdots\wedge dx_m\vert & = \int_{\R^m}f(x)dx_1\cdots dx_m,\\
+    & = \int_{(\R^m,y)}f(\varphi(y))\vert \det D\varphi(y)\vert dy_1\cdots dy_m,\\
+    & = \int_{(\R^m,y)}f^*\omega.
+  \end{align*}
+\end{remark}
+
+\begin{corollary}
+  ALet $\Phi:\M\to\maniN$ be a diffeomorphism between smooth manifolds and $\omega\in\Gamma_C(\vert\wedge\vert^1\maniN)$. Then 
+  \begin{equation*}
+    \int_\M\omega = \int_\maniN\Phi^*\omega.
+  \end{equation*}
+\end{corollary}
+
+\begin{proof}
+  Write 
+  \begin{equation*}
+    \omega = \sum_{i=1}^k \omega_i,
+  \end{equation*}
+  such that $\supp\omega\subseteq V_i$ for some coordinate chart $(V_i,\psi_i:V_i\to U_i\subseteq\R^n)$. Then 
+  \begin{equation*}
+    \supp\Phi^*\omega_i\subseteq\Phi^{-1}(V_i),
+  \end{equation*} 
+  which is a coordinate patch as well. To see this, we have,
+  \begin{equation*}
+    \psi_i\circ\Phi|_{\Phi^{-1}(V_i)}:\Phi^{-1}(V_i)\to U_i\subseteq\R^n,
+  \end{equation*}
+  is again a chart. Then,
+  \begin{equation*}
+    \int_{\maniN}\omega_i = \int_{V_i}\omega_i = \int_{\Phi^{-1}(V_i)}\Phi^*\omega_i = \int_\M\Phi^*\omega_i.
+  \end{equation*}
+  As $\omega$ is a finite sum of these $\omega_i$, we have,
+  \begin{equation*}
+    \int_N\omega = \sum_{i=1}^k \int_\maniN\omega_i = \sum_{i=1}^k \int_\M\Phi^*\omega_i = \int_\M\Phi^*\omega.
+  \end{equation*}
+\end{proof}
+
+\subsection{Orientations on manifolds}
+
+\begin{definition}
+  Let $\M$ be a smooth manifold. An atlas $\mathscr{A}$ oriented is called oriented if 
+  \begin{equation*}
+    \forall\varphi,\psi\in\mathscr{A},x\in\M,\det D(\psi\circ\varphi^{-1}(x))>0.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Two oriented atlases $\mathscr{A},\mathscr{B}$ are equivalent if $\mathscr{A}\cup\mathscr{B}$ is oriented.
+\end{definition}
+
+\begin{definition}
+  An orientation is a choice of a maximal oriented atlas. In particular, a manifold is orientable if there is an orientation.
+\end{definition}
+
+Clearly we have $(\R^m,\{\id\})$ is oriented. 
+
+\begin{example}The following is an example of non-oriented manifold.
+    \item $(S^n,\{\psi_{\pm}\})$ where 
+    \begin{equation*}
+    \psi_\pm:S^n\backslash\{\pm e_n\},\psi_\pm(x,t)\mapsto {\frac x {1\mp t}}
+    \end{equation*}
+    Then we have 
+    \begin{equation*}
+    \psi+\circ\psi_-^{-1}(x) = {\frac x {\vert x\vert^2}}.
+    \end{equation*}
+    Thus $f(x) = {\frac x {\vert x\vert^2}}$ is orientation reversing. That is $\det Df(x)<0$.
+\end{example}
+
+\begin{remark}
+  Fix an orientation reversing diffeomorphism of $\R^n$ say $\Phi(x_1,\cdots,x_n) = (-x_1,x_2,\cdots,x_n)$. We have a new atlas,
+  \begin{equation*}
+  \{\Phi\circ\psi_+,\psi_-\}
+  \end{equation*}
+  is oriented.
+\end{remark}
+
+\begin{example}
+  A Möbius band cannot be oriented. It is an exercise for the readers to give it a proof.
+\end{example}
+
+\begin{proposition}
+  Let $\M$ be a smooth manifold. $\M$ is orientable if and only if one of following statements hold.
+  \begin{enumerate}[i).]
+    \item There is a section $s$ of the bundle $\mathcal{O}(\M)$ with $\vert s(p)\vert = 1$ for all $p\in\M$. Note that $\mathcal{O}$ comes with a canonical inner product, thus we can define a notion of length.
+    \item There is a section $\omega\in\Omega^m(\M)$ where $m = \dim\M$ with $\omega(p)\not=0$ for all $p\in\M$. 
+  \end{enumerate}
+  Moreover, each of the conditions will determine an orientation.
+\end{proposition}
+
+\begin{proof}$\:$
+  \par For the first one. Suppose $\M$ is orientable. then consider $\M= \bigcup_{n}U_n$ where $(U_n,\varphi_n)$ is an oriented chart and consider $(\rho_n)$ be a subordinate partition of unity to the charts. We set,
+  \begin{equation}
+    \omega \defeq\sum_{j=1}^\infty \rho_j dx_1^j\wedge\cdots\wedge dx_m^j.
+  \end{equation}
+  We show that $\omega(p)\not=0$ for all $p\in\M$. To see this for a fixed $p\in U_i$. In the small enough neighborhood around $p$, we have,
+  \begin{equation}
+    \omega = \sum_{j=1}^\infty \rho_j\circ\varphi\det D(\varphi^{-1}\varphi_j\circ\varphi_i)dx_1^i\wedge\cdots\wedge dx_m^i.
+  \end{equation}
+  As we have assumed the manifold to be oriented. Each $\det D(\varphi_j\circ\varphi_i^{-1})$ is positive. And partition of unities are non-negative. We conclude that $\omega(p)>0$. 
+  \par Suppose the second statement holds. Fix $\omega\in\Omega^m\M$ such that $|omega(p)\not=0$ for all $p\in \M$. Let $(U,\varphi)$ be a connected chart. Then obviously, we have,
+  \begin{equation*}
+  \varphi^*\omega = \rho_\varphi dx_1\wedge\cdots dx_m.
+  \end{equation*}
+  with 
+  \begin{equation*}
+  \forall x\in\varphi(U),\rho_\varphi(x)\not=0.
+  \end{equation*}
+  We call $\varphi$ is oriented if $\rho_\varphi>0$. This determines an oriented atlas. Thus proves that the second condition determines an atlas.
+  \par Furthermore, the first and the second conditions are equivalent. To show this, choose a Riemannian metric on $\M$. Given $s$ as in the first condition. Set 
+  \begin{equation*}
+    \omega = \vol\cdot s.
+  \end{equation*}
+  Conversely, given $\omega$ as in the second condition set $s = {\frac \omega \vol}$.
+\end{proof}
+
+\section{Manifolds with boundaries}
+
+\subsection{Basics}
+
+\begin{definition}[Half-space]
+  Let $E$ be a real vector space of dimension $n<\infty$. A subset $H\subseteq E$ is called a half space if there is a linear form $\lambda\in E^*\backslash\{0\}$ such that
+  \begin{equation*}
+    H = \{x\in E\sep \langle\lambda,x\rangle\leq0\}.
+  \end{equation*}
+  We denote such $H$ by $E_\lambda^+$.
+\end{definition}
+
+\begin{example}
+  $\{x\in\R^n\sep x_j\leq 0\}$ is a half space for $1\leq j\leq n$.
+\end{example}
+
+\begin{remark}
+  Let $H_1,H_2\subseteq E$ be two half-spaces.  Then there is a linear isomorphism $T\in\GL(E)$ such that $TH_1=H_2$. That is if 
+  \begin{equation*}
+    H_j = E_{\lambda_j}^+,
+  \end{equation*}
+  then take $T^*\in\GL(E^*)$ such that $T^*\lambda_1 = \lambda_2$. We have 
+  \begin{equation*}
+    \langle \lambda_2,x\rangle = \langle T^*\lambda_1,x\rangle = \langle \lambda_1,Tx\rangle.
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  The above remark is true in the oriented category only if $\dim E\geq 2$. That is $\R_+=[0,\infty)$ and $\R_-=(-\infty,0]$ are diffeomorphic but not oriented diffeomorphic.
+\end{remark}
+
+\begin{definition}
+  Let $E_\lambda^+\subseteq E$ be a half space. The normal space is $E/\ker\lambda$.
+\end{definition}
+
+\begin{lemma}
+  A normal space $E/\ker\lambda$ is canonically oriented by defining a base of $E/\ker\lambda$ by $\lambda(v)>0$.
+\end{lemma}
+
+\begin{definition}
+  If $v\in E$ with $\lambda(v)>0$ then then we say $v$ points outward. Furthermore, we set 
+  \begin{equation*}
+    c(t) = tv.
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  The notion comes from the following case. Consider a curve $c:\R\to E$ such that for small enough $\varepsilon>0$, we have $c((-\varepsilon,0])\subseteq E_\lambda^+$ for some $\lambda\in E^*$. And for $t>0, c(t)\not\in E_\lambda^+$. 
+
+\end{remark}
+
+\begin{thebibliography}{9}
+\bibitem{Lee}
+Lee, John M. (2012) \emph{Introduction to Smooth Manifolds}, Graduate Texts in Mathematics.
+\bibitem{Kobayashi-Nomizu}
+Shoshichi Kobayashi, Katsumi Nomizu (1963) \emph{Foundations of differential geometry. {V}ol {I}}, Interscience Publishers, a division of John Wiley \& Sons, New
+              York-London.
+
+\end{thebibliography}
+
+\end{document}
