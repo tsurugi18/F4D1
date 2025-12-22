@@ -3056,8 +3056,152 @@ Clearly we have $(\R^m,\{\id\})$ is oriented.
 
 \begin{remark}
   The notion comes from the following case. Consider a curve $c:\R\to E$ such that for small enough $\varepsilon>0$, we have $c((-\varepsilon,0])\subseteq E_\lambda^+$ for some $\lambda\in E^*$. And for $t>0, c(t)\not\in E_\lambda^+$. 
-
+  %later
 \end{remark}
+
+\begin{definition}
+  Let $A\subseteq\R^m$ be a set and $f:A\to\R^n$ be a map. $f$ is differentiable if for any $a\in A$, there is a neighborhood $a\in U\subseteq\R^m$(not necessarily contained in $A$) and a differentiable function $g:U\to\R^n$ such that 
+  \begin{equation*}
+    g|_{U\cap A} = f|_{U\cap A}.
+  \end{equation*}
+\end{definition}
+
+\begin{proposition}
+  Let $E_\lambda,E_\mu$ be half spaces in $E\cong \R^n$, $U\subseteq E_\lambda,V\subseteq E_\mu$ be open, and $\phi:U\to V$ be a diffeomorphism. Then 
+  \begin{equation*}
+    \phi(\interior U) = \interior V, \partial U = \partial V.
+  \end{equation*}
+  Furthermore, for $x\in\partial U$, and any outward pointing vector $v$, 
+  \begin{equation*}
+    D_v\mu\circ\phi(x)>0.
+  \end{equation*}
+\end{proposition}
+
+\begin{proof}
+Fix $x\in U$. Then there is a neighborhood $\tilde{U}_x$ of $x$, and $\tilde{V}_y$ of $y = \phi(x)$ in $E$ and smooth maps 
+\begin{equation*}
+  \tilde{\phi}:\tilde{U}_x\to\tilde{V}_y,\tilde{\psi}:\tilde{V}_y\to\tilde{U}_x,
+\end{equation*}
+extening $f$ with respect to $f^{-1}$. Since $E_\lambda,E_\mu$ are half-spaces, we have,
+\begin{equation*}
+  D_x\phi^{-1}\circ\phi = D_{f(x)}\phi^{-1}\circ D_x\phi(x).
+\end{equation*}
+This implies that $D_{f(x)}\tilde{\psi}\circ D_x\tilde{\phi}(x) = \id$.
+\par Suppose $\phi(x)\in\partial V$. Then $\tilde{V}_y$ contains an element outside of $V$. 
+\par Let $c:(-\varepsilon,0]\to U$ with $c((-\varepsilon,0))\subseteq U^\circ,c(0) = x, c'(0) = v$. Then we have
+\begin{equation*}
+  D_v(\mu\circ\phi)(x) = {\frac {d} {dt}}\bigg{|}_{t=0}\underbrace{\mu(\phi(c(t)))}_{=\phi(t)}.
+\end{equation*}
+We have 
+\begin{equation*}
+  t<0\Rightarrow f(t)\leq 0, f(0) = 0.
+\end{equation*}
+Therefore, we have $f'(x)\geq 0$. Suppose $f'(0) = 0$ then $(\phi\circ c)'(0)\in\ker\mu$. This is because that the outward pointing vectors and their negatives are (missing), this implies that 
+range of $D_x(\phi)\subseteq\ker\mu$. This contradicts that the rank of $D_x\phi$ is full.
+\end{proof}
+
+\begin{definition}
+  A smooth manifold with boundary is a second countable Hausdorff space $\M$ together with maximal atlas of charts $(U,\varphi)$ with $\varphi:U\to V\subseteq E_\lambda^+$ being a homeomorphism on to some open subset $V$ in $E_\lambda^+$.
+\end{definition}
+
+\begin{remark}
+  Let $\M$ be a smooth manifold with boundary. A transition map $\psi\circ\varphi^{-1}$ are diffeomorhpism from an open subset of $E_\lambda^+$ to some open subset of $E_\mu^+$.
+\end{remark}
+
+\begin{definition}
+  Let $\M$ be a smooth manifold with boundary. We define,
+  \begin{enumerate}[1).]
+    \item the interior of $\M$ to be $\M^\circ\defeq\interior\M = \bigcup_{\varphi\in\mathcal{A}}\varphi^{-1}(\interior E_\lambda^+)$,
+    \item the boundary of $\M$ to be $\partial\M\defeq \varphi^{-1}(\partial E_\lambda^+)$.
+  \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+  Let $\M^m$ be a smooth boundaryless manifold and let $f:\M\to\R$ be a submersion that is $\forall p\in\M, df|_p\not=0$. Then 
+  \begin{equation*}
+    \maniN = \{x\in\M\sep f(x)\leq 0\},
+  \end{equation*}
+  is a manifold with boundary and 
+  \begin{equation*}
+    \partial\maniN = \{x\in\M\sep f(x) = 0\}.
+  \end{equation*}
+\end{proposition}
+
+\begin{proof}
+  Given $p\in\M$, there exists  a chart $(U,\varphi)$ centered at $p$ such that $\varphi_m = f$. Thus $\varphi:U\to V$ for $V\subseteq\R^m$. That is 
+  \begin{equation*}
+    U\cap\maniN \to V\cap\{x_m=0\}.
+  \end{equation*}
+  All such charts give an atlas for a manifold with boundary $\maniN$.
+\end{proof}
+
+\begin{example}
+  Let $B\subseteq\R^n$ be a unit ball. We know that $\partial B = S^{m-1}$. The function $f$ above in this case is given by 
+  \begin{equation*}
+    f(x) = \norm{x}^2-1 = \sum_{i=1}x_i^2- 1.
+  \end{equation*}
+\end{example}
+
+\begin{proposition}
+  Let $\M^m$ be a smooth manifold. A subset $A\subseteq \M$ is a submanifold with boundary if for each $a\in A$ there is an open neighborhood $U$ in $\M$ and a submersion $f:U\to\R$ such that $A\cap U = \{f\leq 0\}$. In that case $\partial\cap U = \{f=0\}$.
+\end{proposition}
+
+\subsection{Stokes theorem}
+
+Let $f:[a,b]\to\R$ be sufficiently differentiable. We have,
+\begin{equation*}
+  \int_a^bf'(x)dx = f(b)-f(a).
+\end{equation*}
+Observe that $f'(x)dx\in\Omega^1([a,b])$. Obviously $[a,b]$ is a manifold with boundary and the above equation can be restated as,
+\begin{equation*}
+  \int_{\partial[a,b]}fd\#,
+\end{equation*}
+where $\#$ is the counting measure. Now consider $\{x_1\leq 0\}\subseteq\R^m$. Take the canonical basis $e_1,\cdots,e_m$ and its dual basis $e_1^*,\cdots,e_m^*$. For $\lambda = -e_1^*$,
+\begin{equation*}
+  \{x_1\geq 0\} = E_{\lambda}^+.
+\end{equation*}
+Let $\omega\in\Omega_C^{m-1}(E_\lambda^+)$ such that 
+\begin{equation*}
+  \omega = \sum_{j=1}^m(-1)^{j-1}f_j dx_1\wedge\cdots\wedge dx_{j-1}\wedge dx_{j+1}\wedge\cdots\wedge dx_m.
+\end{equation*}
+
+where $f_j\in\cinf_C(E_\lambda^+)$. Thus 
+\begin{equation*}
+  d\omega = \sum_{j=1}^m \pd{f_j}{x_j}dx_1\wedge\cdots\wedge dx_m = (\nabla f)\cdot dx_1\wedge\cdots\wedge dx_m.
+\end{equation*}
+
+Integrating this we get,
+\begin{align*}
+  \int_{E_\lambda^+}d\omega & = \sum_{j=1}^m\int_{\{x_1\leq 0\}}\pd{f_j}{x_j}dx_1\cdots dx_m,\\
+  & \stackrel{\text{Fubini}}{=}\sum_{j=1}^m\int_{\{x_1\leq 0\}}\underbrace{\left(\int_\R\pd{f_j}{x_j}dx_j\right)}_{=0}dx_1\cdots dx_{j-1}dx_{j+1}\cdots dx_m.
+\end{align*}
+Except for $j=1$, thus 
+\begin{equation*}
+  \int_{E_\lambda^+}d\omega = \int_{\R^{m-1}}\left(\int_0^\infty\pd{f_1}{x_1}dx_1\right)dx_2\cdots dx_m = \int_{\R^{m-1}}-f_1(0,x_2,\cdots,x_m)dx_2\cdots dx_m.
+\end{equation*}
+
+Set $\iota:\partial E_\lambda^+ = \{x_1=0\}\hookrightarrow E_\lambda^+\hookrightarrow\R^m$. We then have,
+\begin{equation*}
+  \iota^*\omega = f_1dx_2\wedge\cdots\wedge dx_m.
+\end{equation*}
+
+And in particular,
+
+\begin{equation*}
+  \int_{E_\lambda^+}d\omega = -\int_{\partial E_\lambda^+}\omega.
+\end{equation*}
+
+By setting orientations on as $e_1,\cdots,e_m$ positive in $E_\lambda^+$ and $e_2,\cdots,e_m$ negative in $\partial E_\lambda^+$, we have, 
+\begin{equation*}
+  \int_{E_\lambda^+}d\omega = \int_{\partial E_\lambda^+}\omega.
+\end{equation*}
+
+\begin{theorem}[Stokes]
+  Let $\M^m$ be oriented manifold with boundary such that $\partial\M^m$ carrying the induced orientation,$ \omega\in\Omega_C^{m-1}(\M)$. Then 
+  \begin{equation*}
+    \int_{\M}d\omega = \int_{\partial \M}\iota^*\omega.
+  \end{equation*}
+\end{theorem}
 
 \begin{thebibliography}{9}
 \bibitem{Lee}
