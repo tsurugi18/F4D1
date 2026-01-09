@@ -29,6 +29,7 @@ mysymbol/.style={start anchor=center,end anchor=center,draw=none}
 \newtheorem{fact}{Fact}[section] 
 \newtheorem{example}{Example}[section] 
 \newtheorem{claim}{Claim}
+\newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\hfill $\blacksquare$}
 
 \DeclareMathOperator{\triv}{triv}
 \DeclareMathOperator{\ind}{ind}
@@ -64,6 +65,8 @@ mysymbol/.style={start anchor=center,end anchor=center,draw=none}
 \DeclareMathOperator{\ext}{ext}
 \DeclareMathOperator{\vol}{vol}
 \DeclareMathOperator{\inte}{int}
+\DeclareMathOperator{\diverg}{div}
+\DeclareMathOperator{\curl}{curl}
 %\newcommand*{\name}[\num_arguments][default values]{{\color{#1}\Large #2}}
 \newcommand{\defeq}{\vcentcolon=}
 \newcommand{\norm}[1]{\Vert #1 \Vert}
@@ -490,16 +493,26 @@ Since $\varphi(p) = 1$ and $\chi(p)=1$, thus we conclude $X(\varphi) = 0$.
 \end{lemma}
 
 \begin{proof}
-  Exercise.
+  Suppose $p\not=q$. Then take a smooth functional $\chi:\M\to\R$ such that $\chi(\M)\subseteq[0,1]$ and 
+  \begin{equation*}
+    \begin{cases}
+      \chi \equiv 1 \quad \text{around $p$},
+      \chi \equiv 0 \quad \text{around $q$}.
+    \end{cases}
+  \end{equation*}
+  Then for any $f\in\cinf(\M)$,
+  \begin{equation*}
+    Xf = X\chi f = 0.
+  \end{equation*}
 \end{proof}
 
 \begin{lemma}
-Let $(U,\varphi)$ be a chart of $\M$ centered at $p\in\M$ (ie. $\varphi(p) = 0$) withecoordiante function $x_1,\cdots,x_n$. 
+Let $(U,\varphi)$ be a chart of $\M$ centered at $p\in\M$ (ie. $\varphi(p) = 0$) with coordiante function $x_1,\cdots,x_n$. 
 Then for $f\in\cinf(U)$, there are functions $f_1,\cdots, f_n\in\cinf(U)$, such that 
 \begin{equation*}
 f = \sum_{j=1}^n f_jx_j+f(p).
 \end{equation*} 
-Note that taking $\varphi(p)=0$, justfies the $f_jx_j$ for each coordinate.
+Note that taking $\varphi(p)=0$ justfies the $f_jx_j$ for each coordinate.
 \par Analogously, given $f\in\cinf(\M)$, we may choose $f_j\in\cinf(\M)$ such that 
 \begin{equation*}
   f|_U = \sum_{j=1}^n f_j|_Ux_j +f(p).
@@ -520,11 +533,18 @@ Note that taking $\varphi(p)=0$, justfies the $f_jx_j$ for each coordinate.
 \end{proof}
 
 \begin{definition}
-  Given a chart $(U,\varphi)$ of $\M$. For $f\in\cinf(U)$, we define 
+  Given a chart $(U,\varphi)$ of $\M$. For $f\in\cinf(U)$ we have $f\circ\varphi^{-1}:\varphi(U)\to \R$. We define 
   \begin{equation*}
-    {\frac \partial {\partial x_j}}\bigg{|}_pf \defeq {\frac {\partial } {\partial \gamma_j}}\bigg{|}_{\varphi(p)}(f\circ\varphi^{-1})(\gamma) = D(f\circ\varphi^{-1})(\varphi(p))[e_j].
+    {\frac \partial {\partial x_j}}\bigg{|}_pf \defeq  D(f\circ\varphi^{-1})(\varphi(p))[e_j].
   \end{equation*}
 \end{definition}
+
+\begin{remark}
+  Note that if we set $\gamma_i:(-\varepsilon,\varepsilon)\to\R^n$ to be such that $\gamma(0) = \varphi(p)$ and $\gamma'(0) = e_i$, then 
+  \begin{equation*}
+    {\frac \partial {\partial x_i}}\bigg{|}_pf = {\frac {d} {dt}}\bigg{|}_{t=0}(f\circ\gamma_i)(t).
+  \end{equation*}
+\end{remark}
 
 \begin{proposition}
   Let $\M$ be a smooth manifold and $(U,\varphi)$ be a $n$-dimensional chart at $p$. Then we have 
@@ -552,9 +572,9 @@ Note that taking $\varphi(p)=0$, justfies the $f_jx_j$ for each coordinate.
   \begin{equation*}
     X\chi^2 = 0,\quad Xf = X(\chi^2f).
   \end{equation*}
-  Therefore, 
+  Since $\varphi$ is centered at $p$, we have $x_j(p)=0$ for all $j$. Therefore, 
   \begin{align*}
-    Xf &= \sum_{j=1}^n X((\chi f_j))(Xx_j)(p)+f_j(p)X(\chi x_j)\\
+    Xf &= \sum_{j=1}^n X((\chi f_j))(\chi x_j)(p)+f_j(p)X(\chi x_j)\\
     &= \sum_{j=1}^n f_j(p)X(\chi x_j)\\
     & = \sum_{j=1}^nX(\chi x_j)\cdot{\frac {\partial} {\partial x_j}}\bigg{|}_pf.\\
   \end{align*}
@@ -579,6 +599,7 @@ Note that taking $\varphi(p)=0$, justfies the $f_jx_j$ for each coordinate.
   \end{equation*}
 \end{example}
 \begin{example}
+  \label{example_jacobian}
   Let $(U,\varphi)$ be a chart of an open subset of $\R^n$ with coordinate function $y_1,\cdots, y_n$, (ie. $\varphi=(y_1,\cdots,y_n)$).
   \par We have 
   \begin{align*}
@@ -591,7 +612,7 @@ Note that taking $\varphi(p)=0$, justfies the $f_jx_j$ for each coordinate.
   \end{equation*}
   In particular,
   \begin{equation*}
-  \pd{}{x_i}\bigg{|}_pf  =\sum_{j=1}^n \pd{y_j}{x_i}\pd{}{y_j}\bigg{|}_p.
+  \pd{}{x_i}\bigg{|}_pf  =\sum_{j=1}^n \pd{y_j}{x_i}\bigg{|}_{\varphi(p)}\pd{}{y_j}\bigg{|}_pf.
   \end{equation*}
 \end{example}
 \begin{definition}
@@ -607,11 +628,12 @@ Note that taking $\varphi(p)=0$, justfies the $f_jx_j$ for each coordinate.
 \end{definition}
 
 \begin{lemma}
+  \label{lemma_jacobian}
   Let $\M\subseteq\R^m$ and $\mathcal{N}\subseteq\R^n$ be open. Then in the standard basis $T_pf$ is the Jacobi-matrix.
 \end{lemma}
 
 \begin{proof}
-  Exercise.
+  Follows from the arguments in Example \ref{example_jacobian}.
 \end{proof}
 \begin{lemma}[Chain Rule]
   Let $f:\M\to\mathcal{N}$, $g:\mathcal{N}\to\mathcal{W} $be smooth maps. Then we have 
@@ -620,7 +642,7 @@ Note that taking $\varphi(p)=0$, justfies the $f_jx_j$ for each coordinate.
   \end{equation*}
 \end{lemma}
 \begin{proof}
-  Exercise.
+  Since the statement is local we may assume $\M,\maniN,\mathcal{W}$ to be all open sets in some Euclidean spaces. Then using Lemma \ref{lemma_jacobian} we have the statement.
 \end{proof}
 \begin{lemma}
   Let $(U,\varphi)$ be a chart. Viewing this as a locally smooth map from $\M$ to $\R^n$, we obtain an isomorphism,
@@ -638,7 +660,7 @@ Note that taking $\varphi(p)=0$, justfies the $f_jx_j$ for each coordinate.
 
 \begin{definition}[Physicists definition of tangent space]
   A tangent vector is a family $(\xi^\varphi)_\varphi$ where $\xi^\varphi\in\R$ 
-  where $\varphi$ runs through charts containing $p$, together with a transformation rule 
+  and $\varphi$ runs through charts containing $p$, together with a transformation rule 
   \begin{equation*}
     \xi^\psi = D_{\varphi(p)}\left(\psi\circ\varphi^{-1}\right)[\xi^\varphi].
   \end{equation*}
@@ -648,7 +670,7 @@ Note that taking $\varphi(p)=0$, justfies the $f_jx_j$ for each coordinate.
 \begin{definition}
   Let $\M$ be a manifold. A curve $\gamma:I\to \M$ in $\M$ is a smooth map such that from some interval $I\in\R$, such that $I$ is a manifold with the canonical charts. $d:I\to I$ where ${\frac d {dt}}$ a canonical tangent vector associated to this chart, we get a velocity vector of the curve 
   \begin{equation*}
-    \stackrel{\circ}{\gamma}(t_0) = T_{t_0}\gamma({\frac d {dt}}\big{|}_{t_0})\in T_{\gamma(t_0)}\M.
+    \stackrel{\circ}{\gamma}(t_0) = T_{t_0}\gamma\left({\frac d {dt}}\big{|}_{t_0}\right)\in T_{\gamma(t_0)}\M.
   \end{equation*}
 \end{definition}
 
@@ -663,7 +685,7 @@ Note that taking $\varphi(p)=0$, justfies the $f_jx_j$ for each coordinate.
   \end{equation*}
   Note that $\gamma(0) = \varphi^{-1}(0) = p$. We define 
   \begin{equation*}
-    \stackrel{\circ}{\gamma}(0)f = T_0\gamma({\frac {d} {dt}}\bigg{|}_0)f = {\frac d {dt}}\bigg{|}_{t=0}f(\gamma(t))=\sum_{i=1}^nv_i\pd{f\circ\varphi^{-1}}{x_j}(0) = vf.
+    \stackrel{\circ}{\gamma}(0)f = T_0\gamma\left({\frac {d} {dt}}\bigg{|}_0\right)f = {\frac d {dt}}\bigg{|}_{t=0}f(\gamma(t))=\sum_{i=1}^nv_i\pd{f\circ\varphi^{-1}}{x_j}(0) = vf.
   \end{equation*}
 \end{example}
 \subsection{Local properties of differentiable maps and submanifolds.}
@@ -687,7 +709,7 @@ $\M^m$ denotes that $\dim\M = \dim T_p\M=m$ for any point $p\in\M$.
 \begin{definition}[Submanifold]
   Let $\maniN\subset\M^m$ is called a submanifold if for any chart $(U,\varphi)$ of $\M$, 
   \begin{equation*}
-    \varphi(\N\cap U)\subseteq\R^m
+    \varphi(\maniN\cap U)\subseteq\R^m
   \end{equation*}
   is a submanifold of $\R^m$.
 \end{definition}
@@ -711,8 +733,8 @@ $\M^m$ denotes that $\dim\M = \dim T_p\M=m$ for any point $p\in\M$.
 \begin{proposition}
   Let $f:\M^m\to\maniN^n$ be a subimmersion of rank $k$. 
   \begin{enumerate}[1).]
-    \item For $q\in\maniN$, the set $f^{-1}(\{q\})\subset\M$ is empty or a submanifold of dimension $n-k$.
-    \item For $p\in\M, q\defeq f(p)$ there exists a  neighborhood$U$ of $p$ and $V$ of $q$ such that $S=f(U)\cap V$ is a submanifold of $\maniN$ of dimension $k$.
+    \item For $q\in\maniN$, the set $f^{-1}(\{q\})\subset\M$ is empty or a submanifold of dimension $m-k$.
+    \item For $p\in\M, q\defeq f(p)$ there exists a  neighborhood $U$ of $p$ and $V$ of $q$ such that $S=f(U)\cap V$ is a submanifold of $\maniN$ of dimension $k$.
   \end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -723,6 +745,10 @@ U \arrow[r, "f"] \arrow[d, "\varphi"']                                          
 \R^m\supset U' \arrow[r, "{(x_1,\cdots,x_m)\mapsto(x_1,\cdots,x_k,0,\cdots,0)}"'] & V'\subset\R^n     
 \end{tikzcd}
   \end{center}
+  This shows the second assertion. For the first assertion, note that if $f^{-1}(\{q\})$ is not empty then $k\leq m$
+  \begin{equation*}
+    f^{-1}(\{q\}) = \varphi^{-1}(\{(x_1,\cdots,x_m)\sep \forall i = 1,\cdots,k, x_i = \psi(p)_i\}).
+  \end{equation*}
 \end{proof}
 \begin{corollary}
   $f:\M^m\to\maniN^n$ is smooth and $q\in \maniN$ is a regular value, then $f^{-1}(\{q\})$ is a submanifold of dimension $m-n$ or empty.
@@ -741,7 +767,7 @@ The Lebesgue measure on $\R^m$ is denoted by $\lambda^m$.
   A singleton of a manifold is a nullset. Countable unions of nullsets are again nullsets.
 \end{remark}
 \begin{remark}
-  Let $A\subset\M^m$ where $m>0$, $\M\backslash A$ is dense.
+  Let $A\subset\M^m$ be a nullset where $m>0$, $\M\backslash A$ is dense.
 \end{remark}
 \begin{remark}
   Suppose we have a smooth function $f:\R^m\supset U\to\R$. For the sake of simplicity, we assume $f(0) = 0$ and $\pd{f}{x_1}(0)\not=0$. Consider 
@@ -767,25 +793,30 @@ The Lebesgue measure on $\R^m$ is denoted by $\lambda^m$.
   \end{equation*}
   \label{local_diffeo_section}
 \end{remark}
+\setcounter{claim}{0}
 \begin{theorem}
   Let $f:\M^m\to\maniN^n$ be smooth where $n\geq 1$. Then the set $C_f$ of critical values of $f$ is a nullset. 
 \end{theorem}
 \begin{proof}
-  Suffices to prove that each $p\in\M$ has an open neighborhood$U$ such that $f(C_f\cap U)$ is a nullset.
-  \par$\Rightarrow)$ Without the loss of generality, we assume $\M=U\in\R^m$ and $\maniN=\R^n$ for $n\geq 1$. We will prove the theorem by induction on $m$. 
+  Suffices to prove that each $p\in\M$ has an open neighborhood $U$ such that $f(C_f\cap U)$ is a nullset.
+  \par$\Rightarrow)$ Without the loss of generality, we assume $\M=U\subseteq\R^m$ and $\maniN=\R^n$ for $n\geq 1$. We will prove the theorem by induction on $m$. 
   \par If $m=0$, then the image $f(\M)$ is at most countable thus a nullset.
   \par Assume the claim holds for all dimension less than $m$. Let us define 
-  \begin{equation}
-    C\defeq C_f,\quad C_1\defeq \left\{x\in U\sep\forall \vert\alpha\vert\leq l, {\frac {\partial^{\vert\alpha\vert}f} {\partial_x\alpha}}=0\right\} l\geq 1.
-  \end{equation}
-  Then we have $f(C\backslash C_l)$ is a nullset. Pick $\xi\in C\backslash C_l$ then there exists $\pd{f_i}{x_j}(\xi) \not=0$ for some $i,j$. Without the loss of genearlity, we assume $i=j=1$.
+  \begin{equation*}
+    C\defeq C_f,\quad C_l\defeq \left\{x\in U\sep\forall \vert\alpha\vert\leq l, {\frac {\partial^{\vert\alpha\vert}f} {\partial x^\alpha}}=0\right\},l\geq 1.
+  \end{equation*}
+  \begin{claim}
+    $f(C\backslash C_l)$ is a nullset.
+  \end{claim}
+  \begin{claimproof}
+    Pick $\xi\in C\backslash C_l$ then there exists $\pd{f_i}{x_j}(\xi) \not=0$ for some $i,j$. Without the loss of genearlity, we assume $i=j=1$.
   We put 
   \begin{equation*}
     h(x) = (f_1(x),x_2,\cdots,x_m).
   \end{equation*}
    By Remark \ref{local_diffeo_section}, we have $h$ is a local diffeomorphism and in particular,
    \begin{equation*}
-    \xi\mapsto(f_1(\xi),\xi_2,\xi_m).
+    \xi\mapsto(f_1(\xi),\xi_2,\cdots,\xi_m).
    \end{equation*}
    Similarly to the remark, we define 
    \begin{equation*}
@@ -795,9 +826,9 @@ The Lebesgue measure on $\R^m$ is denoted by $\lambda^m$.
    \begin{align*}
     \lambda^n(f(C_f\cap V)) & = \lambda^n(\{g(t,x)\sep\text{$(t,x)$ is critical for $g$}\}),\\
     & = \lambda^n(\{(t,\tilde{g}(t,x))\sep\text{$x$ is critical for $\tilde{g}(t,\cdot)$}\}),\\
-    & \stackrel{=}{\text{Fubini}} \int_I \lambda^{n-1}\{\tilde{g}(t,x)\sep\text{$x$ is a critical point of $\tilde{g}(t,\cdot)$}\}dt.
+    & = \int_I \lambda^{n-1}\{\tilde{g}(t,x)\sep\text{$x$ is a critical point of $\tilde{g}(t,\cdot)$}\}dt.
    \end{align*} 
-   The inside of the integral is $0$ by the induction hypothesis.
+   The last equality is due to Fubini. The inside of the integral is $0$ by the induction hypothesis.
    \par Fix $1\leq l<\infty$, then $f(C_l\backslash C_{l+1})$ is a nullset. Indeed, for $\xi\in C_l\backslash C_{l+1}$, without the loss of genearlity, we assume there is a multiindex $\beta$ such that $\vert\beta\vert = l$ and 
    \begin{equation*}
     {\frac{\partial^\beta f_1}{\partial x^\beta}}(\xi) = 0.
@@ -806,7 +837,7 @@ The Lebesgue measure on $\R^m$ is denoted by $\lambda^m$.
    \begin{equation*}
     h(x) = \left({\frac{\partial^\beta f_1}{\partial x^\beta}}(x),x_2,\cdots,x_m\right).
    \end{equation*}
-   By the similar argument as above, we get the claim.
+  \end{claimproof}
    \par Finally, let $d>0$ and $W$ be a cube of side length $b$. Consider $x\in C_k\cap W, y\in W$. Fomr Taylor expansion at $x$ implies that 
    \begin{equation*}
     \vert f(x)-f(y)\vert \leq L\vert x-y\vert^{k+1},
@@ -845,11 +876,12 @@ The Lebesgue measure on $\R^m$ is denoted by $\lambda^m$.
   \end{equation*}
 \end{notation}
 \begin{remark}
-  The second condition can be restated as follow. Recall Definition \ref{induced_linear_transform_tangent_space}. A chart $\varphi:U\to \R^m$ can be considered a smooth map between $U$ and $\R^n$. 
+  The second condition can be restated as follow. Recall Definition \ref{induced_linear_transform_tangent_space}. A chart $\varphi:U\to \R^m$ can be considered as a smooth map between $U$ and $\R^n$. 
   We also have seen that $T\R^m \cong \R^m\times\R^n$. With this identification, we have,
-  \begin{equation*}
-    T\varphi:TU\to T\R^m \cong \R^m\times\R^m,  TU\ni [U\ni p\mapsto X_p]\mapsto [\R^n \ni x \mapsto [\cinf(\maniN)\ni f\mapsto X_{\varphi^{-1}(x)}f\circ\varphi]],
-  \end{equation*}
+  \begin{align*}
+    T\varphi:&TU\to T\R^m \cong \R^m\times\R^m,\\
+    &TU\ni [U\ni p\mapsto X_p]\mapsto [\R^n \ni x \mapsto [\cinf(\maniN)\ni f\mapsto X_{\varphi^{-1}(x)}(f\circ\varphi)]],
+  \end{align*}
   is smooth for all chart $\varphi$.
 \end{remark}
 \begin{example}
@@ -916,6 +948,7 @@ The Lebesgue measure on $\R^m$ is denoted by $\lambda^m$.
   \end{equation*}
 \end{proof}
 \begin{theorem}
+  \label{theorem_flow_box}
   Let $\M$ be a smooth manifold and $X\in\Gamma(T\M)$. Then for each $p\in\M$ there exists a neighborhood $U$, $\varepsilon>0$, and a smooth map 
   \begin{equation*}
     F:(-\varepsilon,\varepsilon)\times U\to\M,
@@ -945,7 +978,7 @@ By the construction, we get,
 \begin{equation*}
   F(t,y) = y+\int_0^t f(F(s,y))ds.
 \end{equation*}
-Thus for $\vert t\vert\leq 1$, we get,
+Thus for $\vert t\vert\leq 1$, we obtain,
 \begin{align*}
   \vert F(t,y)-y_0\vert & \leq \left\vert y -y_0+\int_0^t f(F(s,y))ds\right\vert,\\
   & \leq \vert y - y_0\vert +\vert t\vert\vert f(y_0)\vert +\int_0^t\vert f(F(s,y))-f(y_0)\vert ds,\\
@@ -961,14 +994,14 @@ Set $\vert y -y_0\vert \leq {\frac r 2}$ and take,
 \end{equation*}
 then for $\vert t\vert<c$, we have,
 \begin{equation*}
-  \vert F(t,y_0)\leq \cdot <r.
+  \vert F(t,y_0)\vert\leq \cdots <r.
 \end{equation*}
 Thus such $F$ exists on a cylinder $(-\varepsilon,\varepsilon)\times\overline{B\left(y_0,{\frac r 2}\right)}$.
 \par We now move on to examine the differentiability of such solutions. Let $0<\rho<r$ and $\varepsilon$ be such that $F$ is a unique solution to the IVP on a cylinder $[-\varepsilon,\varepsilon]\times \overline{B(y_0,\rho)}$.
 Then we have,
 \begin{align*}
   \vert F(t,y)-F(t,\overline{y})\vert&\leq \vert y -\overline{y}\vert + \left\vert \int_0^tf(F(s,y))-f(F(s,\overline{y}))ds\right\vert,\\
-  &\leq \vert y-\overline{y}\vert+L\int_0^{\vert t \vert}\vert F(s,y)-F(s,\overline{y})vert ds.
+  &\leq \vert y-\overline{y}\vert+L\int_0^{\vert t \vert}\vert F(s,y)-F(s,\overline{y})\vert ds.
 \end{align*}
 Using Lemma \ref{gronwall_lemma}, we obtain,
 \begin{equation*}
@@ -996,7 +1029,7 @@ Similar to the case of $F$ we have $\Phi$ is (Lipschitz)-continuous.
 \begin{claim}
   $F(t,y)$ is partially differentiable in $y$ and $D_2F(t,y) = \Phi(t,y)$.
 \end{claim}
-\begin{proof}[Proof of Claim]
+\begin{claimproof}
 Fix $(t,\overline{y})\in(-\varepsilon,\varepsilon)\times B(y_0,\rho)$. Since $f$ is continuously differentiable, we have,
 \begin{equation*}
   f(x)-f(y) = (Df)(y)(x-y)+R(x,y)(x-y),
@@ -1030,7 +1063,7 @@ Using Lemma \ref{gronwall_lemma}, we obtain,
   G(t,y,\overline{y})\leq c_1\tilde{\varepsilon}\vert y -\overline{y}\vert e^{c_2\vert t\vert}.
 \end{equation*}
 Thus the solution $\Phi$ of Equation \eqref{ivp_3} is equal to $D_2F(t,y)$.
-\end{proof}
+\end{claimproof}\\
 Using the claim, we proved the regularity of $F$. 
 \end{proof}
 \begin{definition}
@@ -1038,18 +1071,18 @@ Using the claim, we proved the regularity of $F$.
 \end{definition}
 
 \begin{theorem}
-  Let $\M$ be a smooth manifold and $X\in\Gamma(T\M), p\in\M$. THen there exists continuous functions $a,b:\M\to\R$ such that 
+  Let $\M$ be a smooth manifold and $X\in\Gamma(T\M), p\in\M$. Then there exists continuous functions $a,b:\M\to\R$ such that 
   \begin{equation*}
     -\infty \leq a(p)<0<b(p)\leq \infty,
   \end{equation*}
-  and an integral curve, $c_p:(a(p),b(p))\to\M$ of $X$ with $c_0(0)=p$ such that for any integral curve $\tilde{c}_p:I\to\M$ of $X$ such that $\tilde{c}_p(0)=p$, we have 
-  \begin{enumerate}[i).]
+  and an integral curve, $c_p:(a(p),b(p))\to\M$ of $X$ with $c_0(0)=p$ such that for any integral curve $\tilde{c}_p:I\to\M$ of $X$ with $\tilde{c}_p(0)=p$, we have 
+  \begin{enumerate}[1).]
     \item $I\subseteq(a(p),b(p))$,
     \item $c_p|_I = \tilde{c}_p$.
   \end{enumerate}
   That is to say $c_p$ is the maximal integral curve through $p$. By continuity the set,
   \begin{equation*}
-    A\defeq = \{t\in I_1\cap I_2\sep c_1(t) = c_2(t)\},
+    A\defeq  \{t\in I_1\cap I_2\sep c_1(t) = c_2(t)\},
   \end{equation*}
   is closed. If $t_0\in I_1\cap I_2$ then $c_1,c_2$ are local solution of the IVP,
   \begin{equation*}
@@ -1072,7 +1105,7 @@ Using the claim, we proved the regularity of $F$.
   Let $c_1:I_1\to\M,c_2:I_2\to\M$ be two integral curves of $X$ through $p$ that is $c_1(0)=c_2(0) = p$. 
 \end{proof}
 
-\subsection{Applications of Mrose-Sards THeorem}
+\subsection{Applications of Mrose-Sards Theorem}
 \subsubsection{Embedding}
 \begin{theorem}[Whiteney]
   Each $\M^m$ has an embedding into $\R^{2m+1}$. 
@@ -1123,9 +1156,9 @@ Using the claim, we proved the regularity of $F$.
   \begin{equation*}
     \phi:\M\times\M\backslash\{(p,p)\sep p\in\M\}\to S^{N-1}, \phi(p,q) = {\frac {p-q} {\vert p-q\vert}}.
   \end{equation*}
-  If $2m<N-1$, using Morse-Sarde, the image of $\phi$ is of measure $0$. Therefore,
+  If $2m<N-1$, using Morse-Sard's, the image of $\phi$ is of measure $0$. Therefore,
   \begin{equation*}
-    \{w\in\S^{N-1}\sep\exists p,q\in\M, p\not=q,p-q\parallel w\} = \Image\phi\cup -\Image\phi.
+    \{w\in S^{N-1}\sep\exists p,q\in\M, p\not=q,p-q\parallel w\} = \Image\phi\cup -\Image\phi.
   \end{equation*}
   The right hand side is a nullset. More explicitly, the set of those $w$ such that $\pi_w|_\M$ is not injective is a nullset.
   \par Suppose $\pi_w$ is an immersion if for $p\in\M$, $v\in T_p\M\backslash\{0\}$, we have $\pi_w(v)\not=0$.
@@ -1154,53 +1187,53 @@ Using the claim, we proved the regularity of $F$.
 \end{definition}
 
 \begin{proposition}
-  Let $X\in\Gamma(T\M)$, and $\phi^X\mathcal{D}(\phi^X)=A\to \M$ be the flow of $X$. Then the following statements hold.
+  Let $X\in\Gamma(T\M)$, and $\phi^X:\mathcal{D}(\phi^X)=A\to \M$ be the flow of $X$. Then the following statements hold.
   \begin{enumerate}[1).]
     \item $A$ is open subset in $\R\times \M$ and contains $\{0\}\times\M$. 
     \item $\phi^X\in\mathcal{C}^\infty(A)$.
     \item For $t\in\R$, $\mathcal{D}(\phi^X_t) = \{p\in\M\sep (t,p)\in A\}\subset\M$  where $\phi_t^X(\cdot) = \phi^X(t,\cdot)$, is open. 
     \item $\M = \bigcup_{t>0}\mathcal{D}(\phi^X_t)$.
     \item $\phi_t^X:\mathcal{D}(\phi_t)\to\mathcal{D}(\phi^X_{-t})$ is a diffeomorphism.
-    \item $\phi^X_s\circ\phi^X_t \subseteq \phi_{s+t}^X$ in other words if $p\in\mathcal{D}(\phi_t^X)\cap\phi_s^X(p)\in\mathcal{D}(\phi_{s}^X)$ then $p\in\mathcal{D}(\phi^X_{s+t})$.
+    \item $\phi^X_s\circ\phi^X_t \subseteq \phi_{s+t}^X$ in other words if $p\in\mathcal{D}(\phi_t^X)$ and $\phi_s^X(p)\in\mathcal{D}(\phi_{s}^X)$ then $p\in\mathcal{D}(\phi^X_{s+t})$.
     \item $\phi^X_s(\phi_t^X(p)) = \phi_{s+t}(p)$.
   \end{enumerate}
 \end{proposition}
-
-\begin{proof}$\:$\\
-  \par For 4), let $s,t>0$, and $p\in\mathcal{D}(\phi_t^X)$, then by assumption, $\phi_t^X(p)\in\mathcal{D}(\phi_{s+t}^X)$. Consider 
+\setcounter{claim}{0}
+\begin{proof}$\:$
+  \par For 6) and 7), let $s,t>0$, and $p\in\mathcal{D}(\phi_t^X)$, then by assumption, $\phi_t^X(p)\in\mathcal{D}(\phi_{s+t}^X)$. Consider 
   \begin{equation*}
     c(u) = \begin{cases}
       \phi_u(p),\quad 0\leq u\leq t,\\
       \phi_{u-t}(\phi_t(p)), \quad t\leq u \leq t+s,
     \end{cases}
   \end{equation*}
-  is an integral curve through $p$ as the two expressions coincide at $u=t$, conclude using the uniqueness. Therefore, 
+  is an integral curve through $p$ as the two expressions coincide at $u=t$, thus using the uniqueness we have $c = \phi^X_{s+t}$. That is,
   \begin{equation*}
-    \phi_{s+t}^X(p) = c(t+s) = \phi_s(\phi_t^X(p)).
+    \phi_{s+t}^X(p) = c(t+s) = \phi^X_s(\phi_t^X(p)).
   \end{equation*}
-  The cases for $s\leq 0$ o $t\leq 0$ are exercises.\\
+  The cases for $s\leq 0$ or $t\leq 0$ are exercises.\\
   \par For 2), let $p\in\mathcal{D}(\phi_t^X)$, $t>0$, we define,
   \begin{equation*}
-    B\defeq. = \{\phi_s^X(p) \sep 0\leq s \leq t\}.
+    B\defeq\{\phi_s^X(p) \sep 0\leq s \leq t\}.
   \end{equation*}
-  This is compact. By using Flow-box theorem, there is a neighborhood $W_0\supseteq B$ and $\varepsilon>0$ such that 
+  This is compact. By using Theorem \ref{theorem_flow_box}, there is a neighborhood $W_0\supseteq B$ and $\varepsilon>0$ such that 
   \begin{equation*}
-    (-\varepsilon,\varepsilon)\times W_0\ni(u,q)\mapsto \phi_u^X(q) \M
+    (-\varepsilon,\varepsilon)\times W_0\ni(u,q)\mapsto \phi_u^X(q) \in\M
   \end{equation*}
-  is smooth. Then choose $N$ such that ${\frac t N}<\varepsilon$. Define inductively $W_j$ by 
+  is smooth. Note that we take the maximum of $\varepsilon$ from the theorem. This operation is justified by the compactness. Then choose $N$ such that ${\frac t N}<\varepsilon$. Define inductively $W_j$ by 
   \begin{equation*}
     W_j = \left(\phi_{{\frac t N}}^X\bigg{|}_{W_{j-1}}\right)^{-1}(W_{j-1}).
   \end{equation*}
-  \begin{claim}
+  \begin{claim}For such $(W_j)$ we have,
   \begin{enumerate}[1).]
     \item $W_0\supseteq W_1\supseteq\cdots \supseteq W_N$ and they are all open.
     \item For $q\in W_N$, $\phi_{t{\frac {N-j} {N}}}^X(q)\in W_j$.
     \item For $0\leq u\leq t{\frac {N-j} N}$, $\phi_u^X(p)\in W_j$. In particular $p\in W_N$. 
   \end{enumerate}
   \end{claim}
-  \begin{proof}[Proof of the Claim]
-    For Claim 2). $q\in W_N$, $\phi_{{\frac t N}}(q)\in W_{N-1}$ and inductively $\phi_{t{\frac {j} N}}(q)\in W_{N-j}$. \\
-    \par For Claim 3). $\varphi_u^X(p)\in B\subset W_0$, $0\leq u \leq t$. 
+  \begin{claimproof} The first assertion is clear as $\phi_{{\frac t N}}^X|_{W_{j-1}}$ is continuous and the constraint on $N$.
+    \par For 2). $q\in W_N$, $\phi^X_{{\frac t N}}(q)\in W_{N-1}$ and inductively $\phi^X_{t{\frac {j} N}}(q)\in W_{N-j}$. \\
+    \par For 3). $\phi_u^X(p)\in B\subset W_0$, $0\leq u \leq t$. 
     \par On the induction step $j\to j+1$, $0\leq u\leq t{\frac {N-j-1} N}$, then 
     \begin{equation*}
       {\frac t N}+u\leq t{\frac {N-j} N},
@@ -1209,8 +1242,8 @@ Using the claim, we proved the regularity of $F$.
     \begin{equation*}
       \phi^X_{{\frac t N}}(\phi_u^X(p))\in W_j,\quad \phi_u^X(p)\in W_j\Rightarrow \phi_u^X(p)\in W_{j+1}.
     \end{equation*}
-    Let $q\in W_N$, then $\phi_t^X(q) = (\phi_{{\frac t N}})^N(q)$, hence $q\in\mathcal{D}(\phi_t^X)$.
-  \end{proof}
+    Let $q\in W_N$, then $\phi_t^X(q) = (\phi^X_{{\frac t N}})^N(q)$, hence $q\in\mathcal{D}(\phi_t^X)$.
+  \end{claimproof}
   For 3). Let $p\in\mathcal{D}(\phi_t^X)$, set $c(u)\defeq \phi_{t+u}^X(p)$ where $-t\leq u\leq 0$. This is an integral curve through $\phi_t^X(p)$. Thus $\phi_t^X(p)\in\mathcal{D}(\phi_{-t}^X)$ and $\phi_{-t}^X\circ\phi_{t}^X(p) = p$.\\
   \par For 1). Let $(t_0,p)\in A$. Using 2). we can find an open neighborhood $\mathcal{D}(\phi_{t_0}^X)\subset W\ni p$. Using Flow-box theorem, there is $(-\varepsilon,\varepsilon)\times \tilde{W}$ open such that 
   \begin{equation*}
@@ -1317,7 +1350,7 @@ $(-\varepsilon,\varepsilon)\times \M\subseteq\mathcal{D}(\phi^X)$. Letting $N\in
   Let $X,Y\in\Gamma(T\M)$.
   \begin{enumerate}
     \item $[X,Y]\in\Gamma(T\M)$.
-    \item $(\Gamma(T\M),[\cdots,\cdots])$ is a Lie algebra.
+    \item $(\Gamma(T\M),[\cdot,\cdot])$ is a Lie algebra.
   \end{enumerate}
 \end{proposition}
 
@@ -1344,14 +1377,14 @@ Let $\varphi:\M\to\maniN$ be a diffeomorphism and $X\in\Gamma(T\M)$. For $q\in\m
 \begin{equation*}
   (\varphi_*X)(q) \defeq T_{\varphi^{-1}(q)}\varphi[X(\varphi^{-1}(q))],
 \end{equation*}
-and 
+and for $Y\in\Gamma(T,\maniN)$,
 \begin{equation*}
-  \varphi^*X\defeq (\varphi^{-1})_*.
+  \varphi^*Y\defeq (\varphi^{-1})_*Y.
 \end{equation*}
 \end{definition}
 
 \begin{definition}
-  Let $\varphi:\M\to\maniN$, be a smooth map and $X\in\Gamma(TM)$ and $Y\in\Gamma(T\maniN)$, we write
+  Let $\varphi:\M\to\maniN$, be a smooth map and $X\in\Gamma(T\M)$ and $Y\in\Gamma(T\maniN)$, we write
   \begin{equation*}
     X\sim_\varphi Y, \text{and say they are $\varphi$-related if } Y (\varphi(p)) = T_p\varphi(X(p)).
   \end{equation*}
@@ -1364,13 +1397,13 @@ and
   \end{equation*}
 \end{remark}
 
-\begin{proposition}
+\begin{proposition}[Naturality of Lie Brackets]
   Suppose $X_1,X_2\in \Gamma(T\M)$, $Y_1,Y_2\in\Gamma(T\maniN)$, and $\varphi:\M\to\maniN$ be smooth. 
   \par If $X_j\sim_\varphi Y_j$ for each $j=1,2$, then $[X_1,X_2]\sim_\varphi[Y_1,Y_2]$.
 \end{proposition}
 
 \begin{proof}
-  Let $p\in\M$ and $f\in\mathcal{C}^infty(\maniN)$. 
+  Let $p\in\M$ and $f\in\mathcal{C}^\infty(\maniN)$. 
   \begin{align*}
     T_p\varphi([X_1,X_2])(f) &= [X_1,X_2]_p(f\circ \varphi),\\
      & = X_{1,p}(X_2f\circ\varphi)-X_{2,p}(X_1f\circ\varphi),\\
@@ -1451,11 +1484,11 @@ where $t\in\R^k$ and $\xi\in\R^{m-k}$.
 \end{definition}
 
 \begin{example}
-  Consider $(E=\M\times\R^N,\pi(p,v) = p,\M)$. This is called a trivial vector bundle.
+  $(E=\M\times\R^N,\pi(p,v) = p,\M)$ is called a trivial vector bundle.
 \end{example}
 
 \begin{definition}
-  Consider $(E,\pi_E,\M)$ and $(F,\pi_F,\M)$ be vector bundles. A homomorphism of vector bundles between $E$ and $F$ is a smooth map 
+  Let $(E,\pi_E,\M)$ and $(F,\pi_F,\M)$ be vector bundles. A homomorphism of vector bundles between $E$ and $F$ is a smooth map 
   $\varphi:E\to F$ such that for each point $p\in\M$, $\varphi|_{E_p}:E_p\to F_p$ is a linear map.\\
   \par It is called an isomorphism if each $\varphi|_{E_p}$ is a linear isomorphism.
 \end{definition}
@@ -1469,7 +1502,7 @@ where $t\in\R^k$ and $\xi\in\R^{m-k}$.
 \end{definition}
 \begin{example}Consider the total space,
   \begin{equation*}
-    E = \{(z,w)\in\C^2\cong\R^4\sep \vert z\vert = 1, {\frac {w^2} {z}}\geq 0\},
+    E = \left\{(z,w)\in\C^2\cong\R^4\sep \vert z\vert = 1, {\frac {w^2} {z}}\geq 0\right\},
   \end{equation*}
   and the projection map,
   \begin{equation*}
@@ -1491,7 +1524,7 @@ where $t\in\R^k$ and $\xi\in\R^{m-k}$.
   \end{equation*}
   Thus we obtain,
   \begin{equation*}
-    E\cap\{(z,w)\sep z\in S^1\backslash\{z_0\}\} = \{(z,w)\in(\C\backslash\R_+z_0)\times \C\sep\substack{x_1^2+x_2^2-1=0\\ x_3\xi(x_1,x_2)-x_4\xi(x_1,x_2)=0}\}.
+    E\cap\{(z,w)\sep z\in S^1\backslash\{z_0\}\} = \left\{(z,w)\in(\C\backslash\R_+z_0)\times \C\sep\substack{x_1^2+x_2^2-1=0\\ x_3\xi(x_1,x_2)-x_4\xi(x_1,x_2)=0}\right\}.
   \end{equation*}
   Examine the Jacobian of the conditions, we observe
   \begin{equation*}
@@ -1553,7 +1586,7 @@ where $t\in\R^k$ and $\xi\in\R^{m-k}$.
 
   Such collection $(g_{ij})_{ij}$ is called a co-cycle with values in $\GL_N(\R)$.
   \begin{remark}
-    The last two properties follow from the first one but the proof is left to the readers.
+    The last two properties follow from the first one. Indeed the second property is obvious as $\varphi_{ii} = \id_{U_i}$. Combining this with the first one, we derive the third.
   \end{remark}
   \begin{definition}
     Let $\M$ be a smooth manifold and $(U_i)_{i\in I}$ be an open covering of $\M$ and $G$ be a Lie group(ie. a manifold with group structure such that both multiplication and inversion are smooth as functions). A family $(g_{ij})_{i,j\in I}$ of smooth map such that 
@@ -1563,7 +1596,7 @@ where $t\in\R^k$ and $\xi\in\R^{m-k}$.
     is a cocycle with values in $G$ if 
     \begin{enumerate}
       \item $g_{ij}g_{jk} = g_{ik}$ over $U_i\cap U_j\cap U_k$.
-      \item $g_ii = e_G$.
+      \item $g_{ii} = e_G$.
       \item $g_{ij} = g_{ji}^{-1}$
     \end{enumerate}
   \end{definition}
@@ -1586,10 +1619,10 @@ where $t\in\R^k$ and $\xi\in\R^{m-k}$.
   \end{equation*}
   \end{definition}
   \begin{remark}
-    Observe that this has not topology defined yet.
+    Observe that this does not have a topology defined yet.
   \end{remark}
   \begin{definition}
-    Let $E,F$ be vector bundles over $\M$. A smooth map $\varphi:E\to F$ is a bundle isomorphism such that
+    Let $E,F$ be vector bundles over $\M$. A smooth map $\varphi:E\to F$ is called a bundle isomorphism if
     \begin{center}
       \begin{tikzcd}
 E \arrow[rr, "\varphi"] \arrow[rd, "\pi_E"'] &    & F \arrow[ld, "\pi_F"] \\
@@ -3173,9 +3206,9 @@ where $f_j\in\cinf_C(E_\lambda^+)$. Thus
 Integrating this we get,
 \begin{align*}
   \int_{E_\lambda^+}d\omega & = \sum_{j=1}^m\int_{\{x_1\leq 0\}}\pd{f_j}{x_j}dx_1\cdots dx_m,\\
-  & \stackrel{\text{Fubini}}{=}\sum_{j=1}^m\int_{\{x_1\leq 0\}}\underbrace{\left(\int_\R\pd{f_j}{x_j}dx_j\right)}_{=0}dx_1\cdots dx_{j-1}dx_{j+1}\cdots dx_m.
+  & =\sum_{j=1}^m\int_{\{x_1\leq 0\}}\underbrace{\left(\int_\R\pd{f_j}{x_j}dx_j\right)}_{=0}dx_1\cdots dx_{j-1}dx_{j+1}\cdots dx_m,
 \end{align*}
-Except for $j=1$, thus 
+where the last equality is due to Fubini. Except for $j=1$, thus 
 \begin{equation*}
   \int_{E_\lambda^+}d\omega = \int_{\R^{m-1}}\left(\int_0^\infty\pd{f_1}{x_1}dx_1\right)dx_2\cdots dx_m = \int_{\R^{m-1}}-f_1(0,x_2,\cdots,x_m)dx_2\cdots dx_m.
 \end{equation*}
@@ -3202,6 +3235,178 @@ By setting orientations on as $e_1,\cdots,e_m$ positive in $E_\lambda^+$ and $e_
     \int_{\M}d\omega = \int_{\partial \M}\iota^*\omega.
   \end{equation*}
 \end{theorem}
+
+\begin{remark}
+  Let $E$ be a $n$-dimensional vector space and $H$ be a half-space. Suppose $E$ is oriented. Choose an oriented basis of $E$ of the form 
+  \begin{equation*}
+    v,e_2,\cdots,e_n,
+  \end{equation*}
+  where 
+  \begin{equation*}
+    H = E_\lambda^+=\{x\in E\sep \langle \lambda,x\rangle\leq0\},
+  \end{equation*}
+  and $e_2,\cdots,e_n\in\ker \lambda$. This defines an induced orientation of $\ker\lambda$ and $v$ points outward.
+\end{remark}
+
+\begin{definition}
+  Let $\M^m$ be an oriented manifold with boundary then $\partial \M^m$ is oriented as follows. For $p\in\partial \M^m$, let $\nu(p)$ be an outward pointing vector $\nu(p)\not=0$. Take a basis $v_1,\cdots,v_m$ of $T_p\partial\M$ is oriented by definition if and only if 
+  \begin{equation*}
+    \nu(p),v_2,\cdots,v_m
+  \end{equation*}
+  is an oriented basis of $T_p\M$. This is called the induced boundary orientation.
+\end{definition} 
+
+\begin{proposition}[Stokes Theorem for Half Spaces]
+  Let $E$ be an oriented $n$-dimensional vector space and $H = E^+_\lambda\subseteq E$ be a half space and equip $\partial H = \ker\lambda$ and $\omega$ the induced orientation. Let 
+  \begin{equation*}
+    i:\partial H\hookrightarrow H
+  \end{equation*}
+  be the inclusion. Then for $\omega\in\Omega_C^{n-1}(H)$, we have,
+  \begin{equation*}
+    \int_Hd\omega = \int_{\partial H}i^*\omega.
+  \end{equation*}
+\end{proposition}
+
+\begin{proof}
+Choose oriented linear coordinate, $x_1,\cdots,x_n$, such that $x_1 = \langle \lambda,x\rangle$. Then 
+\begin{equation*}
+  H = \{x\in\R^n\sep x_1\leq 0\}, \partial H=\{0\}\times\R^{n-1}.
+\end{equation*}
+Recall that for $j\geq 2$, we get,
+\begin{equation*}
+  \int_\R\pd{\phi}{x_j}(\cdots,x_j,\cdots)dx_j=0,
+\end{equation*}
+for $j=1$, we have,
+\begin{equation*}
+  \int_{-\infty}^0\pd{\phi}{x_1}(x_1,0,\cdots,0)dx_1 = \phi(0,a).
+\end{equation*}
+Note that 
+\begin{align*}
+  \omega &= \sum_{j=1}^n(-1)^{j-1}\phi_jdx_1\wedge\cdots\wedge dx_{j-1}\wedge dx_{j+1}\wedge\cdots\wedge dx_n.\\
+  i^*\omega &= \phi i^*(dx_2\wedge\cdots\wedge dx_m)?
+\end{align*}
+Therefore,
+\begin{equation*}
+  d\omega = \sum_{j=1}^n \pd{\phi_j}{x_j}dx_1\wedge\cdots\wedge dx_n.
+\end{equation*}
+\end{proof}
+
+\begin{theorem}[Stokes, note that we do not assume compactness]
+  Let $\M^m$ be an oriented smooth manifold with boundary $\partial\M$. $\partial\M$ carries an induced orientation. Then for $\omega\in\Omega_C^{n-1}(\M)$, we have, 
+  \begin{equation*}
+    \int_\M d\omega = \int_{\partial \M}i^*\omega, 
+  \end{equation*}
+  where $i:\partial\M\hookrightarrow\M$ is a natural inclusion.
+\end{theorem}
+
+\begin{proof}
+  The key is to use partition of unity. Choose $\rho_1,\cdots,\rho_k\in\cinf_C(\M)$ such that 
+  \begin{equation*}
+    \sum_{i=1}^k \rho_j = 1,
+  \end{equation*}
+  in the neighborhood of $\supp\omega$. Furthermore, we  may arrange that $\supp\rho_j\subseteq U_j$ where $(U_j,\varphi_j)$ is an oriented chart. Thus each $\varphi_j$ maps $U_j\to V_j\subseteq H_j$ where $H_j$ is a half space.
+  \begin{align*}
+    \int_\M d\omega & = \sum\int_\M d(\rho_j\omega),\\
+    &= \sum\int_{U_j}d(\rho_\omega),\\
+    & = \sum\int_{H_j}d((\varphi_j^{-1})^*\rho_j\omega),\\
+    & = \sum\int_{\partial H_j}i^*(\varphi_j^{-1})^*\rho_j\omega,\\
+    & = \sum\int_{\partial H_j}(\tilde{\varphi_j}^{-1})^*i^*(\rho_j\omega),\\
+    & = \sum\int_{\partial\M}i^*(\rho_j\omega),\\
+    & = \int_{\partial\M}\omega,
+  \end{align*}
+  where $\tilde{\varphi}$ is such that 
+  \begin{center}
+    \begin{tikzcd}
+\partial\M \arrow[d, "\tilde{\varphi}"'] \arrow[r, "i", hook] & \M \arrow[d, "\varphi"] \\
+\partial H \arrow[r, "i"', hook]                              & H                      
+\end{tikzcd}
+  \end{center}
+\end{proof}
+
+\begin{remark}
+  Note if $\partial\M=\emptyset$ then $\int_\M d\omega = 0$. For example, consider a circle $S^1_\theta$, we have,
+  \begin{equation*}
+    \int_{S^1}f'(\theta)d\theta = 0.
+  \end{equation*}
+\end{remark}
+
+\subsection{Classical Theorem of Gauss and Stokes}
+
+\begin{theorem}[Divergence Theorem of Gauss]
+  \label{theorem_divergence_gauss}
+  Let $(\M^m,g)$ be an oriented Riemannian manifold with boundary $\partial\M$. Let $\nu$ be an outer normal vector field. In other words,
+  \begin{equation*}
+    \nu:\partial\M\to T\M,
+  \end{equation*}
+  such that for all $p\in\partial\M$, we have,
+  \begin{equation*}
+    \nu(p)\perp T_P\partial\M,\norm{\nu(p)}=1,
+  \end{equation*}
+  and $\nu(p)$ points outward. Now $\vol_\M\in\Omega^m(\M),\vol_{\partial\M}\in\Omega^{m-1}(\partial\M)$. Let $X\in \Gamma(T\M)$ be a vector field. Then,
+  \begin{equation*}
+    d(\star X^\flat)=d(i_X(\vol_\M)) = (\diverg X)\vol_\M.
+  \end{equation*}
+\end{theorem}
+\setcounter{claim}{0}
+\begin{proof}
+  \begin{claim}
+  \begin{equation*}
+    i^*(i_X\vol_\M) = \langle X,\nu\rangle\vol_\M.
+  \end{equation*}
+  \end{claim}
+  \begin{claimproof}
+    For $p\in\partial\M,e_2,\cdots,e_m$, be an orthonormal basis of $T_p\partial\M$ such that 
+    \begin{equation*}
+      X(p) = \langle X(p),\nu(p)\rangle\cdot\nu(p)+\sum_{j=2}^m\langle X(p),e_j\rangle e_j.
+    \end{equation*}
+    Then, by setting $e_1 = \nu(p)$, we get,
+    \begin{equation*}
+      i_X\vol_{\M}|p = i_Xe_1^\flat\wedge\cdots\wedge e_m^\flat = \langle X(p),\nu(p)\rangle e_2^\flat\wedge\cdots\wedge e_m^\flat = \vol_{\partial\M}|_p.
+    \end{equation*}
+  \end{claimproof}
+  \par Apply Stokes, we have,
+  \begin{equation*}
+    \int_\M \diverg X\vol_\M = \int_\M di_X\vol_\M=\int_{\partial\M}i^*(i_X\vol_\M) = \int_{\partial\M}\langle X(p),\nu(p)\rangle\vol_{\partial\M}.
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[Divergence Theorem]
+  \label{theorem_divergence}
+  Let $(\M,g)$ be an oriented Riemannian manifold with boundary and $\nu:\partial\M\to T\M$ be a unit outer normal vector field. Then for aany compactly supported $\mathcal{C}^1$-vector field, we have, 
+  \begin{equation*}
+    \int_\M \diverg X\vol_\M = \int_{\partial\M}\langle X,\nu\rangle\vol_{\partial\M}.
+  \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Stokes Theorem for Surface in $3$-manifolds]
+  Let $(\M,g)$ be oriented $3$-dimensional Riemannian manifold. Let $F\subseteq\M$ be an oriented surface with boundary.
+  Let $\nu_F:F\to T\M$ be such that for $p\in F$, there is $e_1,e_2\in T_pF$, an oriented orthonormal basis of $T_pF$ such that 
+  \begin{equation*}
+    \nu_F(p)\defeq e_1\times e_2.
+  \end{equation*}
+  \label{theorem_stokes_surface}
+\end{theorem}
+
+\begin{theorem}[Classical Stokes Theorem]
+  Inheritting the settings of Theorem \ref{theorem_stokes_surface}, consider a vector field $X$ on $\M$ which is of class $\mathcal{C}^1$. We have,
+  \begin{equation*}
+    \int_F\langle\curl X,\nu_F\rangle\vol_F = \int_{\partial F}\langle X,\tau_{\partial F}\rangle \vol_{\partial F},
+  \end{equation*}
+  where $\tau_{\partial F}:\partial F\to T\partial F$ is the oriented unit tangent vector to $\partial F$.
+\end{theorem}
+
+\begin{proof}
+  \begin{align*}
+    \langle \curl X,\nu_F\rangle\vol_F & = (i_\M^F)^*(i_{\curl X}\vol_\M),\\
+    & = (i_\M^F)^*(\star(\curl X)^\flat),\\
+    & = (i_\M^F)^*(\star\star dX^\flat),\\
+    & = (i_\M^F)^*(dX^\flat).
+  \end{align*}
+ Therefore,
+ \begin{equation*}
+  \int_F\langle\curl X,\nu\rangle \vol_F = \int_FdX^\flat \stackrel{\text{Stokes}}{=}\int_{\partial F}(i_F^{\partial F})^*X^\flat.
+ \end{equation*}
+\end{proof}
 
 \begin{thebibliography}{9}
 \bibitem{Lee}
