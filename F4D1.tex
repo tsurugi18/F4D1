@@ -1779,7 +1779,7 @@ f(x) = [(\alpha,x,f_\alpha(x))].
   \begin{equation*}
     \phi(s_1(p)),\cdots,\phi(s_N(p)),
   \end{equation*}
-  is linearly independent. Then there exists $p\in U$ an open neighborhood of $p$ such that for all $q\in U$,
+  is linearly independent. Then there exists an open neighborhood $U$ of $p$ such that for all $q\in U$,
   \begin{equation*}
     \phi(s_1(q)),\cdots,\phi(s_N(q)),
   \end{equation*}
@@ -1796,7 +1796,7 @@ f(x) = [(\alpha,x,f_\alpha(x))].
   \begin{equation*}
     j(p,w) \defeq \left(p,\sum_{\alpha} \rho_{\alpha}j_{\alpha}(w)\right)
   \end{equation*}
-  Now for $P\in\Hom(E,E)$, we set,
+  Now we define $P\in\Hom(E,E)$, such that
   \begin{equation*}
     P(v) \defeq v-j(\varphi(v)),
   \end{equation*}
@@ -1815,7 +1815,7 @@ f(x) = [(\alpha,x,f_\alpha(x))].
 \begin{proposition}[Swan's theorem]
   \label{proposition_9_10}
   Let $E\stackrel{\pi}{\to}\M$ be a vector bundle of a compact manifold $\M$. Then there exists a large enough natural number $r$ such that there exists a surjective bundle homomorphism $\phi:\M\times\R^r\twoheadrightarrow E$.
-  \par In parcitular, $E\oplus\Ker\phi\simeq \M\times \R^r$ is trivial and hence there exit sections $s_1,\cdots,s_r\in\Gamma(E)$, such that 
+  \par In parcitular, $E\oplus\Ker\phi\simeq \M\times \R^r$ is trivial and hence there exists sections $s_1,\cdots,s_r\in\Gamma(E)$, such that 
   \begin{equation*}
     \forall p\in\M, E_p = \Span(s_1(p),\cdots,s_r(p)).
   \end{equation*}
@@ -1856,7 +1856,11 @@ In this section, we assume that  $K$ be a field of characteristic $0$ and all ve
 \subsection{Tensors}
 Let $E$ be a vectorspace. We will denote the dual pairing as $\langle\cdot,\cdot\rangle_{E,E^*}$. 
 \begin{definition}
-  Let $E_1,\cdots,E_r$ be vectorspaces. Recall that a multiliera map $F:E_1\times\cdots E_r\to F$ is such that, for each $i=1,\cdots,r, F(a_1,\cdots,a_{i-1},\cdot,a_{i+1},\cdots,a_r)$ is linear. We denote,
+  Let $E_1,\cdots,E_r$ be vectorspaces. Recall that a multiliear map $F:E_1\times\cdots E_r\to F$ is such that, for each $i=1,\cdots,r$,
+  \begin{equation*}
+    E_i\ni a\mapsto F(a_1,\cdots,a_{i-1},a,a_{i+1},\cdots,a_r)
+  \end{equation*} 
+  is linear. We denote,
   \begin{equation*}
     L(E_1,\cdots,E_r;F) = \{E_1\times\cdots\times E_r\to F\sep \text{$r$-multilinear maps}\}.
   \end{equation*}
@@ -1875,7 +1879,7 @@ Let $E$ be a vectorspace. We will denote the dual pairing as $\langle\cdot,\cdot
 \end{definition}
 
 \begin{remark}
-  Obvisouly we have $\varphi\otimes\psi\in L(E,F;K)$.
+  Obvisouly, $\varphi\otimes\psi\in L(E,F;K)$.
 \end{remark}
 \begin{remark}
   A map $\cdot\otimes\cdot$ is a bilinear map $E^*\times F^*\to L(E,F;K)$.
@@ -1894,16 +1898,24 @@ Let $E$ be a vectorspace. We will denote the dual pairing as $\langle\cdot,\cdot
 \end{proposition}
 
 \begin{definition}
+  \label{definition_tensoring_multilinear}
   We define,
   \begin{equation*}
-    L(e_1,\cdots,E_r,K)\times L(f_1,\cdots,f_s;K)\to L(E_1,\cdots,E_r,F_1,\cdots,F_s;K)
+    L(E_1,\cdots,E_r,K)\times L(F_1,\cdots,F_s;K)\to L(E_1,\cdots,E_r,F_1,\cdots,F_s;K)
   \end{equation*}
   by,
   \begin{equation*}
     \varphi\otimes\psi(e_1,\cdots,e_r,f_1,\cdots,f_s)\defeq \varphi(e_1,\cdots,e_r)\psi(f_1,\cdots,f_s).
   \end{equation*}
-  It is left to the readers as an exercise to show this is bilinear and associative (ie $(\varphi\otimes\psi)\otimes\chi = \varphi\otimes(\psi\otimes\chi))$.
 \end{definition}
+
+\begin{proposition}
+  The map defined in Definition \ref{definition_tensoring_multilinear}, a bilinear form which is associative (ie. $(\varphi\otimes\psi)\otimes\chi = \varphi\otimes(\psi\otimes\chi)$).
+\end{proposition}
+
+\begin{proof}
+  Bilinearlity is clear from the construction. So is the associativity as $(\varphi\otimes\psi)\otimes\chi = \varphi\otimes\psi\otimes\chi$.
+\end{proof}
 
 \begin{notation}
   We denote 
@@ -2015,11 +2027,11 @@ where $T^r\sigma$ is a linear isomorphism. and we have,
 \end{definition}
 
 \begin{lemma}
-  $A_r\circ A_r = A_r$ In other words, it is idempotent.
+  $A_r\circ A_r = \id$ In other words, it is idempotent.
 \end{lemma}
 
 \begin{proof}
-  Let $T\in T^rE$ and fix $\sigma\in S_r$. We have,
+  Let $T\in T^rE$ and fix $\tau\in S_r$. We have,
   \begin{equation*}
     (T^r\tau)A_r(T) = {\frac 1 {r!}}\sum_{\sigma\in S_r}(-1)^\sigma T^r(\tau\sigma)(T)(-1)^{\tau}(-1)^{\tau} = (-1)^\tau A_r(T).
   \end{equation*}
