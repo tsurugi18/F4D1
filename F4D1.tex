@@ -1966,8 +1966,8 @@ E\otimes F \arrow[ru, "\exists!\overline{h}"'] &
   The operation $\otimes$ is associative.
   \begin{center}
     \begin{tikzcd}
-T^rE\times T^sE \arrow[d] \arrow[rr, "{(v_1\otimes\cdots\otimes v_r,w_1\otimes\cdots\otimes w_s)\mapsto v_1\otimes\cdots\otimes v_r\otimes w_1\otimes\cdots\otimes w_s}"] &  & T^{r+s}E \\
-T^rE\otimes T^sE \arrow[rru]                                                                                                                                              &  &         
+T^rE\times T^sE \arrow[rr, "{\substack{(v_1\otimes\cdots\otimes v_r,w_1\otimes\cdots\otimes w_s)\mapsto(v_1\otimes\cdots\otimes v_r\otimes w_1\cdots\otimes w_s)\\\:}}"] \arrow[d] &  & T^{r+s}E \\
+T^rE\otimes T^sE \arrow[rru]                                                                                                                                                       &  &         
 \end{tikzcd}
   \end{center}
 \end{lemma}
@@ -1987,15 +1987,18 @@ Let $\sigma\in S_r$ be the permutations of $\{1,\cdots,r\}$. We have,
 \begin{center}
   % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAFEA9AJxAF9S6TLnyEUARnJVajFmy68BQ7HgJFJ46fWatEIACo92-QSAwrRRMpura5ew92N9pMKAHN4RUADNuEAFskMhAcCCRJGR02AB0Y7HcAuhNffyDEAGZqMKQAJmoGOgAjGAYABWFVMRBuLHcACxwQW1ldAx44hKSUkD9A4OzwzILi0oqLNT1ahqalXrSIwbyW6L04iDwArxc+IA
 \begin{tikzcd}
-E^r \arrow[r, "\sigma"] \arrow[d] & E^r \arrow[d, "\otimes"] \\
+E^r \arrow[r, "\sigma"] \arrow[d, "\otimes"'] & E^r \arrow[d, "\otimes"] \\
 T^rE \arrow[r, "T^r\sigma"']      & T^rE                    
 \end{tikzcd}
 \end{center}
-where $T^r\sigma$ is a linear isomorphism. and we have,
+where $T^r\sigma$ is a linear map. Observe that
 \begin{equation*}
   (T^r\sigma)^{-1}= T^r{\sigma}^{-1}.
 \end{equation*}
-
+Thus it is an isomorphism. Explicitly, we have,
+\begin{equation*}
+  T^r\sigma(v_1\otimes \cdots\otimes v_r) = v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(r)}.
+\end{equation*}
 \begin{notation}
   $\sgn(\sigma) = (-1)^\sigma$.
 \end{notation}
@@ -2003,7 +2006,7 @@ where $T^r\sigma$ is a linear isomorphism. and we have,
 \begin{definition}
   $T\in T^rE$ is called alternating or totally antisymmetric if for all $\sigma\in S_r$, we have,
   \begin{equation*}
-    T^r\sigma T = (-1)^{\sigma}T,
+    T^r\sigma T = (-1)^{\sigma}T.
   \end{equation*}
 \end{definition}
 
@@ -2012,7 +2015,7 @@ where $T^r\sigma$ is a linear isomorphism. and we have,
 \end{remark}
 
 \begin{notation}
-  We denote the space of alternating tensors to be,
+  We denote the space of alternating tensors as,
   \begin{equation*}
     \bigwedge^r E \subseteq T^rE.
   \end{equation*}
@@ -2023,8 +2026,11 @@ where $T^r\sigma$ is a linear isomorphism. and we have,
   \begin{equation*}
     A_r:T^r\to T^r, A\mapsto {\frac 1 {r!}}\sum_{\sigma\in S_r}(-1)^\sigma (T^r\sigma)(T).
   \end{equation*}
-  This is a linear map.
 \end{definition}
+
+\begin{remark}
+  $A_r$ is a linear map.
+\end{remark}
 
 \begin{lemma}
   $A_r\circ A_r = \id$ In other words, it is idempotent.
@@ -2140,7 +2146,7 @@ where $T^r\sigma$ is a linear isomorphism. and we have,
   \end{align*}
 \end{proof}
 
-We will follow the convention from \cite{Kobayashi-Nomizu} which is $\psi\equiv 1$.
+We will follow the convention that $\psi\equiv 1$ which is used in \cite{Kobayashi-Nomizu}.
 
 \begin{definition}
   For $\xi\in\bigwedge^pE$, we define,
@@ -2572,14 +2578,23 @@ is a smooth function. In particular,
 is a $\cinf(\M)$ linear map. 
 \par From Proposition \ref{proposition_12_4}, it follows that $df\in\Gamma(T^*\M)$. In particular, we have a linear map,
 \begin{equation*}
-  d:\cinf(\M)=\Omega^9\M\to\Gamma(T^*\M)=\Omega^1\M.
+  d:\cinf(\M)=\Omega^0\M\to\Gamma(T^*\M)=\Omega^1\M.
 \end{equation*}
 \begin{definition}[Pullback]
   \label{defnition_12_5}
-  Let $f:\M\to\maniN$ be smooth and $\xi\in T(T^{0,s\maniN})$, Put,
+  Let $f:\M\to\maniN$ be smooth and $\xi\in T(T^{0,s}\maniN)$, Put,
   \begin{equation*}
     f^*\xi|_p(v_1,\cdots,v_s) \defeq \xi|_{f(p)}(T_pfv_1,\cdots,T_pfv_s).
   \end{equation*}
+\end{definition}
+
+\begin{definition}
+  A wedge product $\wedge:\Omega^s(\M)\times\Omega^t(\M)\to\Omega^{s+t}(\M)$ is defined pointwise that is,
+  for $\eta\in\Omega^s(\M)$ and $\zeta\in\Omega^t(\M)$, 
+  \begin{equation}
+    \eta\wedge \zeta\defeq [\M\ni p\mapsto \eta_p\wedge\zeta_p].
+  \end{equation}
+  Note that $\eta,\zeta$ are sections, therefore, we have $\eta_p\in\bigwedge^sT^*\M$ and $\zeta_p\in\bigwedge^tT^*\M$.
 \end{definition}
 \begin{proposition}[Properties of Pullbacks]
   \label{proposition_12_6}
@@ -2782,7 +2797,7 @@ And we have,
 \begin{definition}
   We define the gradient to be such that 
   \begin{equation*}
-    \grad_gf = (def)^\# \defeq = \left(\sum (\partial_i f)dx_i\right)^\# = \sum_{ij}g^{ij}(\partial_i f)\pd{}{x_j}.
+    \grad_gf = (def)^\# \defeq \left(\sum (\partial_i f)dx_i\right)^\# = \sum_{ij}g^{ij}(\partial_i f)\pd{}{x_j}.
   \end{equation*}
 \end{definition}
 
@@ -3399,12 +3414,30 @@ Therefore,
   \label{theorem_stokes_surface}
 \end{theorem}
 
+Recall that for a vector field $X$ over $\M$, we have
+\begin{enumerate}[1).]
+  \item $X^\flat$ is $1$-form,
+  \item $dX^\flat$ is $2$-form,
+  \item $\star dX^\flat$ is $1$-form. 
+\end{enumerate}
+
+\begin{definition}
+  Let $X$ be a vector field on $\M$, then we define,
+  \begin{equation*}
+    \curl X\defeq (\star dX^\flat)^\#.
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  $\curl X$ coincides with the usual rotation in $\R^3$.
+\end{remark}
+
 \begin{theorem}[Classical Stokes Theorem]
   Inheritting the settings of Theorem \ref{theorem_stokes_surface}, consider a vector field $X$ on $\M$ which is of class $\mathcal{C}^1$. We have,
   \begin{equation*}
     \int_F\langle\curl X,\nu_F\rangle\vol_F = \int_{\partial F}\langle X,\tau_{\partial F}\rangle \vol_{\partial F},
   \end{equation*}
-  where $\tau_{\partial F}:\partial F\to T\partial F$ is the oriented unit tangent vector to $\partial F$.
+  where $\tau_{\partial F}:\partial F\to T\partial F$ is the oriented unit tangent vectorfield to $\partial F$.
 \end{theorem}
 
 \begin{proof}
@@ -3419,6 +3452,231 @@ Therefore,
   \int_F\langle\curl X,\nu\rangle \vol_F = \int_FdX^\flat \stackrel{\text{Stokes}}{=}\int_{\partial F}(i_F^{\partial F})^*X^\flat.
  \end{equation*}
 \end{proof}
+
+
+\subsection{Applications of Stokes Theorem}
+
+Let $A\subseteq \R^{m+1}$ be a compact set with smooth boundary. $A$ is a compact manifold with boundary such that  
+\begin{equation*}
+  \interior A = A\backslash \partial A
+\end{equation*}
+is open in $\R^{m+1}$. THis is a compact hypersurface in $\R^{m+1}$. $A$ Topologicalboundary of the anifold boundary of $A$. 
+
+\begin{remark}
+  If A compact surface in $\R^3$ is the boundary of a compact set with smooth boundary, then it is orientable.
+\end{remark}
+
+Consider in $\R^{m+1}$, define,
+\begin{equation*}
+\eta\defeq \sum_{j=1}^{m+1}(-1)^{j+1}x_jdx_1\wedge\cdots\wedge dx_{j-1}\wedge dx_{j+1}\wedge\cdots\wedge dx_{m+1}\in\Omega^m(\R^{m+1}).
+\end{equation*}
+Then 
+\begin{equation*}
+d\eta = \sum_{j=1}^{m+1}(-1)^{j+1}dx_j\wedge dx_1\wedge\cdots\wedge dx_{j-1}\wedge dx_{j+1}\wedge\cdots\wedge dx_{m+1}.
+\end{equation*}
+Therefore, we have ,
+\begin{equation*}
+d\eta = (m+1)dx_1\wedge\cdots\wedge dx_{m+1}.
+\end{equation*}
+This is a volume form in $\R^{m+1}$ which is a volume for $A$ as well. Therefore,
+\begin{equation*}
+(m+1)\cdots dx_1\wedge\cdots\wedge dx_{m+1}|_{A} = (m+1)\vol_A.
+\end{equation*}
+Thereore, we have,
+\begin{equation*}
+  \vol(A) = \int_A{\frac 1 {m+1}}d\eta = {\frac 1 {m+1}}\int_{\partial A}\eta.
+\end{equation*}
+\begin{lemma}
+  Let $i:S^m\hookrightarrow\R^{m+1}$. Then $i^*\eta$ is the volume form on $S^m$.
+\end{lemma}
+\begin{corollary}
+  \begin{equation*}
+  \vol(S^m) = \int_{S^m}\eta = \int_{B(0,1)\subseteq\R^{m+1}}d\eta = (m+1)\vol(B(0,1)).
+  \end{equation*}
+  \label{corollary_sphere_volume_form}
+\end{corollary}
+\begin{proof}
+  Let $\omega = dx_1\wedge\cdots dx_{m+1} = \vol_{\R^{m+1}}$. We define a vector field,
+  \begin{equation*}
+    X(x) = \sum_{j=1}^{m+1}x_j\pd{}{x_j},
+  \end{equation*}
+  which we will call it the radial vector field. Note that let $p\in S^m$, then $X(p)$ is the outward normal vector. We then have,
+  \begin{equation*}
+    i_X\omega = i_X dx_1\wedge\cdots\wedge dx_{m+1} = \sum_{i=1}^{m+1}(-1)^{i-1}dx_1\wedge\cdots\wedge dx_{i-1} i_X(dx_j)\wedge dx_{j+1}\wedge\cdots \wedge dx_{m+1}.
+  \end{equation*}
+  But observe that $i_X(dx_j) = x_j$, thus 
+  \begin{equation*}
+    i_X\omega = \eta.
+  \end{equation*}
+  Let $x\in S^m$ and $v_1,\cdots,v_m$ be an oriented orthonormal basis of $T_xS^m$. Then 
+  \begin{equation*}
+    X(x),v_1,\cdots,v_m
+  \end{equation*}
+  is an oriented orthonormal basis of $T_x\R^{m+1}$. 
+  \begin{align*}
+    i^*_\eta(v_1,\cdots,v_m) &= (i_X\omega)(v_1,\cdots,v_m),\\
+    & = \omega(X(x),v_1,\cdots,v_m),\\
+    & = 1.
+  \end{align*}
+  Thus we have shown that $i^*\eta$ is the volume form on $S^m$.
+\end{proof}
+\begin{example}
+  \begin{equation*}
+  \vol(A) = {\frac 1 2}\int_A xdy-ydx, 
+  \end{equation*}
+\end{example}
+\begin{proposition}
+  Consider the antipodal map,
+  \begin{equation*}
+    A:S^m\to S^m, x\mapsto -x.
+  \end{equation*}
+This is orientation preserving/reversing, if and only if $m$ is odd/even.
+\end{proposition}
+\begin{proof}
+  Consider $\eta$ as in Corollay \ref{corollary_sphere_volume_form}. We have,
+  \begin{equation*}
+    A^*\eta  = (-1)^{m+1}\eta.
+  \end{equation*}
+  This proves the statement.
+\end{proof}
+\begin{corollary}
+  $\R\mathbb{P}^m = S^m/A$ is orientable if and only if $m$ is odd. 
+\end{corollary}
+Let $\M\stackrel{\pi}{\to}\M/A$ be a $2$-fold cover of an oriented connected manifold $\M$ by an orientation preserving(respectively, reversing involution $A$). 
+\par Assume $\M/A$ is orientable hence there is $\omega\in\Omega^m(\M/A)$ such that it is nowhere vanishing. Therefore, there is nowhere vanishing $f\in\cinf(\M)$, (ie. $\forall p\in \M,f(p)\not=0$), with
+\begin{equation*}
+  \pi^*\omega f\cdot \vol_M.
+\end{equation*}
+We have,
+\begin{equation*}
+  A^*\pi^*\omega = {\underbrace{(\pi\circ A)}_{=\pi}}^*\omega = \pi^*
+\end{equation*}
+Thus we have $f\cdot\eta = A^*(f\eta)=-A^*f\eta$, if $A$ is orientation reversing.
+\par If $A$ is orientation reversin the, $f$ is odd with respect to $A$. Using intermediate value theorem, we see that there is $p\in \M$ such that $f(p)=0$ which is a contradiction.
+\begin{corollary}
+  \label{lemma_antipodal_homotopic}
+  Let us denote $A_m:S^m\to S^m$ to be the antipodal map of $m$-dimensional sphere. $A_m$ is homotopic to the identity if and only if $m$ is odd. 
+\end{corollary}
+\begin{corollary}[Hairly Ball Theorem]
+  There is a non-vanishing vector field on $S^m$ if and only if $m$ is odd.
+\end{corollary}
+\begin{proof}
+  For odd $m$, let us consider,
+  \begin{equation*}
+    X(x) = (-x_2,x_1,-x_4,x_3,\cdots,-x_{m+1},x_m).
+  \end{equation*}
+  This is a non-vanishing vector field on $S^{m+1}$. Suppose we have $X\in\Gamma(TS^m)$ such that $\forall p\in S^m,X(p)\not=0$. Replace,
+  \begin{equation*}
+    X\to \left[S^m\ni p\mapsto {\frac {X(p)}{\vert X(p)\vert}}\right]
+  \end{equation*}
+  Without loss of generality, we assume $\vert X(p)\vert = 1$. Pick $\rho\in\cinf(\R)$ to be such that 
+  \begin{equation*}
+    \rho(t) = \begin{cases}
+      0,\quad t\leq {\frac 1 3},\\
+      1,\quad t\geq{\frac 2 3}.
+    \end{cases}
+  \end{equation*}
+  And $rho(t)\in[0,1]$ for all $t\in\R$. Now set $h:[0,1]\times S^m\to S^m$ to be
+  \begin{equation*}
+    h(t,p)\defeq\cos(\pi\cdot\rho(t))\cdot p+\sin(\pi\rho(t))\cdot X(p).
+  \end{equation*}
+  $X(p)\perp p\Rightarrow \norm{h(t,p)}^2=1$. Thus we obtain,
+  \begin{equation*}
+    h(0,p) = p,h(1,p) = -p.
+  \end{equation*}
+  Therefore, if there exists a norwhere vanishing vector field, then antipodal map is homotopic to the identity.
+  \par Suppose $m$ is even and $A_m$ is homotopic. 
+  Then we have,
+  \begin{equation*}
+    \int_{S^m}A^*\eta = -\int_{S^m}\eta = -\vol(S^m)<0.
+  \end{equation*}
+  \begin{claim}
+    \begin{equation*}
+      \int_\M h_t^*\omega
+    \end{equation*}
+    is independent of $t$. 
+  \end{claim}
+  \begin{claimproof}
+    Without loss of generality, we show 
+    \begin{equation*}
+      \int_\M h^*_0\omega = \int_\M h^*_1\omega.
+    \end{equation*}
+    Note that $[0,1]\times \M$ is a manifold with oriented boundary $\M\cup(-\M)$. By Stoke's theorem, we have,
+    \begin{equation*}
+      \int_\M h^*_1\omega - \int_\M h^*_0\omega = \int_{\partial([0,1]\times\M)}h^*_{\cdot}\omega = \
+      int_{\partial([0,1]\times\M)}d(h_\cdot^*\omega) = \int_{[0,1]\times\M}h^*(d\omega) = 0.
+    \end{equation*}
+  \end{claimproof}
+  \par Using the claim, we have $\int_{S^m}A^*\eta$ is homotopy invariant. Therefore 
+  \begin{equation*}
+    \int_{S^m}A^*\eta = \int_{S^m}\eta  = \vol(S^m)<0.
+  \end{equation*}
+  More general, let $\M^m$ be a closed oriented manifold and $\omega\in\Omega^m(\M)$. Furthermore, consider,
+  \begin{equation*}
+    h:[0,1]\times\M\to\M
+  \end{equation*}
+  be smooth. Note that it is a family of endomorphisms of $\M$ thus we denote 
+  \begin{equation*}
+    h_t:\M\to\M = [\M\ni p\mapsto h(t,p)\in\M].
+  \end{equation*}
+\end{proof}
+\begin{example}
+  Using this corollary, we conclude that any vector field on $S^2$ vanishes somewhere.
+\end{example}
+\subsection{Brouwer's Fixed Point Theorem}
+
+\begin{theorem}
+  Let $\overline{B(0,1)}$ be a unit ball around the origin in $\R^n$ and $f:\overline{B(0,1)}\to \overline{B(0,1)}$ be continuous. Then $f$ has a fixed point.
+\end{theorem}
+\begin{proof}
+  We first reduce to the case where $f$ is smooth. Suppose a continuous function $f$ does not have a fixed point. Then consider,
+  \begin{equation*}
+    \delta \defeq \inf_{x\in\overline{B(0,1)}}\norm{f(x)-x}>0.
+  \end{equation*}
+  Let $g:\overline{B(0,1)}\to \overline{B(0,1)}$ be smooth such that 
+  \begin{equation*}
+    \norm{f-g}_{L^\infty(\overline{B(0,1)})} \leq {\frac {\delta} 2}.
+  \end{equation*}
+  Then $g$ is a smooth self map of $\overline{B(0,1)}$ without fixed point.
+  \par Let $r:\overline{B(0,1)}\to S^{n-1}$ to be such that for $x\in\overline{B(0,1)}$ we define,
+  \begin{equation*}
+    r(x) \in S^{n-1}\cap\{g(x)+t(x-g(x))\sep t\geq0\}.
+  \end{equation*}
+  This is smooth and $r|_{S^{m-1}}=\id$. Intuitively, $r$ is constructed by the following way shown in the diagram below.
+  \begin{center}
+    \begin{tikzpicture}
+      \draw (0,0) circle (2.0);
+      \draw (0.5,0.4) node[below left]{$x$};
+      \draw (0.5,0.4) node{$\cdot$};
+      \draw (-0.3,0.2) node[below left]{$g(x)$};
+      \draw (-0.3,0.2) node{$\cdot$};
+      \draw (-0.3,0.2)--(0.5,0.4)--(1.86,0.74)node{$\cdot$} node[below right]{$r(x)$};
+    \end{tikzpicture}
+  \end{center}
+  That is if such $g$ exists then there is a smooth retraction $r:\overline{B(0,1)}\to S^{m-1}$. That is we have a following commutative diagram,
+  \begin{center}
+    \begin{tikzcd}
+{\overline{B(0,1)}} \arrow[r, "r"]              & S^{n-1} \\
+S^{n-1} \arrow[ru, "\id"'] \arrow[u, "i", hook] &        
+\end{tikzcd}
+  \end{center}
+Let $\omega\in\Omega^{m-1}(S^{m-1})$ be volume form then $r^*\omega\in\Omega^{m-1}(\overline{B(0,1)})$ is exact by Poincaré's lemma. That is there is $\xi\in \Omega^{m-2}(B(0,1))$ such that 
+\begin{equation*}
+  r^*\omega = d\xi.
+\end{equation*}
+We then have,
+\begin{equation*}
+  \omega = \id^*\omega = i^*r^*\omega = i^*d\xi = d(i^*\xi).
+\end{equation*}
+We found $\omega$ is exact. By Stoke's theorem, we see,
+\begin{equation*}
+  \vol(S^{m-1}) = \int\omega = \int di^*\xi = \int_{B(0,1)}dd\xi = 0.
+\end{equation*}
+\end{proof}
+
+\section{De Rham Cohomology}
+
+
 
 \begin{thebibliography}{9}
 \bibitem{Lee}
