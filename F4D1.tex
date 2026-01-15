@@ -67,6 +67,11 @@ mysymbol/.style={start anchor=center,end anchor=center,draw=none}
 \DeclareMathOperator{\inte}{int}
 \DeclareMathOperator{\diverg}{div}
 \DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\image}{im}
+\DeclareMathOperator{\dR}{dR}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Mnfd}{Mnfd}
+\DeclareMathOperator{\OpEmb}{OpEmb}
 %\newcommand*{\name}[\num_arguments][default values]{{\color{#1}\Large #2}}
 \newcommand{\defeq}{\vcentcolon=}
 \newcommand{\norm}[1]{\Vert #1 \Vert}
@@ -3675,6 +3680,171 @@ We found $\omega$ is exact. By Stoke's theorem, we see,
 \end{proof}
 
 \section{De Rham Cohomology}
+
+\subsection{Basics}
+
+\begin{definition}
+  Let $\M$ be a smooth manifold. We define,
+  \begin{equation*}
+    \Omega^\bullet(\M) = \bigoplus_{j=0}^{\dim\M}\Omega^j(\M).
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  A cochain complex is of $k$-vectorspace (we can also take $R$-modules) consists of a $\Z$-graded vector space $E \defeq \bigoplus E^k$ and homomorphism $d:E^k\to E^{k+1}$ of degree $1$ (ie: any homogeneous element of degree $k$ is mapped to a homogeneous element of degree $k+1$) with $d\circ d = 0$.
+\end{definition}
+
+A cochain complex is represented as a sequence,
+\begin{center}
+  \begin{tikzcd}
+\cdots \arrow[r] & E^{k-1} \arrow[r, "d_{k-1}"] & E^k \arrow[r, "d_k"] & E^{k+1} \arrow[r] & \cdots
+\end{tikzcd}
+\end{center}
+
+This is not necessarily exact. We would like to measure the non-exactness of the series. 
+
+\begin{definition}
+  Given a cochain complex $(E,d)$, we define the following,
+  \begin{enumerate}
+    \item $Z^kE = \ker(E^k\stackrel{d}{\to}E^{k+1})$ which we call the cycles of $(E,d)$.
+    \item $B^kE = \image(E^{k-1}\stackrel{d}{\to}E^k)$ which is the boundaries of $(E,d)$.
+    \item $H^k(E) = H^k(E,d)\defeq Z^kE/B^kE$ which is called the $k$-th cohomology group of $(E,d)$.
+  \end{enumerate}
+\end{definition}
+
+Above taking the quotient $Z^kE/B^kE$ is justified as 
+\begin{equation*}
+  d\circ d = 0\Rightarrow \image d_{k-1}\subseteq\ker d_k.
+\end{equation*}
+
+\begin{definition}
+  The $k$-th de Rham cohomology gruop of $\M$ is 
+  \begin{equation*}
+    H^k_{\dR}(\M) \defeq H^k(\Omega^\bullet(\M),d).
+  \end{equation*}
+\end{definition}
+
+\begin{example}
+  Let $f\in Z^0(\Omega^\bullet(\M))$, then $f$ is a smooth function such that $df=0$. That is $f$ is a locally constant function. We conventionally set $B^0(\Omega^\bullet(\M)) = \{0\}$. From the argument, we see,
+  \begin{equation*}
+    H^0(\Omega^\bullet(\M)) = \prod_{\text{components of $\M$}}\R.
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  For $\M = S^1 = \{z\in\C\sep \vert z\vert = 1\}=\R/2\pi\Z$. The diffeomorphism is given by,
+  \begin{equation*}
+    \R/2\pi\Z\ni \theta\mapsto e^{i\theta}.
+  \end{equation*}
+  From the example above we know 
+  \begin{equation*}
+    H^0(S^1) = \R.
+  \end{equation*}
+  Suppose $\omega\in\Omega^1(S^1)$. Then there is $2\pi$ periodic function $f\in\cinf(\R)$ such that 
+  \begin{equation*}
+    \omega = fd\theta.
+  \end{equation*}
+  Thus $d\omega = 0$. This shows us that 
+  \begin{equation*}
+    Z^1(\Omega^\bullet(S^1)) = \Omega^1(S^1).
+  \end{equation*}
+  Suppose $\omega = dg$ for some $2\pi$-periodic function $g\in\cinf(\R)$ then,
+  \begin{equation*}
+    \int_{S^1}\omega = \int_0^{2\pi}f(\theta)d\theta = g(2\pi)-g(0)=0.
+  \end{equation*}
+\end{example}
+
+\begin{remark}
+  The above example can be furthere generalized as follows. 
+  \par Suppose $\M$ is compact and closed, $\omega\in\Omega^m(\M)$ where $m=\dim \M$. If $\omega = d\eta$ then 
+  \begin{equation*}
+    \int_\M\omega = \int_\M d\eta = \int_{\partial \M = \emptyset}\eta=0.
+  \end{equation*}
+  Conversely, if $\int_\M\omega = 0$, put 
+  \begin{equation*}
+    g(\theta) \defeq \int_0^\theta f(t)dt.
+  \end{equation*}
+  Then $g$ is smooth and $2\pi$-periodic. That is $dg = \omega$.
+\end{remark}
+
+\begin{proposition}
+  Let us surmarize what we have discussed. We have a commutative diagram,
+  \begin{center}
+    \begin{tikzcd}
+\Omega^1(\R/2\pi\Z) \arrow[r, "\int"] \arrow[d] & \R \\
+H^1(\R/2\pi\Z) \arrow[ru, "\cong"']             &   
+\end{tikzcd}
+  \end{center}
+\end{proposition}
+
+We will later see that for every compact closed oriented manifold, we have the above commutative diagram.
+
+\begin{definition}
+  A homomorphism of cochain complexes is a linear map $f:(E,d^E)\to (F,d^F)$ of degree $0$ such that 
+  \begin{equation*}
+    f\circ d^E=d^F\circ f.
+  \end{equation*}
+\end{definition}
+
+In other words, we have a following commutative diagram,
+
+\begin{center}
+  \begin{tikzcd}
+\cdots \arrow[r] & E^{k-1} \arrow[r, "{d^{E,k-1}}"] \arrow[d, "f"] & E^{k} \arrow[r, "{d^{E,k}}"] \arrow[d, "f"] & E^{k+1} \arrow[r] \arrow[d, "f"] & \cdots \\
+\cdots \arrow[r] & F^{k-1} \arrow[r, "{d^{F,k-1}}"']               & F^{k} \arrow[r, "{d^{F,k}}"']               & F^{k+1} \arrow[r]                & \cdots
+\end{tikzcd}
+\end{center}
+
+\begin{proposition}
+  A cochain map $f\in\Hom((E,d^E),(F,d^F))$ induces a homomorphism,
+  \begin{equation*}
+    H^k(f):H^k(E,d^E)\to H^k(F,d^F).
+  \end{equation*}
+\end{proposition}
+
+\begin{proof}
+  Clear from the above diagram.
+\end{proof}
+
+\begin{remark}
+  Recall that for a smooth map $f:\M\to\maniN$, it induces a contravariant functor,
+  \begin{equation*}
+    f^*:(\Omega^\bullet(\maniN),d)\to(\Omega^\bullet(\M),d).
+  \end{equation*}
+  Even though $H^\bullet$ is a covariant functor from the category of cochain complexes to cochain complexes. The above functor is contravariant. This is due to that the pullback is contravariant.
+\end{remark}
+
+\begin{definition}
+  \begin{equation*}
+    \Omega_C^k(\M) = \{\omega\in\Omega^k(\M)\sep \supp\omega\text{ is compact.}\}.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Let us define a category $(\Mnfd_{\OpEmb})$ such that 
+  \begin{enumerate}[i).]
+    \item $\Ob(\Mnfd_{\OpEmb})$ consists of smooth manifolds.
+    \item Morphisms are open embeddings.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  $\Omega^\bullet_C$ is a covariant functor from $(\Mnfd_{\OpEmb})$ to the category of cochain complex.
+\end{remark}
+
+\begin{definition}
+  \begin{equation*}
+    H^k_{\dR,C}(\M) = H^k(\Omega_C^\bullet(\M),d).
+  \end{equation*}
+\end{definition}
+
+\begin{proposition}
+  If $f:\M\to\maniN$ is proper and $\omega\in\Omega^k_C(\maniN)$ then $f^*\omega\in\Omega_C^k(\M)$.
+\end{proposition}
+
+\begin{remark}
+  On the category of smooth manifolds with proper maps. $\Omega_C^\bullet$ and hence $H_{\dR,C}^\bullet$ are contravariant functors.
+\end{remark}
 
 
 
