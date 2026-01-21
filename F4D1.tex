@@ -3846,7 +3846,196 @@ In other words, we have a following commutative diagram,
   On the category of smooth manifolds with proper maps. $\Omega_C^\bullet$ and hence $H_{\dR,C}^\bullet$ are contravariant functors.
 \end{remark}
 
+\begin{definition}
+  
+\end{definition}
 
+%FIRST PART MISSING
+
+\subsection{Poincaré Lemma}
+
+Suppose we have,
+\begin{equation*}
+  f,g:(E^\bullet,d^E)\to(F^\bullet,d^F).
+\end{equation*}
+
+When do we have,
+\begin{equation*}
+  H^\bullet(f) = H^\bullet(g).
+\end{equation*}
+
+\begin{definition}
+  Two cochain complex homomorphisms $f,g:(E^\bullet,d^E)\to(F^\bullet,d^F)$ are called cochain homotopic if there exists homomorphism $K_{k+1}:E^{k+1}\to F^k$ such that 
+  \begin{equation*}
+    d^F_{k-1}K_k+K_{k+1}d_k^E = f-g.
+  \end{equation*}
+\end{definition}
+
+Let $\omega\in Z^k(E)$. That is $\omega\in E^k,d_k\omega = 0$. Consider,
+\begin{equation*}
+  f(\omega) - g(\omega) = dK\omega + Kd\omega = dK\omega\in B^K(F).
+\end{equation*}
+
+Thus $H^k(f)=H^k(g)$. 
+\par Let $\M$ be a smooth manifold (oriented). Consider,
+\begin{equation*}
+  \Omega^1(\M),\Omega^1(\M\times \R). 
+\end{equation*}
+
+For fixed $t_0\in R$, let  
+\begin{equation*}
+  j_k:\M\to \M\times\{t_0\}\subset\M\times\R, p\mapsto (p,t_0).
+\end{equation*}
+
+Put $K:\Omega^{k+1}(\M\times\R) \to\Omega^k(\M\times\R)$ such that 
+\begin{equation*}
+  K(\omega)|_{(p,t_0)}\defeq\int_{t_0}^t (\interior_{\pd{}{t}}\omega)(p,t')dt'.
+\end{equation*}
+
+Take $X_1,\cdots,X_m$ be a coordinate in $\M$. 
+
+\begin{align*}
+  \int_{\pd{}{t}}(f(x,t)dt\wedge dx_{j_1}\wedge\cdots\wedge dx_{j_p}) & = f(x,t) dx_{j_1}\wedge\cdots\wedge dx_{j_p},\\
+  \int_{\pd{}{t}}(g(x,t)dx_{j_1}\wedge\cdots\wedge dx_{j_p}) & = 0.
+\end{align*}
+
+\begin{proposition}
+  Let $\pi:\M\times\R\to\M$ be such that $(p,t) = p$. Then,
+  \begin{equation*}
+    dK+Kd = \id-\pi^*\circ j_{t_0}^*.
+  \end{equation*}
+  Thus $H(\pi)\circ H(j_{t_0}) = \id$. Furthermore,
+  \begin{equation*}
+    H(\pi)=\pi^*,H^k(\M)\to H^K(\M\times\R)
+  \end{equation*}
+  is an isomorphism.
+\end{proposition}
+
+\begin{proof}
+For the last two assertions,
+\begin{align*}
+  \pi\circ j_{t_0}&=\id_\M,\\
+  j^*_{t_0}\circ\pi^*  &= \id_{\Omega^1(\Omega)},\\
+  \Rightarrow & H(j_{t_0})\circ H(\pi) = \id.
+\end{align*}
+Let $\omega\in\Omega^{k+1}(\M\times\R_{t})$ such that 
+\begin{equation*}
+  \omega = \omega_1(t)dt+\omega_2(t).
+\end{equation*}
+Under this we have,
+\begin{align*}
+  K\omega &= (-1)^K\int_{t_0}^t\omega_1(s)ds,\\
+  dK\omega &= \omega_1(t)\wedge dt +(-1)^K\int_{t_0}^t (d_\M\omega_1)(s)ds,\\
+  d\omega & = (d_\M\omega_1)(t)dt + (-1)^{K+1}\omega_2'(t)\wedge dt+(d_\M\omega_2)(t).\\
+  Kd\omega & = (-1)^{K+1}\int_{t_0}^t (d_\M \omega_1)(s)ds + \int_{t_0}^t \omega_2'(s)ds,\\
+  dK\omega+Kd\omega & = \underbrace{\omega_1(t)\wedge dt+\omega_2(t)}_{=\omega}-\overbrace{\omega_2(t_0)}^{\pi^*j_{t_0}^*\omega},\\
+  & = \omega-\pi^* j_{t_0}^*\omega.\\
+  \pi^*j_{t_0}^*\omega = \omega_2(t_0).
+\end{align*}
+\end{proof}
+
+\begin{corollary}
+  For each $t_0\in\R$, the map $j_{t_0}^*:\Omega^\bullet(\M)\to\Omega^\bullet(\M)$, induces an isomorphism 
+  \begin{equation*}
+    H_{\dR}^\bullet(\M\times\R)\to H_{\dR}^\bullet(\M),
+  \end{equation*}
+  with inverse  
+  \begin{equation*}
+    H(\pi) = \pi^*.
+  \end{equation*}
+\end{corollary}
+
+\begin{remark}
+  For $t_0,t_1\in\R$, we have 
+  \begin{equation*}
+    j_{t_0}^*=j_{t_1}^*,
+  \end{equation*}
+  as maps from $H^\bullet(\M\times\R)\to H^\bullet(\M)$.
+\end{remark}
+
+\begin{theorem}
+  Let $f,g:\M\to\maniN$ be smooth homotopic maps(the homotopy between them is smooth), then 
+  \begin{equation*}
+    H(f) = H(g):H^\bullet(\maniN)\to H^\bullet(\M).
+  \end{equation*}
+  In particular, if the manifolds $\M,\N$ are smooth homotopic equivalent then 
+  \begin{equation*}
+    H^\bullet(\M)\cong H^\bullet(\maniN).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+By assumption, there is a smooth map $F:\M\times\R\to\maniN$ such that 
+\begin{equation*}
+  F(\cdot,0) = f, F(\cdot,1) = g.
+\end{equation*}
+Let $j_t:\M\to\M\times\R$ be such that $j_t(p) = (p,t)$. Thus with this notation, we have,
+\begin{equation*}
+  F\circ j_0 = f,F\circ j_1 = g.
+\end{equation*}
+Thus we have,
+\begin{align*}
+  H(f) & = H(F\circ j_0),\\
+  & = H(j_0)\circ H(F),\\
+  & = H(j_1)\circ H(F), \\
+  & = H(F\circ j_1),\\
+  & = H(g).
+\end{align*}
+$\M,\maniN$ are smoothly hotomipic equivalent if and only if there exists $f:\M\to\N,g:\maniN\to\M$ such that 
+\begin{equation*}
+  f\circ g = \id_\N,g\circ f = \id_\M.
+\end{equation*}
+Then $H(f),H(g)$ are inverse to one another.
+\end{proof}
+
+\begin{theorem}[Poincaré Lemma]
+  Let $U\subseteq\R^m$ be a starshaped region(ie. an open set). Then, 
+  \begin{equation*}
+    H^k(U)\cong \begin{cases}
+      \R,\quad k=0,\\
+      0,\quad k>0.
+    \end{cases}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Choose $g\in\cinf(\R)$ such that 
+  \begin{equation*}
+    g(t) = \begin{cases}
+      0,\quad t\leq 0,\\
+      1,\quad t\geq 1.
+    \end{cases}
+  \end{equation*}
+  Then set $F:U\times\R\to U$ by 
+  \begin{equation*}
+    F(x,t) = x_0+g(t)(x-x_0),
+  \end{equation*}
+  where $x_0$ is a star-point of $U$. Thus we have,
+  \begin{equation*}
+    F(x,0) = x_0,F(x,1) = x.
+  \end{equation*}
+  $\id_U$ is smooth homotopic to a constant map $x_0$. Call it $g$. For $k\geq1$,
+  \begin{equation*}
+    \id_{H^k(U)} = H(g^*)|_{H^k(U)} = 0.
+  \end{equation*}
+\end{proof}
+
+\subsection{Mayer-Vietoris sequence}
+
+\begin{lemma}[Snake Lemma]
+  Suppose we have a short exact sequence 
+  \begin{center}
+    \begin{tikzcd}
+0 \arrow[r] & {(A^\bullet,d)} \arrow[r, "\varphi"] & {(B^\bullet,d)} \arrow[r, "\psi"] & {(C^\bullet,d)} \arrow[r] & 0
+\end{tikzcd}
+  \end{center}
+  of cochain complexes. Then there exists $\delta$ such that
+  \begin{center}
+    \begin{tikzcd}
+\cdots \arrow[r] & H^k(A) \arrow[r, "H^k(\varphi)"]         & H^k(B) \arrow[r, "H^k(\psi)"]         & H^k(C) \arrow[lld, "\delta"'] &        \\
+                 & H^{k+1}(A) \arrow[r, "H^{k+1}(\varphi)"] & H^{k+1}(B) \arrow[r, "H^{k+1}(\psi)"] & H^{k+1}(C) \arrow[r]          & \cdots
+\end{tikzcd}
+  \end{center}
+\end{lemma}
 
 \begin{thebibliography}{9}
 \bibitem{Lee}
