@@ -3740,6 +3740,7 @@ Above taking the quotient $Z^kE/B^kE$ is justified as
   \begin{equation*}
     H^0(S^1) = \R.
   \end{equation*}
+  \label{example_zeroth_cohomology_circle}
   Suppose $\omega\in\Omega^1(S^1)$. Then there is $2\pi$ periodic function $f\in\cinf(\R)$ such that 
   \begin{equation*}
     \omega = fd\theta.
@@ -3995,6 +3996,7 @@ Then $H(f),H(g)$ are inverse to one another.
       0,\quad k>0.
     \end{cases}
   \end{equation*}
+  \label{theorem_poincare_lemma}
 \end{theorem}
 
 \begin{proof}
@@ -4021,6 +4023,24 @@ Then $H(f),H(g)$ are inverse to one another.
 
 \subsection{Mayer-Vietoris sequence}
 
+\begin{definition}
+  A short exact sequence of cochain complexes
+   \begin{center}
+    \begin{tikzcd}
+0 \arrow[r] & {(A^\bullet,d)} \arrow[r, "\varphi"] & {(B^\bullet,d)} \arrow[r, "\psi"] & {(C^\bullet,d)} \arrow[r] & 0
+\end{tikzcd}
+  \end{center}
+  is exact if each row of the following diagram is exact.
+  \begin{center}
+    \begin{tikzcd}
+            & \vdots \arrow[d]                        & \vdots \arrow[d]                     & \vdots \arrow[d]             &   \\
+0 \arrow[r] & A^k \arrow[d, "d"] \arrow[r, "\varphi"] & B^k \arrow[d, "d"] \arrow[r, "\psi"] & C^k \arrow[d, "d"] \arrow[r] & 0 \\
+0 \arrow[r] & A^{k+1} \arrow[d] \arrow[r, "\varphi"]  & B^{k+1} \arrow[d] \arrow[r, "\psi"]  & C^{k+1} \arrow[d] \arrow[r]  & 0 \\
+            & \vdots                                  & \vdots                               & \vdots                       &  
+\end{tikzcd}
+  \end{center}
+\end{definition}
+
 \begin{lemma}[Snake Lemma]
   Suppose we have a short exact sequence 
   \begin{center}
@@ -4036,6 +4056,179 @@ Then $H(f),H(g)$ are inverse to one another.
 \end{tikzcd}
   \end{center}
 \end{lemma}
+
+\begin{proof}
+  Consider the following diagram, where we consider lifting from an element of $Z^kC$. 
+  \begin{center}
+\begin{tikzcd}
+                                      & A^{k+1} \arrow[d, "\varphi"'] \arrow[r, "d"] & A^{k+2} \arrow[d, "\varphi"] &                                                       & a \arrow[r, "d", maps to] \arrow[d, "\varphi"', maps to] & da \arrow[d, "\varphi", maps to] \\
+B^k \arrow[d, "\psi"'] \arrow[r, "d"] & B^{k+1}(B) \arrow[d, "\psi"] \arrow[r, "d"'] & B^{k+2}                      & b \arrow[r, "d", maps to] \arrow[d, "\psi"', maps to] & db \arrow[d, "\psi", maps to] \arrow[r, "d"', maps to]   & 0                                \\
+Z^kC \arrow[r, "d"']                  & C^{k+1}                                      &                              & c \arrow[r, "d"', maps to]                            & 0                                                        &                                 
+\end{tikzcd}
+  \end{center}
+  We see that $\varphi(da) = 0$. By injectivity of $\varphi$, we have $da=0$. Thus this defines a well-defined map from 
+  \begin{equation*}
+    Z^kC\ni c\mapsto a\in Z^{k+1}(A),
+  \end{equation*}
+  up to equivalence classes by cycles. We set,
+  \begin{equation*}
+    \delta[c]_{H^k(C)} = [a]_{H^{k+1}(A)}.
+  \end{equation*}
+  We then need to check,
+  \begin{enumerate}[i).]
+    \item $H^k(\psi)\circ\varphi^k = 0,\image H^k(\varphi)=\ker H^k(\psi)$,
+    \item $\delta\circ H^k(\psi) = 0,\ker\delta=\image\psi^k$,
+    \item $H^k(\varphi)\circ\delta = 0,\ker H^k(\varphi)=\image \delta$.
+  \end{enumerate}
+  Let $\tilde{c}\in Z^kC$ and $\tilde{c}=c+d\sigma$. Choose a lift $\tilde{b}\in B^k$ such that $\psi(\tilde{b})=\tilde{c}$. Choose $\tilde{\sigma}\in B^{k-1}$ such that 
+  \begin{equation*}
+    \psi(\tilde{\sigma}) = \sigma.
+  \end{equation*}
+  Then,
+  \begin{equation*}
+    \psi(\tilde{b}-b) = d\sigma = d\psi(\tilde{\sigma}) = \psi(d\tilde{\sigma}).
+  \end{equation*}
+  Therefore,
+  \begin{equation*}
+    \psi(\tilde{b}-b-d\tilde{\sigma})=0.
+  \end{equation*}
+  Then there is $\tau\in A^k$ such that $\varphi(\tau) = \tilde{b}-b-d\tilde{\sigma}$. Furthermore, we have,
+  \begin{equation*}
+    \varphi(d\tau) = d\varphi(\tau)=d\tilde{b}-db.
+  \end{equation*}
+  Let $\tilde{a},a\in A^{k+1}$ be such that 
+  \begin{equation*}
+    \varphi(\tilde{a}) = d\tilde{b},\varphi(a) = db.
+  \end{equation*}
+  That is 
+  \begin{equation*}
+    \varphi(\tilde{a}-a-d\tau) = 0\Rightarrow \tilde{a}-a = d\tau.
+  \end{equation*}
+  That is $[\tilde{a}]_{H^{k+1}(A)} = [a]_{H^{k+1}(A)}$. 
+  \par Now we examine the exactness,
+  If $x\in H^kC$ is in $\image H^k(\psi)$, then 
+  \begin{equation*}
+    \exists b\in Z^kB\st x=[\psi(b)].
+  \end{equation*}
+  $db=0$ hence $a=0$.
+  \par Let $\delta[c]=0$, then there is $a=d\alpha,\alpha\in A^k$, thus,
+  \begin{align*}
+    \psi(b-\varphi(\alpha))&=\psi(b)-c,\\
+    d(b-\varphi(\alpha))=db-\varphi(d\alpha)=db-\varphi(\alpha)=0.
+  \end{align*}
+  Hence, $[c]=\psi_*[b-\varphi(\alpha)]\in \image H^k(\psi)$.
+  \par Given $c\in Z^kA$, then $\varphi(a)=db$ hence $H^k(\varphi)[a]=0$. Thus $H^k(\varphi)\circ\delta=0$.
+  Conversely, let $[a]\in H^{k+1}(A)$ with $H^{k+1}(\varphi)[a]=0$. Then $da = 0,\varphi(a) = db$. Set $c\defeq\psi(b)$. Thus 
+  \begin{equation*}
+    dc = d\psi(b)=\psi(db)=\psi\circ\varphi(a)=0.
+  \end{equation*}
+  This proves that $[a]=\delta[c]$.
+  \par The rest is left to the readers.
+\end{proof}
+
+\begin{theorem}[Mayer-Vietoris for deRham Theory]
+  Let $\M=U\cup V$ be a smooth manifold where $U,V\subseteq\M$ are open sets. Then,
+  \begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \Omega^\bullet(\M) \arrow[r, "{\substack{\omega\mapsto(\omega|_U,\omega|_V)\\\:}}"] & \Omega^\bullet(U) \arrow[r, "{\substack{\:\\(\eta,\tau)\mapsto\eta|_{U\cap V}-\tau|_{U\cap V}}}"'] & \Omega^\bullet(U\cap V) \arrow[r] & 0
+\end{tikzcd}
+  \end{center}
+  is exact.
+  Hence there is the long exact cohomology sequence, 
+  \begin{center}
+    \begin{tikzcd}
+0 \arrow[r]      & H^0\M \arrow[r] & H^0U\oplus H^0V \arrow[r] & H^0 U\cap V \arrow[lld] &        \\
+                 & H^1\M \arrow[r] & H^1U\oplus H^1V \arrow[r] & H^1U\cap V \arrow[r]    & \cdots \\
+\cdots \arrow[r] & H^m\M \arrow[r] & H^mU\oplus H^mV \arrow[r] & H^m U\cap V \arrow[r]   & 0     
+\end{tikzcd}
+  \end{center}
+\end{theorem}
+
+\begin{proof}
+  Only the surjectivity at the right needs proof. Choose a smooth partition of unity $\{\varphi_U,\varphi_V\}$ subordinates to $\{U,V\}$. Given $\omega\in\Omega^k(U\cap V)$, put 
+  \begin{equation*}
+    s\omega = (\varphi_V\omega,-\varphi_U\omega)\in\Omega^k U\oplus \Omega^k.\tag{$\ast$}\label{s_lifting_map}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  The lifting map in Equation \eqref{s_lifting_map} allows to make $\delta$ explicit. That is given $\omega\in\Omega^k(U\cap V)$ representing $[\omega]\in H^k(U\cap V)$ that is $d\omega = 0$. Let 
+  \begin{equation*}
+    \chi\defeq s\omega = (\varphi_V\omega,-\varphi_U\omega),d\chi=(d(\varphi_V\omega),-d(\varphi_U\omega)).
+  \end{equation*}
+  Then we have,
+  \begin{equation*}
+    \delta[\omega]=[d(\varphi_V\omega)]_{H^{k+1}(\M)}.
+  \end{equation*}
+  We warn that $d(\varphi_j\omega)$ extends by $0$ to a closed form on $\M$. It is not necessarily an exact on $\M$.
+\end{remark}
+
+\begin{lemma}
+  Let 
+  \begin{center}
+    \begin{tikzcd}
+0 \arrow[r] & E^0 \arrow[r, "d"] & E^1 \arrow[r, "d"] & \cdots \arrow[r, "d"] & E^n \arrow[r] & 0
+\end{tikzcd}
+  \end{center}
+  be an exact sequence of finite dimensional vector spaces. Then 
+  \begin{equation*}
+    \sum_{j=0}^n (-1)^j\dim E^j = 0.
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{example}
+  Consider $S^n$ and consider two stereographic projection $(U=S^n\backslash\{N\},\sigma_N),(V=S^n\backslash\{-N\},\sigma_{-N})$ where $N=(0,\cdots,0,1)$. Then we have,
+  \begin{equation*}
+    U\cap V\simeq S^{n-1}\times \R\cong_n S^{n-1}.
+  \end{equation*}
+  Then consider Mayer-Vietoris sequence,
+  \begin{center}
+\begin{tikzcd}
+0 \arrow[r]      & H^0S^n \arrow[r] & H^0\R^n\oplus H^0\R^n \arrow[r] & H^0 S^{n-1} \arrow[lld] &        \\
+                 & H^1S^n \arrow[r] & H^1\R^n\oplus H^1\R^n \arrow[r] & H^1 S^{n-1} \arrow[r]   & \cdots \\
+\cdots \arrow[r] & H^kS^n \arrow[r] & H^k\R^n\oplus H^k\R^n \arrow[r] & H^kS^{n-1} \arrow[r]    & \cdots
+\end{tikzcd}
+  \end{center}
+  Using Theorem \ref{theorem_poincare_lemma} and Example \ref{example_zeroth_cohomology_circle}, we obtain,
+  \begin{center}
+    \begin{tikzcd}
+0 \arrow[r]      & \R \arrow[r]     & \R\oplus \R \arrow[r] & {\underbrace{\R}_{n\not=1,n=1\Rightarrow \R\oplus \R}} \arrow[lld, "0"'] &        \\
+                 & 0 \arrow[r]      & 0 \arrow[r, "0"]      & H^1S^{n-1} \arrow[r]                                                     & \cdots \\
+\cdots \arrow[r] & H^kS^n \arrow[r] & 0 \arrow[r]           & 0 \arrow[r]                                                              & \cdots
+\end{tikzcd}
+  \end{center}
+  For $n=1$, we have,
+  \begin{center}
+    \begin{tikzcd}
+0 \arrow[r] & \R \arrow[r]                               & \R\oplus\R \arrow[r] & \R\oplus\R \arrow[lld] \\
+            & \underbrace{H^1(S^1)}_{\cong \R} \arrow[r] & 0                    &                       
+\end{tikzcd}
+  \end{center}
+  In particular $H^{k-1}(S^{n-1})\simeq H^k(S^n)$ for $k\geq1$.
+  \par For $1\leq k\leq n$, 
+  \begin{align*}
+    H^kS^n = H^1(S^{n-k+1})\cong\begin{cases}
+      0,\quad (k\not=n),\\
+      \R,\quad (k=n).
+    \end{cases}
+  \end{align*}
+\end{example}
+
+\subsection{Compactly supported deRham Cohomology and Poincaré duality}
+
+Consider 
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \Omega_C^\bullet(U\cap V) \arrow[r, "{\substack{i_*^U-i_*^V=[\omega\mapsto(-i_*^U\omega,i_*^V\omega)]\\\:}}"] & \Omega_C^\bullet(U)\oplus\Omega_C^\bullet(V) \arrow[r, "{\substack{\:\\(\tau,\eta)\mapsto(i_*^\M\tau+i_*^\M\eta)}}"'] & \Omega_C^\bullet(\M) \arrow[r] & 0
+\end{tikzcd}
+\end{center}
+
+This turns out to be an exact sequence. The proof will be shown next week.
+
 
 \begin{thebibliography}{9}
 \bibitem{Lee}
