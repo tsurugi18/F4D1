@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[10pt]{article}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -10,6 +10,7 @@
 \usepackage{lipsum}
 \usepackage{fancyhdr}
 \usepackage{tikz-cd} 
+\usepackage{adjustbox} 
 \usetikzlibrary{arrows}
 \newcommand{\midarrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
 \tikzset{commutative diagrams/.cd,
@@ -4229,14 +4230,208 @@ Consider
 
 This turns out to be an exact sequence. The proof will be shown next week.
 
+\begin{proposition}
+  We have the following exact sequence.
+  \begin{center}
+    \begin{tikzcd}
+0 \arrow[r] & \Omega^\bullet_C(U\cap V) \arrow[r, "{\substack{\omega\mapsto(-i_*^U\omega,i_*^V\omega)\\\:}}"] & \Omega^\bullet_C(U)\oplus\Omega^\bullet_C(V) \arrow[r, "{\substack{(\eta,\tau)\mapsto i_*\eta+i_*\tau)\\\:}}"] & \Omega^\bullet_C(\M) \arrow[r] & 0
+\end{tikzcd}
+  \end{center}
+\end{proposition}
 
+Recall Theorem \ref{theorem_poincare_lemma}, we have,
+\begin{equation*}
+  H^k_{\dR}(\R^N)=\begin{cases}
+    0,\quad k>0,\\
+    \R, \quad k=0.
+  \end{cases}
+\end{equation*}
+
+We also have the following diagram,
+
+\begin{center}
+  \begin{tikzcd}
+\Omega^n_C(\R^n) \arrow[r, "\int"] \arrow[d] & \R \\
+H_C^n(\R^n) \arrow[ru, "\eta"']              &   
+\end{tikzcd}
+\end{center}
+\begin{proposition}[Poincaré Lemma with compact support]
+  \begin{equation*}
+    H_C^k(\R^n)\cong\begin{cases}
+      0,\quad k\not=n,\\
+      \R,\quad k=n.
+    \end{cases}
+  \end{equation*}
+\end{proposition}
+
+\begin{proof}
+  Only surjectivity at the right needs proof. Let $N\in S^n$ be the north pole and $U=S^n\backslash \{N\},V=S^n\backslash \{-N\}$. Choose a smooth partition of unity $\{\varphi_U,\varphi_V\}$ subordinates to $\{U,V\}$. For $\omega\in\Omega^p_C(\M)$, we have 
+  \begin{equation*}
+    \varphi_U\omega\in\Omega_C^p(U),\varphi_V\omega\in\Omega_C^p(V).
+  \end{equation*}
+\end{proof}
+
+\begin{proof}
+  Recall 
+  \begin{equation*}
+    H^k S^n==\begin{cases}
+      0,\quad k\not=0,n,\\
+      \R,\quad k=0,n.
+    \end{cases}
+  \end{equation*}
+  \begin{center}
+    \begin{tikzcd}
+\Omega^n S^n \arrow[r, "\int"] \arrow[d] & \R \\
+H^nS^n \arrow[ru, "\cong"']              &   
+\end{tikzcd}
+  \end{center}
+  Note that $S^n$ is compact thus $H^kS^n=H^k_CS^n$. Let $\omega\in\Omega_C^k(S^n\backslash\{N\})$ such that $d\omega=0,\int\omega=0$. The goal is to show that 
+  \begin{equation*}
+    \exists \eta\in\Omega^{k-c}_C(S^n\backslash\{N\}),\begin{cases}
+      \omega = \eta,\quad (k>0),\\
+      \omega = 0,\quad (k=0).
+    \end{cases}
+  \end{equation*}
+  From this, the claim follows. For $k=0$, as $\omega$ is smooth with compact support and $d\omega = 0$. This implies that $\omega$ is constant but the support is compact thus it must vanish.
+  \par For $k\geq1$, we (mising) identify forms $\omega$ with compact support on $S^n\backslash\{N\}$ with forms on $S^n$ by extension by $0$. From the knowledge of $H^k(S^n)$, we infer that there exists $\eta\in\Omega^{k-1}(S^n)$ with $d\eta=\omega$. However, we do not know whether $\eta$ vanishes near $N$.
+  Choose $\rho\in\cinf_C(U)$ with $\rho|_{\overline{V}}=1$.
+  \par For $k\geq 2$, we know,\
+  \begin{equation*}
+    d\eta|_U=\omega|_U=0.
+  \end{equation*}
+  By Theorem \ref{theorem_poincare_lemma}, there is a $\xi\in\Omega^{k-2}(U)$ with $d\xi=\eta|_U$.
+  \begin{equation*}
+    \eta_1\defeq \eta-d(\rho\xi)\in\Omega_C^{k-1}(S^n\backslash\{N\}),
+  \end{equation*}
+  since $\eta_1|_V=0$. Thus,
+  \begin{equation*}
+    d\eta_1=d\eta-d^2(\rho\xi)=\omega.
+  \end{equation*}
+  For $k=1$, 
+  \begin{equation*}
+    d\eta|_U=\omega|_U=0\Rightarrow\eta|_U=c,
+  \end{equation*}
+  for some constant $c$. Put,
+  \begin{equation*}
+    \eta_1\defeq \eta-c\in\Omega^0_C(\S^n\backslash\{N\}).
+  \end{equation*}
+  Thus $d\eta_1=\omega$.
+\end{proof}
+
+\begin{proposition}
+  Let $\M^m$ be an oriented manifold. Consider,
+  \begin{equation*}
+    H_C^k(\M)\times H^{m-k}(\M)\ni([\omega],[\tau])\mapsto\int\omega\wedge\tau\in\R.
+  \end{equation*}
+  This is a well-defined bilinear pairing.
+\end{proposition}
+\begin{proof}
+  Let $\alpha\in\Omega_C^{k-1}(\M),\beta\in\Omega^{m-k-1}_C(\M)$, and cosider,
+  \begin{equation*}
+    \omega'=\omega+d\alpha,\tau'=\tau+d\beta.
+  \end{equation*}
+  Then we have,
+  \begin{align*}
+    \omega'\wedge\tau'-\omega\wedge\tau&= (\omega+d\alpha)\wedge(\tau+d\beta)-\omega\wedge\tau+d\alpha\wedge d\beta,\\
+    & = d\alpha\wedge\tau'+\omega'\wedge d\beta,\\
+    & = d(\underbrace{\alpha\wedge\tau'}_{\in\Omega_C^{n-1}(\M)})+(-1)^kd(\underbrace{\omega'\wedge d\beta}_{\in\Omega^{m-1}_C(\M)})+d(\alpha\wedge d\beta).
+  \end{align*}
+  Using Stokes' theorem, we obtain,
+  \begin{equation*}
+    \int\omega'\wedge\tau' = \int\omega\wedge\tau.
+  \end{equation*}
+\end{proof}
+
+\begin{notation}
+  We will denote such bilinear pairing by,
+  \begin{equation*}
+    \langle[\omega],[\tau]\rangle\defeq\int\omega\wedge\tau.
+  \end{equation*}
+\end{notation}
+
+\begin{definition}
+  We set $\beta:H^{m-k}(\M)\to H_C^k(\M)^*$, by
+  \begin{equation*}
+    \beta([\tau]) = \langle\cdot,[\tau]\rangle.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  A manifold $\M^m$ is a good manifold if 
+  \begin{enumerate}
+    \item $H_{(C)}^k(\M)$ are finite dimensional for all $k$.
+    \item $\beta$ is an isomorphism.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  From Poincaré Lemmas, we have that $\R^m$ is a good manifold. More precisely,
+  \begin{equation*}
+    H^k_C\R^m\times H^{m-k}\R^m\ni([\omega],[\tau])\mapsto\int\omega\wedge\tau\in\R.
+  \end{equation*}
+  If $k\not=m$, then this is $\mathcal{O}\times\mathcal{O}\to\R$ which is a dual pairing. For $k=m$,
+  \begin{equation*}
+    H^m\R^m\times H^0\R^m\to\R.
+  \end{equation*}
+  Note that for each element of $[\omega]\in H^m_C\R^m$, there is $\rho\in\cinf_C(\R^m)$ such that $\int\rho=1$ and 
+  \begin{equation*}
+    [\omega]= [\rho dx_1\wedge\cdots\wedge dx_m].
+  \end{equation*}
+  Recall that $H^0\R^m = \{[1]\}$. Thus, we have,
+  \begin{equation*}
+    \langle[\rho dx_1\wedge\cdots\wedge dx_m],[1]\rangle = \int\rho dx_1\wedge\cdots\wedge dx_m\wedge 1 = \int\rho = 1.
+  \end{equation*}
+\end{remark}
+
+\begin{lemma}
+  Consider an exact sequence of vectorspaces,
+  \begin{center}
+    \begin{tikzcd}
+\cdots \arrow[r] & V_1 \arrow[r] & V_2 \arrow[r] & V_3 \arrow[r] & \cdots
+\end{tikzcd}
+  \end{center}
+  If $V_1,V_3$ are finite dimensional then so is $V_2$.
+  \label{lemma_exact_finite_dimensional}
+\end{lemma}
+\begin{lemma}[Five Lemma]
+  \label{lemma_five_lemma}
+  Suppose the following diagram commutes and horizontal sequences are exact in 
+\begin{center}
+    \begin{tikzcd}
+A \arrow[r] \arrow[d, "\alpha"] & B \arrow[r] \arrow[d, "\beta"] & C \arrow[r] \arrow[d, "\gamma"] & D \arrow[r] \arrow[d, "\delta"] & E \arrow[d, "\varepsilon"] \\
+A' \arrow[r]                    & B' \arrow[r]                   & C' \arrow[r]                    & D' \arrow[r]                    & E'                        
+\end{tikzcd}
+\end{center}
+  Then $\alpha,\beta,\delta,\varepsilon$ are isomorphisms then so is $\gamma$.
+\end{lemma}
+\setcounter{claim}{0}
+\begin{theorem}[Mayer-Vietoris Principle]
+  For $\M=U\cup V$ for some open sets $U,V$. If $U,V,U\cap V$ are good then so is $\M$.
+\end{theorem}
+\begin{proof}
+  \begin{claim}
+    Consider the sequence,
+
+\adjustbox{scale=0.75,center}{
+\begin{tikzcd}
+\cdots \arrow[r] & H^{m-k-1}U\cap V \arrow[r, "\delta"] \arrow[d, "\beta"] & H^{m-k}\M \arrow[r] \arrow[d, "\beta"] & H^{m-k}U\oplus H^{m-k}V \arrow[r] \arrow[d, "\beta"] & H^{m-k}U\cap V \arrow[r, "\delta"] \arrow[d, "\beta"] & H^{m-k+1}\M \arrow[r] \arrow[d, "\beta"] & \cdots \\
+\cdots \arrow[r] & (H_C^{k+1}U\cap V)^* \arrow[r, "\delta"']               & (H_C^k\M)^* \arrow[r]                  & (H^k_CU\oplus H_C^kV)^* \arrow[r]                    & (H_C^kU\cap V)^* \arrow[r, "\delta^*"']               & (H^{k-1}_C\M)^* \arrow[r]                & \cdots
+\end{tikzcd}
+}
+    Then each square commutes up to signs.
+  \end{claim}
+  \begin{claimproof}
+    Follows from Lemma \ref{lemma_five_lemma}.
+  \end{claimproof}
+  \par The detailed proof will be found in \cite{Bott}.
+\end{proof}
 \begin{thebibliography}{9}
 \bibitem{Lee}
 Lee, John M. (2012) \emph{Introduction to Smooth Manifolds}, Graduate Texts in Mathematics.
 \bibitem{Kobayashi-Nomizu}
 Shoshichi Kobayashi, Katsumi Nomizu (1963) \emph{Foundations of differential geometry. {V}ol {I}}, Interscience Publishers, a division of John Wiley \& Sons, New
               York-London.
-
+\bibitem{Bott} Bott, Raoul and Tu, Loring W (1982), \emph{Differential Forms in Algebraic Topology}, Graduate Texts in Mathematics, Springer-Verlag, New York.
 \end{thebibliography}
 
 \end{document}
