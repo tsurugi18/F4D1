@@ -4425,6 +4425,247 @@ A' \arrow[r]                    & B' \arrow[r]                   & C' \arrow[r] 
   \end{claimproof}
   \par The detailed proof will be found in \cite{Bott}.
 \end{proof}
+\subsection{The Hodge deRham Theorem}
+Consider a Riemannain manifold $\M^m$ and $L$ be a flat line bundle (i.e. either $L=\C$ or $L=\mathcal{O}$) and we equip $L$ with the Euclidean metric (imposing the flatness justifies such equipment). The Hodge $\star$-operator extends to an isometry.
+\begin{equation*}
+  \star:\Omega^p(\M,L)\mapsto \Omega^{m-p}(\M,\mathcal{O}\otimes L).
+\end{equation*}
+For $\omega,\tau\in\Omega^p(\M,L)$, we get a $1$-density $\omega\wedge\star\tau$. Locally 
+\begin{equation*}
+\omega=\omega_1\otimes s,\eta=\eta_1\otimes t, s,t\in\Gamma(L).
+\end{equation*}
+We then get,
+\begin{equation*}
+\omega\wedge\star\tau = \omega_1\wedge\star\eta_1\langle s,t\rangle.
+\end{equation*}
+In this way, $\Omega^p_{C}(\M,L)$ becomes an Euclidean (respectively Hermitian after tensoring with $\C$) space with scalar product 
+\begin{equation*}
+\langle \omega,\tau\rangle \defeq\int_\M\omega\wedge\star\tau.
+\end{equation*}
+\begin{proposition}
+  The adjoint of $d_p:\Omega^p_C(\M,L)\to\Omega^{p+1}_C(\M,L)$ is given by 
+  \begin{equation*}
+  d_p^*=(-1)^{mp+1}\ast_{m-p-1}d_{m-p}\ast_p+1.
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  For a $p$-form $\omega$ and $(p+1)$-form $\tau$, we have,
+  \begin{align*}
+    \langle d\omega,\tau\rangle &= \int_\M d\omega\wedge\star\tau = \int_\M[d(\omega\wedge\star\tau)-(-1)^p\omega\wedge d(\star\tau)],\\
+    & \stackrel{\text{Stokes'}}{=}\int_\M (-1)^{p+1+p(m-p)}\omega\wedge\star\star d\star\tau,\\
+    & = \langle\omega,(-1)^{mp+1}\star d\star\tau\rangle, \quad(p^2=p\mod{2}).
+  \end{align*}
+\end{proof}
+\begin{definition}
+  Let $T:H\to H$ be a linear operator of Hilbert spaces. $T$ is positive or $T\geq0$ if for any $x\in H$, 
+  \begin{equation}
+    \langle Tx,x\rangle \geq0.
+  \end{equation}
+\end{definition}
+\begin{definition}[Hodge Laplace Operator]
+  \begin{equation}
+    \Delta_p\defeq d_{p-1}d_{p-1}^*+d_p^*d_p = (d+d^*)_p.
+  \end{equation}
+\end{definition}
+\begin{example}
+  For $p=0$, thisis the usual Laplace-Beltrami operator, that is 
+  \begin{equation*}
+  \Delta_0=-\diverg\grad = \Delta.
+  \end{equation*}
+\end{example}
+\begin{definition}
+  A $p$-form $\omega$ is said to be harmonic if 
+  \begin{equation*}
+  \Delta\omega=0.
+  \end{equation*}
+\end{definition}
+\begin{theorem}[Hodge-deRham]
+  Let $\M$ be a compact manifold then there is a orthogonal sum decomposition. That is 
+  \begin{equation*}
+  \Omega^p(\M,L) = \ker\Delta_p\oplus\image d_{p-1}\oplus \image d_p^*. \tag{HD}\label{equation_hd_decomp}
+  \end{equation*}
+  In particular, $H^p_{\dR}(\M)$ is canonically isomorphic to $\mathscr{H}^p=\ker\Delta_p$. In other words, each deRham cohomology class has exactly one harmonic form.
+\end{theorem}
+\begin{proof}
+  We only prove the orthogonality of the three spaces in Equation \eqref{equation_hd_decomp}. The proof of equality requires stronger tools, (e.g. the elliptic regularity theorem).
+  \par Let $\omega\in\ker d_p,\eta\in\Omega^{p+1}(\M,L)$, then 
+  \begin{equation*}
+    (\omega,d_p^*\eta)=(d_p\omega,\eta) = 0.
+  \end{equation*}
+  Therefore, $\ker d_p\perp\image d_p^*$, in particular, 
+  \begin{equation*}
+    \image d_{p-1},\mathscr{H}^p\perp\image d_p^*.
+  \end{equation*}
+  This follows from $d_p\circ d_{p-1}=0$ and $\mathscr{H}^p\subseteq \ker d_p^*$. Similarly, $\ker d_{p-1}^*\perp\image d_{p-1}$, and hence,
+  \begin{equation*}
+    \mathscr{H}^p\subseteq\ker d_{p-1}^*\perp\image d_{p-1}.
+  \end{equation*}
+\end{proof}
+\begin{corollary}
+  Poincaré duality is implemented by the Hodge $\star$-operator. That is $\star$ gives an isomorphism of cohomology by
+  \begin{equation*}
+    \star:\mathscr{H}^p(\M,L)\to\mathscr{H}^{m-p}(\M,\mathcal{O}\otimes L).
+  \end{equation*}
+\end{corollary}
+\subsection{DeRham Cohomology for Manifolds with Boundaries}
+For simplicity, all manifolds in this section are assumed to be oriented. 
+\par Let $\M$ be a manifold with boundary $\partial\M$ and $i:\partial\M\hookrightarrow\M$ be the inclusion map. There are many variation of relative deRham cohomology which turns out to be equivalent. We put 
+\begin{align*}
+  \Omega^\bullet(\M)=\{\text{forms smooth up to $\partial\M$}\},\\
+  \Omega^\bullet(\M,\partial\M)=\ker i^*:\Omega^\bullet(\Omega)\to\Omega^*(\partial \M).
+\end{align*}
+We get an exact sequence of cochain complexes.
+\begin{center}
+  \begin{tikzcd}
+0 \arrow[r] & {\Omega^\bullet(\M,\partial\M)} \arrow[r] & \Omega^\bullet(\M) \arrow[r, "i^*"] & \Omega^\bullet(\partial\M) \arrow[r] & 0
+\end{tikzcd}
+\end{center}
+\begin{proposition}
+  The inclusion map induces an isomorphism,
+  \begin{equation*}
+    H^\bullet(\M)\to H^\bullet(\M\backslash\partial\M).
+  \end{equation*}
+  The inclusion map $\Omega^\bullet_C(\M\backslash\partial\M)\to\Omega^\bullet(\M,\partial\M)$ induces an isomorphism 
+  \begin{equation*}
+    H^\bullet_C(\M\backslash\partial\M)\to H^\bullet(\M,\partial\M).
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  The homotopy operator shows that for any $t_0\in(-\varepsilon,0)$, the map 
+  \begin{equation*}
+    i_{t_0}:\partial\M\to(-\varepsilon,0)\times\partial\M,
+  \end{equation*}
+  induces an isomorphism,
+  \begin{equation*}
+    i_{t_0}^*:H^\bullet((-\varepsilon,0)\times\partial\M)\stackrel{\substack{p\mapsto(t_0,p)\\\:}}{\to}H^\bullet(\partial\M).\tag{$\ast$}\label{equation_isom_i}
+  \end{equation*}
+  For general $\M$, choose a cillinder $(-\varepsilon,0]\times\partial\M$ of the boundary and a smooth cut-off function $\varphi$ such that 
+  \begin{equation*}
+    \varphi(t)=\begin{cases}
+      0,\quad(t\leq-\varepsilon),\\
+      1,\quad(t\geq-{\frac \varepsilon 2}).
+    \end{cases}
+  \end{equation*}
+  For the surjectivity, let $\omega\in Z^k(\M,\partial\M)$. By Equation \eqref{equation_isom_i}, there exists $\tau\in Z^k(\partial\M)$ and $\xi\in\Omega^{k-1}((-\varepsilon,0)\times\partial\M)$ such that 
+  \begin{equation*}
+    \omega|_{(-\varepsilon,0)\times\partial\M}=d\xi+\pi^*\tau.
+  \end{equation*}
+  Thn 
+  \begin{equation*}
+    \omega-d(\varphi\xi)|_{(-\varepsilon,0)\times\partial\M} = d(\underbrace{(1-\varphi)\xi}_{\Omega^{k-1}_C((-\varepsilon,0)\times\partial\M)})+\pi^*\tau,
+  \end{equation*}
+  extends smoothly to the boundary.
+  \par For the injectivity, let $\omega\in Z^k(\M)$ and $\omega|_{\M\backslash\partial\M}=d\eta$ for $\eta\in\Omega^{k-1}(\M\backslash\partial\M)$. Then $\omega|_{(-\varepsilon,0)\times\partial\M}$ is also exact and by Equation \eqref{equation_isom_i}, there exists $\tau\in\Omega^{k-1}((-\varepsilon,0]\times\partial\M)$ with $\omega|_{\M\backslash\partial\M}=d\tau$.
+  \begin{equation*}
+    \omega_1 = \omega-d(\varphi\tau) = d(\underbrace{\eta-\varphi\tau}_{=\eta}).
+  \end{equation*}
+  $\eta_1$ is closed on $\left(-{\frac \varepsilon 2},0\right)\times\partial\M$ and by the surjectivity, we find $\xi\in\Omega^{k-2}\left(\left(-{\frac \varepsilon 2},0\right]\times\partial\M\right)$ such that $\eta_2 = \eta_1-d(\varphi\xi)$ extends smoothly to the boundary. Certainly 
+  \begin{equation*}
+    \omega_1 = d\eta_1 = d\eta_2.
+  \end{equation*}
+  Therefore,
+  \begin{equation*}
+    \omega = d\eta = d(\eta_1+\varphi\tau) = d(\eta_2+\varphi\tau).
+  \end{equation*}
+  This proves the first part of the theorem. For the latter part, consider the short exact sequence,
+  \begin{equation*}
+    \begin{tikzcd}
+0 \arrow[r] & {\Omega^\bullet((-\varepsilon,0]\times\partial\M,\partial\M)} \arrow[r] & {\Omega^\bullet((-\varepsilon,0]\times\partial\M)} \arrow[r, "i^*"] & \Omega^\bullet(\partial\M) \arrow[r] & 0
+\end{tikzcd}
+\tag{$C$}\label{short_exact_sequence_rel_cohomology}
+  \end{equation*}
+  The homotopy operator shows that 
+  \begin{equation*}
+    i^*:H^\bullet((-\varepsilon,0]\times\partial\M)\to H^\bullet(\partial\M),
+  \end{equation*}
+  is an isomorphism and hence the long exact cochain sequence shows that 
+  $H^\bullet((-\varepsilon,0)\times\partial\M,\partial\M)$ vanishes. Let $\varphi$ be the cut-off function defined as before. For the surjectivity, given $\omega\in Z^k(\Omega^\bullet(\M,\partial\M))$,
+  \begin{equation*}
+  \exists \xi\in\Omega^{k-1}((-\varepsilon,0]\times\partial\M,\partial\M),\st \omega|_{(-\varepsilon,0]\times\partial\M}=d\xi.
+  \end{equation*}
+  Then,
+  \begin{equation*}
+  \omega -d(\varphi\xi)\in Z^k(\Omega_C^\bullet(\M\backslash\partial\M)).
+  \end{equation*}
+  For the injectivity, let $\omega\in Z^k(\Omega_C^\bullet(\M\backslash\partial\M))$, with $\omega=d\eta,\eta\in\Omega^\bullet(\M,\partial\M)$. THen for a certain $\varepsilon>0$, 
+  \begin{equation*}
+  \supp\omega\subseteq\M\backslash(-\varepsilon,0]\times\partial.
+  \end{equation*}
+  Hence,
+  \begin{equation*}
+    \eta|_{(-\varepsilon,0]\times\partial\M}\in Z^{k-1}((-\varepsilon,0]\times\partial\M,\partial\M).
+  \end{equation*}
+  As before,
+  \begin{equation*}
+    \eta|_{(-\varepsilon,0]\times\partial\M}=d\xi,
+  \end{equation*}
+  then 
+  \begin{equation*}
+    \omega = d(\underbrace{\eta-d(\varphi\xi)}_{\in\Omega_C^\bullet(\M\backslash\partial\M)}).
+  \end{equation*}
+\end{proof}
+We come back to the short exact sequence of relative cohomology. There is a homological algebra realization of relative cohomologies.
+\begin{definition}
+  A morphism of cochain complexes $\phi:(E^\bullet,d^E)\to(F^\bullet,d^F)$ is called a quasi-isomorphism if for all $n\in\Z_{\geq0}$, we have,
+  \begin{equation*}
+    H^n(f):H^n(E^\bullet)\to H^n(F^\bullet)
+  \end{equation*}
+  is an isomorphism.
+\end{definition}
+\begin{proposition}
+  Let 
+  \begin{center}
+    \begin{tikzcd}
+0 \arrow[r] & {(K^\bullet,d^K)} \arrow[r, "f"] & {(E^\bullet,d^E)} \arrow[r, "g"] & {(F^\bullet,d^F)} \arrow[r] & 0
+\end{tikzcd}
+  \end{center}
+  be a short exact sequence of cohain complexes. Set,
+  \begin{equation*}
+    Q^k \defeq E^k\oplus F^{k-1}, d^Q\defeq = \begin{pmatrix}
+      d^E & O\\
+      g & -d^F
+    \end{pmatrix}
+  \end{equation*}
+  Then $(Q^\bullet,d^Q)$ is a cochain complex and 
+  \begin{equation*}
+    \phi:K^\bullet\to Q^\bullet = [\omega\to(f(\omega),0)]
+  \end{equation*}
+  is a quasiisomorphism
+\end{proposition}
+\begin{proof}
+  \begin{equation*}
+    \begin{pmatrix}
+      d^E & O\\
+      g & -d^F
+    \end{pmatrix}^2 = \begin{pmatrix}
+      (d^E)^2 & O\\
+      gd^E-d^Fg & (d^F)^2
+    \end{pmatrix}=O.
+  \end{equation*}
+  $\phi$ is linear and respects boundaries that is 
+  \begin{equation*}
+    d\phi(\omega) = d(f(\omega),0) = (df(\omega),gf(\omega))=(f(d\omega),0)=\phi(d\omega).
+  \end{equation*}
+  Thus $\phi$ is a morphism of cochain complexes.
+  \par For the injectivity, let $\omega\in Z^k(K^\bullet)$ with $\phi(\omega)$ exact. Then,
+  \begin{equation*}
+  (f(\omega),0) = d(\xi,\tau)=(d\xi,g(\xi)-d\tau).
+  \end{equation*}
+  Let $\tilde{\tau}\in E^{k-1}$ with $g(\tilde{\tau})=\tau$, then,
+  \begin{align*}
+    d(\underbrace{(\xi,\tau)-d(\tilde{\tau},0)}_{=(\xi-d\tilde{\tau},0)})=(f(\omega),0).\\
+    g(\xi-d\tilde{\tau})=g(\xi)-d\tau=0.
+  \end{align*}
+  Therefore $\xi-d\tilde{\tau}\in\image f$. Thus we conclude, $\omega\in B^k(K^\bullet)$.
+  \par For the surjectivity, let $(\xi,\tau)\in Z^k(Q^\bullet)$, then $d\xi=0,g(\xi) = d\tau$. As before, choose $\tilde{\tau}\in E^{k-1}$ with $g(\tilde{\tau}) = \tau$. Then,
+  \begin{equation*}
+    (\xi,\tau)-d(\tilde{\tau},0)=(\xi-d\tilde{\tau},0)\in\image\phi.
+  \end{equation*}
+  ALso,
+  \begin{equation*}
+    g(\xi-d\tilde{\tau})=g(\xi)-d\tau=0,d(\xi-d(\tilde{\tau}))=0.
+  \end{equation*}
+\end{proof}
 \begin{thebibliography}{9}
 \bibitem{Lee}
 Lee, John M. (2012) \emph{Introduction to Smooth Manifolds}, Graduate Texts in Mathematics.
