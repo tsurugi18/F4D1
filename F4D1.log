@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.10.19)  28 JAN 2026 17:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.10.19)  4 FEB 2026 17:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -463,20 +463,20 @@ File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (./F4D1.aux)
 \openout1 = `F4D1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
  (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count325
@@ -496,27 +496,27 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 112.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 115.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 112.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 115.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 112.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 115.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-Overfull \hbox (4.10284pt too wide) in paragraph at lines 155--156
-[]\OT1/cmr/bx/n/10 Definition 2.1. []\OT1/cmr/m/it/10 Let $\OML/cmm/m/it/10 X$ \OT1/cmr/m/it/10 be a topo-log-i-cal space. $\OML/cmm/m/it/10 X$ \OT1/cmr/m/it/10 is said to be sep-a-rated/Hausdorff
- []
-
-
 
 [1
 
 {/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (4.10284pt too wide) in paragraph at lines 158--159
+[]\OT1/cmr/bx/n/10 Definition 2.1. []\OT1/cmr/m/it/10 Let $\OML/cmm/m/it/10 X$ \OT1/cmr/m/it/10 be a topo-log-i-cal space. $\OML/cmm/m/it/10 X$ \OT1/cmr/m/it/10 is said to be sep-a-rated/Hausdorff
+ []
+
+
 
 [2]
 
@@ -543,7 +543,7 @@ Overfull \hbox (4.10284pt too wide) in paragraph at lines 155--156
 [13]
 
 [14]
-Overfull \hbox (8.49144pt too wide) detected at line 863
+Overfull \hbox (8.49144pt too wide) detected at line 866
 \OML/cmm/m/it/10 ^^U[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 C[] \OMS/cmsy/m/n/10 \ \OML/cmm/m/it/10 W\OT1/cmr/m/n/10 )) \OMS/cmsy/m/n/10 ^^T \OML/cmm/m/it/10 r[]^^U\OT1/cmr/m/n/10 ([] \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 C[] \OMS/cmsy/m/n/10 \ \OML/cmm/m/it/10 W[]\OT1/cmr/m/n/10 )) \OMS/cmsy/m/n/10 ^^T \OML/cmm/m/it/10 r[] [][] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 K \OMS/cmsy/m/n/10 ^^A \OML/cmm/m/it/10 r[]:
  []
 
@@ -552,7 +552,7 @@ Overfull \hbox (8.49144pt too wide) detected at line 863
 [15]
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 970--971
+Underfull \hbox (badness 10000) in paragraph at lines 973--974
 
  []
 
@@ -561,7 +561,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 970--971
 [17]
 
 [18]
-Overfull \hbox (80.58345pt too wide) detected at line 1066
+Overfull \hbox (80.58345pt too wide) detected at line 1069
 []
  []
 
@@ -572,32 +572,32 @@ Overfull \hbox (80.58345pt too wide) detected at line 1066
 [20]
 
 [21]
-Underfull \hbox (badness 10000) in paragraph at lines 1219--1221
+Underfull \hbox (badness 10000) in paragraph at lines 1222--1224
 
  []
 
 
 
 [22]
-Underfull \hbox (badness 10000) in paragraph at lines 1241--1242
+Underfull \hbox (badness 10000) in paragraph at lines 1244--1245
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1250--1254
+Underfull \hbox (badness 10000) in paragraph at lines 1253--1257
 
  []
 
 
 
 [23]
-LaTeX Font Info:    Trying to load font information for U+euf on input line 1347.
+LaTeX Font Info:    Trying to load font information for U+euf on input line 1350.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 )
 
 [24]
-Overfull \hbox (121.72151pt too wide) detected at line 1370
+Overfull \hbox (121.72151pt too wide) detected at line 1373
 []
  []
 
@@ -606,36 +606,36 @@ Overfull \hbox (121.72151pt too wide) detected at line 1370
 [25]
 
 [26]
-Underfull \hbox (badness 10000) in paragraph at lines 1469--1470
+Underfull \hbox (badness 10000) in paragraph at lines 1472--1473
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1477--1479
+Underfull \hbox (badness 10000) in paragraph at lines 1480--1482
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1497--1499
+Underfull \hbox (badness 10000) in paragraph at lines 1500--1502
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1516--1518
+Underfull \hbox (badness 10000) in paragraph at lines 1519--1521
 
  []
 
 
 
 [27]
-Underfull \hbox (badness 10000) in paragraph at lines 1541--1543
+Underfull \hbox (badness 10000) in paragraph at lines 1544--1546
 
  []
 
 
 
 [28]
-Underfull \hbox (badness 10000) in paragraph at lines 1565--1567
+Underfull \hbox (badness 10000) in paragraph at lines 1568--1570
 
  []
 
@@ -644,31 +644,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 1565--1567
 [29]
 
 [30]
-Overfull \hbox (40.36815pt too wide) in paragraph at lines 1719--1720
+Overfull \hbox (40.36815pt too wide) in paragraph at lines 1722--1723
 []\OT1/cmr/bx/n/10 Definition 3.19. []\OT1/cmr/m/it/10 Let $\OML/cmm/m/it/10 E [] \OMS/cmsy/m/n/10 M\OML/cmm/m/it/10 ; F [] \OMS/cmsy/m/n/10 M$ \OT1/cmr/m/it/10 be vec-tor bun-dles with co-cy-cle $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 g[]\OT1/cmr/m/n/10 )[]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 h[]\OT1/cmr/m/n/10 )[]$
  []
 
 
 
 [31]
-Overfull \hbox (40.36815pt too wide) in paragraph at lines 1727--1728
+Overfull \hbox (40.36815pt too wide) in paragraph at lines 1730--1731
 []\OT1/cmr/bx/n/10 Definition 3.20. []\OT1/cmr/m/it/10 Let $\OML/cmm/m/it/10 E [] \OMS/cmsy/m/n/10 M\OML/cmm/m/it/10 ; F [] \OMS/cmsy/m/n/10 M$ \OT1/cmr/m/it/10 be vec-tor bun-dles with co-cy-cle $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 g[]\OT1/cmr/m/n/10 )[]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 h[]\OT1/cmr/m/n/10 )[]$
  []
 
 
-Overfull \hbox (1.52359pt too wide) detected at line 1766
+Overfull \hbox (1.52359pt too wide) detected at line 1769
 \OMS/cmsy/m/n/10 f[]g $ f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 f[]\OT1/cmr/m/n/10 )[] \OMS/cmsy/m/n/10 j 8\OML/cmm/m/it/10  \OMS/cmsy/m/n/10 2 \OML/cmm/m/it/10 I; f[] \OMS/cmsy/m/n/10 2 C[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 U[]; \U/msb/m/n/10 R[]\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; f[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 ) = \OML/cmm/m/it/10 g[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 f[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10 :
  []
 
 
 
 [32]
-Underfull \hbox (badness 10000) in paragraph at lines 1799--1801
+Underfull \hbox (badness 10000) in paragraph at lines 1802--1804
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1808--1810
+Underfull \hbox (badness 10000) in paragraph at lines 1811--1813
 
  []
 
@@ -677,7 +677,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1808--1810
 [33]
 
 [34]
-Underfull \hbox (badness 10000) in paragraph at lines 1939--1940
+Underfull \hbox (badness 10000) in paragraph at lines 1942--1943
 
  []
 
@@ -691,24 +691,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 1939--1940
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 2088.
+(amsmath)                 on input line 2091.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2110--2112
+Underfull \hbox (badness 10000) in paragraph at lines 2113--2115
 
  []
 
 
 
 [38]
-Overfull \hbox (75.37903pt too wide) detected at line 2152
+Overfull \hbox (75.37903pt too wide) detected at line 2155
 []
  []
 
 
 
 [39]
-Overfull \hbox (14.15628pt too wide) in paragraph at lines 2185--2185
+Overfull \hbox (14.15628pt too wide) in paragraph at lines 2188--2188
 []\OT1/cmr/bx/n/14.4 Orientations, vol-umes and the Hodge $\OMS/cmsy/m/n/14.4 ^^C$\OT1/cmr/bx/n/14.4 -operator 
  []
 
@@ -719,7 +719,7 @@ Overfull \hbox (14.15628pt too wide) in paragraph at lines 2185--2185
 [41]
 
 [42]
-Overfull \hbox (30.00484pt too wide) detected at line 2407
+Overfull \hbox (30.00484pt too wide) detected at line 2410
 \OMS/cmsy/m/n/10 ^^C\OML/cmm/m/it/10 e[] \OMS/cmsy/m/n/10 ^ [] ^ \OML/cmm/m/it/10 e[] \OT1/cmr/m/n/10 = (\OMS/cmsy/m/n/10 ^^@\OT1/cmr/m/n/10 1)[] [] \OML/cmm/m/it/10 g\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 e[]; e[]\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 e[] \OMS/cmsy/m/n/10 ^ [] ^ \OML/cmm/m/it/10 e[] \OMS/cmsy/m/n/10 
  \OML/cmm/m/it/10 e[] \OMS/cmsy/m/n/10 ^ [] ^ \OML/cmm/m/it/10 e[]= [][] :
  []
@@ -729,7 +729,7 @@ Overfull \hbox (30.00484pt too wide) detected at line 2407
 [43]
 
 [44]
-Overfull \hbox (0.18745pt too wide) in paragraph at lines 2492--2494
+Overfull \hbox (0.18745pt too wide) in paragraph at lines 2495--2497
 []\OT1/cmr/bx/n/10 Remark 5.6. []\OT1/cmr/m/it/10 Given a man-i-fold $\OMS/cmsy/m/n/10 M$\OT1/cmr/m/it/10 , we have a vec-tor-bun-dle $\OML/cmm/m/it/10 T\OMS/cmsy/m/n/10 M [] M\OML/cmm/m/it/10 ; T[]\OMS/cmsy/m/n/10 M 7!
  []
 
@@ -740,31 +740,31 @@ Overfull \hbox (0.18745pt too wide) in paragraph at lines 2492--2494
 [46]
 
 [47]
-Overfull \hbox (85.16478pt too wide) detected at line 2653
+Overfull \hbox (85.16478pt too wide) detected at line 2656
 []
  []
 
 
 
 [48]
-Underfull \hbox (badness 10000) in paragraph at lines 2674--2676
+Underfull \hbox (badness 10000) in paragraph at lines 2677--2679
 
  []
 
 
-Overfull \hbox (21.39902pt too wide) detected at line 2685
+Overfull \hbox (21.39902pt too wide) detected at line 2688
 []
  []
 
 
-Overfull \hbox (90.75081pt too wide) detected at line 2693
+Overfull \hbox (90.75081pt too wide) detected at line 2696
 []
  []
 
 
 
 [49]
-Overfull \hbox (1.13658pt too wide) detected at line 2720
+Overfull \hbox (1.13658pt too wide) detected at line 2723
 []
  []
 
@@ -775,7 +775,7 @@ Overfull \hbox (1.13658pt too wide) detected at line 2720
 [51]
 
 [52]
-Overfull \hbox (16.04054pt too wide) detected at line 2872
+Overfull \hbox (16.04054pt too wide) detected at line 2875
 []
  []
 
@@ -788,7 +788,7 @@ Overfull \hbox (16.04054pt too wide) detected at line 2872
 [55]
 
 [56]
-Overfull \hbox (30.02634pt too wide) in paragraph at lines 3031--3032
+Overfull \hbox (30.02634pt too wide) in paragraph at lines 3034--3035
 []\OT1/cmr/bx/n/10 Remark 5.10. []\OT1/cmr/m/it/10 Fix an ori-en-ta-tion re-vers-ing dif-feo-mor-phism of $\U/msb/m/n/10 R[]$ \OT1/cmr/m/it/10 say $\OT1/cmr/m/n/10 ^^H(\OML/cmm/m/it/10 x[]; []  ; x[]\OT1/cmr/m/n/10 ) =
  []
 
@@ -801,7 +801,7 @@ Overfull \hbox (30.02634pt too wide) in paragraph at lines 3031--3032
 [59]
 
 [60]
-Overfull \hbox (22.35223pt too wide) detected at line 3247
+Overfull \hbox (22.35223pt too wide) detected at line 3250
 [][] \OML/cmm/m/it/10 d! \OT1/cmr/m/n/10 = [][] [] \OML/cmm/m/it/10 dx[] [] dx[] \OT1/cmr/m/n/10 = [][] \OMS/cmsy/m/n/10 ^^@\OML/cmm/m/it/10 f[]\OT1/cmr/m/n/10 (0\OML/cmm/m/it/10 ; x[]; []  ; x[]\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 dx[] [] dx[]:
  []
 
@@ -816,7 +816,7 @@ Overfull \hbox (22.35223pt too wide) detected at line 3247
 [64]
 
 [65]
-Overfull \hbox (17.92905pt too wide) detected at line 3512
+Overfull \hbox (17.92905pt too wide) detected at line 3515
 \OML/cmm/m/it/10 i[]! \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 i[]dx[] \OMS/cmsy/m/n/10 ^ [] ^ \OML/cmm/m/it/10 dx[] \OT1/cmr/m/n/10 = [](\OMS/cmsy/m/n/10 ^^@\OT1/cmr/m/n/10 1)[]\OML/cmm/m/it/10 dx[] \OMS/cmsy/m/n/10 ^ [] ^ \OML/cmm/m/it/10 dx[]i[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 dx[]\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^ \OML/cmm/m/it/10 dx[] \OMS/cmsy/m/n/10 ^ [] ^ \OML/cmm/m/it/10 dx[]:
  []
 
@@ -825,7 +825,7 @@ Overfull \hbox (17.92905pt too wide) detected at line 3512
 [66]
 
 [67]
-Overfull \hbox (13.5055pt too wide) detected at line 3614
+Overfull \hbox (13.5055pt too wide) detected at line 3617
 [][] \OML/cmm/m/it/10 h[]! \OMS/cmsy/m/n/10 ^^@ [][] \OML/cmm/m/it/10 h[]! \OT1/cmr/m/n/10 = [][] \OML/cmm/m/it/10 h[]! \OT1/cmr/m/n/10 =  \OML/cmm/m/it/10 int[]d\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 h[]!\OT1/cmr/m/n/10 ) = [][] \OML/cmm/m/it/10 h[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 d!\OT1/cmr/m/n/10 ) = 0\OML/cmm/m/it/10 :
  []
 
@@ -852,7 +852,7 @@ Overfull \hbox (13.5055pt too wide) detected at line 3614
 [77]
 
 [78]
-Overfull \hbox (18.87364pt too wide) in paragraph at lines 4222--4222
+Overfull \hbox (18.87364pt too wide) in paragraph at lines 4226--4226
 []\OT1/cmr/bx/n/12 Compactly sup-ported deR-ham Co-ho-mol-ogy and Poincar^^Se
  []
 
@@ -863,7 +863,7 @@ Overfull \hbox (18.87364pt too wide) in paragraph at lines 4222--4222
 [80]
 
 [81]
-Overfull \hbox (15.0pt too wide) in paragraph at lines 4420--4422
+Overfull \hbox (15.0pt too wide) in paragraph at lines 4424--4426
 [][]
  []
 
@@ -874,24 +874,24 @@ Overfull \hbox (15.0pt too wide) in paragraph at lines 4420--4422
 [83]
 
 [84]
-Overfull \hbox (10.72911pt too wide) in paragraph at lines 4558--4559
+Overfull \hbox (10.72911pt too wide) in paragraph at lines 4562--4563
 \OT1/cmr/m/n/10 Then $\OML/cmm/m/it/10 !\OMS/cmsy/m/n/10 j[]$ \OT1/cmr/m/n/10 is also ex-act and by Equa-tion [], there ex-ists $\OML/cmm/m/it/10 ^^\ \OMS/cmsy/m/n/10 2 \OT1/cmr/m/n/10 
 []((\OMS/cmsy/m/n/10 ^^@\OML/cmm/m/it/10 "; \OT1/cmr/m/n/10 0] \OMS/cmsy/m/n/10 ^^B
  []
 
 
-Overfull \hbox (23.24019pt too wide) in paragraph at lines 4561--4563
+Overfull \hbox (23.24019pt too wide) in paragraph at lines 4565--4567
 $\OML/cmm/m/it/10 ^^Q[]$ \OT1/cmr/m/n/10 is closed on $[] \OMS/cmsy/m/n/10 ^^B \OML/cmm/m/it/10 @\OMS/cmsy/m/n/10 M$ \OT1/cmr/m/n/10 and by the sur-jec-tiv-ity, we find $\OML/cmm/m/it/10 ^^X \OMS/cmsy/m/n/10 2 \OT1/cmr/m/n/10 
 [] []$
  []
 
 
-Overfull \hbox (20.3342pt too wide) detected at line 4576
+Overfull \hbox (20.3342pt too wide) detected at line 4580
 []
  []
 
 
-Overfull \hbox (19.58035pt too wide) in paragraph at lines 4580--4583
+Overfull \hbox (19.58035pt too wide) in paragraph at lines 4584--4587
 \OT1/cmr/m/n/10 is an iso-mor-phism and hence the long ex-act cochain se-quence shows that $\OML/cmm/m/it/10 H[]\OT1/cmr/m/n/10 ((\OMS/cmsy/m/n/10 ^^@\OML/cmm/m/it/10 "; \OT1/cmr/m/n/10 0) \OMS/cmsy/m/n/10 ^^B
  []
 
@@ -901,25 +901,61 @@ Overfull \hbox (19.58035pt too wide) in paragraph at lines 4580--4583
 
 [86]
 
-[87] (./F4D1.aux)
+[87]
+Overfull \hbox (50.72311pt too wide) in paragraph at lines 4709--4710
+ [] 
+ []
+
+
+Overfull \hbox (18.14603pt too wide) in paragraph at lines 4729--4732
+\OT1/cmr/m/n/10 Similarly, one ar-gues for $\OML/cmm/m/it/10 ! \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 d^^X$\OT1/cmr/m/n/10 . Now given $[\OML/cmm/m/it/10 !\OT1/cmr/m/n/10 ] \OMS/cmsy/m/n/10 2 \OML/cmm/m/it/10 H[]\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 M\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 [(\OML/cmm/m/it/10 ^^\; ^^Q\OT1/cmr/m/n/10 )] \OMS/cmsy/m/n/10 2 \OML/cmm/m/it/10 H[]\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 M\OML/cmm/m/it/10 ; @\OMS/cmsy/m/n/10 M\OT1/cmr/m/n/10 )$,
+ []
+
+
+Overfull \hbox (24.2238pt too wide) in paragraph at lines 4729--4732
+\OT1/cmr/m/n/10 there is a rep-re-sen-ta-tive of $[(\OML/cmm/m/it/10 ^^\; ^^Q\OT1/cmr/m/n/10 )]$ of the form $[(\OML/cmm/m/it/10 ^^_; \OT1/cmr/m/n/10 0)]$ with $\OML/cmm/m/it/10 ^^_ \OMS/cmsy/m/n/10 2 \OT1/cmr/m/n/10 
+[](\OMS/cmsy/m/n/10 Mn\OML/cmm/m/it/10 @\OMS/cmsy/m/n/10 M\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; d^^_ \OT1/cmr/m/n/10 =
+ []
+
+
+
+[88]
+Overfull \hbox (20.67656pt too wide) detected at line 4744
+\OML/cmm/m/it/10 ^^_\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 M\OT1/cmr/m/n/10 ) = [](\OMS/cmsy/m/n/10 ^^@\OT1/cmr/m/n/10 1)[] [] \OML/cmm/m/it/10 H[]\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 M\OT1/cmr/m/n/10 ) = [](\OMS/cmsy/m/n/10 ^^@\OT1/cmr/m/n/10 1)[] [] \OML/cmm/m/it/10 H[]\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 M\OML/cmm/m/it/10 ; @\OMS/cmsy/m/n/10 M\OT1/cmr/m/n/10 ) = (\OMS/cmsy/m/n/10 ^^@\OT1/cmr/m/n/10 1)[]\OML/cmm/m/it/10 ^^_\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 M\OML/cmm/m/it/10 ; @\OMS/cmsy/m/n/10 M\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 :
+ []
+
+
+
+[89]
+
+[90]
+
+[91]
+Overfull \hbox (18.40533pt too wide) detected at line 4880
+[][] []\OT1/cmr/m/n/10 (^^A) = [](\OMS/cmsy/m/n/10 ^^@\OT1/cmr/m/n/10 1)[] [] = [](\OMS/cmsy/m/n/10 ^^@\OT1/cmr/m/n/10 1)[] = [](\OMS/cmsy/m/n/10 ^^@\OT1/cmr/m/n/10 1)[] [] \OML/cmm/m/it/10 H[]\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 M\OT1/cmr/m/n/10 ) = \OML/cmm/m/it/10 ^^_\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 M\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 :
+ []
+
+
+
+[92] (./F4D1.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 19836 strings out of 473190
- 423571 string characters out of 5715799
- 893570 words of memory out of 5000000
- 42761 multiletter control sequences out of 15000+600000
+ 20017 strings out of 473190
+ 428037 string characters out of 5715799
+ 893651 words of memory out of 5000000
+ 42942 multiletter control sequences out of 15000+600000
  571797 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,22n,121p,534b,1167s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb>
-Output written on F4D1.pdf (87 pages, 559183 bytes).
+Output written on F4D1.pdf (92 pages, 577454 bytes).
 PDF statistics:
- 404 PDF objects out of 1000 (max. 8388607)
- 266 compressed objects within 3 object streams
+ 420 PDF objects out of 1000 (max. 8388607)
+ 277 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

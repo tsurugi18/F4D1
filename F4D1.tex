@@ -46,6 +46,8 @@ mysymbol/.style={start anchor=center,end anchor=center,draw=none}
 \DeclareMathOperator{\SO}{SO}
 \DeclareMathOperator{\Sp}{Sp}
 \DeclareMathOperator{\esssup}{esssup}
+\DeclareMathOperator{\abs}{abs}
+\DeclareMathOperator{\rel}{rel}
 \DeclareMathOperator{\diam}{diam}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\Hom}{Hom}
@@ -63,6 +65,7 @@ mysymbol/.style={start anchor=center,end anchor=center,draw=none}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\PD}{PD}
 \DeclareMathOperator{\ext}{ext}
 \DeclareMathOperator{\vol}{vol}
 \DeclareMathOperator{\inte}{int}
@@ -95,7 +98,7 @@ mysymbol/.style={start anchor=center,end anchor=center,draw=none}
 \newcommand{\sep}[0]{\:|\:}
 \newcommand{\pd}[2]{{\frac {\partial #1} {\partial #2}}}
 \newcommand{\compinc}[0]{\subset \subset}
-
+\newcommand{\sH}[0]{\mathscr{H}}
 \newcommand{\fib}[1]{%
   \mathbin{\mathop{\times}\limits_{#1}}%
 }
@@ -104,7 +107,7 @@ mysymbol/.style={start anchor=center,end anchor=center,draw=none}
 }
 
 \title{Analysis and Geometry on Manifolds}
-\author{So Murata}
+\author{Lectures given by\\Prof. Matthias Lesch, Dr. Oliver Fürst\\Typed by\\So Murata}
 \date{WiSe 25/26, University of Bonn}
 
 
@@ -1868,12 +1871,12 @@ Let $E$ be a vectorspace. We will denote the dual pairing as $\langle\cdot,\cdot
   \end{equation*} 
   is linear. We denote,
   \begin{equation*}
-    L(E_1,\cdots,E_r;F) = \{E_1\times\cdots\times E_r\to F\sep \text{$r$-multilinear maps}\}.
+    \mathcal{L}(E_1,\cdots,E_r;F) = \{E_1\times\cdots\times E_r\to F\sep \text{$r$-multilinear maps}\}.
   \end{equation*}
 \end{definition}
 \begin{remark}
   \begin{equation*}
-    \dim L(E_1,\cdots,E_r;F) = \left(\prod_{i=1}^r\dim E_i\right)\times \dim F.
+    \dim \mathcal{L}(E_1,\cdots,E_r;F) = \left(\prod_{i=1}^r\dim E_i\right)\times \dim F.
   \end{equation*}
 \end{remark}
 
@@ -1888,7 +1891,7 @@ Let $E$ be a vectorspace. We will denote the dual pairing as $\langle\cdot,\cdot
   Obvisouly, $\varphi\otimes\psi\in L(E,F;K)$.
 \end{remark}
 \begin{remark}
-  A map $\cdot\otimes\cdot$ is a bilinear map $E^*\times F^*\to L(E,F;K)$.
+  A map $\cdot\otimes\cdot$ is a bilinear map $E^*\times F^*\to \mathcal{L}(E,F;K)$.
 \end{remark}
 
 \begin{proposition}
@@ -1900,23 +1903,23 @@ Let $E$ be a vectorspace. We will denote the dual pairing as $\langle\cdot,\cdot
   \begin{equation*}
     e_i^*\otimes f_j^*(e_k,f_l) = \delta_{ik}\delta_{jl.}
   \end{equation*}
-  In particular, $(e_i^*\otimes f_j^*)_{(i,j)\in I\times J}$ is a basis of $L(E,F;K)$.
+  In particular, $(e_i^*\otimes f_j^*)_{(i,j)\in I\times J}$ is a basis of $\mathcal{L}(E,F;K)$.
 \end{proposition}
 
 \begin{definition}
   \label{definition_tensoring_multilinear}
   We define,
   \begin{equation*}
-    L(E_1,\cdots,E_r,K)\times L(F_1,\cdots,F_s;K)\to L(E_1,\cdots,E_r,F_1,\cdots,F_s;K)
+    \mathcal{L}(E_1,\cdots,E_r,K)\times \mathcal{L}(F_1,\cdots,F_s;K)\to \mathcal{L}(E_1,\cdots,E_r,F_1,\cdots,F_s;K)
   \end{equation*}
   by,
   \begin{equation*}
-    \varphi\otimes\psi(e_1,\cdots,e_r,f_1,\cdots,f_s)\defeq \varphi(e_1,\cdots,e_r)\psi(f_1,\cdots,f_s).
+    (\varphi,\psi)\mapsto\varphi\otimes\psi(e_1,\cdots,e_r,f_1,\cdots,f_s)\defeq \varphi(e_1,\cdots,e_r)\psi(f_1,\cdots,f_s).
   \end{equation*}
 \end{definition}
 
 \begin{proposition}
-  The map defined in Definition \ref{definition_tensoring_multilinear}, a bilinear form which is associative (ie. $(\varphi\otimes\psi)\otimes\chi = \varphi\otimes(\psi\otimes\chi)$).
+  The map defined in Definition \ref{definition_tensoring_multilinear}, is a bilinear form which is associative (ie. $(\varphi\otimes\psi)\otimes\chi = \varphi\otimes(\psi\otimes\chi)$).
 \end{proposition}
 
 \begin{proof}
@@ -1926,11 +1929,11 @@ Let $E$ be a vectorspace. We will denote the dual pairing as $\langle\cdot,\cdot
 \begin{notation}
   We denote 
   \begin{equation*}
-    E^*\otimes F^*\defeq L(E,F;K),
+    E^*\otimes F^*\defeq \mathcal{L}(E,F;K),
   \end{equation*}
   and 
   \begin{equation*}
-    E\otimes F \cong E^{**}\otimes F^{**} = L(E^*,F^*,K).
+    E\otimes F \cong E^{**}\otimes F^{**} = \mathcal{L}(E^*,F^*,K).
   \end{equation*}
 \end{notation}
 
@@ -1951,7 +1954,7 @@ E\otimes F \arrow[ru, "\exists!\overline{h}"'] &
   is an isomorphism.
 \end{proposition}
 \begin{proof}
-  Check at the level of basis elements.
+  Can be checked at the level of basis elements.
 \end{proof}
 \begin{definition}
   Let $E$ be a vectorspace, we will define,
@@ -2907,7 +2910,7 @@ In terms of the
 \end{proof}
 A diffeomorphism $f:\M\to\maniN$ gives rise for pullback map 
   \begin{equation*}
-    \left\vert\bigwedge\right\vert^\alpha(\maniN)\stackrel{f^*}{to}\left\vert\bigwedge\right\vert(\M), \mathcal{O}(\maniN)\stackrel{f^*}{\to}\mathcal{O}(\M).
+    \left\vert\bigwedge\right\vert^\alpha(\maniN)\stackrel{f^*}{\to}\left\vert\bigwedge\right\vert(\M), \mathcal{O}(\maniN)\stackrel{f^*}{\to}\mathcal{O}(\M).
   \end{equation*}
 
 \begin{proposition}
@@ -4056,6 +4059,7 @@ Then $H(f),H(g)$ are inverse to one another.
                  & H^{k+1}(A) \arrow[r, "H^{k+1}(\varphi)"] & H^{k+1}(B) \arrow[r, "H^{k+1}(\psi)"] & H^{k+1}(C) \arrow[r]          & \cdots
 \end{tikzcd}
   \end{center}
+  is a long exact sequence.
 \end{lemma}
 
 \begin{proof}
@@ -4511,8 +4515,8 @@ In this way, $\Omega^p_{C}(\M,L)$ becomes an Euclidean (respectively Hermitian a
 For simplicity, all manifolds in this section are assumed to be oriented. 
 \par Let $\M$ be a manifold with boundary $\partial\M$ and $i:\partial\M\hookrightarrow\M$ be the inclusion map. There are many variation of relative deRham cohomology which turns out to be equivalent. We put 
 \begin{align*}
-  \Omega^\bullet(\M)=\{\text{forms smooth up to $\partial\M$}\},\\
-  \Omega^\bullet(\M,\partial\M)=\ker i^*:\Omega^\bullet(\Omega)\to\Omega^*(\partial \M).
+  \Omega^\bullet(\M)&=\{\text{differential forms smooth up to $\partial\M$}\},\\
+  \Omega^\bullet(\M,\partial\M)&=\ker i^*:\Omega^\bullet(\Omega)\to\Omega^*(\partial \M).
 \end{align*}
 We get an exact sequence of cochain complexes.
 \begin{center}
@@ -4521,7 +4525,7 @@ We get an exact sequence of cochain complexes.
 \end{tikzcd}
 \end{center}
 \begin{proposition}
-  The inclusion map induces an isomorphism,
+  The inclusion map $\Omega^\bullet(\M)\to\Omega^\bullet(\M\backslash\partial\M)$ induces an isomorphism,
   \begin{equation*}
     H^\bullet(\M)\to H^\bullet(\M\backslash\partial\M).
   \end{equation*}
@@ -4621,7 +4625,7 @@ We come back to the short exact sequence of relative cohomology. There is a homo
   \end{center}
   be a short exact sequence of cohain complexes. Set,
   \begin{equation*}
-    Q^k \defeq E^k\oplus F^{k-1}, d^Q\defeq = \begin{pmatrix}
+    Q^k \defeq E^k\oplus F^{k-1}, d^Q\defeq  \begin{pmatrix}
       d^E & O\\
       g & -d^F
     \end{pmatrix}
@@ -4630,7 +4634,8 @@ We come back to the short exact sequence of relative cohomology. There is a homo
   \begin{equation*}
     \phi:K^\bullet\to Q^\bullet = [\omega\to(f(\omega),0)]
   \end{equation*}
-  is a quasiisomorphism
+  is a quasiisomorphism.
+  \label{proposition_extension_cochain_complexes}
 \end{proposition}
 \begin{proof}
   \begin{equation*}
@@ -4666,6 +4671,227 @@ We come back to the short exact sequence of relative cohomology. There is a homo
     g(\xi-d\tilde{\tau})=g(\xi)-d\tau=0,d(\xi-d(\tilde{\tau}))=0.
   \end{equation*}
 \end{proof}
+\begin{definition}[Relative deRham Cohomology Using $Q$]
+  Motivated by Proposition \ref{proposition_extension_cochain_complexes}, we consider $(\omega,\tau)\in\Omega^k(\M)\oplus\Omega^{k-1}(\partial\M)$, with the boundary,
+  \begin{equation*}
+    d(\omega,\tau) = (d\omega,i^*\omega-d\tau) \stackrel{d}{\mapsto}(\underbrace{d^2\omega}_{=0},\underbrace{i^*d\omega-di^*\omega+d^2\tau}).
+  \end{equation*}
+  Thus set 
+  \begin{equation*}
+    Q^k \defeq\Omega^k(\M)\oplus\Omega^{k-1}(\partial\M)=\Omega^k(\M,\partial\M),
+  \end{equation*}
+  we have,
+  \begin{equation*}
+    Q^k(\M,\partial\M)\ni(\omega,\tau)\mapsto\omega\Omega^k(\M),
+  \end{equation*}
+  which induces 
+  \begin{center}
+    \begin{tikzcd}
+\Omega_C^k(\M\backslash\partial\M) \arrow[r, hook] & {\Omega^k(\M,\partial\M)} \arrow[r, "{\omega\mapsto(\omega,0)}"] & {Q^k(\M,\partial\M)}
+\end{tikzcd}
+  \end{center}
+  We have the cycles $(\omega,\tau)$ with $d\omega=0,i^*\omega=d\tau$. An element of $H^k(\M,\partial\M)$ can be represented by such a pair.
+\end{definition}
+\begin{theorem}[Poincaré duality ofr manifold with boundary]
+  Let $\M^m$ be an oriented manifold with boundary with a finite good cover. Then 
+  \begin{equation*}
+    H^p(\M)\times H^{m-p}(\M,\partial\M)\ni([\omega],[(\tau,\eta)])\longmapsto\int_\M\omega\wedge\tau-(-1)^p\int_{\partial\M}i^*\omega\wedge\eta\in\R.
+  \end{equation*}
+  This is a well defined dual pairing extending the Poincaré duality paring,
+  \begin{equation*}
+    H^p(\M\backslash\partial\M)\times H_C^{m-p}(\M\backslash\partial\M)\ni([\omega],[\tau])\mapsto\int_\M\omega\wedge\tau\in\R,
+  \end{equation*}
+  \begin{center}
+    \begin{tikzcd}
+\cdots \arrow[r] & H_C^k(\M\backslash\partial\M) \arrow[d, "\cong"] \arrow[r] & H^k(\M) \arrow[r] & H^k(\partial\M) \arrow[r] & H^{k+1}_C(\M\backslash\partial\M) \arrow[r] & \cdots \\
+                 & {H^k(\M,\partial\M)} \arrow[d, "\cong"]                    &                   &                           &                                             &        \\
+                 & H^k(Q^\bullet)                                             &                   &                           &                                             &       
+\end{tikzcd}
+  \end{center}
+  (i.e. the first one is realized as the lift of the second one. If both are well-defined and we can show the former extends the latter, we automatically get that the first one is a dual pairing).
+\end{theorem}
+\begin{proof}
+  For well-definedness, suppose $(\tau,\eta)=d(\underbrace{\xi_1}_{\M},\underbrace{\xi_2}_{\M})=(d\xi_1,i^*\xi_1-d\xi_2)$.
+  As $\omega$ is a closed form, we have,
+  \begin{align*}
+    \int_{\M}\omega\wedge\tau & = \int_\M\omega\wedge d\xi_1,\\
+    &=(-1)^p\int_\M d(\omega\wedge\xi_1),\\
+    &\stackrel{\text{Stokes'}}{=}(-1)^p\int_\M i^*\omega\wedge\underbrace{i^*\xi_1}_{=\eta+d\xi_2},\\
+    & = (-1)^p\int_{\partial\M}i^*\omega\wedge\eta+i^*\omega\wedge d\xi_2.
+  \end{align*}
+  Observe that again using Stokes' $\partial\partial\M=\emptyset$, we obtain,
+  \begin{equation*}
+    \int_{\partial\M}i^*\omega\wedge d\xi_2=0.
+  \end{equation*}
+  Although this does not necessarily mean that $i^*\omega\wedge d\xi_2=0$. We then have,
+  \begin{equation*}
+    \int_\M\omega\wedge\tau - (-1)^p\int_{\partial\M}i^*\omega\wedge\eta=0.
+  \end{equation*}
+  Similarly, one argues for $\omega=d\xi$. Now given $[\omega]\in H^p(\M),[(\tau,\eta)]\in H^{m-p}(\M,\partial\M)$, there is a representative of $[(\tau,\eta)]$ of the form $[(\chi,0)]$ with $\chi\in\Omega_C^{m-p-1}(\M\backslash\partial\M), d\chi=0$,
+  therefore, we have,
+  \begin{equation*}
+    \langle[\omega],[(\chi,0)]\rangle = \int_\M\omega\wedge\chi.
+  \end{equation*}
+\end{proof}
+\begin{remark}
+  Let $\M$ be a compact oriented manifold with boundary. Poincare duality tells us that 
+  \begin{equation*}
+    H^p(\M)\cong H^{m-p}(\M,\partial\M)^*,
+  \end{equation*}
+  as vectorspaces. The Euler characteristic is ,
+  \begin{equation*}
+    \chi(\M)=\sum_{j=0}^m(-1)^j\dim H^j(\M)=\sum_{j=0}^m(-1)^j\dim H^{m-j}(\M,\partial\M)=(-1)^m\chi(\M,\partial\M).
+  \end{equation*}
+\end{remark}
+From this observation and apply this for $\partial\M$, we derive,
+\begin{corollary}
+  \begin{equation*}
+    \chi(\partial\M) = (-1)^{m-1}\chi(\partial\M). 
+  \end{equation*}
+  Thus if $m$ is even then $\chi(\partial\M)=0$. From exercise sheets, we have,
+  \begin{equation*}
+    \chi(\M)=(-1)^{m-1}\chi(\M,\partial\M)+\chi(\partial\M).
+  \end{equation*}
+  Therefore, if $m$ is even,
+  \begin{align*}
+      \chi(\M)=\chi(\M,\partial\M),
+  \end{align*}
+  if $m$ is odd, 
+  \begin{align*}
+    \chi(\M)&=-\chi(\M,\partial\M),\\
+    & = \chi(\M,\partial\M)+\chi(\partial\M),\\
+    \chi(\partial\M)&=-2\chi(\M,\partial\M)=2\chi(\M).
+  \end{align*}
+\end{corollary}
+
+We also have a deRham Hodge theorem for compact manifold with boundary. Let $\M$ be an oriented Riemannian manifold with boundary. The following will be only fully understandable with the aid of the theory of elliptic boundary value problem.
+\begin{align*}
+  \Omega^p_{\text{rel}}(\M) &\defeq \Omega^p(\M,\partial\M)=\{\omega\in\Omega^p(\M)\sep i^*\omega=0\},\\
+  \Omega^p_{\text{abs}}(\M)&\defeq\{\omega\in\Omega^p(\M)\sep i^*\star\omega=0\},\\
+  \mathscr{H}^p_{\text{abs}}(\M)&\defeq\{\omega\in\Omega^p(\M)\sep d_p\omega=0,d^*_{p-1}\omega=0\},\\
+  \mathscr{H}^p_{\text{rel}}(\M)&\defeq\{\omega\in\Omega^p_{\text{rel}}(\M)\sep d_p\omega=0,d_{p-1}^*\omega=0\}.
+\end{align*}
+We have the following orthogonal sum decomposition,
+\begin{align*}
+  \Omega^p(\M)&=\mathscr{H}_{\abs}^p\oplus d_{p-1}(\Omega^{p-1}(\M))\oplus d_p^*(\Omega_{\rel}^{p+1}(\M)),\\
+  \Omega^p(\M)&=\sH_{\rel}^p\oplus d_{p-1}(\Omega_{\rel}^{p-1}(\M))\oplus d_p^*(\Omega_{\abs}^{p+1}(\M)).
+\end{align*}
+In particular, we have natural isomorphisms,
+\begin{equation*}
+  \sH_{\abs}^p(\M)\cong H^p(\M),\sH^p_{\rel}=H^p(\M,\partial\M).
+\end{equation*}
+Poincaré duality is implemented by $\star:\sH^p_{\abs}(\M)\stackrel{\sim}{\to}\sH^{m-p}_{\rel}(\M)$. 
+\begin{proposition}[Künneth]
+  Let $\M,\N$ be manifolds with finite good covers. Consider,
+  \begin{center}
+    \begin{tikzcd}
+   & \M\times\maniN \arrow[ld, "\pi_1"'] \arrow[rd, "\pi_2"] &        \\
+\M &                                                         & \maniN
+\end{tikzcd}
+  \end{center}
+  Then we have 
+  \begin{center}
+    \begin{tikzcd}
+H^p_C(\M)\times H^q_C(\maniN) \arrow[r, "{\substack{(\omega_1,\omega_2)\mapsto\pi_1^*\omega_1\wedge\pi_2^*\omega_2\\\:}}"] & H^{p+q}(\M\times\maniN)
+\end{tikzcd}
+  \end{center}
+  This induces an isomorphism,
+  \begin{equation*}
+    \bigoplus_{p+q=k}H_C^p(\M)\times H_C^q(\maniN)\cong H_C^k(\M\times\maniN).
+  \end{equation*}
+\end{proposition}
+\begin{proof}[Sketch of the proof.]
+  This is proven by using Mayer-Vietoris sequence and induction by the cardinalities of the good covers.
+\end{proof}
+Let $i:L^k\hookrightarrow M$ be a compact oriented submanifold. Then we have 
+\begin{equation*}
+  \phi_L:H^h(\M)\to\R, [\omega]\mapsto\int_L i^*\omega,
+\end{equation*}
+is a linear functional. Thus there is a class, 
+\begin{equation*}
+  \PD(L) \in H^{m-k}_C(\M),
+\end{equation*}
+such that for each closed $\eta\in\Omega_C^{m-k}(\M)$ with $[\eta]=\PD(L)$, and each closed $\omega\in\Omega^k(\M)$,
+\begin{equation*}
+  \phi_L([\omega]) = \int_\M\omega\wedge\eta.
+\end{equation*}
+Such $\PD(L)$ is called the Poincaré dual of $L$.
+\begin{proposition}
+  Let $U\supseteq L$ be an open neighborhood of the submanifold. Then $\eta$ representing $\PD(L)$ can be chosen such that $\supp\eta\subseteq U$.
+\end{proposition}
+\begin{proof}
+  Let $\eta\in\Omega^{m-k}_C(U)$ be a representative of $\PD^U(L)$ (i.e. the Poincaré dual of $L$ in $U$), then for arbitrary closed $\omega\in\Omega^k(\M)$, we have,
+  \begin{equation*}
+    \int_Li^*\omega=\int_Li^*(\omega|_U)=\int_U\omega\wedge\eta=\int_\M\omega\wedge\eta.
+  \end{equation*}
+  Since $\eta$ has a compact support and we might extend by $0$ to $\M$.
+\end{proof}
+\begin{example}
+  let $\M$ be a compact oriented manifold. Let $L=\Delta=\{(p,p)\sep p\in\M\}$, the diagonal in $\M\times\M$. 
+\end{example}
+\begin{example}
+  Let $\M$ be an oriented manifold and $E\twoheadrightarrow\M$ be a vector bundle. $\M$ sits inside $E$ as the $0$-section $i:\M\hookrightarrow E$. Then,
+  \begin{equation*}
+    \Theta\defeq\PD(\M)\in H_C^m(E),
+  \end{equation*}
+  is called the Thom class of $E$. $e(E)\defeq i^*\theta$ is called the Euler class of the bundle. If $E$ is oriented then $e(E)\in H_C^m(\M)$. The Euler class of the manifold $\M$ is $e(\M)\defeq e(T\M)$.
+\end{example}
+\begin{proposition}
+  For any $s\in\Gamma(E)$, we have $s^*\Theta=e$. If $E$ has a nowhere vanishing section $s$, then $e(E)=0$.
+\end{proposition}
+\begin{proof}
+  Using homotopy invariance of cohomologies, we see that $s$ is homotopic to $0$-section $i:\M\hookrightarrow\M$. This shows the first assertion. For the seecond, choose a smooth metric on $E$ and let 
+  \begin{equation*}
+    U=\{v\in E\sep \vert v\vert<\vert s(\pi(v))\vert\}.
+  \end{equation*} 
+  Then $U$ is an open neighborhood of $i(\M)$ and by Proposition (ref missing), there is a form $\eta\in\Omega_C^m(U)$ representing $\Theta=\PD(\M)$. Thus $s^*\Theta=0$. By the first assertion, we conclude $e(E)=0$.
+\end{proof}
+Now let $\M$ be an compact oriented manifold. Choose a basis $([\omega_i])_{i=1,\cdots,r}$ of $H^\bullet\M$ and let $[\tau_j]_{j=1,\cdots,r}$ be the dual basis with respect to the Poincaré duality, that is,
+\begin{equation*}
+  \int_\M \omega_i\wedge\tau_j = \delta_{ij}.
+\end{equation*}
+\begin{proposition}
+  we have the following statements.
+  \begin{enumerate}[1).]
+    \item $\PD(\Delta)=\sum_{i=1}^r(-1)^{\vert\omega_i\vert}\pi_1^*\omega_1\wedge\pi_2^*\tau_i$.
+    \item $\int_\Delta\PD(\Delta) = \chi(\M) = \sum_{j\geq0}(-1)^j\dim H^j(\M)$.
+    \item $\int_\M e(\M)=\chi(\M)$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  By Künneth theorem, we have,
+  \begin{equation*}
+    \PD(\Delta) = \sum_{ij}c_{ij}\pi_1^*\omega_i\wedge\pi_2^*\tau_j.
+  \end{equation*}
+  We use the defining relation for the Poincaré dual, 
+  \begin{align*}
+    (-1)^{\vert\omega_l\vert\vert\tau\vert_k}\delta_{kl}& =\int_\M\tau_k\wedge\omega_l,\\
+    & = \int_\M i^*(\pi^*_1\tau_k\wedge\pi_2^*\omega_l),\\
+    & = \int_\Delta \pi_1^*\tau_k\wedge\pi_2^*\omega_l,\\
+    & = \int_{\M\times\M}\pi_1^*\tau_k\wedge\pi_2^*\omega_l\wedge\PD(\Delta),\\
+    & = \sum_{ij}c_{ij}\int_{\M\times\M}\pi^*_1\tau_k\wedge\pi_2^*\omega_l\wedge\pi^*_1\omega_i\wedge\pi_2^*\tau_j,\\
+    & = \sum_{ij}c_{ij}(-1)^{\vert\omega_j\vert\vert\omega_l\vert+\vert\tau_k\vert\vert\omega_j\vert}\delta_{ik}\delta_{lj},\\
+    & = c_{kl}(-1)^{\vert\tau_k\vert\vert\omega_l\vert+\vert\omega_k\vert\vert\omega_l\vert}.\\
+    &\Rightarrow c_{kl} = (-1)^{\vert\omega_k\vert}\delta_{kl}.
+  \end{align*}
+  For the second statement, using the first, we have,
+  \begin{equation*}
+    \int_\Delta\PD(\Delta) = \sum_{i}(-1)^{\vert\omega_i\vert}\underbrace{\int_\M\omega_i\wedge\tau_i}_{=1}=\sum_{i}(-1)^{\vert\omega_i\vert} = \sum_{j}(-1)^j\dim H^j(\M)=\chi(\M).
+  \end{equation*}
+  For the third, a tubular neighborhood of $\Delta$ in $\M\times\M$ is $\mathcal{N}\Delta\defeq T(\M\times\M)/T\Delta$. Thus, as in Example (ref missing)
+  \begin{equation*}
+    \PD(\Delta)=i^*(\text{Thom class of }\mathcal{N}\Delta).
+  \end{equation*}
+  Since,
+  \begin{equation*}
+    T(\M\times\M)|_\Delta\cong T\Delta\oplus T\Delta,
+  \end{equation*}
+  we have $\mathcal{N}\Delta\cong T\Delta\cong T\M$, thus 
+  \begin{equation*}
+    \int_\Delta\PD(\Delta) = \int_\M e(\M)=\chi(\M).
+  \end{equation*}
+\end{proof}
+
 \begin{thebibliography}{9}
 \bibitem{Lee}
 Lee, John M. (2012) \emph{Introduction to Smooth Manifolds}, Graduate Texts in Mathematics.
