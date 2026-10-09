@@ -1,5 +1,6 @@
-\documentclass[10pt]{article}
-
+\documentclass[8pt]{article}
+\linespread{0.5} 
+\usepackage{extsizes}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -307,7 +308,7 @@ $(\R^n,\{\id\})$ is separated and second countable smooth manifold.
 \end{definition}
 
 \begin{proposition}
-  $f:\M\to\N$ is smooth if and only if $f$ is continuous and for each chart $(U,\varphi),(V,\psi)$ of $\M,\maniN$, $\psi\circ f\varphi^{-1}$ is smooth.
+  $f:\M\to\N$ is smooth if and only if $f$ is continuous and for each chart $(U,\varphi),(V,\psi)$ of $\M,\maniN$, $\psi\circ f\circ\varphi^{-1}$ is smooth.
 \end{proposition}
 \begin{remark}
   Since transition maps are smooth, above map is well-defined and if $f$ is smooth so is $\varphi'\circ f\circ \psi'$ for any charts $\varphi',\psi'$. 
@@ -330,9 +331,9 @@ $(\R^n,\{\id\})$ is separated and second countable smooth manifold.
 \end{proposition}
 
 \begin{proof}
-$\mathcal{M}$ is locally compact (look at the charts), hence there existsa acompact subsets
+$\mathcal{M}$ is locally compact (look at the charts), hence there exists a acompact subsets
 \begin{equation*}
-  K_1\subset\compinc K_2\compinc K_3
+  K_1\compinc K_2\compinc K_3
 \end{equation*}
 such that 
 \begin{equation*}
@@ -401,7 +402,7 @@ From now on, a manifold refers to a smooth, separated, and second countable mani
   \label{partition_of_unity_existence}
 \end{theorem}
 \begin{proof}
-By Proposition \ref{smooth_manifold_paracompact}, take a countable, locally finite refinement charts $((\tilde{\psi}_n,V_n))_{n\in\N}$. Borrowing the notation from Exampple \ref{partition_of_unity_example}, we set 
+By Proposition \ref{smooth_manifold_paracompact}, we can take a countable, locally finite refinement charts $((\tilde{\psi}_n,V_n))_{n\in\N}$. Borrowing the notation from Exampple \ref{partition_of_unity_example}, we set 
 \begin{equation*}
   \tilde{\varphi_n}(x) \defeq
   \begin{cases}
@@ -861,7 +862,7 @@ The Lebesgue measure on $\R^m$ is denoted by $\lambda^m$.
    \begin{equation*}
     \vert f(x)-f(y)\vert \leq L\left({\frac {\sqrt{m}d} r}\right)^{k+1}.
    \end{equation*}
-   This means that $f(C_k\cap W_j)$ sits in a cube of edge length less than or equal to $2L\left({\frac {\sqrt{m}d} r}\right)^{k+1}$.
+   This means that $f(C_k\cap W_j)$ sits in a cube of edge length is at most $2L\left({\frac {\sqrt{m}d} r}\right)^{k+1}$.
    \begin{equation*}
     \lambda^n(f(C_k\cap W))\leq r^m\lambda(\max_{1\leq j\leq r^m}f(C_k\cap W_j)) \leq r^m \left\{2L\left({\frac {\sqrt{m}d} r}\right)\right\}^n = K\cdot r^{m-n(k+1)}.
    \end{equation*}
@@ -971,7 +972,7 @@ The Lebesgue measure on $\R^m$ is denoted by $\lambda^m$.
 \end{theorem}
 \setcounter{claim}{0}
 \begin{proof}
-Recall that a continuously differentiable function over a compact set is Lipschitz. \\
+Recall that a continuously differentiable function over a compact set is Lipschitz.
 \par Consider a smooth function $f:\overline{B(y_0,r)}\to\R$ such that 
 \begin{equation*}
   a(y)<f(y)<b(y).
@@ -1221,7 +1222,7 @@ Using the claim, we proved the regularity of $F$.
   \begin{equation*}
     \phi_{s+t}^X(p) = c(t+s) = \phi^X_s(\phi_t^X(p)).
   \end{equation*}
-  The cases for $s\leq 0$ or $t\leq 0$ are exercises.\\
+  The cases for $s\leq 0$ or $t\leq 0$ are exercises.
   \par For 2), let $p\in\mathcal{D}(\phi_t^X)$, $t>0$, we define,
   \begin{equation*}
     B\defeq\{\phi_s^X(p) \sep 0\leq s \leq t\}.
@@ -1242,7 +1243,7 @@ Using the claim, we proved the regularity of $F$.
   \end{enumerate}
   \end{claim}
   \begin{claimproof} The first assertion is clear as $\phi_{{\frac t N}}^X|_{W_{j-1}}$ is continuous and the constraint on $N$.
-    \par For 2). $q\in W_N$, $\phi^X_{{\frac t N}}(q)\in W_{N-1}$ and inductively $\phi^X_{t{\frac {j} N}}(q)\in W_{N-j}$. \\
+    \par For 2). $q\in W_N$, $\phi^X_{{\frac t N}}(q)\in W_{N-1}$ and inductively $\phi^X_{t{\frac {j} N}}(q)\in W_{N-j}$.
     \par For 3). $\phi_u^X(p)\in B\subset W_0$, $0\leq u \leq t$. 
     \par On the induction step $j\to j+1$, $0\leq u\leq t{\frac {N-j-1} N}$, then 
     \begin{equation*}
@@ -1567,8 +1568,6 @@ See \cite{Lee}.
   We derived a contradiction that two components get connected by a path. This turns out to be one of the realization of a Möbius strip.
 \end{example}
 
-%current Current
-
 \textbf{Construction of vector bundle from local charts}
   \par Consider $E\stackrel{\pi}{\to}\M$ be a vector bundle and $(U_i,\varphi_i)_{i\in I}$ be a bundle chart. Consider 
   \begin{center}
@@ -1601,7 +1600,7 @@ See \cite{Lee}.
     \begin{equation*}
       g_{ij}:U_i\cap U_j\to G
     \end{equation*}
-    is a cocycle with values in $G$ if 
+    is a cocycle with values in $G$ if the following conditions are satisfied.
     \begin{enumerate}
       \item $g_{ij}g_{jk} = g_{ik}$ over $U_i\cap U_j\cap U_k$.
       \item $g_{ii} = e_G$.
@@ -1637,24 +1636,25 @@ E \arrow[rr, "\varphi"] \arrow[rd, "\pi_E"'] &    & F \arrow[ld, "\pi_F"] \\
                                              & \M &                      
 \end{tikzcd}
     \end{center}
-    is a commutative diagram and for all $p\in\M,\varphi_p$ is an isomorphism between $E_p$ and $F_p$.
+    is a commutative diagram and for all $p\in\M,\varphi_p\defeq\varphi|_{E_p}$ is an isomorphism between $E_p$ and $F_p$.
   \end{definition}
 
   \begin{example}
     Let $\M$ be a smooth manifold. Then we have 
     \begin{equation*}
-      T\M = \bigcup_{p\in\M}\{p\}\times T_p\M.
+      T\M = \bigcup_{p\in\M}\{p\}\times T_p\M
     \end{equation*}
-    Let $(U_i,\varphi_i)_{i\in I}$ be an atlas for $\M$. Now define a bundle atlas as follows.
-    \begin{equation*}
-      \psi_i:TU_i = \bigcup_{p\in U_i}\{p\}\times T_p\M  = \pi^{-1}(U_i)\to U_i\times \R^m, (p,X_p)\mapsto (p,T_p\varphi_iX_p).
-    \end{equation*}
+    is a vectorbundle which is called the Tangent bundle of $\M$. Let $(U_i,\varphi_i)_{i\in I}$ be an atlas for $\M$. Now define a bundle atlas as follows.
+    \begin{align*}
+      \psi_i:TU_i &= \bigcup_{p\in U_i}\{p\}\times T_p\M  = \pi^{-1}(U_i)\to U_i\times \R^m,\\
+       (p,X_p)&\stackrel{\psi}{\mapsto} (p,T_p\varphi_iX_p).
+    \end{align*}
     Note that we have a canonical isomorphism $T_{\varphi_i(p)}\R^m\cong\R^m$.
     \par Given two charts $(U,\varphi),(V,\psi)$ around a point $p\in \M$, and $v\in T_p\M$ then we have,
     \begin{equation*}
       v = \sum_{k=1}^m \xi_k^\varphi \pd{}{x_k}\bigg{|}_p = \sum_{k=1}^m \xi_k^\psi \pd{}{y_k}\bigg{|}_p.
     \end{equation*}
-    Then we have 
+    Then we have for $T_p\varphi:T_pM\to \R^m$,
     \begin{equation*}
       T_p\varphi(v) = \begin{pmatrix}
         \xi_1^\varphi\\
@@ -1675,9 +1675,9 @@ E \arrow[rr, "\varphi"] \arrow[rd, "\pi_E"'] &    & F \arrow[ld, "\pi_F"] \\
     That is 
     \begin{align*}
       \sum\xi_k^\varphi\pd{}{x_k}\bigg{|}_p & = \sum\xi_k^\psi\pd{}{y_k}\bigg{|}_p,\\
-      & = \sum_k\left(\sum_l \sum\xi_k^\psi\pd{x_k}{y_l}\right)\pd{}{x_k}\bigg{|}_p.
+      & = \sum_k\left(\sum_l \xi_l^\psi\pd{x_k}{y_l}\right)\pd{}{x_k}\bigg{|}_p.
     \end{align*}
-    Thus the cocycle is $(g_{kl}(p))_{kl} = \left(\pd{x_k}{y_k}(p)\right)$.
+    Thus the cocycle is $(g_{kl}(p))_{kl} = \left(\pd{x_k}{y_l}(p)\right)_{kl}$.
   \end{example}
 
 \begin{theorem}
@@ -1705,7 +1705,7 @@ E \arrow[rr, "\varphi"] \arrow[rd, "\pi_E"'] &    & F \arrow[ld, "\pi_F"] \\
   \end{equation*}
   Define, $\Phi:E\to F$ as follows. For $p\in U_i$ and $\xi\in\R^N$, we put
   \begin{equation*}
-    \Phi(p,\xi) = \psi_i\circ\phi_i(p,\xi).
+    \Phi(p,\xi) = \psi_i^{-1}\circ\varphi_i(p,\xi).
   \end{equation*}
   This gives us a bundle isomorphism.
 \end{proof}
@@ -1718,7 +1718,7 @@ E \arrow[rr, "\varphi"] \arrow[rd, "\pi_E"'] &    & F \arrow[ld, "\pi_F"] \\
 \end{definition}
 
 \begin{definition}
-  Let $E\stackrel{\pi_E}{\to}\M,F\stackrel{\pi_F}{\to}\M$ be vector bundles with cocycle $(g_{ij})_{i,j\in I},(h_{ij})_{i,j\in I}$ we define their direct sum to be 
+  Let $E\stackrel{\pi_E}{\to}\M,F\stackrel{\pi_F}{\to}\M$ be vector bundles corresponding to cocycles $(g_{ij})_{i,j\in I},(h_{ij})_{i,j\in I}$, we define their direct sum to be 
   \begin{equation*}
     (E\oplus F)_p = E_p\oplus F_p
   \end{equation*}
@@ -1726,7 +1726,7 @@ E \arrow[rr, "\varphi"] \arrow[rd, "\pi_E"'] &    & F \arrow[ld, "\pi_F"] \\
 \end{definition}
 
 \begin{definition}
-  Let $E\stackrel{\pi_E}{\to}\M,F\stackrel{\pi_F}{\to}\M$ be vector bundles with cocycle $(g_{ij})_{i,j\in I},(h_{ij})_{i,j\in I}$ we define their tensor product to be 
+  Let $E\stackrel{\pi_E}{\to}\M,F\stackrel{\pi_F}{\to}\M$ be vector bundles with corresponding cocycles $(g_{ij})_{i,j\in I},(h_{ij})_{i,j\in I}$ we define their tensor product to be 
   \begin{equation*}
     (E\otimes F)_p = E_p\otimes F_p
   \end{equation*}
@@ -1742,20 +1742,33 @@ E \arrow[rr, "\varphi"] \arrow[rd, "\pi_E"'] &    & F \arrow[ld, "\pi_F"] \\
 \end{remark}
 
 \begin{remark}
+  \label{remark_8_1}
   A vector bundle $E\stackrel{\pi}{\to}\M$ is trivial of rank $N$ if and only if there exists sections $s_1,\cdots,s_N\in\Gamma(E)$ such that for all $p\in \M$, $\langle s_1(p),\cdots,s_N(p)\rangle$ is a basis of $E_p$.
+\end{remark}
+
+\begin{definition}
+  For a vector bundle $E\stackrel{\pi}{\to}\M$, a collection of sections $\{s_i:\M\to E\}_{i\in I}$ is called a frame if for every $p\in \M$, 
+  \begin{equation*}
+    \langle s_i(p)\rangle_{i\in I}
+  \end{equation*}
+  is a basis of $E$.
+\end{definition}
+
+\begin{remark}
+  Each frame gives a local triviality to the corresponding bundle. Therefore, a frame gives a natural smooth vector bundle structure.
 \end{remark}
 
   %11.19
 
-Given a bundle atlas $(U_\alpha,\varphi_\alpha)$ with cocycle $(g_{\alpha\beta})$, defne,
+Given a bundle atlas $(U_\alpha,\varphi_\alpha)$ with cocycle $(g_{\alpha\beta})$, and a section $f:\M\to \M\times E$, define,
 \begin{equation*}
   f_\alpha:U_\alpha \to \R^n, f_\alpha(x) =\pr_2(\varphi_\alpha(f(x))).
 \end{equation*}
-Of course, we have,
+By definition, we have,
 \begin{equation*}
   f_\alpha = g_{\alpha\beta}(x)f_\beta(x), x\in U_\alpha\cap U_\beta.
 \end{equation*}
-Conversely, given such $f_\alpha$, we define,
+Conversely, given such $f_\alpha$, we can recover $f$ by
 \begin{equation*}
 f(x) = [(\alpha,x,f_\alpha(x))].
 \end{equation*}
@@ -1769,58 +1782,61 @@ f(x) = [(\alpha,x,f_\alpha(x))].
 \end{proposition}
 \begin{proposition}
   \label{proposition_9_9}
-  Let $E,F\to\M$ be vector bundles. Let $\phi\in\Hom(E,F)$ be surjective. Then there exists $j\in\Hom(F,E)$ such that $\phi\circ j = \id_F$. Furthermore, $\Ker\phi$ is a vector bundle over $\M$ and 
+  Let $E,F\to\M$ be vector bundles. Any surjective bundle morphism $\phi\in\Hom(E,F)$ admits a section $j\in \Hom(F,E)$. Furthermore, $\Ker\phi$ is a vector bundle over $\M$ and 
   \begin{equation*}
     E\simeq \Ker\phi\oplus F.
   \end{equation*}
-  That is to say, in the category of vector bundles of $\M$, a short exact sequence 
+  In the language of category theory, this is to say that the category of vector bundles of $\M$, any short exact sequence splits.
   \begin{center}
     \begin{tikzcd}
 0 \arrow[r] & \Ker\phi \arrow[r, hook] & E \arrow[r, "\phi", two heads] & F \arrow[r] \arrow[l, "\exists j", dotted, bend left] & 0
 \end{tikzcd}
   \end{center}
-  splits.
 \end{proposition}
 
 \begin{proof}
-  We will first show that locally such section exists. Let $p\in\M$. Choose sections of $E$ (by using a chart) $s_1,\cdots,s_n\in\Gamma(E)$ such that 
+  We will first show that locally such section exists. For $p\in\M$ and that $\phi_p:E_p\to F_p$ is surjective, there exist,
   \begin{equation*}
-    \phi(s_1(p)),\cdots,\phi(s_N(p)),
+    v_1,\cdots,v_N\in E_p
   \end{equation*}
-  is linearly independent. Then there exists an open neighborhood $U$ of $p$ such that for all $q\in U$,
+  such that 
+  \begin{equation*}
+    \phi_p(v_1),\cdots,\phi(v_N)\in F_p
+  \end{equation*}
+  is a basis. Choose a bundle chart $(U,\phi)$ of $F$ around $p$. Since a chart is a trivial and by Remark \ref{remark_8_1}, we pick $s_1,\cdots,s_N\in\Gamma(\pi^{-1}_E(U))$ extending $v_1,\cdots,v_N$ and
   \begin{equation*}
     \phi(s_1(q)),\cdots,\phi(s_N(q)),
   \end{equation*}
-  is linearly independent. For $w\in F_q|_U$, we can now write,
+  is linearly independent for all $q\in U$. For $w\in F|_U$, we can now write,
   \begin{equation*}
-    w = \sum\xi_j\phi(s_j(q)).
+    w = \sum_{j=1}^N\xi_j\phi(s_j(q)).
   \end{equation*}
   Put 
   \begin{equation*}
     j(w) = \sum\xi_js_j(q).
   \end{equation*}
-  Clearly, we have that $j$ is a section of $\phi$ over $U$.
-  \par For the global case, let $(U_\alpha)_{\alpha\in I}$ be an open covering with sections $j_\alpha:F|_{U_\alpha}\to E|_{U_\alpha}$. Let $(\rho_\alpha)_{\alpha\in I}$ be a subordinated partition of unity. Then,
+  This gives a section of $\phi$ on the chart $U$.
+  \par For the global case, let $(U_\alpha)_{\alpha\in I}$ be an open covering with sections $j_\alpha:F|_{U_\alpha}\to E|_{U_\alpha}$. Let $(\rho_\alpha)_{\alpha\in I}$ be a subordinated partition of unity. Set
   \begin{equation*}
-    j(p,w) \defeq \left(p,\sum_{\alpha} \rho_{\alpha}j_{\alpha}(w)\right)
+    j(p,w) \defeq \left(p,\sum_{\alpha} \rho_{\alpha}j_{\alpha}(w)\right).
   \end{equation*}
-  Now we define $P\in\Hom(E,E)$, such that
+  For the latter claim, we define $P\in\Hom(E,E)$, such that
   \begin{equation*}
-    P(v) \defeq v-j(\varphi(v)),
+    P(v) \defeq v-j(\phi(v)),
   \end{equation*}
-  then $P$ is a projection $P^2=P$ and the image is $\Image(P) = \Ker \phi$.
+  then $P$ is a projection $P^2=P$ by the linearlity of $\phi,j$. Its image is $\Image(P) = \Ker \phi$.
   \par Fix $p$, and choose sections $\tilde{s}_1,\cdots,\tilde{s}_r$ of $E$ be such that 
   \begin{equation*}
-    \tilde{s}_1(p),\cdots\tilde{s}_1(p),\cdots,\tilde{s}_r(p)
+    \langle \tilde{s}_1(p),\cdots,\tilde{s}_r(p)\rangle
   \end{equation*}
-  is a basis of $\Ker\phi|_P$. Set 
+  is a basis of $\Ker\phi|_p$. Set 
   \begin{equation*}
     s_j\defeq P\circ\tilde{s}_j.
   \end{equation*}
-  Then $s_j$ are sections of $\Ker\phi$ and in a neighborhoodof $p$, they are pairwise linearly independent hence a frame.
+  Then $s_j$ are sections of $\Ker\phi$ and they are pairwise fiberwise linearly independent hence a frame.
 \end{proof}
 
-\begin{proposition}[Swan's theorem]
+\begin{proposition}[Swan]
   \label{proposition_9_10}
   Let $E\stackrel{\pi}{\to}\M$ be a vector bundle of a compact manifold $\M$. Then there exists a large enough natural number $r$ such that there exists a surjective bundle homomorphism $\phi:\M\times\R^r\twoheadrightarrow E$.
   \par In parcitular, $E\oplus\Ker\phi\simeq \M\times \R^r$ is trivial and hence there exists sections $s_1,\cdots,s_r\in\Gamma(E)$, such that 
@@ -1828,23 +1844,23 @@ f(x) = [(\alpha,x,f_\alpha(x))].
     \forall p\in\M, E_p = \Span(s_1(p),\cdots,s_r(p)).
   \end{equation*}
 \end{proposition}
-
 \begin{proof}
   Choose a finite bundle atlas $(U_1,\varphi_1),\cdots,(U_l,\varphi_l)$ of $E$ (this is justified as $\M$ is compact) and a subordinated partition of unity $\rho_1,\cdots,\rho_l$. 
   We set, 
   \begin{equation*}
-    s_j^i(p)\defeq \rho_j(p)\varphi_j^{-1}(p,e_j),
+    s_j^i(p)\defeq \rho_j(p)\varphi_j^{-1}(p,e_i),
   \end{equation*}
   where $N=\rank E$ and $e_1,\cdots,e_N$ are the canonical basis of $\R^N$. Note that $s_j^i\in\Gamma(E)$. 
-  \par Given $p\in\M$ there exists $j$ such that $\rho_j(p)\not=0$. Hence $s_j^i(p),\cdots,s_j^N(p)$ is a basis of $E_p$, respectively 
-  \begin{equation*}
-    \forall p\in \M, E_p = \Span(s_j^i(p))_{\substack{1\leq j\leq l\\ 1\leq i\leq N}}.
-  \end{equation*}
+  \par Given $p\in\M$ there exists $j$ such that $\rho_j(p)\not=0$. Hence $s_j^i(p),\cdots,s_j^N(p)$ is a basis of $E_p$.
+  %, respectively 
+  % \begin{equation*}
+  %   \forall p\in \M, E_p = \Span(s_j^i(p))_{\substack{1\leq j\leq l\\ 1\leq i\leq N}}.
+  % \end{equation*}
   Re-enumerate them to $s_1,\cdots,s_r\in\Gamma(E)$. Put
   \begin{equation*}
-    \phi:\M\times \R^r\to E (p,\xi)\mapsto(p,\sum\xi_js_j(p)).
+    \M\times \R^r\ni (p,\xi)\stackrel{\phi}{\mapsto}\left(p,\sum\xi_js_j(p)\right)\in E.
   \end{equation*}
-  The rest follows from the previous propostion.
+  Clearly, $\phi$ is surjective thus we apply Proposition \ref{proposition_9_9}.
 \end{proof}
 
 \begin{definition}
@@ -1918,27 +1934,28 @@ Let $E$ be a vectorspace. We will denote the dual pairing as $\langle\cdot,\cdot
 \end{definition}
 
 \begin{proposition}
-  The map defined in Definition \ref{definition_tensoring_multilinear}, is a bilinear form which is associative (ie. $(\varphi\otimes\psi)\otimes\chi = \varphi\otimes(\psi\otimes\chi)$).
+  \label{proposition_10_2}
+  The map defined in Definition \ref{definition_tensoring_multilinear}, is a bilinear form which is associative (i.e. $(\varphi\otimes\psi)\otimes\chi = \varphi\otimes(\psi\otimes\chi)$).
 \end{proposition}
 
 \begin{proof}
   Bilinearlity is clear from the construction. So is the associativity as $(\varphi\otimes\psi)\otimes\chi = \varphi\otimes\psi\otimes\chi$.
 \end{proof}
 
-\begin{notation}
-  We denote 
+\begin{remark}
+  By Proposition \ref{proposition_10_2}, we have the following identification,
   \begin{equation*}
-    E^*\otimes F^*\defeq \mathcal{L}(E,F;K),
+    E^*\otimes F^*\defeq \mathcal{L}(E,F;K).
   \end{equation*}
-  and 
+  When $E,F$ are both reflexive (e.g. $E,F$ are finite dimensional), we can use the above identification and get,
   \begin{equation*}
     E\otimes F \cong E^{**}\otimes F^{**} = \mathcal{L}(E^*,F^*,K).
   \end{equation*}
-\end{notation}
+\end{remark}
 
 \begin{proposition}[Universality]
   \label{proposition_10_3}
-  The assingment $\otimes :E\times F\to E\otimes F$ solves the following universal property. \\
+  The assingment $\otimes :E\times F\to E\otimes F$ has the following universal property.
   \par Let $G$ be a vectorspace and $h:E\times F\to G$ be a bilinear map. Then there exists a unique linear map $\overline{h}:E\otimes F\to G$ making the diagram commutative.
   \begin{center}
     \begin{tikzcd}
@@ -1967,7 +1984,7 @@ E\otimes F \arrow[ru, "\exists!\overline{h}"'] &
   which is called the tensor algebra over $E$. Furthermore, Setting $\otimes$ as a multiplication of elements, $T(E)$ is a positively graded $K$-algebra. 
 \end{definition}
 \begin{remark}
-  Obviously, a basis of $T^rE$ is given by $(e_{i_1}\otimes \cdots\otimes e_{i_r})_{1\leq i_1\leq\cdots\leq i_r\leq n}$. Thus we have $\dim T^rE = (\dim E)^r$.
+  Obviously, a basis of $T^rE$ is given by $(e_{i_1}\otimes \cdots\otimes e_{i_r})_{1\leq i_1\leq\cdots\leq i_r\leq n}$. Thus $\dim T^rE = (\dim E)^r$.
 \end{remark}
 
 \begin{lemma}
@@ -1999,16 +2016,17 @@ E^r \arrow[r, "\sigma"] \arrow[d, "\otimes"'] & E^r \arrow[d, "\otimes"] \\
 T^rE \arrow[r, "T^r\sigma"']      & T^rE                    
 \end{tikzcd}
 \end{center}
-where $T^r\sigma$ is a linear map. Observe that
-\begin{equation*}
-  (T^r\sigma)^{-1}= T^r{\sigma}^{-1}.
-\end{equation*}
-Thus it is an isomorphism. Explicitly, we have,
+where $T^r\sigma$ is a linear map. Explicitly, this is
 \begin{equation*}
   T^r\sigma(v_1\otimes \cdots\otimes v_r) = v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(r)}.
 \end{equation*}
+Observe that
+\begin{equation*}
+  (T^r\sigma)^{-1}= T^r{\sigma}^{-1}.
+\end{equation*}
+Thus it is an isomorphism.
 \begin{notation}
-  $\sgn(\sigma) = (-1)^\sigma$.
+  $\sgn(\sigma) = (-1)^{N(\sigma)}$, where $N(\sigma)$ is the number of transposition appearing in $\sigma$.
 \end{notation}
 
 \begin{definition}
@@ -2032,7 +2050,7 @@ Thus it is an isomorphism. Explicitly, we have,
 \begin{definition}
   An anti-symmetrization map is ,
   \begin{equation*}
-    A_r:T^r\to T^r, A\mapsto {\frac 1 {r!}}\sum_{\sigma\in S_r}(-1)^\sigma (T^r\sigma)(T).
+    A_r:T^r\to T^r, A\mapsto {\frac 1 {r!}}\sum_{\sigma\in S_r}\sgn(\sigma) (T^r\sigma)(T).
   \end{equation*}
 \end{definition}
 
@@ -2041,17 +2059,17 @@ Thus it is an isomorphism. Explicitly, we have,
 \end{remark}
 
 \begin{lemma}
-  $A_r\circ A_r = \id$ In other words, it is idempotent.
+  $A_r\circ A_r = A_r$. In other words, it is idempotent.
 \end{lemma}
 
 \begin{proof}
   Let $T\in T^rE$ and fix $\tau\in S_r$. We have,
   \begin{equation*}
-    (T^r\tau)A_r(T) = {\frac 1 {r!}}\sum_{\sigma\in S_r}(-1)^\sigma T^r(\tau\sigma)(T)(-1)^{\tau}(-1)^{\tau} = (-1)^\tau A_r(T).
+    (T^r\tau)A_r(T) = {\frac 1 {r!}}\sum_{\sigma\in S_r}\sgn(\sigma) T^r(\tau\sigma)(T)(-1)^{\tau}(-1)^{\tau} = (-1)^\tau A_r(T).
   \end{equation*}
   In particular, the range of $A_r$ is contained in $\bigwedge^r E$. If $T\in\bigwedge^rE$, we have,
   \begin{equation*}
-    A_r(T) = {\frac 1 {r!}}\sum_{\sigma\in S_r} T^r\sigma T = T.
+    A_r(T) = {\frac 1 {r!}}\sum_{\sigma\in S_r} \sgn(\sigma)(T^r\sigma) T = T.
   \end{equation*}
   Thus we have the range of $A_r$ is exactly $\bigwedge^rE$.
 \end{proof}
@@ -2067,7 +2085,7 @@ Thus it is an isomorphism. Explicitly, we have,
 \begin{definition}
   Let $\psi:\N\to \Z_+$ be a sequence such that $\psi(0)=\psi(1) = 1$. We define,
   \begin{equation*}
-    \wedge_\psi:\bigwedge^pE\times \bigwedge^q E \to\bigwedge^{p+q}E, \xi\wedge_\psi \eta \defeq {\frac {\psi(p+q)} {\psi(p)\psi(q)}}A_{p+q}(\xi\otimes\eta).
+    \wedge_\psi:\bigwedge^pE\times \bigwedge^q E \to\bigwedge^{p+q}E,\quad \xi\wedge_\psi \eta \defeq {\frac {\psi(p+q)} {\psi(p)\psi(q)}}A_{p+q}(\xi\otimes\eta).
   \end{equation*}
 \end{definition}
 
@@ -2079,7 +2097,7 @@ Thus it is an isomorphism. Explicitly, we have,
 \end{definition}
 
 \begin{proposition}
-  The map $\wedge = \wedge_\psi$ is bilinear, associated and graded commutative. Furthermore, for $v_1,\cdots,v_r\in E = \bigwedge^1E$, 
+  The map $\wedge \defeq \wedge_\psi$ is bilinear, associated and graded commutative. Furthermore, for $v_1,\cdots,v_r\in E = \bigwedge^1E$, 
   \begin{equation*}
     v_1\wedge\cdots\wedge v_r = {\frac {\psi(r)} {r!}}\sum_{\sigma\in S_r}\sgn\sigma v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(r)}.
   \end{equation*}
@@ -2110,7 +2128,7 @@ Thus it is an isomorphism. Explicitly, we have,
   \begin{equation*}
     \xi\wedge\eta = (-1)^\tau\eta\wedge\xi = (-1)^{pq}\eta\wedge\xi.
   \end{equation*}
-  We derived the graded-commutativity.\\
+  We derived the graded-commutativity.
   \par For the associativity, we have,
   \begin{align*}
     (\xi\wedge \eta)\wedge\chi & = {\frac {\psi(p+q+r)} {\psi(p+q)\psi(r)}} A_{p+q+r}((\xi\wedge\eta)\otimes \chi),\\
@@ -2138,23 +2156,26 @@ Thus it is an isomorphism. Explicitly, we have,
   \end{equation*}
   and 
   \begin{equation*}
-    \langle v_1\wedge\cdots\wedge v_r,v_1^*\wedge \cdots\wedge v_r^*\rangle_{T^rE,T^rE^*} = {\frac {\psi(r)^2} {r!}}\det((\langle v_i,v_j^*\rangle)_{1\leq i,j\leq r}),
+    \langle v_1\wedge\cdots\wedge v_r,v_1^*\wedge \cdots\wedge v_r^*\rangle_{T^rE,T^rE^*} = \left({\frac {\psi(r)} {r!}}\right)^2\det((\langle v_i,v_j^*\rangle)_{1\leq i,j\leq r}),
   \end{equation*}
 \end{corollary}
-
 \begin{proof}
   \begin{align*}
-    \langle v_1\wedge\cdots\wedge v_r,v_1^*\otimes \cdots\otimes v_r^*\rangle_{T^rE,T^rE^*} & = \sum_{\sigma\in S_r}\sgn\sigma \langle v_{\sigma(1)}v^*_1\rangle\cdots\langle v_{\sigma(r)}v^*_r\rangle,\\
+    \langle v_1\wedge\cdots\wedge v_r,v_1^*\otimes \cdots\otimes v_r^*\rangle_{T^rE,T^rE^*} & = {\frac {\psi(r)} {r!}}\sum_{\sigma\in S_r}\sgn\sigma \langle v_{\sigma(1)}v^*_1\rangle\cdots\langle v_{\sigma(r)}v^*_r\rangle,\\
     & = {\frac {\psi(r)} {r!}}\det((\langle v_i,v_j^*\rangle)_{1\leq i,j\leq r}).
   \end{align*}
   \begin{align*}
-    \langle v_1\wedge\cdots\wedge v_r,v_1^*\wedge \cdots\wedge v_r^*\rangle_{T^rE,T^rE^*} & = {\frac {\psi(r)} {r!}}\sum_{\tau\in S_r}\sgn\tau\langle v_1\wedge\cdots\wedge v_r,v_{\tau(1)}^*\otimes \cdots\otimes v_{\tau(r)}^*\rangle_{T^rE,T^rE^*},\\
+    \langle v_1\wedge\cdots\wedge v_r,v_1^*\wedge \cdots\wedge v_r^*\rangle_{T^rE,T^rE^*} 
+    & = {\frac {\psi(r)} {r!}}\sum_{\tau\in S_r}\sgn\tau\langle v_1\wedge\cdots\wedge v_r,v_{\tau(1)}^*\otimes \cdots\otimes v_{\tau(r)}^*\rangle_{T^rE,T^rE^*},\\
     &  = {\frac {\psi(r)} {r!}}\sum_{\tau\in S_r}\sgn\tau \langle v_{\tau(1)}\wedge\cdots\wedge v_{\tau(r)},v_1^*\otimes \cdots\otimes v_r^*\rangle_{T^rE,T^rE^*},\\
-    & = {\frac {\psi(r)} {(r!)^2}}\det((\langle v_i,v_j^*\rangle)_{1\leq i,j\leq r}).
+    & = \left({\frac {\psi(r)} {(r!)^2}}\right)^2\det((\langle v_i,v_j^*\rangle)_{1\leq i,j\leq r}).
   \end{align*}
 \end{proof}
 
-We will follow the convention that $\psi\equiv 1$ which is used in \cite{Kobayashi-Nomizu}.
+We will follow the convention that $\psi\equiv 1$ which is used in \cite{Kobayashi-Nomizu}. Therefore,
+\begin{equation*}
+  \bigwedge^p E\times\bigwedge^qE\ni(\xi,\eta)\stackrel{\cdot\wedge\cdot}{\mapsto} \xi\wedge\eta = A_{p+q}(\xi\oplus\eta).
+\end{equation*}
 
 \begin{definition}
   For $\xi\in\bigwedge^pE$, we define,
@@ -2185,6 +2206,15 @@ We will follow the convention that $\psi\equiv 1$ which is used in \cite{Kobayas
   In other words, $\inte_u$ is an anti-derivation.
 \end{lemma}
 
+% \begin{proof}
+%   Suppose $\deg(\omega) = p,\deg(\eta) = q$ and consider $\xi\in\bigwedge^{p+q-1}E$. Then,
+%   \begin{align*}
+%     \inte_u(\omega\wedge\eta)(\xi) &= \langle u\wedge\xi,\omega\wedge\eta\rangle,\\
+%     & = \langle u\wedge\xi_1\wedge\cdots\xi_{p+q-1},\omega\wedge\eta\rangle,\\
+%     &= 
+%   \end{align*}
+% \end{proof}
+
 \section{Orientations, volumes and the Hodge $\ast$-operator}
 
 \subsection{Lines}
@@ -2212,19 +2242,19 @@ In this section, we denote $K=\R$.
 \end{definition}
 
 \begin{remark}
-  We have a map,
+  By the universaility of the map
 \begin{equation*}
-  (E^*)^n\to\bigwedge^n E*.
+  (E^*)^n\to\bigwedge^n E^*,
 \end{equation*}
-With this, we can define an $\alpha$-density by,
+we can define an $\alpha$-density from $\rho:(E^*)^n\to \R$ by
 \begin{equation*}
-  \rho:(E^*)^n\to\R, \rho(\varphi(v_1^*),\cdots,\varphi(v_n^*)) = \vert\det\varphi\vert^\alpha\rho(v_1^*,\cdots,v_n^*),
+  \rho(\varphi(v_1^*),\cdots,\varphi(v_n^*)) = \vert\det\varphi\vert^\alpha\rho(v_1^*,\cdots,v_n^*),
 \end{equation*}
 for every $\varphi\in\GL(E^*)$. In particular, we have,
 \begin{equation*}
   \varphi(v_1)\wedge\cdots\wedge\varphi(v_n) = (\det\varphi) v_1\wedge\cdots\wedge v_n.
 \end{equation*}
-Similarly for the signed density case we put $\sgn(\det\varphi)$.
+Similarly for the signed density case.%, we put $\sgn(\det\varphi)$.
 \end{remark}
 
 \begin{remark}
@@ -2233,7 +2263,7 @@ Similarly for the signed density case we put $\sgn(\det\varphi)$.
   \end{equation*}
   Given $\xi\in\bigwedge^nE\backslash\{0\}$, we have,
   \begin{equation*}
-    \rho_\xi^\alpha(\omega) \defeq \vert\langle\xi,\omega\rangle_{V\times V^*}\vert^\alpha
+    \rho_\xi^\alpha(\omega) \defeq \vert\langle\xi,\omega\rangle\vert^\alpha
   \end{equation*}
   which is an $\alpha$-density. Also,
   \begin{equation*}
@@ -2253,13 +2283,13 @@ Similarly for the signed density case we put $\sgn(\det\varphi)$.
   \end{equation*}
   In particular,
   \begin{equation*}
-    \left\vert\bigwedge\right\vert^1 E\otimes\mathcal{O}\longleftrightarrow \bigwedge^nE,
+    \left\vert\bigwedge\right\vert^1 E\otimes\mathcal{O}(E)\longleftrightarrow \bigwedge^nE,
   \end{equation*}
   and 
   \begin{equation*}
-    \mathcal{O}\otimes\mathcal{O}\to\R.
+    \mathcal{O}(E)\otimes\mathcal{O}(E)\to\R.
   \end{equation*}
-  Furthermore, $\mathcal{O}$ has a canonical Euclidean metric, namely, for $\rho\in\mathcal{O}$, we have,
+  Furthermore, $\mathcal{O}(E)$ has a canonical Euclidean metric, namely, for $\rho\in\mathcal{O}(E)$, we have,
   \begin{equation*}
     \vert\rho\vert\defeq \sqrt{\rho(\omega)^2},\forall \omega\not=0.
   \end{equation*}
@@ -2269,7 +2299,7 @@ Similarly for the signed density case we put $\sgn(\det\varphi)$.
 \subsection{Orientations}
 
 \begin{definition}
-  An orientation of $E$ is given by a choice of a vector $\mathfrak{o}\in\mathcal{O}$ of unit length.
+  An orientation of $E$ is given by a choice of a vector $\mathfrak{o}\in\mathcal{O}(E)$ of unit length.
 \end{definition}
 
 \begin{remark}
@@ -2288,11 +2318,11 @@ Similarly for the signed density case we put $\sgn(\det\varphi)$.
 
 \begin{definition}
   Given a connected component ${\bigwedge^n}_+ E$ of $\bigwedge^n E\backslash\{0\}$. 
-  A basis $e_1,\cdots,e_n$ of $E$ is called oriented if 
+  A basis $e_1,\cdots,e_n$ of $E$ is called oriented with respect to the component if 
   \begin{equation*}
     e_1\wedge\cdots\wedge e_n\in{\bigwedge^n}_+E.
   \end{equation*}
-  Or equivalently, we have,
+  Equivalently, we have,
   \begin{equation*}
     e_1\wedge\cdots\wedge e_n = \mathfrak{o}\cdot\vert e_1\wedge\cdots\wedge e_n\vert.
   \end{equation*}
@@ -2316,7 +2346,7 @@ Note that $\bigwedge E\subseteq TE$. Thus we have,
   \label{lemma_11_5}
   If $g$ is non-degenerate, so are $T^rg,\bigwedge^rg$. The latter is the restriction of $T^r g$ to $\bigwedge^r E\times\bigwedge^r E$. Also we have an isomorphism 
   \begin{equation*}
-    (\cdot)^\flat:E\to E^*,v\mapsto g(v_j,\cdot) = v^\flat.
+    (\cdot)^\flat:E\to E^*,v\mapsto g(v,\cdot) = v^\flat.
   \end{equation*}
    By Riesz representation theorem, we can define a inverse of $(\cdot)^\flat$ which we will denote by $(\cdot)^\#$. 
   \par $g$ induces a non-degenerate bilienar form $g^\ast$ on $E^*$, such that 
@@ -2334,10 +2364,10 @@ Note that $\bigwedge E\subseteq TE$. Thus we have,
   \begin{equation*}
     \left(\bigwedge^r g\right) = (e_{i_1}\wedge\cdots\wedge e_{i_r},e_{j_1}\wedge\cdots\wedge e_{j_r}) = {\frac {\pm1} {r!}}\prod_{k=1}^r \delta_{i_1j_1}.
   \end{equation*}
+\end{proof}
   \begin{remark}
     Induced bases are orthogonal with respect to the induced forms. Therefore, they are non-degenerate.
   \end{remark}
-\end{proof}
 
 \begin{proposition}
   \label{proposition_11_6}
@@ -2381,8 +2411,7 @@ Note that $\bigwedge E\subseteq TE$. Thus we have,
 
 \subsection{The Hodge $\ast$-operator}
 
-Let $g$ be a non-degenerate biliear form on $E$ where $E$ is a real vector space of dimension $n$. Let $\vol_g\in\left|\bigwedge\right|^1E$. 
-\par Let $\mathcal{O}(E)$ be the orientation line. From Lemma \ref{lemma_11_3}, we have,
+Let $g$ be a non-degenerate biliear form on $E$ where $E$ is a real vector space of dimension $n$. Let $\vol_g\in\left|\bigwedge\right|^1E$ be as in Proposition \ref{proposition_11_6}. From Lemma \ref{lemma_11_3}, we have,
 \begin{equation*}
     \left\vert\bigwedge\right\vert^1 E\otimes\mathcal{O}(E)\stackrel{\cong}{\longleftrightarrow} \bigwedge^nE, \mathcal{O}(E)\otimes\mathcal{O}(E)\cong\R.
   \end{equation*}
@@ -2426,21 +2455,21 @@ Let $g$ be a non-degenerate biliear form on $E$ where $E$ is a real vector space
 \begin{definition}
   Let $E$ be a $n$-dimensional $\R$-vectorspace. The Hodge $\star$-operator is a map 
   \begin{align*}
-    \star_p:\bigwedge^p E\to\bigwedge^{n-p}E\otimes \mathcal{O},
+    \star_p:\bigwedge^p E\to\bigwedge^{n-p}E\otimes \mathcal{O}(E),
   \end{align*}
   satisfying the following properties.
   \begin{enumerate}[i).]
     \item It is a linear isomorphism.
     \item For $g$-orthonormal basis $\{e_1,\cdots,e_n\}$ of $E$ and $\sigma\in S_n$, we have 
     \begin{equation*}
-      \star_p (e_{\sigma(1)}\wedge\cdots\wedge e_{\sigma(p)}) = (-1)^{\sgn\sigma}\left(\prod_{i=1}^pg(e_{\sigma(i)},e_{\sigma(i)})\right)e_{\sigma(p+1)}\wedge\cdots\wedge e_{\sigma(n)}\otimes e_1\wedge\cdots\wedge e_n/\vol_g.
+      \star_p (e_{\sigma(1)}\wedge\cdots\wedge e_{\sigma(p)}) = (-1)^{\sgn\sigma}\left(\prod_{i=1}^pg(e_{\sigma(i)},e_{\sigma(i)})\right)e_{\sigma(p+1)}\wedge\cdots\wedge e_{\sigma(n)}\otimes (e_1\wedge\cdots\wedge e_n/\vol_g).
     \end{equation*}
     \item $\star_{n-p}\star_p = (-1)^{p(n-p)+\ind g}$,
     \item For $\omega,\eta\in\bigwedge^p E$, we have,
     \begin{equation*}
       \left(\bigwedge^{n-p}g\right)(\star\omega,\star\eta) = (-1)^{\ind g}\left(\bigwedge^p g\right)(\omega,\eta).
     \end{equation*}
-    \item Let $\omega\in\bigwedge^pE,\eta\in\bigwedge^{n-p}E\otimes\mathcal{O}$, then 
+    \item Let $\omega\in\bigwedge^pE,\eta\in\bigwedge^{n-p}E\otimes\mathcal{O}(E)$, then 
     \begin{equation*}
       \omega\wedge\eta = (-1)^{p(n-p)+\ind g}\left(g\right)(\omega,\star\eta)\cdot\vol_g.
     \end{equation*}
@@ -2451,7 +2480,7 @@ Let $g$ be a non-degenerate biliear form on $E$ where $E$ is a real vector space
   Let $E$ be a $\R$-vector space of dimension $n$ and $g$ be a non-degenerate bilinear form on $E$. Pick $\vol_g\in \left\vert\bigwedge\right\vert^1E$.
   There exists a unique bilinear pairing such that 
   \begin{equation*}
-    \bigwedge^p E\times\left(\bigwedge^{n-p}E\otimes \mathcal{O}\right)\ni(\omega,\eta)\mapsto \omega\wedge\eta/\vol_g \in\R.
+    \bigwedge^p E\times\left(\bigwedge^{n-p}E\otimes \mathcal{O}(E)\right)\ni(\omega,\eta)\mapsto \omega\wedge\eta/\vol_g \in\R.
   \end{equation*}
   In particular\, for any $\eta\in\bigwedge^p E$ there is a unique $\star\eta\in\bigwedge^{n-p}E\otimes \mathcal{O}$ such that for any $\omega\in\bigwedge^pE$,
   \begin{equation*}
@@ -2459,38 +2488,41 @@ Let $g$ be a non-degenerate biliear form on $E$ where $E$ is a real vector space
   \end{equation*}
   And such $\star$ is the Hodge $\star$-operator $\star_p$.
 \end{theorem}
-
 \begin{proof}
   The composition,
   \begin{equation*}
     (\omega,\eta)\mapsto\omega\wedge\eta\mapsto \omega\wedge\eta/\vol_g\in\R
   \end{equation*}
-  is bilinear. Note that 
+  is bilinear. As $\{e_i\}$ is $g$-orthonormal, we have,
   \begin{equation*}
     \det(g(e_i,e_j))_{ij} = (-1)^{\ind g}.
   \end{equation*}
-  Let $I = \{i_1,\cdots,i_p\}\subseteq\{1,\cdots,n\}$. Then we denote,
+  Let $I = \{i_1,\cdots,i_p\}\subseteq\{1,\cdots,n\}$, then we denote,
   \begin{equation*}
     e_I\defeq e_{i_1}\wedge\cdots\wedge e_{i_p}.
   \end{equation*}
   Since any element $\omega\in\bigwedge^pE$ is of the form,
   \begin{equation*}
-    \omega = \sum_{\substack{I\subseteq\{1,\cdots,n\}\\\vert I \vert = p}}\omega_Ie_I, (\omega_I\in\R).
+    \omega = \sum_{\substack{I\subseteq\{1,\cdots,n\}\\\vert I \vert = p}}\omega_I\cdot e_I, 
   \end{equation*}
+  where $\{\omega_I\}$ are the coefficients in $\R$.
 Fix $I_0\subseteq\{1,\cdots,n\}$ and denote $I_0^c = \{1,\cdots,n\}\backslash I_0$. Using the expression of $\omega$ above, we have,
+% \begin{equation*}
+% \omega\wedge e_{I_0^c}\otimes \underbrace{e_1\wedge\cdots\wedge e_n}_{\vol_g} = \pm\omega_{I_0}\vert \underbrace{e_1\wedge\cdots\wedge e_n}_{\vol_g}\vert.
+% \end{equation*}
 \begin{equation*}
-\omega\wedge e_{I_0^c}\otimes \underbrace{e_1\wedge\cdots\wedge e_n}_{\vol_g} = \pm\omega_{I_0}\vert \underbrace{e_1\wedge\cdots\wedge e_n}_{\vol_g}\vert.
+  \omega\wedge e_{I_0^c}\otimes\mathfrak{o} = \pm\omega_{I_0}\vert e_1\wedge\cdots\wedge e_n\vert.
 \end{equation*}
-This shows the non-degeneracy. The existence of $\ast\eta$ thus follows from non-degeneracy. 
-\par We now show that $\star$ satisfies all the properties of  the Hodge operator.
+This shows the non-degeneracy as for any $\omega\not=0$, there is $I_0$ whose corresponding coefficient $\omega_{I_0}\not=0$ and the existence of $\ast\eta$ thus follows from non-degeneracy. We now show that $\star$ satisfies all the properties of  the Hodge operator.
 \par\textbf{ii).}
-Set $\omega = e_{I}$ for some $\{i_1,\cdots,i_p\}\subseteq\{1,\cdots,n\}$. Then 
+%current Current
+Consider $e_{I}$ for some $I=\{i_1,\cdots,i_p\}\subseteq\{1,\cdots,n\}$. Then 
 \begin{align*}
-  \mathfrak{o} = \left(\bigwedge^pg\right)(\omega,e_{I^c}).
+  \mathfrak{o} = \left(\bigwedge^pg\right)(e_I,e_{I^c}).
 \end{align*}
 We have,
 \begin{align*}
-  \omega\wedge e_{I^c} &= (-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i){\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}},\\
+  e_I\wedge e_{I^c} &= (-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i){\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}},\\
 & = (-1)^{\sgn\sigma}e_1\wedge\cdots\wedge e_n(-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i){\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}},\\
 & = \prod_{i\in I}g(e_i,e_i)\vert e_1\wedge\cdots\wedge e_n\vert,\\
 & = \left(\bigwedge^pg\right)(e_I,e_I)\vert e_1\wedge\cdots\wedge e_n\vert.
@@ -2649,7 +2681,7 @@ is a $\cinf(\M)$ linear map.
   \begin{equation*}
     f^*(\eta+\zeta)_p(x) = \eta|_{f(p)}(T_pf(x))+\zeta|_{f(p)}(T_pf(x)) = f^*\eta_p(x)+f^\zeta_p(x).
   \end{equation*} 
-  Similarly, for $\eta\Omega^p(\mathcal{L})$ and $p\in\M$, 
+  Similarly, for $\eta\in\Omega^p(\mathcal{L})$ and $p\in\M$, 
   \begin{equation*}
     ((g\circ f)^*\eta)_p(x) = \eta_{g\circ f(p)}(T_pg\circ f(x)) = \eta_{g\circ f(p)}(T_{f(p)}g\cdot T_p f(x)) = ((f^*g^*)_p\eta)(x).
   \end{equation*}
@@ -2826,9 +2858,9 @@ Compute $\star dx_j$ for a general coordinate system.
 \end{align*}
 
 $g_{ij} = g\left(\pd{}{x_i},\pd{}{x_j}\right),g^{ij} = g(dx_i,dx_j) = (\{(g_{kl})_{k,l}\}^{-1})_{i,j}$.
-\par Recall that $\ast dx_j$ is the unique twisted $(n-1)$-form $\omega$ satisfying 
+\par Recall that $\star dx_j$ is the unique twisted $(n-1)$-form $\omega$ satisfying 
 \begin{equation*}
-  \tau\wedge \omega = \bigwedge^1 g(\tau_1dx_j)\vol g,
+  \tau\wedge \omega = \bigwedge^1 g(\tau,dx_j)\vol g,
 \end{equation*}
 where $\tau$ is an arbitrary $1$-form. 
 \begin{equation*}
@@ -2965,7 +2997,7 @@ and the orientation as
   \end{align*}
   Respectively for $\mathcal{O}$, we get,
   \begin{equation*}
-    g_{ij} = \sgn D(\varphi_i\circ\varphi_j^{-1})|_{\varphi_j(p)}.
+    g_{ij} = \sgn \det D(\varphi_i\circ\varphi_j^{-1})|_{\varphi_j(p)}.
   \end{equation*}
 \end{proof}
 A diffeomorphism $f:\M\to\maniN$ gives rise to a pullback map 
@@ -2996,8 +3028,9 @@ A diffeomorphism $f:\M\to\maniN$ gives rise to a pullback map
   \begin{align*}
     (\varphi^{-1})^*\omega &= f\vert dx_1\wedge\cdots\wedge dx_m\vert,\\
     (\psi^{-1})^*\omega & = (\varphi^{-1}\circ\varphi\circ\psi^{-1})^*\omega,\\
-     & = (\varphi)
+     & = (\varphi\circ\psi^{-1})^*(\varphi^{-1})^*\omega.
   \end{align*}
+  Since $\omega$ is a $1$-density we obtain,
   \begin{equation*}
     \Rightarrow \int_{\R^m}(\varphi^{-1})^*\omega = \int_{\R^m}(\psi^{-1})^*\omega.
   \end{equation*}
@@ -3028,7 +3061,7 @@ A diffeomorphism $f:\M\to\maniN$ gives rise to a pullback map
   \end{equation*}
   Then we have,
   \begin{align*}
-    \int_{(R^m,x)}f\vert dx_1\wedge\cdots\wedge dx_m\vert & = \int_{\R^m}f(x)dx_1\cdots dx_m,\\
+    \int_{(\R^m,x)}f\vert dx_1\wedge\cdots\wedge dx_m\vert & = \int_{\R^m}f(x)dx_1\cdots dx_m,\\
     & = \int_{(\R^m,y)}f(\varphi(y))\vert \det D\varphi(y)\vert dy_1\cdots dy_m,\\
     & = \int_{(\R^m,y)}f^*\omega.
   \end{align*}
@@ -3123,7 +3156,7 @@ Clearly we have $(\R^m,\{\id\})$ is oriented.
   \end{equation*}
   We show that $\omega(p)\not=0$ for all $p\in\M$. To see this for a fixed $p\in U_i$. In the small enough neighborhood around $p$, we have,
   \begin{equation*}
-    \omega = \sum_{j=1}^\infty \rho_j\circ\varphi\det D(\varphi^{-1}\varphi_j\circ\varphi_i)dx_1^i\wedge\cdots\wedge dx_m^i.
+    \omega = \sum_{j=1}^\infty \rho_j\circ\varphi\det D(\varphi^{-1}_j\circ \varphi_j\circ\varphi_i^{-1})dx_1^i\wedge\cdots\wedge dx_m^i.
   \end{equation*}
   As we have assumed the manifold to be oriented. Each $\det D(\varphi_j\circ\varphi_i^{-1})$ is positive. And partition of unities are non-negative. We conclude that $\omega(p)>0$. 
   \par Suppose the second statement holds. Fix $\omega\in\Omega^m\M$ such that $\omega(p)\not=0$ for all $p\in \M$. Let $(U,\varphi)$ be a connected chart. Then obviously, we have,
@@ -3534,7 +3567,7 @@ Let $A\subseteq \R^{m+1}$ be a compact set with smooth boundary. $A$ is a compac
 \begin{equation*}
   \interior A = A\backslash \partial A
 \end{equation*}
-is open in $\R^{m+1}$. THis is a compact hypersurface in $\R^{m+1}$. $A$ Topologicalboundary of the anifold boundary of $A$. 
+is open in $\R^{m+1}$. This is a compact hypersurface in $\R^{m+1}$. $A$ Topological boundary of the anifold boundary of $A$. 
 
 \begin{remark}
   If A compact surface in $\R^3$ is the boundary of a compact set with smooth boundary, then it is orientable.
@@ -4024,7 +4057,7 @@ Under this we have,
   \begin{equation*}
     H(f) = H(g):H^\bullet(\maniN)\to H^\bullet(\M).
   \end{equation*}
-  In particular, if the manifolds $\M,\N$ are smooth homotopic equivalent then 
+  In particular, if the manifolds $\M,\maniN$ are smooth homotopic equivalent then 
   \begin{equation*}
     H^\bullet(\M)\cong H^\bullet(\maniN).
   \end{equation*}
@@ -4048,7 +4081,7 @@ Thus we have,
 \end{align*}
 $\M,\maniN$ are smoothly hotomipic equivalent if and only if there exists $f:\M\to\N,g:\maniN\to\M$ such that 
 \begin{equation*}
-  f\circ g = \id_\N,g\circ f = \id_\M.
+  f\circ g = \id_\maniN,g\circ f = \id_\M.
 \end{equation*}
 Then $H(f),H(g)$ are inverse to one another.
 \end{proof}
@@ -4299,7 +4332,7 @@ This turns out to be an exact sequence. The proof will be shown next week.
   We have the following exact sequence.
   \begin{center}
     \begin{tikzcd}
-0 \arrow[r] & \Omega^\bullet_C(U\cap V) \arrow[r, "{\substack{\omega\mapsto(-i_*^U\omega,i_*^V\omega)\\\:}}"] & \Omega^\bullet_C(U)\oplus\Omega^\bullet_C(V) \arrow[r, "{\substack{(\eta,\tau)\mapsto i_*\eta+i_*\tau)\\\:}}"] & \Omega^\bullet_C(\M) \arrow[r] & 0
+0 \arrow[r] & \Omega^\bullet_C(U\cap V) \arrow[r, "{\substack{\omega\mapsto(-i_*^U\omega,i_*^V\omega)\\\:}}"] & \Omega^\bullet_C(U)\oplus\Omega^\bullet_C(V) \arrow[r, "{\substack{(\eta,\tau)\mapsto (i_*\eta+i_*\tau)\\\:}}"] & \Omega^\bullet_C(\M) \arrow[r] & 0
 \end{tikzcd}
   \end{center}
 \end{proposition}
