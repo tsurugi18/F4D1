@@ -2462,22 +2462,23 @@ Let $g$ be a non-degenerate biliear form on $E$ where $E$ is a real vector space
     \item It is a linear isomorphism.
     \item For $g$-orthonormal basis $\{e_1,\cdots,e_n\}$ of $E$ and $\sigma\in S_n$, we have 
     \begin{equation*}
-      \star_p (e_{\sigma(1)}\wedge\cdots\wedge e_{\sigma(p)}) = (-1)^{\sgn\sigma}\left(\prod_{i=1}^pg(e_{\sigma(i)},e_{\sigma(i)})\right)e_{\sigma(p+1)}\wedge\cdots\wedge e_{\sigma(n)}\otimes (e_1\wedge\cdots\wedge e_n/\vol_g).
+      \star_p (e_{\sigma(1)}\wedge\cdots\wedge e_{\sigma(p)}) = {\frac {(-1)^{\sgn\sigma}} {p!}}\left(\prod_{i=1}^pg(e_{\sigma(i)},e_{\sigma(i)})\right)e_{\sigma(p+1)}\wedge\cdots\wedge e_{\sigma(n)}\otimes (e_1\wedge\cdots\wedge e_n/\vol_g).
     \end{equation*}
-    \item $\star_{n-p}\star_p = (-1)^{p(n-p)+\ind g}$,
+    \item $\star_{n-p}\star_p = {\frac {(-1)^{p(n-p)+\ind g}} {p!(n-p)!}}$.
     \item For $\omega,\eta\in\bigwedge^p E$, we have,
     \begin{equation*}
-      \left(\bigwedge^{n-p}g\right)(\star\omega,\star\eta) = (-1)^{\ind g}\left(\bigwedge^p g\right)(\omega,\eta).
+      \left(\bigwedge^{n-p}g\right)(\star\omega,\star\eta) = {\frac {(-1)^{\ind g}} {p!(n-p)!}}\left(\bigwedge^p g\right)(\omega,\eta).
     \end{equation*}
     \item Let $\omega\in\bigwedge^pE,\eta\in\bigwedge^{n-p}E\otimes\mathcal{O}(E)$, then 
     \begin{equation*}
-      \omega\wedge\eta = (-1)^{p(n-p)+\ind g}\left(g\right)(\omega,\star\eta)\cdot\vol_g.
+      \omega\wedge\eta = {\frac {(-1)^{p(n-p)+\ind g}} {p!(n-p)!}}\left(g\right)(\omega,\star\eta)\cdot\vol_g.
     \end{equation*}
   \end{enumerate}
+  \label{definition_hodge_star_operator}
 \end{definition}
 
 \begin{theorem}
-  Let $E$ be a $\R$-vector space of dimension $n$ and $g$ be a non-degenerate bilinear form on $E$. Pick $\vol_g\in \left\vert\bigwedge\right\vert^1E$.
+  Let $E$ be a $\R$-vector space of dimension $n$ and $g$ be a non-degenerate bilinear form on $E$. %Pick $\vol_g\in \left\vert\bigwedge\right\vert^1E$.
   There exists a unique bilinear pairing such that 
   \begin{equation*}
     \bigwedge^p E\times\left(\bigwedge^{n-p}E\otimes \mathcal{O}(E)\right)\ni(\omega,\eta)\mapsto \omega\wedge\eta/\vol_g \in\R.
@@ -2486,7 +2487,7 @@ Let $g$ be a non-degenerate biliear form on $E$ where $E$ is a real vector space
   \begin{equation*}
     \omega\wedge\star\eta = \bigwedge^pg(\omega,\eta)\vol_g.
   \end{equation*}
-  And such $\star$ is the Hodge $\star$-operator $\star_p$.
+  And such $\star$ is the Hodge $\star$-operator.% $\star_p$.
 \end{theorem}
 \begin{proof}
   The composition,
@@ -2495,7 +2496,7 @@ Let $g$ be a non-degenerate biliear form on $E$ where $E$ is a real vector space
   \end{equation*}
   is bilinear. As $\{e_i\}$ is $g$-orthonormal, we have,
   \begin{equation*}
-    \det(g(e_i,e_j))_{ij} = (-1)^{\ind g}.
+    \det(g(e_i,e_j)_{ij}) = (-1)^{\ind g}.
   \end{equation*}
   Let $I = \{i_1,\cdots,i_p\}\subseteq\{1,\cdots,n\}$, then we denote,
   \begin{equation*}
@@ -2513,37 +2514,56 @@ Fix $I_0\subseteq\{1,\cdots,n\}$ and denote $I_0^c = \{1,\cdots,n\}\backslash I_
 \begin{equation*}
   \omega\wedge e_{I_0^c}\otimes\mathfrak{o} = \pm\omega_{I_0}\vert e_1\wedge\cdots\wedge e_n\vert.
 \end{equation*}
-This shows the non-degeneracy as for any $\omega\not=0$, there is $I_0$ whose corresponding coefficient $\omega_{I_0}\not=0$ and the existence of $\ast\eta$ thus follows from non-degeneracy. We now show that $\star$ satisfies all the properties of  the Hodge operator.
+This shows the non-degeneracy for any $\omega\not=0$ as there is $I_0$ whose corresponding coefficient $\omega_{I_0}\not=0$ and the existence of $\star\eta$ thus follows from non-degeneracy. We now show that $\star$ satisfies all the properties of the Hodge operator.
+\par As this is a dual pairing thus a linear isomorphism thus \textbf{i} follows.
 \par\textbf{ii).}
-%current Current
-Consider $e_{I}$ for some $I=\{i_1,\cdots,i_p\}\subseteq\{1,\cdots,n\}$. Then 
-\begin{align*}
-  \mathfrak{o} = \left(\bigwedge^pg\right)(e_I,e_{I^c}).
-\end{align*}
-We have,
-\begin{align*}
-  e_I\wedge e_{I^c} &= (-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i){\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}},\\
-& = (-1)^{\sgn\sigma}e_1\wedge\cdots\wedge e_n(-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i){\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}},\\
-& = \prod_{i\in I}g(e_i,e_i)\vert e_1\wedge\cdots\wedge e_n\vert,\\
-& = \left(\bigwedge^pg\right)(e_I,e_I)\vert e_1\wedge\cdots\wedge e_n\vert.
-\end{align*}
-That is 
+Let $I = \{\sigma(1),\cdots,\sigma(p)\}$, by putting,
 \begin{equation*}
-  \star e_{\sigma(1)}\wedge\cdots\wedge e_{\sigma(p)}={\sgn\sigma}e_1\wedge\cdots\wedge e_n(-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i)e_{I^c}{\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}}.
+  \varepsilon_I = \bigwedge^pg(e_I,e_I), 
 \end{equation*}
-\par\textbf{iii).}
-Applying the second propert twice, and consider $\tau\in S_n$ such that 
+using the previous argument, we know that 
+\begin{equation*}
+  \star_p e_I = \sgn(\sigma)\varepsilon_I e_{I^c}\otimes\mathfrak{o}.
+\end{equation*} 
+Extracting $\varepsilon_I$ using the definition, we obtain the desired formula.
+% then we have
+% \begin{align*}
+%     \left(\bigwedge^pg\right)(e_I,e_I)=e_I\wedge (\star e_I)/\vol_g=\mathfrak{o}.
+% \end{align*}
+% We have,
+% \begin{align*}
+%   e_I\wedge e_{I^c} &= (-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i){\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}},\\
+% & = (-1)^{\sgn\sigma}e_1\wedge\cdots\wedge e_n(-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i){\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}},\\
+% & = \prod_{i\in I}g(e_i,e_i)\vert e_1\wedge\cdots\wedge e_n\vert,\\
+% & = \left(\bigwedge^pg\right)(e_I,e_I)\vert e_1\wedge\cdots\wedge e_n\vert.
+% \end{align*}
+% That is 
+% \begin{equation*}
+%   \star e_{\sigma(1)}\wedge\cdots\wedge e_{\sigma(p)}={\sgn\sigma}e_1\wedge\cdots\wedge e_n(-1)^{\sgn\sigma}\prod_{i\in I}g(e_i,e_i)e_{I^c}{\frac {e_1\wedge\cdots\wedge e_n} {\vert e_1\wedge\cdots\wedge e_n\vert}}.
+% \end{equation*}
+\par\textbf{iii.}
+Applying Definition \ref{definition_hodge_star_operator}.ii twice together with the observation that for $\tau\in S_n$ such that
 \begin{equation*}
   \tau = \begin{pmatrix}
     1 & \cdots & n-p & n-p+1 & \cdots n \\ 
     p+1 & \cdots & n & 1 & \cdots & p
-  \end{pmatrix}
+  \end{pmatrix},
 \end{equation*}
-Then we have $\sgn\tau = (-1)^{p(n-p)}$. Rewrite $e_{I^c}$ with $\tau$, we obtain,
+we have $I^c = \{e_{\sigma\circ\tau(1),\cdots,\sigma\circ\tau(n-p)}\}$ and $\sgn\tau = (-1)^{p(n-p)}$. Substituting this to the definition, we obtain the formula.
+% Rewrite $e_{I^c}$ with $\tau$, we obtain,
+% \begin{equation*}
+%   \star_{n-p}\star_{p}e_I = (-1)^{\ind g} \sgn\sigma\sgn(\tau)e_{\tau(I^c)} = (-1)^{p(n-p)+\ind g}e_I.
+% \end{equation*}
+% To show it satisfies the remaining properties is left to the readers as an exercise.
+\par\textbf{iv.} We show this basis-wise. By definition, we have
 \begin{equation*}
-  \star_{n-p}\star_{p}e_I = (-1)^{\ind g} \sgn\sigma\sgn(\tau)e_{\tau(I^c)} = (-1)^{p(n-p)+\ind g}e_I.
+  \left(\bigwedge^{n-p}g\right)(\ast_pe_I,\ast_pe_I) = \varepsilon_{I^c}.
 \end{equation*}
-To show it satisfies the remaining properties is left to the readers as an exercise.
+Observe that 
+\begin{equation*}
+  \varepsilon_{I}\cdot \varepsilon_{I^c} = {n \choose p}\varepsilon_{\{1,\cdots,n\}} = {\frac {(-1)^{\mathrm{ind}g}} {p!(n-p)!}}.
+\end{equation*}
+\par\textbf{v.} Use Definition \ref{definition_hodge_star_operator}.iii.
 \end{proof}
 
 %12/8
@@ -2566,30 +2586,43 @@ To show it satisfies the remaining properties is left to the readers as an exerc
   \end{equation*}
 \end{definition}
 
+\begin{notation}
+  Let $f:\M\to T^{r,s}\M$ be a section. Over the local chart and its coordinate functiosn $x_1,\cdots,x_m$, one can take functions $\{f_{j_1\cdots j_s}^{i_1\cdots i_r}\}$ such that
+  \begin{equation}
+    \label{local_chart_section}
+        f|_U = \sum f_{j_1\cdots j_s}^{i_1\cdots i_r}\pd{}{x_{i_1}}\otimes\cdots\otimes \pd{}{x_{i_s}}\otimes dx_{j_1}\otimes \cdots\otimes dx_{j_s}
+  \end{equation}
+  For vector fields, $X_1,\cdots,X_s\in\Gamma(T\M)$, and covector field $\omega_1,\cdots,\omega_r\in\Gamma(T^*\M)$, we write 
+  \begin{equation}
+    \label{evaluation_section}
+    f(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)|_U = \sum f_{j_1\cdots j_s}^{i_1\cdots i_r}\prod_{k=1}^r \omega_k|_U\left(\pd{}{x_{i_k}}\right)\prod_{l=1}^s dx_{j_l}(X_{l}|_U).
+  \end{equation}
+  As the formula suggests, this can be evaluated point-wise.
+  \label{notation_section_evaluation}
+\end{notation}
+
 \begin{proposition}
-  For a map $f:\M\to T^{r,s}\M$ with 
-  \begin{equation*}
-   \forall p\in\M, f(p)\in T_p^{r,s}\M,
-  \end{equation*}
-  the following are equivalent.
-  \begin{enumerate}[1).]
-    \item For vector fields, $X_1,\cdots,X_n\in\Gamma(T\M)$, and covector field $\omega_1,\cdots,\omega_r\in\Gamma(T^*\M)$, the function, 
-    \begin{equation*}
-      p\mapsto f(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s) = f(p)(\omega_1(p),\cdots,\omega_r(p),X_1(p),\cdots,X_s(p)),
-    \end{equation*}
-    is smooth.
-    \item For any charts $(U,\varphi)$ with coordiate functions $x_1,\cdots,x_m$, we have,
-      \begin{equation*}
-        f = \sum f_{j_1\cdots j_s}^{i_1\cdots i_r}\pd{}{x_{i_1}}\otimes\cdots\otimes \pd{}{x_{i_s}}\otimes dx_{j_1}\otimes \cdots\otimes dx_{j_s},
-      \end{equation*}
-      where $dx_1,\cdots,dx_m$ are the dual basis to $\pd{}{x_1},\cdots,\pd{}{x_m}$ with smooth functions $f_{j_1,\cdots,j_s}^{i_1,\cdots,i_r}\in\cinf(U)$.
-      \item $f\in\Gamma(T^{r,s}\M)$.
+  Let $f:\M\to T^{r,s}\M$ be a section of $T^{r,s}\M\to \M$. The following statements about $f$ are equivalent.
+  \begin{enumerate}[1.]
+    % \item For vector fields, $X_1,\cdots,X_n\in\Gamma(T\M)$, and covector field $\omega_1,\cdots,\omega_r\in\Gamma(T^*\M)$, then 
+    % \begin{equation*}
+    %   p\mapsto f(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s) = f(p)(\omega_1(p),\cdots,\omega_r(p),X_1(p),\cdots,X_s(p)),
+    % \end{equation*}
+    \item For vector fields, $X_1,\cdots,X_s\in\Gamma(T\M)$, and covector field $\omega_1,\cdots,\omega_r\in\Gamma(T^*\M)$, evaluating Equation \eqref{evaluation_section} point-wise gives a smooth functional on $\M$.
+    % \item For any charts $(U,\varphi)$ with coordiate functions $x_1,\cdots,x_m$, we have,
+    %   \begin{equation*}
+    %     f = \sum f_{j_1\cdots j_s}^{i_1\cdots i_r}\pd{}{x_{i_1}}\otimes\cdots\otimes \pd{}{x_{i_s}}\otimes dx_{j_1}\otimes \cdots\otimes dx_{j_s},
+    %   \end{equation*}
+    %   where $dx_1,\cdots,dx_m$ are the dual basis to $\pd{}{x_1},\cdots,\pd{}{x_m}$ with smooth functions $f_{j_1,\cdots,j_s}^{i_1,\cdots,i_r}\in\cinf(U)$.
+    \item Over a local chart, the coefficient functions $\{f_{j_1\cdots j_s}^{i_1\cdots i_r}\}$ in Equation \eqref{local_chart_section} are smooth.
+      \item $f$ is a smooth section.
   \end{enumerate}
   \label{proposition_12_2}
 \end{proposition}
 
 \begin{proof}
-  Exercise.
+  \textbf{2}$\Rightarrow$\textbf{3} follows from that smoothness is a local property. \textbf{3}$\Rightarrow$\textbf{1} follows from the stability of smoothness under composition and the definition of the evaluation.
+  \par \textbf{1}$\Rightarrow$\textbf{2} can be shown locally by evaluating $f$ at basis elements of the tangent bundle and the cotangent bundle. The argument can be lifted to the global case by the partition of unity.
 \end{proof}
 
 \begin{definition}
@@ -2601,14 +2634,20 @@ To show it satisfies the remaining properties is left to the readers as an exerc
 
 \begin{proposition}
   \label{proposition_12_4}
-  Let $f:\Gamma(T^*\M)^r\times \Gamma(T\M)^s \to\cinf(\M)$, is induced by a section of $T^{r,s}\M$ if and only if it is $\cinf(\M)$-$(r+s)$ multilinear.
+  % Let $f:\Gamma(T^*\M)^r\times \Gamma(T\M)^s \to\cinf(\M)$, is induced by a section of $T^{r,s}\M$ if and only if it is $\cinf(\M)$-$(r+s)$ multilinear.
+  There is a bijection between $\Gamma(T^{r,s}\mathcal{M})$ and multilnear $C^\infty(\mathcal{M})$-valued-functionals on $\Gamma(T^*\mathcal{M})^r\times \Gamma(T\mathcal{M})^s$.
 \end{proposition}
-\begin{proof} If $f\in\Gamma(T^{r,s}\M)$ then 
+\begin{proof} If $f\in\Gamma(T^{r,s}\M)$ then evaluating at $p\in\M$,
 \begin{equation*}
-  (\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)\mapsto (p\mapsto f(p)(\omega_1(p),\cdots,\omega_r(p),X_1(p),\cdots, X_s(p))),
+  (\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)\mapsto (p\mapsto f(\omega_1,\cdots,\omega_r,X_1,\cdots, X_s)(p)),
 \end{equation*}
 is clearly $\cinf(\M)$-$(r+s)$-multilinear.
-\par Conversely, given $\cinf(\M)$-multilinear map $f$, need to find $f(p)$. To do so we will show that for $p\in\M$, if there is $i$ such that $\omega_i(p) = 0$ or there is $j$ such that $X_j(p)=0$, we have,
+\par Conversely, consider a multilinear $\cinf(\M)$-valued-functional map 
+\begin{equation*}
+  B:\Gamma(T^*\mathcal{M})^r\times \Gamma(T\mathcal{M})^s\to \cinf(\M)
+\end{equation*}
+We will show that this induces a smooth section. %current Current
+if there is $i$ such that $\omega_i(p) = 0$ or there is $j$ such that $X_j(p)=0$, we have,
 \begin{equation*}
   f(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)(p) = 0.
 \end{equation*}
