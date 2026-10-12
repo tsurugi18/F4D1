@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=latex 2025.10.19)  12 OCT 2026 00:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=latex 2025.10.19)  12 OCT 2026 13:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -577,12 +577,12 @@ File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 2108.
+(amsmath)                 on input line 2109.
 
 
 
 [29]
-Overfull \hbox (42.09256pt too wide) detected at line 2172
+Overfull \hbox (42.09256pt too wide) detected at line 2173
 []
  []
 
@@ -595,7 +595,7 @@ Overfull \hbox (42.09256pt too wide) detected at line 2172
 [32]
 
 [33]
-Overfull \hbox (34.53305pt too wide) detected at line 2466
+Overfull \hbox (34.53305pt too wide) detected at line 2467
 \OML/cmm/m/it/8 ?[]\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 e[] \OMS/cmsy/m/n/8 ^ [] ^ \OML/cmm/m/it/8 e[]\OT1/cmr/m/n/8 ) = [] [] \OML/cmm/m/it/8 e[] \OMS/cmsy/m/n/8 ^ [] ^ \OML/cmm/m/it/8 e[] \OMS/cmsy/m/n/8 
  \OT1/cmr/m/n/8 (\OML/cmm/m/it/8 e[] \OMS/cmsy/m/n/8 ^ [] ^ \OML/cmm/m/it/8 e[]= [][]\OT1/cmr/m/n/8 )\OML/cmm/m/it/8 :
  []
@@ -609,14 +609,14 @@ Overfull \hbox (34.53305pt too wide) detected at line 2466
 [36]
 
 [37]
-Overfull \hbox (46.0521pt too wide) detected at line 2779
+Overfull \hbox (46.0521pt too wide) detected at line 2821
 []
  []
 
 
 
 [38]
-Overfull \hbox (49.84387pt too wide) detected at line 2820
+Overfull \hbox (49.84387pt too wide) detected at line 2862
 []
  []
 
@@ -631,7 +631,7 @@ Overfull \hbox (49.84387pt too wide) detected at line 2820
 [42]
 
 [43]
-Overfull \hbox (3.45122pt too wide) in paragraph at lines 3055--3057
+Overfull \hbox (3.45122pt too wide) in paragraph at lines 3097--3099
 \OT1/cmr/m/it/8 which is in-vari-ant un-der dif-feo-morh-pisms and in lo-cal co-or-di-nate co-cy-cles with the Lebesgue
  []
 
@@ -672,7 +672,7 @@ Overfull \hbox (3.45122pt too wide) in paragraph at lines 3055--3057
 [60]
 
 [61]
-Overfull \hbox (24.25659pt too wide) in paragraph at lines 4322--4323
+Overfull \hbox (24.25659pt too wide) in paragraph at lines 4364--4365
 []\OT1/cmr/bx/n/8 Example 7.3. []\OT1/cmr/m/it/8 Con-sider $\OML/cmm/m/it/8 S[]$ \OT1/cmr/m/it/8 and con-sider two stere-o-graphic pro-jec-tion $\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 U \OT1/cmr/m/n/8 = \OML/cmm/m/it/8 S[]\OMS/cmsy/m/n/8 nf\OML/cmm/m/it/8 N\OMS/cmsy/m/n/8 g\OML/cmm/m/it/8 ; ^^[[]\OT1/cmr/m/n/8 )\OML/cmm/m/it/8 ; \OT1/cmr/m/n/8 (\OML/cmm/m/it/8 V \OT1/cmr/m/n/8 =
  []
 
@@ -683,7 +683,7 @@ Overfull \hbox (24.25659pt too wide) in paragraph at lines 4322--4323
 [63]
 
 [64]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 4557--4559
+Overfull \hbox (12.0pt too wide) in paragraph at lines 4599--4601
 [][]
  []
 
@@ -696,7 +696,7 @@ Overfull \hbox (12.0pt too wide) in paragraph at lines 4557--4559
 [67]
 
 [68]
-Overfull \hbox (6.03699pt too wide) in paragraph at lines 4842--4843
+Overfull \hbox (6.03699pt too wide) in paragraph at lines 4884--4885
  [] 
  []
 
@@ -717,12 +717,12 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 19640 strings out of 473191
- 424810 string characters out of 5715825
- 895602 words of memory out of 5000000
- 42574 multiletter control sequences out of 15000+600000
+ 19641 strings out of 473191
+ 424823 string characters out of 5715825
+ 895632 words of memory out of 5000000
+ 42575 multiletter control sequences out of 15000+600000
  569862 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,22n,121p,560b,1149s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on GeometryandAnalysisonManifolds.dvi (73 pages, 545184 bytes).
+Output written on GeometryandAnalysisonManifolds.dvi (73 pages, 545516 bytes).

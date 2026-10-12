@@ -1943,6 +1943,7 @@ Let $E$ be a vectorspace. We will denote the dual pairing as $\langle\cdot,\cdot
 \end{proof}
 
 \begin{remark}
+  \label{remark_10_1}
   By Proposition \ref{proposition_10_2}, we have the following identification,
   \begin{equation*}
     E^*\otimes F^*\defeq \mathcal{L}(E,F;K).
@@ -2646,33 +2647,73 @@ is clearly $\cinf(\M)$-$(r+s)$-multilinear.
 \begin{equation*}
   B:\Gamma(T^*\mathcal{M})^r\times \Gamma(T\mathcal{M})^s\to \cinf(\M)
 \end{equation*}
-We will show that this induces a smooth section. %current Current
-if there is $i$ such that $\omega_i(p) = 0$ or there is $j$ such that $X_j(p)=0$, we have,
+We will show that this induces a smooth section. 
+\setcounter{claim}{0}
+\begin{claim}
+  Let $\omega_1,\cdots,\omega_r\in T^*\M$ and $X_1,\cdots,X_s\in T\M$. Then the value of 
+  \begin{equation*}
+    B(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)
+  \end{equation*}
+  only depends on the values
+  \begin{equation*}
+    \omega_1(p),\cdots,\omega_r(p),X_1(p),\cdots,X_s(p).
+  \end{equation*}
+\end{claim}
+\begin{claimproof}
+  Suppose $\omega_1(p)=0$, in a local chart $U$ around $p$, we have,
+  \begin{equation*}
+    \omega_1|U = \sum_{j}a_j(p)dx_j,
+  \end{equation*}
+  such that for each $j$, $a_j(p) = 0$. Take a smooth function $h:\M\to \R$ supported in $U$ and is constant $1$ near $p$.
+  Then consider
+  \begin{align*}
+    \omega_1 & = (1-h^2)\omega_1+h^2\sum_{j}a_jdx_j,\\
+    & = (1-h^2)\omega_1+\sum_{j}(h\cdot a_j)(h\cdot dx_j).
+  \end{align*}
+  Notice that $h\cdot a_j\in\cinf(\M)$ and $h\cdot dx_j\in\Gamma(T^*\M)$.
+  Hence using multilicality, we obtain,
+  \begin{align*}
+    B(\omega_1,\cdots,\omega_r,X_1,\cdot,X_s) =&  (1-h^2)(p)B(\omega_1,\cdots,\omega_r,X_1,\cdot,X_s)(p)\\
+    &+ \sum_{j}(h\cdot a_j)(p)B((h\cdot dx_j),\omega_2,\cdots,\omega_r,X_1,\cdot,X_s)(p),\\
+    & = 0.
+  \end{align*}
+  Therefore, the value of $B(\omega_1,\cdots,\omega_r,X_1,\cdot,X_s)$ is independent of the choice of extension of covectors and tangent vectors.
+\end{claimproof}
+% \par if there is $i$ such that $\omega_i(p) = 0$ or there is $j$ such that $X_j(p)=0$, we have,
+% \begin{equation*}
+%   f(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)(p) = 0.
+% \end{equation*}
+% Indeed, we assume without loss of generality that $\omega_1(p)=0$. Choose a chart $(U,\varphi)$ centered around $p$. Choose $h\in\cinf(\M)$ such that $h\equiv 1$ in small enough neighborhood of $p$. By assumption, we have,
+% \begin{equation*}
+%   \omega_1|_U = \sum_{j=1}^ma_jdx_j, a_j(p) = 0.
+% \end{equation*}
+% Combining these, we obtain,
+% \begin{align*}
+%   \omega_1 & = (1-h^2)\omega_1+h^2\omega_1,\\
+%   &= (1-h^2)\omega_1+\sum_{j=1}^m\underbrace{(a_jh)}_{\in\cinf(\M)}\underbrace{(hdx_j)}_{\in\Gamma(T^*\M)}.
+% \end{align*}
+% Using multilinearlity of $f$, we get,
+% \begin{equation*}
+%   f(\omega_1,\cdots)(p) = (1-h^2)(p)f(\omega_1,\cdots)(p)+\sum_{j=1}^m\underbrace{(ha_j)(p)}_{=0}f(hdx_j,\cdots)(p) = 0.
+% \end{equation*}
+% Define $f(p)$ as follows. For $\theta_1,\cdots,\theta_r\in T^*_p\M,v_1,\cdots,v_s\in T_p\M$, choose $\omega_1,\cdots,\omega_r\in\Gamma(T^*\M),X_1,\cdots,X_s\in\Gamma(T\M)$ with 
+% \begin{equation*}
+%   \omega_j(p) = \theta_j,X_j(p) = v_j.
+% \end{equation*}
+% By what we have proved, we have,
+% \begin{equation*}
+%   f(p)(\theta_1,\cdots,\theta_r,v_1,\cdots,v_s) \defeq f(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)(p),
+% \end{equation*}
+% which is independent of choices of $\omega_j,X_j$. The rest follows from Proposition \ref{proposition_12_2}.
+\par The claim shows that $B$ induces pointwise a multilinear functional,
 \begin{equation*}
-  f(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)(p) = 0.
-\end{equation*}
-Indeed, we assume without loss of generality that $\omega_1(p)=0$. Choose a chart $(U,\varphi)$ centered around $p$. Choose $h\in\cinf(\M)$ such that $h\equiv 1$ in small enough neighborhood of $p$. By assumption, we have,
+B(p):(T^*\M)^r\times (T\M)^s\to\R\in\\mathcal{L}((T^*\M)^r,(T\M)^s;\R).
+\end{equation*} 
+Under the identification in Remark \ref{remark_10_1}, we have,
 \begin{equation*}
-  \omega_1|_U = \sum_{j=1}^ma_jdx_j, a_j(p) = 0.
+  \mathcal{L}((T^*\M)^r,(T\M)^s;\R)\cong (T^\M)^r\otimes (T^*\M)^s.
 \end{equation*}
-Combining these, we obtain,
-\begin{align*}
-  \omega_1 & = (1-h^2)\omega_1+h^2\omega_1,\\
-  &= (1-h^2)\omega_1+\sum_{j=1}^m\underbrace{(a_jh)}_{\in\cinf(\M)}\underbrace{(hdx_j)}_{\in\Gamma(T^*\M)}.
-\end{align*}
-Using multilinearlity of $f$, we get,
-\begin{equation*}
-  f(\omega_1,\cdots)(p) = (1-h^2)(p)f(\omega_1,\cdots)(p)+\sum_{j=1}^m\underbrace{(ha_j)(p)}_{=0}f(hdx_j,\cdots)(p) = 0.
-\end{equation*}
-Define $f(p)$ as follows. For $\theta_1,\cdots,\theta_r\in T^*_p\M,v_1,\cdots,v_s\in T_p\M$, choose $\omega_1,\cdots,\omega_r\in\Gamma(T^*\M),X_1,\cdots,X_s\in\Gamma(T\M)$ with 
-\begin{equation*}
-  \omega_j(p) = \theta_j,X_j(p) = v_j.
-\end{equation*}
-By what we have proved, we have,
-\begin{equation*}
-  f(p)(\theta_1,\cdots,\theta_r,v_1,\cdots,v_s) \defeq f(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)(p),
-\end{equation*}
-which is independent of choices of $\omega_j,X_j$. The rest follows from Proposition \ref{proposition_12_2}.
+Hence $p\mapsto B(p)$ defines a section. By the assumption, this satisfies Proposition \ref{proposition_12_2}1, hence smooth.
 \end{proof}
 Observe that given $f\in\cinf(\M)$ and $X\in\Gamma(T\M)$, the map,
 \begin{equation*}
@@ -2696,13 +2737,14 @@ is a $\cinf(\M)$ linear map.
 \end{definition}
 
 \begin{definition}
-  A wedge product $\wedge:\Omega^s(\M)\times\Omega^t(\M)\to\Omega^{s+t}(\M)$ is defined pointwise that is,
+  A wedge product $\wedge:\Omega^s(\M)\times\Omega^t(\M)\to\Omega^{s+t}(\M)$ is defined pointwise. That is,
   for $\eta\in\Omega^s(\M)$ and $\zeta\in\Omega^t(\M)$, 
   \begin{equation*}
     \eta\wedge \zeta\defeq [\M\ni p\mapsto \eta_p\wedge\zeta_p].
   \end{equation*}
   Note that $\eta,\zeta$ are sections, therefore, we have $\eta_p\in\bigwedge^sT^*\M$ and $\zeta_p\in\bigwedge^tT^*\M$.
 \end{definition}
+%current Current
 \begin{proposition}[Properties of Pullbacks]
   \label{proposition_12_6}
   Given $\M\stackrel{f}{\to}\maniN\stackrel{g}{\to}\mathcal{L}$ be smooth maps. We have,
